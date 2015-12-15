@@ -1,0 +1,1 @@
+angular.module('RedePga', ['highcharts-ng', 'ngFileUpload', 'ngTagsInput', 'ui.mask']);

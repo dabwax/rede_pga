@@ -1,0 +1,43 @@
+2015-09-13 23:47:29 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pga.chart' doesn't exist
+Stack Trace:
+#0 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(96): Cake\Database\Schema\Collection->_reflect('Column', 'chart', Array, Object(Cake\Database\Schema\Table))
+#1 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(65): Cake\Database\Schema\Collection->describe('chart', Array)
+#2 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\cakephp\src\ORM\Table.php(426): Cake\Database\Schema\CachedCollection->describe('chart')
+#3 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\cakephp\src\ORM\Table.php(502): Cake\ORM\Table->schema()
+#4 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(195): Cake\ORM\Table->primaryKey()
+#5 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(110): Bake\Shell\Task\ModelTask->getAssociations(Object(Cake\ORM\Table))
+#6 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(96): Bake\Shell\Task\ModelTask->bake('Chart')
+#7 [internal function]: Bake\Shell\Task\ModelTask->main('Chart')
+#8 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\cakephp\src\Console\Shell.php(391): call_user_func_array(Array, Array)
+#9 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\cakephp\src\Console\Shell.php(386): Cake\Console\Shell->runCommand(Array, false)
+#10 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(204): Cake\Console\Shell->runCommand(Array, true)
+#11 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(175): Cake\Console\ShellDispatcher->_dispatch()
+#12 C:\Users\lhas\Documents\Projetos\pga\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(126): Cake\Console\ShellDispatcher->dispatch()
+#13 C:\Users\lhas\Documents\Projetos\pga\bin\cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#14 {main}
+
+
+2015-12-15 10:21:49 Error: [Cake\Console\Exception\MissingShellException] Shell class for "Schema" could not be found.
+Exception Attributes: array (
+  'class' => 'Schema',
+)
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(201): Cake\Console\ShellDispatcher->findShell('schema')
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(175): Cake\Console\ShellDispatcher->_dispatch()
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(126): Cake\Console\ShellDispatcher->dispatch()
+#3 /home/dabwax/Projetos/rede_pga/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2015-12-15 10:22:26 Error: [Cake\Console\Exception\MissingShellException] Shell class for "Schema" could not be found.
+Exception Attributes: array (
+  'class' => 'Schema',
+)
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(201): Cake\Console\ShellDispatcher->findShell('schema')
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(175): Cake\Console\ShellDispatcher->_dispatch()
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(126): Cake\Console\ShellDispatcher->dispatch()
+#3 /home/dabwax/Projetos/rede_pga/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
