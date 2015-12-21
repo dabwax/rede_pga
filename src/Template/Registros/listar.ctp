@@ -58,10 +58,10 @@
 
 				<div class="well text-center">
 					<a href="javascript:;" ng-click="voltarParaAulas()" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Voltar</a>
-					<a href="<?php echo $this->Url->build(['action' => 'editar']); ?>/{{filtro.aula.id}}" target="_blank" class="btn btn-success" ng-if="!admin_logged.clinical_condition"><i class="fa fa-pencil"></i> Editar</a>
+					<a href="<?php echo $this->Url->build(['action' => 'editar']); ?>/{{filtro.aula.id}}" class="btn btn-success" ng-if="!admin_logged.clinical_condition"><i class="fa fa-pencil"></i> Editar</a>
 
 					<div ng-if="!filtro.aula.lesson_entries.length">
-						<a href="<?php echo $this->Url->build(['action' => 'editar']); ?>/{{filtro.aula.id}}" target="_blank" class="btn btn-success" ng-if="admin_logged.clinical_condition"><i class="fa fa-pencil"></i> Toque aqui para adicionar dados a esta aula</a>
+						<a href="<?php echo $this->Url->build(['action' => 'editar']); ?>/{{filtro.aula.id}}" class="btn btn-success" ng-if="admin_logged.clinical_condition"><i class="fa fa-pencil"></i> Toque aqui para adicionar dados a esta aula</a>
 					</div>
 				</div>
 
@@ -90,11 +90,21 @@
 				<br>
 				{{registro.observation}}
 				</p>
+
+				<p>
+					<strong class="label label-success">Nota esperada</strong> <small>{{registro.nota_esperada}}</small>
+				</p>
 				
+				<p>
+					<strong class="label label-danger mt20">Nota alcançada</strong> <small>{{registro.nota_alcancada}}</small>
+				</p>
+
 			</div>
 
 			<h2>Hashtags</h2>
-			<span class="label label-info" ng-repeat="registro in filtro.aula.lesson_hashtags"> {{registro.hashtag.name}} </span>
+
+			<a class="label label-info" href="<?php echo $this->Url->build('/feed/listar/'); ?>{{registro.hashtag.id}}" ng-repeat="registro in filtro.aula.lesson_hashtags">{{registro.hashtag.name}}</a>
+			
 		</div> <!-- #listagem-detalhes -->
 
 	</div>

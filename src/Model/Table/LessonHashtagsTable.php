@@ -15,12 +15,16 @@ class LessonHashtagsTable extends Table
       $this->belongsTo('Hashtags');
   }
 
-  public function getHashtagsDefinidas($lesson_id)
+  public function getHashtagsDefinidas($lesson_id, $current_user)
   {
   	$find = $this
   	->find()
   	->contain(['Hashtags'])
-  	->where(['lesson_id' => $lesson_id])
+  	->where([
+      'lesson_id' => $lesson_id
+      ,'model'    => $current_user['role_table']
+      ,'model_id' => $current_user['id']
+    ])
   	->all();
 
   	$tmp = [];

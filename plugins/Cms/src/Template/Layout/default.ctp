@@ -41,6 +41,7 @@
     <?= $this->Html->script('/global/scripts/ng-file-upload-all.min.js'); ?>
     <?= $this->Html->script('/global/scripts/ng-tags-input.min.js'); ?>
     <?= $this->Html->script('/global/scripts/ui-mask/dist/mask.min.js'); ?>
+    <?= $this->Html->script('/global/scripts/ui-sortable/src/sortable.js'); ?>
 
     <?= $this->Html->script('redepga.js') ?>
     <?= $this->Html->script('controllers.js') ?>
@@ -146,35 +147,35 @@
 				<!-- BEGIN SIDEBAR MENU -->
 				<ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 
-					<li>
+					<li class="<?php echo ($this->request->params['controller'] == 'Permissions') ? 'current' : ''; ?>">
 						<a href="<?= $this->Url->build('/cms/permissions'); ?>">
 						<i class="fa fa-pencil"></i>
 						<span class="title">Permissões de Página</span>
 						<span class="arrow "></span>
 						</a>
 					</li>
-					<li>
+					<li class="<?php echo ($this->request->params['controller'] == 'Inputs') ? 'current' : ''; ?>">
 						<a href="<?= $this->Url->build('/cms/inputs'); ?>">
 						<i class="fa fa-keyboard-o"></i>
 						<span class="title">Inputs</span>
 						<span class="arrow "></span>
 						</a>
 					</li>
-					<li>
+					<li class="<?php echo ($this->request->params['controller'] == 'Themes') ? 'current' : ''; ?>">
 						<a href="<?= $this->Url->build('/cms/themes'); ?>">
 						<i class="fa fa-keyboard-o"></i>
 						<span class="title">Matérias</span>
 						<span class="arrow "></span>
 						</a>
 					</li>
-          <li>
+          <li class="<?php echo ($this->request->params['controller'] == 'Charts') ? 'current' : ''; ?>">
             <a href="<?= $this->Url->build('/cms/charts'); ?>">
             <i class="fa fa-keyboard-o"></i>
             <span class="title">Gráficos</span>
             <span class="arrow "></span>
             </a>
           </li>
-          <li>
+          <li class="<?php echo ($this->request->params['controller'] == 'Settings') ? 'current' : ''; ?>">
             <a href="<?= $this->Url->build('/cms/settings'); ?>">
             <i class="fa fa-cog"></i>
             <span class="title">Configurações do Sistema</span>

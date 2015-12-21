@@ -11,6 +11,20 @@ use Cms\Controller\AppController;
 class InputsController extends AppController
 {
 
+    public function sortable()
+    {
+        $this->autoRender = false;
+
+        foreach($_GET['item_id'] as $position => $item_id)
+        {
+            $entity = $this->Inputs->get($item_id);
+
+            $entity->position = $position;
+
+            $this->Inputs->save($entity);
+        }
+    }
+
     /**
      * Index method
      *
@@ -22,8 +36,9 @@ class InputsController extends AppController
       
         $query = $this->Inputs->find()->contain(['Users'])->where(
         [
-            'Inputs.user_id' => $current_user_selected['id']
-        ]);
+            'Inputs.user_id' => $current_user_selected['id'],
+            'Inputs.status' => 1
+        ])->order(['Inputs.position' => 'DESC']);
 
         $this->set('inputs', $this->paginate($query));
         $this->set('_serialize', ['inputs']);
@@ -148,10 +163,12 @@ class InputsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
         $input = $this->Inputs->get($id);
-        if ($this->Inputs->delete($input)) {
-            $this->Flash->success(__('The input has been deleted.'));
+
+        $input->status = 0;
+
+        if ($this->Inputs->save($input)) {
+            $this->Flash->success(__('O input foi ocultado.'));
         } else {
             $this->Flash->error(__('The input could not be deleted. Please, try again.'));
         }

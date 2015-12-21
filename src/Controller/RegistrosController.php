@@ -27,11 +27,25 @@ class RegistrosController extends AppController
 
     // Busca o registro da aula
     $lesson = $lessons_table->find()->contain(['LessonEntries' => function($q) {
-      return $q->contain(['Inputs']);
+
+      $where = [
+        'LessonEntries.model' => $this->currentUser('role_table')
+        ,'LessonEntries.model_id' => $this->currentUser('id')
+      ];
+
+      return $q->where($where)->contain(['Inputs']);
     }])->where(['id' => $lesson_id])->first();
 
     // Busca e itera todos os campos do aluno
-    $inputs = $inputs_table->find()->where(['user_id' => $admin_logged['user_id'] ])->all();
+    $inputs = $inputs_table
+    ->find()
+    ->where([
+      'Inputs.user_id'  => $admin_logged['user_id'],
+      'Inputs.status'   => 1
+    ])
+    ->order(['Inputs.position' => 'DESC'])
+    ->all();
+
 
     foreach($inputs as $input)
     {
@@ -215,7 +229,7 @@ class RegistrosController extends AppController
     }
   }
   
-  public function editar($lesson_id = null)
+  public function editar($lesson_id = null, $redirect_to_input_id = null)
   {
     // Dados do usuário logado
     $admin_logged         = $this->getAdminLogged();
@@ -234,37 +248,46 @@ class RegistrosController extends AppController
     $materias             = $themes_table->getSelectMaterias($admin_logged['user_id']);
 
     // Atribui as matérias existentes ao objeto do formulário
-    $aula->materias       = $lesson_themes_table->getMateriasDefinidas($lesson_id, $admin_logged['user_id']);
-    $aula->hashtags       = $lesson_hashtags_table->getHashtagsDefinidas($lesson_id);
+    $aula->materias       = $lesson_themes_table->getMateriasDefinidas($lesson_id, $admin_logged['user_id'], $admin_logged['role_table'], $admin_logged['id']);
+    $aula->hashtags       = $lesson_hashtags_table->getHashtagsDefinidas($lesson_id, $admin_logged);
 
     // Se houver requisição POST
     if($this->request->is(["post", "put"]))
     {
 
       // Salva o input de matérias
-      $lesson_themes_table->salvarMaterias($aula, @$this->request->data['materias']);
+      $lesson_themes_table->salvarMaterias($aula, @$this->request->data['materias'], $admin_logged);
 
       // Salva todos os inputs da aula
       $lesson_entries_table->salvarRegistros($aula, @$this->request->data['registros'], $admin_logged);
 
       // Salva todas as hashtags da aula
-      $lesson_hashtags_table->salvarHashtags($aula, @$this->request->data['hashtags']);
+      $lesson_hashtags_table->salvarHashtags($aula, @$this->request->data['hashtags'], $admin_logged);
 
       // Redireciona o usuário
 
-      if(empty($admin_logged['clinical_condition']))
+      if($admin_logged['role_role'] != "user")
       {
         $this->Flash->success("Seu registro foi atualizado! Obrigado. :)");
-        return $this->redirect("/registros/editar/" . $lesson_id);
+        return $this->redirect("/registros/editar/" . $lesson_id . "?status=sucesso");
       } else {
-
         $this->Flash->success("Obrigado pela sua opinião, querido aluno. :)");
         return $this->redirect("/registros/listar");
       }
     }
 
     // Envia váriaveis pra view
-    $this->set(compact("materias", "aula"));
+    $this->set(compact("materias", "aula", "redirect_to_input_id"));
+  }
+
+  public function excluir($id = null)
+  {
+    $lessons_table  = TableRegistry::get("Lessons");
+    $entity         = $lessons_table->get($id);
+
+    $lessons_table->delete($entity);
+    
+    return $this->redirect('/listar');
   }
 
 }

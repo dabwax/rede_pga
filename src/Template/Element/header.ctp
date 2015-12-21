@@ -3,32 +3,24 @@
 <div class="page-header-inner container">
   <!-- BEGIN LOGO -->
   <div class="page-logo text-center">
-    <a href="<?= $this->Url->build('/feed/listar'); ?>" style="width: 130px;">
-    <?php echo $this->Html->image("logo.png", ['class' => 'logo-default logo-redepga', 'alt' => 'PGA', 'style' => 'height: 50px; padding-top: 6px;']); ?>
+    <a href="<?= $this->Url->build('/feed/listar'); ?>" style="width: 100%; text-align: center;">
+    <?php echo $this->Html->image("logo.png", ['class' => 'logo-default logo-redepga', 'alt' => 'PGA', 'style' => 'height: 50px; margin-top: 14px !important; display: inline-block;']); ?>
     </a>
-        <?php if(@$admin_logged) : ?>
-    <div class="menu-toggler sidebar-toggler">
-      <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
-    </div>
-  <?php endif; ?>
   </div>
   <!-- END LOGO -->
-  <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-  <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-  </a>
-  <!-- END RESPONSIVE MENU TOGGLER -->
+
   <!-- BEGIN PAGE TOP -->
   <div class="page-top">
 
     <?php if(@$admin_logged) : ?>
 
       <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-4">
-    <?php echo $this->Html->image("/uploads/" . $admin_logged['user']->profile_attachment, ['class' => 'img-circle', 'style' => 'width: 70px; height: 70px; margin-top: 10px; margin-left: 12px; float: left;']); ?>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+    <?php echo $this->Html->image("/uploads/" . $admin_logged['user']->profile_attachment, ['class' => 'img-circle', 'style' => 'width: 80px; height: 70px; margin-top: 10px; margin-left: 12px; float: left;']); ?>
       <p style="float: left; margin-left: 12px; margin-top: 32px; font-weight: bold; font-size: 16px;"><?php echo $admin_logged['user']->full_name; ?></p>
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="col-lg-6 col-md-5 col-sm-5 col-xs-5">
       
       <div id="btn-group-header" class="btn-group">
       <a href="javascript:;" onclick="$('#modal_atores').modal('show');" class="btn btn-default" title="Atores"><i class="icon-user"></i> </a>

@@ -10,85 +10,71 @@ class FeedController extends AppController
 
 	public function listar($hashtag_id = null)
 	{
-		$lessons_table = TableRegistry::get("Lessons");
+		// Get all tables
+		$lessons 			= TableRegistry::get("Lessons");
+		// get current actors
+		$actors 			= $this->getAtores();
 
-    	$admin_logged = $this->Cookie->read("admin_logged");
+		// if current user is a user, load correct view
+		if($this->currentUserIsStudent())
+			$this->view = "dashboard_aluno";
 
-    	if(!empty($admin_logged['clinical_condition']))
-    	{
-    		$this->view = "dashboard_aluno";
-    	} else {
+		// get all lessons from current user
+		$query = $lessons->buscaAulas( $this->currentUser('user_id') );
 
-			$where = [
-				'user_id' => $admin_logged['user_id']
-			];
+		// if has any hashtag
+		if(!empty($hashtag_id))
+		{
+			$hashtag 														= $lessons->LessonHashtags->Hashtags->get($hashtag_id);
+			$options														= ['valueField' => 'lesson_id'];
+			$where 															= ['hashtag_id' => $hashtag_id];
+			$lessons_that_contains_this_hashtag = $lessons->LessonHashtags->find('list', $options)->where($where)->all()->toArray();
+		} // end - hashtag
 
-			$lessons = $lessons_table
-			->find()
-			->where($where)
-			->order(['Lessons.modified' => 'DESC'])
-			->contain([
-			'LessonEntries' => function($q) {
-				return $q->contain(["Inputs"]);
-			},
-			'LessonThemes' => function($q) {
-				return $q->contain(["Themes"]);
-			},
-			'LessonHashtags' => function($q) {
-				return $q->contain(["Hashtags"]);
-			}])
-			->all()->toArray();
+		// iterates current lessons
+		foreach ($query as $key => $lesson) {
+			// init actors attr
+			$lesson->actors = [];
+			// init front-end formatted data
+			$lesson->formatted_data = [];
+			// init boolean current user belongs
+			$lesson->current_user_belongs = false;
 
-
-
-			if($hashtag_id)
+			// iterates entries
+			foreach($lesson->lesson_entries as $entry)
 			{
-				$table_hashtag = TableRegistry::get("Hashtags");
-				$table_lesson_hashtags = TableRegistry::get("LessonHashtags");
-				$hashtag = $table_hashtag->get($hashtag_id);
-
-				$filtering = $hashtag;
-
-				$lesson_hashtags = $table_lesson_hashtags->find('list', ['valueField' => 'lesson_id'])
-				->where(['hashtag_id' => $hashtag_id])
-				->all()->toArray();
-
-
-				foreach($lessons as $key => $value)
+				// check if current user is equal to author from entry
+				if($this->currentUser('id') == $entry->model_id)
 				{
-					if(!in_array($value->id, $lesson_hashtags))
-					{
-						unset($lessons[$key]);
-					}
+					$lesson->current_user_belongs = true;
 				}
-			} else {
-				$filtering = false;
-			}
 
+				// iterates actors for this entry
+				foreach($actors[$entry->model] as $actor)
+				{
+					// check if actor id is equal to author from entry
+					if($actor->id == $entry->model_id)
+					{
+						$lesson->actors[$actor->id] = $actor;
 
-			$atores = $this->getAtores();
+						// include this current entry as belonging to actor
+						$lesson->formatted_data[$actor->id][$entry->id] = $entry;
+					} // end - check
 
-			foreach($lessons as $l)
+				} // end - actors
+			} // end - lesson entries
+
+			// if has any hashtag filter and this lesson didn't have it, unset it
+			if(!empty($hashtag_id))
 			{
-				$l->atores = [];
-
-				foreach($l->lesson_entries as $le)
+				if(!in_array($lesson->id, $lessons_that_contains_this_hashtag))
 				{
-					foreach($atores[$le->model] as $m)
-					{
-						if($m->id == $le->model_id)
-						{
-							$l->atores[$m->id] = [
-								'id' => $m->id,
-								'nome' => $m->full_name,
-								'email' => $m->username,
-							];
-						}
-					}
+					unset($query[$key]);
 				}
-			}
-		}
+			} // end - hashtag
 
-		$this->set(compact("lessons", "filtering"));
+		} // end - iterate lessons
+
+		$this->set(compact("query", "hashtag"));
 	}
 }

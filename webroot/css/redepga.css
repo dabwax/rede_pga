@@ -192,6 +192,13 @@
 .input-icon {
   font-family: sans-serif, FontAwesome;
 }
+.page-sidebar .current a {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #000 !important;
+}
+.page-sidebar .current a i {
+  color: #000 !important;
+}
 
 /* Admin */
 .body-admin {
@@ -215,6 +222,13 @@
   background: #1E824C !important;
   border-color: #1E824C !important;
   color: #FFF !important;
+}
+.body-admin .page-sidebar .current a {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #000 !important;
+}
+.body-admin .page-sidebar .current a i {
+  color: #000 !important;
 }
 
 /* Mugshots */
@@ -285,4 +299,22 @@
 }
 #select_aluno {
   margin-top: 16px;
+}
+.btn-editar-registro {
+  color: #666;
+}
+.sucesso {
+  font-size: 24px;
+  color: green;
+  font-family: "Open Sans";
+  padding-top: 10px;
+  text-align: center;
+  width: 200px;
+  float: right;
+  
+}
+.sucesso i {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 10px;
 }

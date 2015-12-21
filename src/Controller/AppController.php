@@ -240,4 +240,18 @@ class AppController extends Controller
       return $admin_logged;
     }
 
+    public function currentUserIsStudent()
+    {
+      $current_user = $this->getAdminlogged();
+      
+      return ($current_user['role_role'] == "user");
+    }
+
+    public function currentUser($key)
+    {
+      $current_user = $this->getAdminlogged();
+      
+      return $current_user[$key];
+    }
+
 }

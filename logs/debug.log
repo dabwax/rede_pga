@@ -9136,3 +9136,656 @@ Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
 
 
 
+2015-12-15 16:16:39 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 62]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 62
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 88
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 16:16:44 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 62]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 62
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 88
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 16:17:16 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 62]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 62
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 89
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 16:27:38 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 89
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 17:21:03 Notice: Notice (8): Trying to get property of non-object in [/home/dabwax/Projetos/rede_pga/plugins/Cms/src/Controller/InputsController.php, line 21]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+Cms\Controller\InputsController::sortable() - ROOT/plugins/Cms/src/Controller/InputsController.php, line 21
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 17:21:22 Notice: Notice (8): unserialize(): Error at offset 0 of 25 bytes in [/home/dabwax/Projetos/rede_pga/plugins/Cms/src/Controller/InputsController.php, line 21]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+unserialize - [internal], line ??
+Cms\Controller\InputsController::sortable() - ROOT/plugins/Cms/src/Controller/InputsController.php, line 21
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 17:22:16 Notice: Notice (8): unserialize(): Error at offset 0 of 25 bytes in [/home/dabwax/Projetos/rede_pga/plugins/Cms/src/Controller/InputsController.php, line 21]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+unserialize - [internal], line ??
+Cms\Controller\InputsController::sortable() - ROOT/plugins/Cms/src/Controller/InputsController.php, line 21
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 17:24:12 Notice: Notice (8): unserialize(): Error at offset 0 of 19 bytes in [/home/dabwax/Projetos/rede_pga/plugins/Cms/src/Controller/InputsController.php, line 21]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+unserialize - [internal], line ??
+Cms\Controller\InputsController::sortable() - ROOT/plugins/Cms/src/Controller/InputsController.php, line 21
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 17:24:33 Notice: Notice (8): Undefined property: stdClass::$data in [/home/dabwax/Projetos/rede_pga/plugins/Cms/src/Controller/InputsController.php, line 21]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+Cms\Controller\InputsController::sortable() - ROOT/plugins/Cms/src/Controller/InputsController.php, line 21
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 17:24:49 Notice: Notice (8): Undefined property: stdClass::$data in [/home/dabwax/Projetos/rede_pga/plugins/Cms/src/Controller/InputsController.php, line 21]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+Cms\Controller\InputsController::sortable() - ROOT/plugins/Cms/src/Controller/InputsController.php, line 21
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 17:29:32 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 10:54:54 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 11:06:51 Notice: Notice (8): Undefined variable: lesson_table in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 282]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Controller\RegistrosController::excluir() - APP/Controller/RegistrosController.php, line 282
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 11:06:52 Notice: Notice (8): Undefined variable: lesson_table in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 282]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Controller\RegistrosController::excluir() - APP/Controller/RegistrosController.php, line 282
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 11:06:52 Notice: Notice (8): Undefined variable: lesson_table in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 282]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Controller\RegistrosController::excluir() - APP/Controller/RegistrosController.php, line 282
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 14:55:00 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:16:44 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:24:59 Notice: Notice (8): Undefined variable: admin_logged in [/home/dabwax/Projetos/rede_pga/src/Controller/FeedController.php, line 25]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Controller\FeedController::listar() - APP/Controller/FeedController.php, line 25
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:27:23 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:27:35 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:27:42 Notice: Notice (8): Undefined variable: filtering in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 7]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 7
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:27:42 Notice: Notice (8): Undefined variable: lessons in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:08:14 Notice: Notice (8): Indirect modification of overloaded property Cake\ORM\Entity::$formatted_data has no effect in [/home/dabwax/Projetos/rede_pga/src/Controller/FeedController.php, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Controller\FeedController::listar() - APP/Controller/FeedController.php, line 54
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:08:14 Notice: Notice (8): Indirect modification of overloaded property Cake\ORM\Entity::$formatted_data has no effect in [/home/dabwax/Projetos/rede_pga/src/Controller/FeedController.php, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Controller\FeedController::listar() - APP/Controller/FeedController.php, line 54
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:10 Notice: Notice (8): Undefined variable: filtering in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 7]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 7
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:10 Notice: Notice (8): Undefined variable: lessons in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:10 Notice: Notice (8): Undefined variable: filtering in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 7]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 7
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:10 Notice: Notice (8): Undefined variable: lessons in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:29 Notice: Notice (8): Undefined variable: hashtag in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 7]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 7
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:29 Notice: Notice (8): Undefined variable: lessons in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:34 Notice: Notice (8): Undefined variable: lessons in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:42 Notice: Notice (8): Undefined variable: lessons in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:44 Notice: Notice (8): Undefined variable: lessons in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:15:19 Notice: Notice (8): Undefined variable: current_user_selected in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:15:26 Notice: Notice (8): Undefined variable: current_user_selected in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:15:32 Notice: Notice (8): Undefined variable: current_user in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:15:34 Notice: Notice (8): Undefined variable: current_user in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-17 10:03:51 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-17 10:55:32 Notice: Notice (8): Undefined variable: admin_logged in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 31]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Controller\RegistrosController::App\Controller\{closure}() - APP/Controller/RegistrosController.php, line 31
+Cake\ORM\Association\HasMany::eagerLoader() - CORE/src/ORM/Association/SelectableAssociationTrait.php, line 54
+Cake\ORM\EagerLoader::loadExternal() - CORE/src/ORM/EagerLoader.php, line 542
+Cake\ORM\Query::_execute() - CORE/src/ORM/Query.php, line 657
+Cake\ORM\Query::_all() - CORE/src/Datasource/QueryTrait.php, line 218
+Cake\ORM\Query::all() - CORE/src/ORM/Query.php, line 608
+Cake\ORM\Query::first() - CORE/src/Datasource/QueryTrait.php, line 341
+App\Controller\RegistrosController::api_inputs() - APP/Controller/RegistrosController.php, line 35
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-17 10:55:40 Notice: Notice (8): Undefined variable: admin_logged in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 31]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Controller\RegistrosController::App\Controller\{closure}() - APP/Controller/RegistrosController.php, line 31
+Cake\ORM\Association\HasMany::eagerLoader() - CORE/src/ORM/Association/SelectableAssociationTrait.php, line 54
+Cake\ORM\EagerLoader::loadExternal() - CORE/src/ORM/EagerLoader.php, line 542
+Cake\ORM\Query::_execute() - CORE/src/ORM/Query.php, line 657
+Cake\ORM\Query::_all() - CORE/src/Datasource/QueryTrait.php, line 218
+Cake\ORM\Query::all() - CORE/src/ORM/Query.php, line 608
+Cake\ORM\Query::first() - CORE/src/Datasource/QueryTrait.php, line 341
+App\Controller\RegistrosController::api_inputs() - APP/Controller/RegistrosController.php, line 35
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-18 13:35:01 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-18 13:42:27 Notice: Notice (8): Undefined index: role_role in [/home/dabwax/Projetos/rede_pga/src/Controller/AppController.php, line 247]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Controller\AppController::currentUserIsStudent() - APP/Controller/AppController.php, line 247
+App\Controller\FeedController::listar() - APP/Controller/FeedController.php, line 19
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-18 13:42:27 Notice: Notice (8): Undefined variable: get_atores in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+

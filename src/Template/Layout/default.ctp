@@ -74,6 +74,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->script('/global/scripts/highcharts-ng.min.js'); ?>
     <?= $this->Html->script('/global/scripts/ng-file-upload-all.min.js'); ?>
     <?= $this->Html->script('/global/scripts/ng-tags-input.min.js'); ?>
+    <?= $this->Html->script('/global/scripts/ui-mask/dist/mask.min.js'); ?>
+    <?= $this->Html->script('/global/scripts/ui-sortable/src/sortable.js'); ?>
     <?= $this->Html->script('redepga.js') ?>
     <?= $this->Html->script('controllers.js') ?>
     <?= $this->Html->script('services.js') ?>
@@ -103,7 +105,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 				<ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 
 					<?php if($permissions[$admin_logged['role_table']]->feed == 1) : ?>
-					<li>
+          <li class="<?php echo ($this->request->params['controller'] == 'Feed') ? 'current' : ''; ?>">
 						<a href="<?= $this->Url->build('/feed/listar'); ?>">
 						<i class="fa fa-rss"></i>
 						<span class="title">Feed</span>
@@ -112,7 +114,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 					</li>
 					<?php endif; ?>
 					<?php if($permissions[$admin_logged['role_table']]->input == 1) : ?>
-					<li>
+          <li class="<?php echo ($this->request->params['controller'] == 'Registros') ? 'current' : ''; ?>">
 						<a href="<?= $this->Url->build('/registros/listar'); ?>">
 						<i class="fa fa-keyboard-o"></i>
 						<span class="title">Inputs</span>
@@ -133,7 +135,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 					</li>
 					<?php endif; ?>
 					<?php if($permissions[$admin_logged['role_table']]->evolucao == 1) : ?>
-					<li>
+          <li class="<?php echo ($this->request->params['controller'] == 'Evolucao') ? 'current' : ''; ?>">
 						<a href="<?= $this->Url->build('/evolucao/listar'); ?>">
             <i class="fa fa-line-chart"></i>
 						<span class="title">Evolução</span>
@@ -142,7 +144,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 					</li>
 					<?php endif; ?>
 					<?php if($permissions[$admin_logged['role_table']]->bate_papo == 1) : ?>
-					<li>
+          <li class="<?php echo ($this->request->params['controller'] == 'BatePapo') ? 'current' : ''; ?>">
 						<a href="<?= $this->Url->build('/bate-papo'); ?>">
             <i class="fa fa-comments"></i>
 						<span class="title">Bate-Papo</span>
@@ -151,7 +153,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 					</li>
 					<?php endif; ?>
 					<?php if($permissions[$admin_logged['role_table']]->exercicios == 1) : ?>
-					<li>
+          <li class="<?php echo ($this->request->params['controller'] == 'Exercicios') ? 'current' : ''; ?>">
 						<a href="<?= $this->Url->build('/exercicios'); ?>">
             <i class="fa fa-pencil"></i>
 						<span class="title">Exercícios</span>

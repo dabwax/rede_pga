@@ -25,6 +25,14 @@
             Você só poderá preencher campos que dizem respeito a seu cargo (tutor, psicoterapeuta, responsáveis).
           </p>
 
+          <?php if(!empty($_GET['status']) && $_GET['status'] == "sucesso") : ?>
+            <p class="sucesso">
+              <i class="fa fa-check-square-o"></i>
+              <span>
+              Salvo!</span>
+            </p> <!-- .sucesso -->
+          <?php endif; ?>
+
           <hr>
           
           <div class="col-lg-8">
@@ -47,37 +55,37 @@
                   </div>
 
                 <div ng-if="registro.type === 'calendario'">
-                  <input name="registros[{{indice}}][value]" ng-model="registro.value" datepicker value="{{registro.value}}" type="text" class="form-control">
+                  <input id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" datepicker value="{{registro.value}}" type="text" class="form-control">
                 </div> <!-- calendario -->
 
                 <div ng-if="registro.type === 'intervalo_tempo'">
-                  <input name="registros[{{indice}}][value]" ng-model="registro.value" type="text" class="form-control">
+                  <input id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" type="text" class="form-control">
                 </div> <!-- intervalo_tempo -->
 
                 <div ng-if="registro.type === 'registro_textual'">
-                  <textarea name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control"></textarea>
+                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control"></textarea>
                 </div> <!-- registro_textual -->
 
                 <div ng-if="registro.type === 'escala_numerica'">
                   <p>
                     Valor atual: <strong>{{registro.value}}</strong>
                   </p>
-                  <input name="registros[{{indice}}][value]" ng-model="registro.value" type="range" min="{{registro.config.min}}" max="{{registro.config.max}}" class="form-control">
+                  <input id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" type="range" min="{{registro.config.min}}" max="{{registro.config.max}}" class="form-control">
                 </div> <!-- escala_numerica -->
 
                 <div ng-if="registro.type === 'escala_texto'">
 
-                  <select class="form-control" name="registros[{{indice}}][value]" ng-model="registro.value"  ng-options="option for option in registro.config.options track by option">
+                  <select id="input{{registro.id}}" class="form-control" name="registros[{{indice}}][value]" ng-model="registro.value"  ng-options="option for option in registro.config.options track by option">
                   </select>
 
                 </div> <!-- escala_texto -->
 
                 <div ng-if="registro.type === 'numero'">
-                  <input name="registros[{{indice}}][value]" ng-model="registro.value" type="text" class="form-control">
+                  <input id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" type="text" class="form-control">
                 </div> <!-- numero -->
 
                 <div ng-if="registro.type === 'texto_privativo'">
-                  <textarea name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control"></textarea>
+                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control"></textarea>
                 </div> <!-- numero -->
 
               </div> <!-- .col-md-8 -->
@@ -103,6 +111,9 @@
                 </label>
 
                 <textarea name="materias[{{materia.theme_id}}][observation]" placeholder="Observação sobre a aula de {{materia.name}}" class="form-control textarea-materia" ng-if="materia.enabled">{{materia.observation}}</textarea>
+
+                <input name="materias[{{materia.theme_id}}][nota_esperada]" placeholder="Nota esperada {{materia.name}}" class="form-control" ng-if="materia.enabled" value="{{materia.nota_esperada}}" />
+                <input name="materias[{{materia.theme_id}}][nota_alcancada]" placeholder="Nota alcançada {{materia.name}}" class="form-control" ng-if="materia.enabled" value="{{materia.nota_alcancada}}" />
 
               </div>
 
@@ -145,6 +156,8 @@
               <button type="submit" class="btn btn-block btn-success green">
                 <i class="fa fa-pencil"></i> Salvar dados
               </button>
+
+              <small class="text-center" style="display: block; margin-top: 10px;"><a href="<?php echo $this->Url->build(['action' => 'excluir', $aula->id]); ?>" style="color: #f00 !important;" onclick="if(!confirm('Você tem certeza disto? Esta ação é permanente!')) { return false; }">remover esta aula</a></small>
             </div>
           </div>
         </div> <!-- .form-actions -->
@@ -155,3 +168,15 @@
     </div> <!-- .portlet -->
   </div> <!-- .col-lg -->
 </div> <!-- .row -->
+
+<?php if(!empty($redirect_to_input_id)) : ?>
+<script>
+  $(document).ready(function() {
+
+    setTimeout(function() {
+      $("#input<?php echo $redirect_to_input_id; ?>").focus();
+    }, 0);
+
+  });
+</script>
+<?php endif; ?>

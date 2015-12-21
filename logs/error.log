@@ -19422,3 +19422,1060 @@ Stack Trace:
 #2 {main}
 
 
+2015-12-15 15:43:12 Error: [Cake\View\Exception\MissingHelperException] Helper class paramsHelper could not be found.
+Exception Attributes: array (
+  'class' => 'paramsHelper',
+  'plugin' => 'Cms',
+)
+Request URL: /cms/themes
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('params', 'Cms')
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/View/HelperRegistry.php(70): Cake\Core\ObjectRegistry->load('Cms.params')
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/View/View.php(751): Cake\View\HelperRegistry->__isset('params')
+#3 /home/dabwax/Projetos/rede_pga/plugins/Cms/src/Template/Layout/default.ctp(194): Cake\View\View->__get('params')
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/View/View.php(834): include('/home/dabwax/Pr...')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/View/View.php(794): Cake\View\View->_evaluate('/home/dabwax/Pr...', Array)
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/View/View.php(511): Cake\View\View->_render('/home/dabwax/Pr...')
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/View/View.php(473): Cake\View\View->renderLayout('', 'default')
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(582): Cake\View\View->render(NULL, NULL)
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(120): Cake\Controller\Controller->render()
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Cms\Controller\ThemesController))
+#11 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#12 {main}
+
+
+2015-12-15 15:43:17 Error: Fatal Error (1): Call to undefined method App\View\AppView::params() in [/home/dabwax/Projetos/rede_pga/plugins/Cms/src/Template/Layout/default.ctp, line 194]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2015-12-15 15:43:17 Error: [Cake\Error\FatalErrorException] Call to undefined method App\View\AppView::params()
+Request URL: /cms/themes
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to undefin...', '/home/dabwax/Pr...', 194)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2015-12-15 15:43:23 Error: [Cake\Routing\Exception\MissingControllerException] Controller class {{url}} could not be found.
+Exception Attributes: array (
+  'class' => '{{url}}',
+  'plugin' => 'Cms',
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /cms/%7B%7Burl%7D%7D
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2015-12-15 15:43:23 Error: [Cake\Routing\Exception\MissingControllerException] Controller class {{url}} could not be found.
+Exception Attributes: array (
+  'class' => '{{url}}',
+  'plugin' => 'Cms',
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /cms/%7B%7Burl%7D%7D
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2015-12-15 15:43:23 Error: [Cake\Routing\Exception\MissingControllerException] Controller class {{url}} could not be found.
+Exception Attributes: array (
+  'class' => '{{url}}',
+  'plugin' => 'Cms',
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /cms/%7B%7Burl%7D%7D
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2015-12-15 15:43:23 Error: [Cake\Routing\Exception\MissingControllerException] Controller class {{url}} could not be found.
+Exception Attributes: array (
+  'class' => '{{url}}',
+  'plugin' => 'Cms',
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /cms/%7B%7Burl%7D%7D
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2015-12-15 15:44:32 Warning: Warning (2): var_dump() expects at least 1 parameter, 0 given in [/home/dabwax/Projetos/rede_pga/plugins/Cms/src/Template/Layout/default.ctp, line 194]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+var_dump - [internal], line ??
+include - ROOT/plugins/Cms/src/Template/Layout/default.ctp, line 194
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 16:15:49 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "users"
+Request URL: /
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(237): Cake\ORM\Table->get(1)
+#2 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(56): App\Controller\AppController->getAdminLogged()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-15 16:15:50 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "users"
+Request URL: /
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(237): Cake\ORM\Table->get(1)
+#2 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(56): App\Controller\AppController->getAdminLogged()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-15 16:16:02 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "users"
+Request URL: /
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(237): Cake\ORM\Table->get(1)
+#2 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(56): App\Controller\AppController->getAdminLogged()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-15 16:16:02 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "users"
+Request URL: /
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(237): Cake\ORM\Table->get(1)
+#2 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(56): App\Controller\AppController->getAdminLogged()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-15 16:16:12 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "users"
+Request URL: /
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(237): Cake\ORM\Table->get(1)
+#2 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(56): App\Controller\AppController->getAdminLogged()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-15 16:16:12 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "users"
+Request URL: /
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(237): Cake\ORM\Table->get(1)
+#2 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(56): App\Controller\AppController->getAdminLogged()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-15 16:16:39 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 62]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 62
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 88
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 16:16:44 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 62]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 62
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 88
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 16:17:16 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 62]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 62
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 89
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 16:27:38 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 89
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 17:19:10 Error: [Cake\View\Exception\MissingTemplateException] Template file "Inputs/sortable.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Inputs/sortable.ctp',
+)
+Request URL: /cms/inputs/sortable
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/View/View.php(462): Cake\View\View->_getViewFileName(NULL)
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(582): Cake\View\View->render(NULL, NULL)
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(120): Cake\Controller\Controller->render()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(Cms\Controller\InputsController))
+#4 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 {main}
+
+
+2015-12-15 17:29:32 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-15 17:30:39 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Model/Table/LessonThemesTable.php, line 64]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+App\Model\Table\LessonThemesTable::salvarMaterias() - APP/Model/Table/LessonThemesTable.php, line 64
+App\Controller\RegistrosController::editar() - APP/Controller/RegistrosController.php, line 245
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 411
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 10:54:37 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "users"
+Request URL: /
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(237): Cake\ORM\Table->get(1)
+#2 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(56): App\Controller\AppController->getAdminLogged()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-16 10:54:54 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 11:00:26 Error: [Cake\Controller\Exception\MissingActionException] Action RegistrosController::index() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'RegistrosController',
+  'action' => 'index',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /registros/
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#2 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+
+2015-12-16 11:05:46 Error: [Cake\Controller\Exception\MissingActionException] Action RegistrosController::excluir() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'RegistrosController',
+  'action' => 'excluir',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /registros/excluir/7
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#2 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+
+2015-12-16 11:06:36 Error: Fatal Error (1): Call to undefined method Cake\ORM\Entity::delete() in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 282]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2015-12-16 11:06:36 Error: [Cake\Error\FatalErrorException] Call to undefined method Cake\ORM\Entity::delete()
+Request URL: /registros/excluir/7
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to undefin...', '/home/dabwax/Pr...', 282)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2015-12-16 11:06:39 Error: Fatal Error (1): Call to undefined method Cake\ORM\Entity::deleteAll() in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 282]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2015-12-16 11:06:39 Error: [Cake\Error\FatalErrorException] Call to undefined method Cake\ORM\Entity::deleteAll()
+Request URL: /registros/excluir/7
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to undefin...', '/home/dabwax/Pr...', 282)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2015-12-16 11:06:51 Error: Fatal Error (1): Call to a member function delete() on a non-object in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 282]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2015-12-16 11:06:51 Error: [Cake\Error\FatalErrorException] Call to a member function delete() on a non-object
+Request URL: /registros/excluir/7
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to a membe...', '/home/dabwax/Pr...', 282)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2015-12-16 11:06:52 Error: Fatal Error (1): Call to a member function delete() on a non-object in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 282]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2015-12-16 11:06:52 Error: [Cake\Error\FatalErrorException] Call to a member function delete() on a non-object
+Request URL: /registros/excluir/7
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to a membe...', '/home/dabwax/Pr...', 282)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2015-12-16 11:06:52 Error: Fatal Error (1): Call to a member function delete() on a non-object in [/home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php, line 282]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2015-12-16 11:06:52 Error: [Cake\Error\FatalErrorException] Call to a member function delete() on a non-object
+Request URL: /registros/excluir/7
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to a membe...', '/home/dabwax/Pr...', 282)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2015-12-16 11:07:04 Error: [Cake\View\Exception\MissingTemplateException] Template file "Registros/excluir.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'Registros/excluir.ctp',
+)
+Request URL: /registros/excluir/7
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/View/View.php(462): Cake\View\View->_getViewFileName(NULL)
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(582): Cake\View\View->render(NULL, NULL)
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(120): Cake\Controller\Controller->render()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#4 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 {main}
+
+
+2015-12-16 11:07:13 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "lessons"
+Request URL: /registros/excluir/7
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php(280): Cake\ORM\Table->get('7')
+#2 [internal function]: App\Controller\RegistrosController->excluir('7')
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#6 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 {main}
+
+
+2015-12-16 11:07:20 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "lessons"
+Request URL: /registros/editar/7
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php(238): Cake\ORM\Table->get('7')
+#2 [internal function]: App\Controller\RegistrosController->editar('7')
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#6 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 {main}
+
+
+2015-12-16 11:21:44 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "users"
+Request URL: /
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(237): Cake\ORM\Table->get(1)
+#2 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(56): App\Controller\AppController->getAdminLogged()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-16 14:54:41 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "users"
+Request URL: /
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(237): Cake\ORM\Table->get(1)
+#2 /home/dabwax/Projetos/rede_pga/src/Controller/AppController.php(56): App\Controller\AppController->getAdminLogged()
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-16 14:55:00 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:16:44 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:27:23 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:27:35 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:27:42 Warning: Warning (2): array_values() expects parameter 1 to be array, null given in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+array_values - [internal], line ??
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 15:28:46 Error: [RuntimeException] Table "App\Model\Table\LessonsTable" is not associated with "Hashtags"
+Request URL: /feed/listar/8
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/src/Controller/FeedController.php(30): Cake\ORM\Table->__get('Hashtags')
+#1 [internal function]: App\Controller\FeedController->listar('8')
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\FeedController))
+#5 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 {main}
+
+
+2015-12-16 15:29:51 Error: [BadMethodCallException] Unknown method "contain"
+Request URL: /feed/listar/8
+Stack Trace:
+#0 [internal function]: Cake\ORM\Table->__call('contain', Array)
+#1 [internal function]: App\Model\Table\HashtagsTable->contain(Array)
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association.php(867): call_user_func_array(Array, Array)
+#3 /home/dabwax/Projetos/rede_pga/src/Controller/FeedController.php(30): Cake\ORM\Association->__call('contain', Array)
+#4 /home/dabwax/Projetos/rede_pga/src/Controller/FeedController.php(30): Cake\ORM\Association\BelongsTo->contain(Array)
+#5 [internal function]: App\Controller\FeedController->listar('8')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\FeedController))
+#9 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2015-12-16 15:29:52 Error: [BadMethodCallException] Unknown method "contain"
+Request URL: /feed/listar/8
+Stack Trace:
+#0 [internal function]: Cake\ORM\Table->__call('contain', Array)
+#1 [internal function]: App\Model\Table\HashtagsTable->contain(Array)
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association.php(867): call_user_func_array(Array, Array)
+#3 /home/dabwax/Projetos/rede_pga/src/Controller/FeedController.php(30): Cake\ORM\Association->__call('contain', Array)
+#4 /home/dabwax/Projetos/rede_pga/src/Controller/FeedController.php(30): Cake\ORM\Association\BelongsTo->contain(Array)
+#5 [internal function]: App\Controller\FeedController->listar('8')
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\FeedController))
+#9 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2015-12-16 15:29:59 Error: Fatal Error (1): Call to undefined method Cake\ORM\Entity::contain() in [/home/dabwax/Projetos/rede_pga/src/Controller/FeedController.php, line 30]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2015-12-16 15:29:59 Error: [Cake\Error\FatalErrorException] Call to undefined method Cake\ORM\Entity::contain()
+Request URL: /feed/listar/8
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to undefin...', '/home/dabwax/Pr...', 30)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2015-12-16 16:10:10 Warning: Warning (2): array_values() expects parameter 1 to be array, null given in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+array_values - [internal], line ??
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:10 Warning: Warning (2): array_values() expects parameter 1 to be array, null given in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+array_values - [internal], line ??
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:30 Warning: Warning (2): array_values() expects parameter 1 to be array, null given in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+array_values - [internal], line ??
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:34 Warning: Warning (2): array_values() expects parameter 1 to be array, null given in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+array_values - [internal], line ??
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:42 Warning: Warning (2): array_values() expects parameter 1 to be array, null given in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+array_values - [internal], line ??
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:10:44 Warning: Warning (2): array_values() expects parameter 1 to be array, null given in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+array_values - [internal], line ??
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-16 16:15:19 Warning: Warning (2): array_values() expects parameter 1 to be array, null given in [/home/dabwax/Projetos/rede_pga/src/Template/Feed/listar.ctp, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+array_values - [internal], line ??
+include - APP/Template/Feed/listar.ctp, line 32
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::render() - CORE/src/View/View.php, line 465
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-17 09:04:19 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "lessons"
+Request URL: /registros/editar/96
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Table.php(1176): Cake\ORM\Query->firstOrFail()
+#1 /home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php(238): Cake\ORM\Table->get('96')
+#2 [internal function]: App\Controller\RegistrosController->editar('96')
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#6 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 {main}
+
+
+2015-12-17 10:03:51 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-17 10:57:18 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'model' in where clause is ambiguous
+Request URL: /registros/api_inputs/8
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Statement/MysqlStatement.php(36): PDOStatement->execute(NULL)
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Connection.php(274): Cake\Database\Statement\MysqlStatement->execute()
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Query.php(175): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(657): Cake\Database\Query->execute()
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(218): Cake\ORM\Query->_execute()
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(608): Cake\ORM\Query->_all()
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association/ExternalAssociationTrait.php(114): Cake\ORM\Query->all()
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association/SelectableAssociationTrait.php(56): Cake\ORM\Association\HasMany->_buildResultMap(Object(Cake\ORM\Query), Array)
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(542): Cake\ORM\Association\HasMany->eagerLoader(Array)
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(657): Cake\ORM\EagerLoader->loadExternal(Object(Cake\ORM\Query), Object(Cake\Database\Statement\MysqlStatement))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(218): Cake\ORM\Query->_execute()
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(608): Cake\ORM\Query->_all()
+#12 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(341): Cake\ORM\Query->all()
+#13 /home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php(37): Cake\ORM\Query->first()
+#14 [internal function]: App\Controller\RegistrosController->api_inputs('8')
+#15 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#16 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#17 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#18 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#19 {main}
+
+
+2015-12-17 10:59:25 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'model' in where clause is ambiguous
+Request URL: /registros/api_inputs/8
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Statement/MysqlStatement.php(36): PDOStatement->execute(NULL)
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Connection.php(274): Cake\Database\Statement\MysqlStatement->execute()
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Query.php(175): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(657): Cake\Database\Query->execute()
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(218): Cake\ORM\Query->_execute()
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(608): Cake\ORM\Query->_all()
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association/ExternalAssociationTrait.php(114): Cake\ORM\Query->all()
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association/SelectableAssociationTrait.php(56): Cake\ORM\Association\HasMany->_buildResultMap(Object(Cake\ORM\Query), Array)
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(542): Cake\ORM\Association\HasMany->eagerLoader(Array)
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(657): Cake\ORM\EagerLoader->loadExternal(Object(Cake\ORM\Query), Object(Cake\Database\Statement\MysqlStatement))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(218): Cake\ORM\Query->_execute()
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(608): Cake\ORM\Query->_all()
+#12 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(341): Cake\ORM\Query->all()
+#13 /home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php(37): Cake\ORM\Query->first()
+#14 [internal function]: App\Controller\RegistrosController->api_inputs('8')
+#15 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#16 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#17 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#18 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#19 {main}
+
+
+2015-12-17 10:59:37 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'model' in where clause is ambiguous
+Request URL: /registros/api_inputs/8
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Statement/MysqlStatement.php(36): PDOStatement->execute(NULL)
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Connection.php(274): Cake\Database\Statement\MysqlStatement->execute()
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Query.php(175): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(657): Cake\Database\Query->execute()
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(218): Cake\ORM\Query->_execute()
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(608): Cake\ORM\Query->_all()
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association/ExternalAssociationTrait.php(114): Cake\ORM\Query->all()
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association/SelectableAssociationTrait.php(56): Cake\ORM\Association\HasMany->_buildResultMap(Object(Cake\ORM\Query), Array)
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(542): Cake\ORM\Association\HasMany->eagerLoader(Array)
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(657): Cake\ORM\EagerLoader->loadExternal(Object(Cake\ORM\Query), Object(Cake\Database\Statement\MysqlStatement))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(218): Cake\ORM\Query->_execute()
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(608): Cake\ORM\Query->_all()
+#12 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(341): Cake\ORM\Query->all()
+#13 /home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php(37): Cake\ORM\Query->first()
+#14 [internal function]: App\Controller\RegistrosController->api_inputs('8')
+#15 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#16 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#17 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#18 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#19 {main}
+
+
+2015-12-17 10:59:56 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'LessonEntry.model' in 'where clause'
+Request URL: /registros/api_inputs/8
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Statement/MysqlStatement.php(36): PDOStatement->execute(NULL)
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Connection.php(274): Cake\Database\Statement\MysqlStatement->execute()
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Query.php(175): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(657): Cake\Database\Query->execute()
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(218): Cake\ORM\Query->_execute()
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(608): Cake\ORM\Query->_all()
+#6 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association/ExternalAssociationTrait.php(114): Cake\ORM\Query->all()
+#7 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Association/SelectableAssociationTrait.php(56): Cake\ORM\Association\HasMany->_buildResultMap(Object(Cake\ORM\Query), Array)
+#8 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(542): Cake\ORM\Association\HasMany->eagerLoader(Array)
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(657): Cake\ORM\EagerLoader->loadExternal(Object(Cake\ORM\Query), Object(Cake\Database\Statement\MysqlStatement))
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(218): Cake\ORM\Query->_execute()
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(608): Cake\ORM\Query->_all()
+#12 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(341): Cake\ORM\Query->all()
+#13 /home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php(37): Cake\ORM\Query->first()
+#14 [internal function]: App\Controller\RegistrosController->api_inputs('8')
+#15 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#16 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#17 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#18 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#19 {main}
+
+
+2015-12-17 11:36:42 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'model' in 'where clause'
+Request URL: /registros/editar/8?status=sucesso
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Statement/MysqlStatement.php(36): PDOStatement->execute(NULL)
+#1 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Connection.php(274): Cake\Database\Statement\MysqlStatement->execute()
+#2 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Database/Query.php(175): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#3 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(657): Cake\Database\Query->execute()
+#4 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(218): Cake\ORM\Query->_execute()
+#5 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/ORM/Query.php(608): Cake\ORM\Query->_all()
+#6 /home/dabwax/Projetos/rede_pga/src/Model/Table/LessonHashtagsTable.php(28): Cake\ORM\Query->all()
+#7 /home/dabwax/Projetos/rede_pga/src/Controller/RegistrosController.php(252): App\Model\Table\LessonHashtagsTable->getHashtagsDefinidas('8', Array)
+#8 [internal function]: App\Controller\RegistrosController->editar('8')
+#9 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Controller/Controller.php(411): call_user_func_array(Array, Array)
+#10 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#11 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\RegistrosController))
+#12 /home/dabwax/Projetos/rede_pga/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2015-12-17 14:13:43 Error: Fatal Error (4): syntax error, unexpected '$admin_logged' (T_VARIABLE) in [/home/dabwax/Projetos/rede_pga/src/Controller/ExerciciosController.php, line 73]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2015-12-17 14:13:43 Error: [Cake\Error\FatalErrorException] syntax error, unexpected '$admin_logged' (T_VARIABLE)
+Request URL: /exercicios
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(4, 'syntax error, u...', '/home/dabwax/Pr...', 73)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2015-12-18 13:34:05 Error: Fatal Error (4): syntax error, unexpected '$admin_logged' (T_VARIABLE) in [/home/dabwax/Projetos/rede_pga/src/Controller/ExerciciosController.php, line 73]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2015-12-18 13:34:05 Error: [Cake\Error\FatalErrorException] syntax error, unexpected '$admin_logged' (T_VARIABLE)
+Request URL: /exercicios
+Stack Trace:
+#0 /home/dabwax/Projetos/rede_pga/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(4, 'syntax error, u...', '/home/dabwax/Pr...', 73)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2015-12-18 13:35:01 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-12-18 13:42:27 Warning: Warning (2): Invalid argument supplied for foreach() in [/home/dabwax/Projetos/rede_pga/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+

@@ -17,7 +17,10 @@ class LessonsTable extends Table
       $this->addBehavior('Timestamp');
   }
 
-  public function buscaAulas($user_id, $where_2)
+  // método para buscar todas as aulas do estudante
+
+  // $where_2 = parametros extras
+  public function buscaAulas($user_id, $where_2 = array() )
   {
   	$where = [
   		'Lessons.user_id' => $user_id,
@@ -25,14 +28,24 @@ class LessonsTable extends Table
 
     $where = array_merge($where, $where_2);
 
-  	return $this->find()->where($where)->contain([
-  		'LessonThemes' => function($q) {
-      		return $q->contain(['Themes']);
-    	},
-    	'LessonEntries' => function($q) {
-      		return $q->contain(['Inputs']);
-    	}
-    ])->all();
+    // joins
+    $contain = [
+    'LessonEntries' => function($q) {
+      return $q->contain(["Inputs"]);
+    },
+    'LessonThemes' => function($q) {
+      return $q->contain(["Themes"]);
+    },
+    'LessonHashtags' => function($q) {
+      return $q->contain(["Hashtags"]);
+    }];
+
+    // query
+  	return $this->find()
+    ->where($where)
+    ->contain($contain)
+    ->all()
+    ->toArray();
   }
 
 }

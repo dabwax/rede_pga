@@ -1,5 +1,21 @@
 angular.module("RedePga")
 
+.controller('AdminInputsCtrl', ['$scope', '$http', function($scope, $http) {
+
+  $scope.sortableOptions = {
+    update: function(e, ui) {
+      var data = $(this).sortable('serialize');
+
+      $http.get(baseUrl + "cms/inputs/sortable?" + data).then(function(result) {
+
+        console.log(result.data);
+
+      });
+
+    }
+  };
+
+}])
 .controller('ConfigurarAtoresCtrl', ['$scope', function($scope) {
 
   $scope.actor = {
@@ -65,6 +81,22 @@ angular.module("RedePga")
   {
     $scope.search.$ = '';
   };
+
+  $scope.role_helper = function(role)
+  {
+
+    var roles = {
+       "dad": "Pai"
+      ,"mom": "Mãe"
+      ,"tutor": "Tutor"
+      ,"therapist": "Terapeuta"
+      ,"mediator": "Mediador"
+      ,"coordinator": "Coordenador"
+      ,"user": "Estudante"
+    };
+
+    return roles[role];
+  }
 }])
 .controller('ExerciciosCtrl', ['$scope', '$http', '$timeout', '$interval', 'Exercicios', 'Upload', function($scope, $http, $timeout, $interval, Exercicios, Upload) {
   
@@ -290,8 +322,6 @@ angular.module("RedePga")
 
       $scope.filtro.aula = aula;
 
-      console.log(aula.lesson_themes[0].observation);
-
     $("#listagem-aulas").slideUp(500, function() {
 
       $("#listagem-detalhes").slideDown(500);
@@ -416,12 +446,29 @@ angular.module("RedePga")
 
 .controller("CmsInputCtrl", ['$scope', function($scope) {
 
+  $scope.keyPressed = function(e) {
+
+    console.log(e.which);
+    if(e.which == 2)
+    {
+      $scope.adicionar_mais();
+    }
+  };
+
+  $scope.adicionar_mais = function() {
+    $scope.input.config.options.push('');
+
+    setTimeout(function() {
+      $("textarea").last().focus();
+    }, 0);
+  }
+
   $scope.$watch("input.type", function(newValue) {
     if(newValue == 'escala_texto')
     {
       if($scope.input.config == undefined)
       {
-        $scope.input.config = {options: ['Preencha com um nome']};
+        $scope.input.config = {options: ['']};
       }
     }
   });

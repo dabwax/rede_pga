@@ -16,7 +16,7 @@ class LessonThemesTable extends Table
       $this->addBehavior('Timestamp');
   }
 
-  public function getMateriasDefinidas($lesson_id, $user_id)
+  public function getMateriasDefinidas($lesson_id, $user_id, $model = null, $model_id = null)
   {
   	
     $materias = [];
@@ -33,10 +33,13 @@ class LessonThemesTable extends Table
         'enabled' => false,
         'name' => $f->name,
         'observation' => ''
+        ,'nota_esperada' => ''
+        ,'nota_alcancada' => ''
       ];
     }
 
-    $find = $this->find('all')->contain(['Themes'])->where(['lesson_id' => $lesson_id])->all();
+    $where = ['lesson_id' => $lesson_id, 'model' => $model, 'model_id' => $model_id];
+    $find = $this->find('all')->contain(['Themes'])->where($where)->all();
 
     // Inclui as matérias existentes
     foreach($find as $f)
@@ -48,13 +51,15 @@ class LessonThemesTable extends Table
         'enabled' => true,
         'name' => $f->theme->name,
         'observation' => $f->observation
+        ,'nota_esperada' => $f->nota_esperada
+        ,'nota_alcancada' => $f->nota_alcancada
       ];
     }
 
   	return $materias;
   }
 
-  public function salvarMaterias($aula, $materias)
+  public function salvarMaterias($aula, $materias, $current_user)
   {
 
     // Itera todas as matérias preenchidas
@@ -68,8 +73,6 @@ class LessonThemesTable extends Table
       if($materia['enabled'] == '1')
       {
 
-        $observation = $materia['observation'];
-
         foreach($aula->materias as $materia_da_aula)
         {
 
@@ -77,9 +80,13 @@ class LessonThemesTable extends Table
           {
 
             $tmp = $this->newEntity([
-              'lesson_id' => $aula->id,
-              'theme_id' => $theme_id,
-              'observation' => $observation
+              'lesson_id'       => $aula->id,
+              'theme_id'        => $theme_id,
+              'observation'     => $materia['observation'],
+              'nota_esperada'   => $materia['nota_esperada'],
+              'nota_alcancada'  => $materia['nota_alcancada'],
+              'model' => $current_user['role_table'],
+              'model_id' => $current_user['id']
             ]);
 
             $this->save($tmp);
@@ -90,7 +97,11 @@ class LessonThemesTable extends Table
 
             $tmp = $this->get($materia_da_aula['id']);
 
-            $tmp->observation = $observation;
+            $tmp->observation     = $materia['observation'];
+            $tmp->nota_esperada   = $materia['nota_esperada'];
+            $tmp->nota_alcancada  = $materia['nota_alcancada'];
+            $tmp->model           = $current_user['role_table'];
+            $tmp->model_id        = $current_user['id'];
 
             $this->save($tmp);
           } // if materia enabled e materia_da_aula igual theme_id
