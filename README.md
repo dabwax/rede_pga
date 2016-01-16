@@ -1,6 +1,6 @@
-# Rede PGA
+# PEP - Plataforma de Ensino Personalizado
 
-URL oficial: http://redepga.com.br
+URL oficial: http://pep.com.br
 
 ## Base de Dados
 
