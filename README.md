@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/dabwax/pep/master/webroot/img/logo_monster.png" width="150" />
+
 # PEP - Plataforma de Ensino Personalizado
 
 URL oficial: http://pep.com.br
@@ -11,10 +13,10 @@ MySQL, dump localizado em webroot/rede_pga.sql.
 Utilizado o CakePHP v3 com AngularJS v1.3.
 
 ## Instalação
-1) Extrair conteúdo do .zip no DocumentRoot do web server.
-2) Editar config/app.php o Datasource padrão.
-3) Importar base de dados no Datasource.
-4) Habilitar mod_rewrite, php5-intl e cURL.
-5) Rodar http://localhost/rede_pga
-6) ????
-7) PROFIT!
+* Extrair conteúdo do .zip no DocumentRoot do web server.
+* Editar config/app.php o Datasource padrão.
+* Importar base de dados no Datasource.
+* Habilitar mod_rewrite, php5-intl e cURL.
+* Rodar http://localhost/rede_pga
+* ????
+* PROFIT!
