@@ -53,6 +53,8 @@ class AuthenticationController extends AppController
 
   public function login()
   {
+    $this->layout = 'login';
+
     $login = new LoginForm();
 
     $this->set(compact("login"));

@@ -430,6 +430,10 @@ angular.module("RedePga")
 
     $scope.getRole = function()
     {
+      if($scope.roles[$scope.roleChecked] == undefined) {
+        return "Quem é você?";
+      }
+
       return $scope.roles[$scope.roleChecked];
     }
 

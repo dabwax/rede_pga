@@ -218,7 +218,7 @@ return [
             //'port' => 'nonstandard_port_number',
             'username' => 'root',
             'password' => 'relogio123',
-            'database' => 'rede_pga',
+            'database' => 'pep',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,

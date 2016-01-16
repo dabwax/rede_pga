@@ -1,1 +1,1 @@
-angular.module('RedePga', ['highcharts-ng', 'ngFileUpload', 'ngTagsInput', 'ui.mask', 'ui.sortable']);
+angular.module('RedePga', []);

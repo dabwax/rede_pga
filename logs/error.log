@@ -20479,3 +20479,167 @@ Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
 
 
 
+2016-01-16 14:07:09 Error: [PDOException] SQLSTATE[42000] [1049] Unknown database 'rede_pga'
+Request URL: /pep/
+Stack Trace:
+#0 /vagrant/pep/vendor/cakephp/cakephp/src/Database/Driver/PDODriverTrait.php(48): PDO->__construct('mysql:host=loca...', 'root', 'relogio123', Array)
+#1 /vagrant/pep/vendor/cakephp/cakephp/src/Database/Driver/Mysql.php(89): Cake\Database\Driver\Mysql->_connect('mysql:host=loca...', Array)
+#2 /vagrant/pep/vendor/cakephp/cakephp/src/Database/Schema/BaseSchema.php(46): Cake\Database\Driver\Mysql->connect()
+#3 /vagrant/pep/vendor/cakephp/cakephp/src/Database/Dialect/MysqlDialectTrait.php(62): Cake\Database\Schema\BaseSchema->__construct(Object(Cake\Database\Driver\Mysql))
+#4 /vagrant/pep/vendor/cakephp/cakephp/src/Database/Schema/Collection.php(52): Cake\Database\Driver\Mysql->schemaDialect()
+#5 /vagrant/pep/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(44): Cake\Database\Schema\Collection->__construct(Object(Cake\Database\Connection))
+#6 /vagrant/pep/vendor/cakephp/cakephp/src/Database/Connection.php(319): Cake\Database\Schema\CachedCollection->__construct(Object(Cake\Database\Connection), true)
+#7 /vagrant/pep/vendor/cakephp/cakephp/src/ORM/Table.php(425): Cake\Database\Connection->schemaCollection()
+#8 /vagrant/pep/vendor/cakephp/cakephp/src/ORM/Query.php(141): Cake\ORM\Table->schema()
+#9 /vagrant/pep/vendor/cakephp/cakephp/src/ORM/Query.php(123): Cake\ORM\Query->addDefaultTypes(Object(Cake\ORM\Table))
+#10 /vagrant/pep/vendor/cakephp/cakephp/src/ORM/Table.php(1217): Cake\ORM\Query->__construct(Object(Cake\Database\Connection), Object(Cake\ORM\Table))
+#11 /vagrant/pep/vendor/cakephp/cakephp/src/ORM/Table.php(921): Cake\ORM\Table->query()
+#12 /vagrant/pep/src/Controller/AppController.php(96): Cake\ORM\Table->find()
+#13 /vagrant/pep/src/Controller/AppController.php(49): App\Controller\AppController->getPermissions()
+#14 /vagrant/pep/vendor/cakephp/cakephp/src/Controller/Controller.php(278): App\Controller\AppController->initialize()
+#15 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#16 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(87): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'Feed')
+#17 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(49): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#18 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#19 /vagrant/pep/vendor/cakephp/cakephp/src/Event/EventManager.php(389): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#20 /vagrant/pep/vendor/cakephp/cakephp/src/Event/EventManager.php(355): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#21 /vagrant/pep/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#22 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#23 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#24 {main}
+
+
+2016-01-16 14:42:58 Warning: Warning (2): Invalid argument supplied for foreach() in [/vagrant/pep/src/Template/Element/header.ctp, line 54]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+include - APP/Template/Element/header.ctp, line 54
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1161
+Cake\View\View::element() - CORE/src/View/View.php, line 376
+include - APP/Template/Layout/default.ctp, line 90
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2016-01-16 14:43:00 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/plugins/simple-line-icons/simple-line-icons.min.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 14:43:00 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 16:38:38 Error: Fatal Error (1): Call to undefined method App\Controller\AuthenticationController::viewBuilder() in [/vagrant/pep/src/Controller/AuthenticationController.php, line 24]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2016-01-16 16:38:39 Error: [Cake\Error\FatalErrorException] Call to undefined method App\Controller\AuthenticationController::viewBuilder()
+Request URL: /pep/login
+Stack Trace:
+#0 /vagrant/pep/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to undefin...', '/vagrant/pep/sr...', 24)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-01-16 16:39:11 Error: [Cake\Core\Exception\MissingPluginException] Plugin Login could not be found.
+Exception Attributes: array (
+  'plugin' => 'Login',
+)
+Request URL: /pep/login
+Stack Trace:
+#0 /vagrant/pep/vendor/cakephp/cakephp/src/Core/App.php(127): Cake\Core\Plugin::classPath('Login')
+#1 /vagrant/pep/vendor/cakephp/cakephp/src/View/View.php(1081): Cake\Core\App::path('Template', 'Login')
+#2 /vagrant/pep/vendor/cakephp/cakephp/src/View/View.php(910): Cake\View\View->_paths(NULL)
+#3 /vagrant/pep/vendor/cakephp/cakephp/src/View/View.php(462): Cake\View\View->_getViewFileName(NULL)
+#4 /vagrant/pep/vendor/cakephp/cakephp/src/Controller/Controller.php(582): Cake\View\View->render(NULL, NULL)
+#5 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(120): Cake\Controller\Controller->render()
+#6 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\AuthenticationController))
+#7 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 {main}
+
+
+2016-01-16 16:39:48 Error: Fatal Error (1): Call to undefined method App\Controller\AuthenticationController::viewBuilder() in [/vagrant/pep/src/Controller/AuthenticationController.php, line 56]
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 192
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 91
+[main] - [internal], line ??
+
+
+
+2016-01-16 16:39:48 Error: [Cake\Error\FatalErrorException] Call to undefined method App\Controller\AuthenticationController::viewBuilder()
+Request URL: /pep/login
+Stack Trace:
+#0 /vagrant/pep/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(91): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to undefin...', '/vagrant/pep/sr...', 56)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-01-16 16:58:41 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Js could not be found.
+Exception Attributes: array (
+  'class' => 'Js',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/js/main.js
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 17:01:13 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Img could not be found.
+Exception Attributes: array (
+  'class' => 'Img',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/img/logo-monster.png
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 17:01:21 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Img could not be found.
+Exception Attributes: array (
+  'class' => 'Img',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/img/logo-monster.png
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
