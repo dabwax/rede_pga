@@ -1,1 +1,1 @@
-<div class="alert alert-success"><?= h($message) ?></div>
+<script>Materialize.toast('<?= h($message) ?>', 4000);</script>

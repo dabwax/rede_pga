@@ -20643,3 +20643,320 @@ Stack Trace:
 #1 {main}
 
 
+2016-01-16 18:37:28 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/css/components.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:28 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/plugins/simple-line-icons/simple-line-icons.min.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:29 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/css/layout.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:29 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/scripts/ng-tags-input.bootstrap.min.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:29 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/scripts/ng-tags-input.min.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:29 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/css/plugins.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:30 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/css/exercicios.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:30 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/scripts/ng-file-upload-all.min.js
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:30 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/css/themes/grey.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:31 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/scripts/highcharts-ng.min.js
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:31 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/css/redepga.css
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:31 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/scripts/ui-sortable/src/sortable.js
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/scripts/ui-mask/dist/mask.min.js
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Global could not be found.
+Exception Attributes: array (
+  'class' => 'Global',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/global/scripts/ng-tags-input.min.js
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:37:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Uploads could not be found.
+Exception Attributes: array (
+  'class' => 'Uploads',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /pep/uploads/1450196930-abacate1-jpg.jpg
+Stack Trace:
+#0 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-01-16 18:49:34 Warning: Warning (512): Method Cake\View\Helper\HtmlHelper::url does not exist in [/vagrant/pep/vendor/cakephp/cakephp/src/View/Helper.php, line 138]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+Cake\View\Helper::__call() - CORE/src/View/Helper.php, line 138
+Cake\View\Helper\HtmlHelper::url() - APP/Template/Layout/default.ctp, line 26
+include - APP/Template/Layout/default.ctp, line 26
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2016-01-16 18:49:35 Warning: Warning (512): Method Cake\View\Helper\HtmlHelper::url does not exist in [/vagrant/pep/vendor/cakephp/cakephp/src/View/Helper.php, line 138]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 139
+Cake\View\Helper::__call() - CORE/src/View/Helper.php, line 138
+Cake\View\Helper\HtmlHelper::url() - APP/Template/Layout/default.ctp, line 27
+include - APP/Template/Layout/default.ctp, line 27
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 834
+Cake\View\View::_render() - CORE/src/View/View.php, line 794
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 511
+Cake\View\View::render() - CORE/src/View/View.php, line 473
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 582
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 120
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2016-01-16 18:49:58 Error: [Cake\Controller\Exception\MissingActionException] Action FeedController::<pre class=() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'FeedController',
+  'action' => '<pre class=',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /pep/feed/%3Cpre%20class=
+Stack Trace:
+#0 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#1 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\FeedController))
+#2 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+
+2016-01-16 18:50:19 Error: [Cake\Controller\Exception\MissingActionException] Action FeedController::<pre class=() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'FeedController',
+  'action' => '<pre class=',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /pep/feed/%3Cpre%20class=
+Stack Trace:
+#0 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#1 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\FeedController))
+#2 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+
+2016-01-16 18:50:24 Error: [Cake\Controller\Exception\MissingActionException] Action FeedController::<pre class=() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'FeedController',
+  'action' => '<pre class=',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /pep/feed/%3Cpre%20class=
+Stack Trace:
+#0 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#1 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\FeedController))
+#2 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+
+2016-01-16 18:50:32 Error: [Cake\Controller\Exception\MissingActionException] Action FeedController::index() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'FeedController',
+  'action' => 'index',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /pep/feed/
+Stack Trace:
+#0 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#1 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\FeedController))
+#2 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+
+2016-01-16 18:50:49 Error: [Cake\Controller\Exception\MissingActionException] Action EvolucaoController::index() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'EvolucaoController',
+  'action' => 'index',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /pep/evolucao
+Stack Trace:
+#0 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(114): Cake\Controller\Controller->invokeAction()
+#1 /vagrant/pep/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(87): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\EvolucaoController))
+#2 /vagrant/pep/webroot/index.php(37): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+

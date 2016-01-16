@@ -1,49 +1,43 @@
-<?php $this->Html->addCrumb('<i class="fa fa-home"></i>Home', '/', ['escape' => false]); ?>
-<?php $this->Html->addCrumb('<i class="fa fa-rss"></i>Feed', '/feed/listar', ['escape' => false]); ?>
-<div class="row" ng-controller="FeedCtrl">
+<div class="row" ng-controller="FeedCtrl" ng-init='lessons = <?php echo json_encode(array_values($query) ); ?>; current_user = <?php echo json_encode( $admin_logged ); ?>; '>
 
-	<div class="col-lg-8 col-lg-offset-2">
-		
-		<?php if(!empty($hashtag)) : ?>
-		<h2>Filtrando pela hashtag: <strong><?php echo $hashtag->name; ?></strong></h2>
+  <nav>
+    <div class="nav-wrapper  teal lighten-2">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search"  ng-model="search.$" placeholder="Pesquisar por palavra-chave" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons" ng-click="reset_search()">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
 
-		<a href="<?php echo $this->Url->build('/feed/listar'); ?>" class="btn btn-xs btn-default">Remover filtro</a>
-		<?php endif; ?>
+<?php if(!empty($hashtag)) : ?>
+<h2>Filtrando pela hashtag: <strong><?php echo $hashtag->name; ?></strong></h2>
 
-		<div id="listagem-busca" class="form-group">
-			<label>Buscar por palavra-chave</label>
-			
-			<div ng-class="{'input-group': search.$}">
-				<input type="text" class="form-control input-icon" ng-model="search.$" placeholder="Pesquisar" />
+<a href="<?php echo $this->Url->build('/feed/listar'); ?>" class="btn btn-xs btn-default">Remover filtro</a>
+<?php endif; ?>
+		<div class="col s12 m6">
+			<div class="card small" ng-repeat="lesson in lessons | filter:search:strict">
 
-				<span class="input-group-btn">
-		        	<button class="btn btn-danger" ng-if="search.$" ng-click="reset_search()" type="button"><i class="fa fa-times"></i></button>
-		      	</span>
-	      	</div>
+			<div class="card-content">
 
-		</div> <!-- #listagem-busca -->
 
-	</div>
-
-	<div class="clearfix"></div>
-
-	<div class="col-lg-12">
-		
-		<div class="timeline" ng-init='lessons = <?php echo json_encode(array_values($query) ); ?>; current_user = <?php echo json_encode( $admin_logged ); ?>; '>
-
-			<div class="timeline-item" ng-repeat="lesson in lessons | filter:search:strict">
-				<div class="timeline-badge">
+				<!--<div class="timeline-badge">
 					<span style="background: #14B9D6;">{{lesson.date | date:'dd/MM'}}</span>
-				</div>
+				</div>-->
+
 				<div class="timeline-body">
 
 						<div class="timeline-body-content">
 
 							<div class="row">
 
-								<div ng-repeat="(author_id, entries) in lesson.formatted_data" class="col-lg-12 col-md-12">
+								<div ng-repeat="(author_id, entries) in lesson.formatted_data">
 
-									<h2><span class="label label-lg label-success">{{role_helper(lesson.actors[author_id].role)}}</span> {{lesson.actors[author_id].full_name}} <span class="label label-danger label-sm" ng-if="author_id == current_user.id">Você</span></h2>
+									<span class="card-title">{{role_helper(lesson.actors[author_id].role)}} </span>
+									<span class="card-title"> {{lesson.actors[author_id].full_name}}</span>
+									<span class="card-title" ng-if="author_id == current_user.id"> Você</span>
 									
 									<table class="table">
 										<tbody>
@@ -88,7 +82,7 @@
 						</div> <!-- .timeline-body-content -->
 
 				</div> <!-- .timeline-body -->
-			</div>
-		</div>
+				</div> <!-- .timeline-body -->
+				</div>
 	</div>
 </div>

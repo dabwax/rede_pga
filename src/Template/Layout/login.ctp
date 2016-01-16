@@ -29,5 +29,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
 
     <?= $this->Html->script('/js/main.js'); ?>
+    <?= $this->Flash->render() ?>
 </body>
 </html>

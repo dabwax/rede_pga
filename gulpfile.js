@@ -31,6 +31,7 @@ gulp.task('js', function() {
 
 gulp.task('watch', function () {
    gulp.watch('webroot/css/*.styl', ['css']);
+   gulp.watch('webroot/js/redepga.js', ['js']);
    gulp.watch('webroot/js/controllers.js', ['js']);
    gulp.watch('webroot/js/directives.js', ['js']);
    gulp.watch('webroot/js/services.js', ['js']);
