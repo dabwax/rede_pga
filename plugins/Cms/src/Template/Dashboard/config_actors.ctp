@@ -113,7 +113,7 @@
 		    				<td><span title="<?php echo $a->password; ?>">********</span></td>
 		    				<td>
 		    					<a href="javascript:;" class="btn btn-primary" ng-click='set_actor(<?php echo json_encode($a, true); ?>, "<?php echo $k; ?>")' title="Editar ator"><i class="fa fa-pencil"></i></a>
-		    					<a href="javascript:;" class="btn btn-danger" href="<?php echo $this->Url->build(['action' => 'delete_actor']); ?><?php echo $a->id; ?>/<?php echo $a->role; ?>" title="Excluir ator"><i class="fa fa-trash"></i></a>
+		    					<a class="btn btn-danger" href="<?php echo $this->Url->build(['action' => 'delete_actor']); ?><?php echo $a->id; ?>/<?php echo $a->role; ?>" title="Excluir ator"><i class="fa fa-trash"></i></a>
 		    				</td>
 		    			</tr>
 		    			<?php endforeach; ?>
