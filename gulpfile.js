@@ -5,6 +5,7 @@ var minifyCSS = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
+var livereload = require('gulp-livereload');
 
 gulp.task('default', ['css', 'js', 'watch']);
 
@@ -15,6 +16,7 @@ gulp.task('css', function () {
         .pipe(minifyCSS())
         .pipe(rename('style.css'))
         .pipe(gulp.dest('webroot/css'))
+        .pipe(livereload());
 });
 
 gulp.task('js', function() {
@@ -30,9 +32,14 @@ gulp.task('js', function() {
 });
 
 gulp.task('watch', function () {
-   gulp.watch('webroot/css/*.styl', ['css']);
-   gulp.watch('webroot/js/redepga.js', ['js']);
-   gulp.watch('webroot/js/controllers.js', ['js']);
-   gulp.watch('webroot/js/directives.js', ['js']);
-   gulp.watch('webroot/js/services.js', ['js']);
+  livereload.listen({
+    host: null
+  });
+
+  gulp.watch('webroot/css/*.styl', ['css']);
+  gulp.watch('webroot/css/pages/*.styl', ['css']);
+  gulp.watch('webroot/js/redepga.js', ['js']);
+  gulp.watch('webroot/js/controllers.js', ['js']);
+  gulp.watch('webroot/js/directives.js', ['js']);
+  gulp.watch('webroot/js/services.js', ['js']);
 });
