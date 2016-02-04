@@ -18,9 +18,9 @@
 	<div class="navbar-fixed">
 		<nav>
 			<div class="nav-wrapper teal lighten-5">
-				<a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo"><?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?></a>
+				<a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo center"><?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?></a>
 
-				<a href="#" data-activates="mobile-menu" class="button-collapse teal-text"><i class="material-icons">menu</i></a>
+				<a href="#" id="pep-menu-btn" data-activates="mobile-menu" class="button-collapse teal-text"><i class="material-icons">menu</i></a>
 
 				<ul class="side-nav teal-text" id="mobile-menu">
 			        <li><i class="material-icons left">home</i><a class="teal-text" href="<?php echo $this->Url->build('/'); ?>">Home</a> </li>
