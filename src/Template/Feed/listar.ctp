@@ -1,43 +1,53 @@
 <div class="row" ng-controller="FeedCtrl" ng-init='lessons = <?php echo json_encode(array_values($query) ); ?>; current_user = <?php echo json_encode( $admin_logged ); ?>; '>
 
-  <nav>
-    <div class="nav-wrapper  teal lighten-2">
-      <form>
-        <div class="input-field">
-          <input id="search" type="search"  ng-model="search.$" placeholder="Pesquisar por palavra-chave" required>
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons" ng-click="reset_search()">close</i>
-        </div>
-      </form>
-    </div>
-  </nav>
+	<nav>
+	<div class="nav-wrapper  teal lighten-2">
+	  <form>
+	    <div class="input-field">
+	      <input id="search" type="search"  ng-model="search.$" placeholder="Pesquisar por palavra-chave" required>
+	      <label for="search"><i class="material-icons">search</i></label>
+	      <i class="material-icons" ng-click="reset_search()">close</i>
+	    </div>
+	  </form>
+	</div>
+	</nav>
 
-<?php if(!empty($hashtag)) : ?>
-<h2>Filtrando pela hashtag: <strong><?php echo $hashtag->name; ?></strong></h2>
+	<?php if(!empty($hashtag)) : ?>
+		<h2>Filtrando pela hashtag: <strong><?php echo $hashtag->name; ?></strong></h2>
 
-<a href="<?php echo $this->Url->build('/feed/listar'); ?>" class="btn btn-xs btn-default">Remover filtro</a>
-<?php endif; ?>
-		<div class="col s12 m6">
-			<div class="card small" ng-repeat="lesson in lessons | filter:search:strict">
+		<a href="<?php echo $this->Url->build('/feed/listar'); ?>" class="btn btn-xs btn-default">Remover filtro</a>
+	<?php endif; ?>
 
-			<div class="card-content">
+			<div class="col s12 m4" ng-repeat="lesson in lessons | filter:search:strict">
+			<div class="card">
+
+				<div class="card-content">
+
+					<span class="card-title">{{lesson.date | date: 'dd/MM'}} <small>{{lesson.date | date: 'y'}}</small> 
+
+					<a href="<?php echo $this->Url->build(['controller' => 'registros', 'action' => 'editar']); ?>/{{lesson.id}}/{{entry.input.id}}" class="waves-effect waves-light btn green btn-floating right"><i class="material-icons">mode_edit</i></a></span>
 
 
-				<!--<div class="timeline-badge">
-					<span style="background: #14B9D6;">{{lesson.date | date:'dd/MM'}}</span>
-				</div>-->
+					<ul class="pep-lista-atores collapsible" data-collapsible="accordion">
+						<li ng-repeat="(author_id, entries) in lesson.formatted_data">
 
-				<div class="timeline-body">
+							<div class="collapsible-header" ng-class="{'pep-autor-voce': author_id == current_user.id }"> {{lesson.actors[author_id].full_name | limitTo: 29 }} <i class="material-icons">arrow_drop_down</i> </div>
 
-						<div class="timeline-body-content">
+							<div class="collapsible-body">
 
-							<div class="row">
+								<div ng-repeat="entry in entries" class="center" style="padding-top: 10px;">
+									
+									<div class="chip">{{entry.input.name}}</div>
 
-								<div ng-repeat="(author_id, entries) in lesson.formatted_data">
+									<p>{{entry.value}}</p>
+								</div>
 
-									<span class="card-title">{{role_helper(lesson.actors[author_id].role)}} </span>
-									<span class="card-title"> {{lesson.actors[author_id].full_name}}</span>
-									<span class="card-title" ng-if="author_id == current_user.id"> Você</span>
+							</div> <!-- .collapsible-body -->
+
+						</li>
+					</ul> <!-- .pep-lista-atores -->
+
+				<!--
 									
 									<table class="table">
 										<tbody>
@@ -76,13 +86,7 @@
 
 								</div> <!-- end - entry -->
 
-							</div> <!-- .row -->
-
-
-						</div> <!-- .timeline-body-content -->
-
-				</div> <!-- .timeline-body -->
-				</div> <!-- .timeline-body -->
-				</div>
-	</div>
-</div>
+</div> <!-- .card-content -->
+</div> <!-- .card-content -->
+</div> <!-- .card -->
+</div> <!-- .row -->
