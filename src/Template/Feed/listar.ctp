@@ -23,15 +23,15 @@
 
 				<div class="card-content">
 
-					<span class="card-title">{{lesson.date | date: 'dd/MM'}} <small>{{lesson.date | date: 'y'}}</small> 
+					<span class="card-title">{{lesson.date | date: 'dd/MM'}}<small>/{{lesson.date | date: 'y'}}</small> 
 
-					<a href="<?php echo $this->Url->build(['controller' => 'registros', 'action' => 'editar']); ?>/{{lesson.id}}/{{entry.input.id}}" class="waves-effect waves-light btn green btn-floating right"><i class="material-icons">mode_edit</i></a></span>
+					<a href="<?php echo $this->Url->build(['controller' => 'registros', 'action' => 'editar']); ?>/{{lesson.id}}/{{entry.input.id}}" class="waves-effect waves-light btn blue btn-floating right"><i class="material-icons">mode_edit</i></a></span>
 
 
-					<ul class="pep-lista-atores collapsible" data-collapsible="accordion">
+					<ul class="pep-atores collapsible" data-collapsible="accordion">
 						<li ng-repeat="(author_id, entries) in lesson.formatted_data">
 
-							<div class="collapsible-header" ng-class="{'pep-autor-voce': author_id == current_user.id }"> {{lesson.actors[author_id].full_name | limitTo: 29 }} <i class="material-icons">arrow_drop_down</i> </div>
+							<div class="collapsible-header" ng-class="{'pep-autor-voce': author_id == current_user.id }"> {{lesson.actors[author_id].full_name | limitTo: 25 }}<span ng-if="lesson.actors[author_id].full_name.length > 25">...</span><i class="material-icons">arrow_drop_down</i> </div>
 
 							<div class="collapsible-body">
 
@@ -89,4 +89,13 @@
 </div> <!-- .card-content -->
 </div> <!-- .card-content -->
 </div> <!-- .card -->
+
 </div> <!-- .row -->
+
+<div class="clearfix"></div>
+<p class="chip blue"><strong>Dica:</strong> Confira se a aula existe antes de adicionar</p>
+<div class="clearfix"></div>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large waves-effect waves-light pink" href="<?php echo $this->Url->build('/registros/adicionar'); ?>"><i class="material-icons">add</i></a>
+</div>

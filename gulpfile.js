@@ -32,7 +32,6 @@ gulp.task('js', function() {
 });
 
 gulp.task('watch', function () {
-<<<<<<< Updated upstream
   livereload.listen({
     host: null
   });
@@ -43,12 +42,5 @@ gulp.task('watch', function () {
   gulp.watch('webroot/js/controllers.js', ['js']);
   gulp.watch('webroot/js/directives.js', ['js']);
   gulp.watch('webroot/js/services.js', ['js']);
-=======
-   gulp.watch('webroot/css/*.styl', ['css']);
-   gulp.watch('webroot/css/pages/*.styl', ['css']);
-   gulp.watch('webroot/js/redepga.js', ['js']);
-   gulp.watch('webroot/js/controllers.js', ['js']);
-   gulp.watch('webroot/js/directives.js', ['js']);
-   gulp.watch('webroot/js/services.js', ['js']);
->>>>>>> Stashed changes
+  
 });
