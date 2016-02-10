@@ -1,1 +1,5 @@
+<<<<<<< Updated upstream
 #navbar .nav-wrapper{background:#d2d7d3}#search::-webkit-input-placeholder{color:#fff}#search:focus#search::-webkit-input-placeholder{color:#222}#pep-menu-btn{display:inline-block;margin-left:12px}.pep-login{background:url(../img/login.jpg) top center;background-size:initial}.small-logo{font-size:12px}.pep-lista-atores li i.material-icons{float:right;margin:0}.pep-autor-voce{font-weight:700!important}.pep-btn-adicionar-novas-infos{width:100%;font-size:12px}
+=======
+#navbar .nav-wrapper{background:#d2d7d3}.pep-login{background:url(../img/login.jpg) top center;background-size:initial}.small-logo{font-size:12px;margin-top:20px;display:inline-block}#pep-lista-atores li{opacity:0}.card-title{color:#26a69a;font-weight:700!important}.toast{background:#e91e63;font-weight:700}.input input{padding-left:4px}
+>>>>>>> Stashed changes

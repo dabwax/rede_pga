@@ -403,6 +403,11 @@ angular.module("RedePga")
 }])
 
 .controller('AuthenticationController', ['$scope', function($scope) {
+
+  // Materialize animation effects
+  Materialize.showStaggeredList('#pep-lista-atores');
+  Materialize.fadeInImage('img');
+
   $scope.roleChecked = false;
   $scope.roles = {
     'tutors.tutor' : 'Tutor(a)',

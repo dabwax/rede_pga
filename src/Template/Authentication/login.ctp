@@ -7,7 +7,7 @@
         <div class="clearfix"></div>
         <span class="card-title">{{getRole()}}</span>
 
-        <ul class="collection" ng-hide="roleChecked">
+        <ul id="pep-lista-atores" class="collection" ng-hide="roleChecked">
           <li class="collection-item"><div>Aluno<a ng-click="setRole('users.user')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
           <li class="collection-item"><div>Pai<a ng-click="setRole('protectors.dad')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
           <li class="collection-item"><div>Mãe<a ng-click="setRole('protectors.mom')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
