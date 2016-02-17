@@ -15,15 +15,15 @@ angular.module("RedePga")
 
 }])
 
-.factory("Exercicios", ["$http", function($http) {
+.factory("Exercicios", ["$http", "Upload", function($http, Upload) {
 
 	return {
 		add_reply: function(resposta)
 		{
-			// return Upload.upload({
-		 //        url: baseUrl + 'exercicios/api_add_reply',
-		 //        data: {anexo: resposta.attachment, resposta: resposta}
-		 //    });
+			return Upload.upload({
+		        url: baseUrl + 'exercicios/api_add_reply',
+		        data: {anexo: resposta.attachment, resposta: resposta}
+		    });
 		},
 		fetch_all: function()
 		{

@@ -1,4 +1,4 @@
-angular.module('RedePga', ["kendo.directives"]);
+angular.module('RedePga', ["kendo.directives", "ngFileUpload"]);
 
 $(document).ready(function() {
 	kendo.culture("pt-BR");
