@@ -10,8 +10,8 @@ var livereload = require('gulp-livereload');
 gulp.task('default', ['css', 'js', 'watch']);
 
 gulp.task('css', function () {
-    gulp.src('webroot/css/main.styl')
-      .pipe(stylus({compress: false, paths: ['webroot/css', 'webroot/css/pages']}))
+    gulp.src('webroot/css/style.styl')
+      .pipe(stylus({compress: false, paths: ['webroot/css', 'webroot/css/pages', 'webroot/css/sections']}))
         .pipe(autoprefixer())
         .pipe(minifyCSS())
         .pipe(rename('style.css'))
@@ -38,6 +38,7 @@ gulp.task('watch', function () {
 
   gulp.watch('webroot/css/*.styl', ['css']);
   gulp.watch('webroot/css/pages/*.styl', ['css']);
+  gulp.watch('webroot/css/sections/*.styl', ['css']);
   gulp.watch('webroot/js/redepga.js', ['js']);
   gulp.watch('webroot/js/controllers.js', ['js']);
   gulp.watch('webroot/js/directives.js', ['js']);

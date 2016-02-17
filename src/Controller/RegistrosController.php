@@ -213,7 +213,7 @@ class RegistrosController extends AppController
 
     $this->set(compact("lesson"));
 
-    if($this->request->is("post"))
+    if($this->request->is("post") && !empty($this->request->data['date']))
     {
       $dateTime = \DateTime::createFromFormat("d/m/Y", $this->request->data['date']);
 
@@ -226,6 +226,8 @@ class RegistrosController extends AppController
       $this->Flash->success("A aula foi criada com sucesso.");
 
       return $this->redirect(['action' => 'editar', $lesson->id]);
+    } else {
+      $this->Flash->error("Não foi possível cadastrar a aula. Verifique os dados preenchidos.");
     }
   }
   

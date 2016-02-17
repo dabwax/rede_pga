@@ -1,45 +1,33 @@
-<?php $this->Html->addCrumb('<i class="fa fa-home"></i>Home', '/', ['escape' => false]); ?>
-<?php $this->Html->addCrumb('<i class="fa fa-keyboard-o"></i>Inputs', '/registros/listar', ['escape' => false]); ?>
-<?php $this->Html->addCrumb('<i class="fa fa-plus-square-o"></i>Adicionar Novo...', '/registros/adicionar', ['escape' => false]); ?>
-
-<?php echo $this->element("header_pagina", ["titulo" => "Inputs - Adicionar Aula"]); ?>
-
 <div class="row" ng-controller="AdicionarRegistrosCtrl">
+  
+  <div class="col s12">
+    <div class="card">
+      
+      <?= $this->Form->create($lesson); ?>
 
-	<div class="col-lg-12">
-        <?= $this->Form->create($lesson); ?>
+      <div class="card-content">
+        <span class="card-title">Adicionar Nova Aula</span>
+        <p>Ao avançar a página, você preencherá as informações da aula.</p>
 
-
-          <p>
-            Esta é a página em que você inclui novos registros para seu aluno/filho/paciente. <br>
-            <br>
-            Você só poderá preencher campos que dizem respeito a seu cargo (tutor, psicoterapeuta, responsáveis).
-          </p>
-
-          <hr>
-
-
-		<div class="form-group">
-        	<?= $this->Form->input("date", ['type' => 'text', 'class' => 'form-control', 'datepicker', 'ng-model' => 'lesson.date', 'label' => 'Data da Aula']); ?>
-		</div>
-
-		<div class="form-group">
-        	<?= $this->Form->input("observation", ['type' => 'textarea', 'class' => 'form-control ckeditor', 'label' => 'Observações']); ?>
+        <div class="input-field">
+          <?= $this->Form->input("date", ['type' => 'text', 'class' => 'form-control', 'md-datepicker', 'ng-model' => 'lesson.date', 'label' => 'Data da Aula *']); ?>
         </div>
 
-        <div class="form-actions">
-          <div class="row">
-            <div class="col-md-offset-3 col-md-9">
-              <button type="submit" class="btn green">
-                <i class="fa fa-pencil"></i> Salvar
-              </button>
-            </div>
-          </div>
-        </div> <!-- .form-actions -->
+        <div class="input-field">
+          <?= $this->Form->input("observation", ['type' => 'textarea', 'class' => 'materialize-textarea ckeditor', 'label' => 'Observações']); ?>
+        </div>
 
-        <?= $this->Form->end(); ?>
+      </div> <!-- .card-content -->
 
-	</div>
-</div>
+      <div class="card-action">
+        <a href="<?php echo $this->Url->build('/'); ?>" class="waves-effect waves-teal btn-flat"><i class="large material-icons">arrow_back</i> Voltar para Feed</a>
+        <button type="submit" class="waves-effect waves-light btn">Avançar <i class="large material-icons right">send</i></button>
+      </div> <!-- .card-action -->
 
-<?php echo $this->element("footer_pagina"); ?>
+      <?= $this->Form->end(); ?>
+
+    </div> <!-- .card -->
+
+  </div> <!-- .col -->
+
+</div> <!-- .row -->

@@ -48,7 +48,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 
 	<!-- AngularJS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
 
     <?= $this->Html->script('/js/main.js'); ?>
     <?= $this->Flash->render() ?>

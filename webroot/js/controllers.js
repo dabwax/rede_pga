@@ -1,4 +1,4 @@
-angular.module("RedePga")
+angular.module("RedePga", ["ngMaterial"])
 
 .controller('AdminInputsCtrl', ['$scope', '$http', function($scope, $http) {
 
