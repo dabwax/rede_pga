@@ -1,6 +1,8 @@
-angular.module('RedePga', []);
+angular.module('RedePga', ["kendo.directives"]);
 
 $(document).ready(function() {
+	kendo.culture("pt-BR");
+
 	$(".button-collapse").sideNav();
 	
 	$('.collapsible').collapsible({

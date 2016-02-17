@@ -9,6 +9,28 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+	<!-- Kendo UI -->
+	<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.common.min.css">
+	<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.flat.min.css">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+	<!-- Materialize -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+	<!-- Kendo UI -->
+	<script src="http://kendo.cdn.telerik.com/2016.1.112/js/kendo.ui.core.min.js"></script>
+	<script src="http://kendo.cdn.telerik.com/2016.1.112/js/messages/kendo.messages.pt-BR.min.js"></script>
+	<script src="http://kendo.cdn.telerik.com/2016.1.112/js/cultures/kendo.culture.pt-BR.min.js"></script>
+	
+	<script>var baseUrl = '<?php echo $this->Url->build("/", true); ?>';</script>
+    <?= $this->Html->script('/js/main.js'); ?>
+    <?= $this->Flash->render() ?>
+
 	<!-- Estilização da aplicação minificada -->
     <?= $this->Html->css('/css/style.css'); ?>
 	<title>PEP - Plataforma de Ensino Personalizado</title>
@@ -41,16 +63,5 @@
  		<?= $this->fetch('content') ?>
 	</div>
 
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
-	<!-- Materialize -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-
-	<!-- AngularJS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
-
-    <?= $this->Html->script('/js/main.js'); ?>
-    <?= $this->Flash->render() ?>
 </body>
 </html>

@@ -8,6 +8,31 @@ class RegistrosController extends AppController
 {
   public $protected_area = true;
 
+  // OBS: O formato da data usado aqui é "yyyy-MM-dd".
+  public function api_validar_data()
+  {
+    $this->autoRender = false;
+
+    // Objetos de tabela
+    $lessons_table = TableRegistry::get("Lessons");
+
+    // Busca o registro da aula na data especificada
+    $lesson = $lessons_table->find()->where(['date' => $_GET['data'] ])->first();
+
+    $return = [];
+
+    if($lesson) {
+      $return['status']   = "INDISPONÍVEL";
+      $return['message']  = "INDISPONÍVEL! Já existe uma aula nesta data.";
+    } else {
+      $return['status']   = "DISPONÍVEL";
+      $return['message']  = "Esta data está DISPONÍVEL!";
+    }
+
+    echo json_encode($return);
+
+  }
+
   public function api_inputs($lesson_id)
   {
     $this->autoRender = false;
@@ -213,21 +238,23 @@ class RegistrosController extends AppController
 
     $this->set(compact("lesson"));
 
-    if($this->request->is("post") && !empty($this->request->data['date']))
+    if($this->request->is("post"))
     {
-      $dateTime = \DateTime::createFromFormat("d/m/Y", $this->request->data['date']);
+      if(empty($this->request->data['date'])) {
+        $this->Flash->error("Não foi possível cadastrar a aula. Verifique os dados preenchidos.");
+      } else {
+        $dateTime = \DateTime::createFromFormat("d/m/Y", $this->request->data['date']);
 
-      $this->request->data['date'] = $dateTime->format("Y-m-d");
-      $this->request->data['user_id'] = $admin_logged['user_id'];
+        $this->request->data['date'] = $dateTime->format("Y-m-d");
+        $this->request->data['user_id'] = $admin_logged['user_id'];
 
-      $lesson = $lessons_table->patchEntity($lesson, $this->request->data);
-      $lessons_table->save($lesson);
+        $lesson = $lessons_table->patchEntity($lesson, $this->request->data);
+        $lessons_table->save($lesson);
 
-      $this->Flash->success("A aula foi criada com sucesso.");
+        $this->Flash->success("A aula foi criada com sucesso.");
 
-      return $this->redirect(['action' => 'editar', $lesson->id]);
-    } else {
-      $this->Flash->error("Não foi possível cadastrar a aula. Verifique os dados preenchidos.");
+        return $this->redirect(['action' => 'editar', $lesson->id]);
+      }
     }
   }
   

@@ -10,7 +10,9 @@
         <p>Ao avançar a página, você preencherá as informações da aula.</p>
 
         <div class="input-field">
-          <?= $this->Form->input("date", ['type' => 'text', 'class' => 'form-control', 'md-datepicker', 'ng-model' => 'lesson.date', 'label' => 'Data da Aula *']); ?>
+          <strong>Data da Aula *</strong>
+          <div class="clearfix"></div>
+          <input name="date" type="text" ng-model="lesson.date" kendo-date-picker k-format="'dd/MM/yyyy'" k-change="mudouData" />
         </div>
 
         <div class="input-field">
@@ -20,8 +22,8 @@
       </div> <!-- .card-content -->
 
       <div class="card-action">
-        <a href="<?php echo $this->Url->build('/'); ?>" class="waves-effect waves-teal btn-flat"><i class="large material-icons">arrow_back</i> Voltar para Feed</a>
-        <button type="submit" class="waves-effect waves-light btn">Avançar <i class="large material-icons right">send</i></button>
+        <a href="<?php echo $this->Url->build('/'); ?>" class="waves-effect waves-teal btn-flat">Voltar para Feed</a>
+        <button type="submit" class="waves-effect waves-light btn" ng-disabled="!avancar">Avançar <i class="large material-icons right">send</i></button>
       </div> <!-- .card-action -->
 
       <?= $this->Form->end(); ?>

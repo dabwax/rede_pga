@@ -1,4 +1,4 @@
-angular.module("RedePga", ["ngMaterial"])
+angular.module("RedePga")
 
 .controller('AdminInputsCtrl', ['$scope', '$http', function($scope, $http) {
 
@@ -399,7 +399,30 @@ angular.module("RedePga", ["ngMaterial"])
   
 }])
 
-.controller('AdicionarRegistrosCtrl', ['$scope', function($scope) {
+.controller('AdicionarRegistrosCtrl', ['$scope', '$http', 'Inputs', function($scope, $http, Inputs) {
+
+  $scope.avancar = false;
+
+  $scope.mudouData = function() {
+
+    var data_formatada = kendo.toString(this.value(), 'yyyy-MM-dd');
+
+    Inputs.validar_data(data_formatada).then(function(result) {
+
+      console.log(result.data);
+
+
+      if(result.data.status == "INDISPONÍVEL") {
+        $scope.avancar = false;
+      } else {
+        $scope.avancar = true;
+      }
+
+      Materialize.toast(result.data.message, 10000);
+      
+    });;
+
+  }
 }])
 
 .controller('AuthenticationController', ['$scope', function($scope) {

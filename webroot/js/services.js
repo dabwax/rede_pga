@@ -1,25 +1,29 @@
 angular.module("RedePga")
 
-.factory("Inputs", function($http, Upload) {
+.factory("Inputs", ["$http", function($http) {
 
 	return {
 		fetch_all: function(id)
 		{
 			return $http.get(baseUrl + "registros/api_inputs/" + id);
+		},
+		validar_data: function(data)
+		{
+			return $http.get(baseUrl + "registros/api_validar_data?data=" + data);
 		}
 	};
 
-})
+}])
 
-.factory("Exercicios", function($http, Upload) {
+.factory("Exercicios", ["$http", function($http) {
 
 	return {
 		add_reply: function(resposta)
 		{
-			return Upload.upload({
-		        url: baseUrl + 'exercicios/api_add_reply',
-		        data: {anexo: resposta.attachment, resposta: resposta}
-		    });
+			// return Upload.upload({
+		 //        url: baseUrl + 'exercicios/api_add_reply',
+		 //        data: {anexo: resposta.attachment, resposta: resposta}
+		 //    });
 		},
 		fetch_all: function()
 		{
@@ -27,8 +31,8 @@ angular.module("RedePga")
 		}
 	};
 
-})
-.factory("Mensagens", function($http) {
+}])
+.factory("Mensagens", ["$http", function($http) {
 
 	return {
 		add_message: function(mensagem)
@@ -45,4 +49,4 @@ angular.module("RedePga")
 		}
 	};
 
-})
+}]);
