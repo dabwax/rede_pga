@@ -25,9 +25,9 @@
 	<!-- ng-file-upload -->
     <?= $this->Html->script('/vendors/ng-file-upload-master/dist/ng-file-upload-all.min.js'); ?>
 
-	<!-- angular-tour -->
-    <?= $this->Html->css('/vendors/angular-tour-master/dist/angular-tour.css'); ?>
-    <?= $this->Html->script('/vendors/angular-tour-master/dist/angular-tour-tpls.min.js'); ?>
+	<!-- highcharts-ng -->
+    <?= $this->Html->script('http://code.highcharts.com/highcharts.src.js'); ?>
+    <?= $this->Html->script('/vendors/highcharts-ng-master/dist/highcharts-ng.min.js'); ?>
 
 	<!-- Kendo UI -->
 	<script src="http://kendo.cdn.telerik.com/2016.1.112/js/kendo.ui.core.min.js"></script>
@@ -69,36 +69,6 @@
 	<div class="container">
  		<?= $this->fetch('content') ?>
 	</div>
-
-<div>
-  <span id="tip1">Highlighted</span>
-  <span id="tip2">Elements</span>
-  <input id="input1" />
-  <span id="full1">Full options</span>
-</div>
-
-<!-- at the bottom of the page -->
-<tour step="currentStep">
-  <virtual-step tourtip="tip 1" tourtip-element="#tip1"></virtual-step>
-  <virtual-step tourtip="tip 2" tourtip-element="#tip2"></virtual-step>
-  <virtual-step tourtip="You can use it as an attribute on your element" tourtip-element="#input1"></virtual-step>
-  <virtual-step
-    tourtip="Full options"
-    tourtip-step="2"
-    tourtip-next-label="Next"
-    tourtip-placement="right"
-    tourtip-container-element="body"
-    tourtip-margin="0"
-    tourtip-offset-vertical="0"
-    tourtip-offset-horizontal="0"
-    on-show="someFunc"
-    on-proceed="someFunc"
-    use-source-scope="false"
-    tourtip-element="#full1"></virtual-step>
-
-    <a ng-click="openTour()">Open Tour</a>
-<a ng-click="closeTour()">Close Tour</a>
-</tour>
 
 </body>
 </html>

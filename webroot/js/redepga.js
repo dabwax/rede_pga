@@ -1,4 +1,4 @@
-angular.module('RedePga', ["kendo.directives", "ngFileUpload", "angular-tour"]);
+angular.module('RedePga', ["kendo.directives", "ngFileUpload", "highcharts-ng"]);
 
 $(document).ready(function() {
 	kendo.culture("pt-BR");
