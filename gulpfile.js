@@ -6,11 +6,13 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var livereload = require('gulp-livereload');
+var plumber = require('gulp-plumber');
 
 gulp.task('default', ['css', 'js', 'watch']);
 
 gulp.task('css', function () {
     gulp.src('webroot/css/style.styl')
+      .pipe(plumber())
       .pipe(stylus({compress: false, paths: ['webroot/css', 'webroot/css/pages', 'webroot/css/sections']}))
         .pipe(autoprefixer())
         .pipe(minifyCSS())
@@ -26,6 +28,7 @@ gulp.task('js', function() {
   	'webroot/js/directives.js',
   	'webroot/js/services.js',
   ])
+    .pipe(plumber())
     .pipe( concat('main.js') ) // concat pulls all our files together before minifying them
     .pipe(uglify())
     .pipe(gulp.dest('webroot/js'))

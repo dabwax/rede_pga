@@ -1,10 +1,14 @@
-<div class="inputs index large-10 medium-9 columns" ng-controller="AdminInputsCtrl" ng-init='items = <?php echo json_encode($inputs, JSON_HEX_APOS); ?>'>
-    
-    <div class="page-title red darken-4">
-        <h2>Inputs</h2> 
-    </div> <!-- .page-title -->
+<div class="page-title red darken-3">
+    <h2>Inputs</h2>
 
-    <a href="<?php echo $this->Url->build(['action' => 'add']); ?>" class="btn btn-primary right">Adicionar Novo Input</a>
+    <div class="actions">
+        <a href="<?php echo $this->Url->build(['action' => 'add']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">add</i> novo</a>
+    </div> <!-- .actions -->
+
+    <div class="clearfix"></div>
+</div> <!-- .page-title -->
+
+<div class="card-content" ng-controller="AdminInputsCtrl" ng-init='items = <?php echo json_encode($inputs, JSON_HEX_APOS); ?>'>
 
     <table class="table">
     <thead>
@@ -20,8 +24,8 @@
             <td>{{item.model}}</td>
             <td class="actions">
 
-                <a href="<?php echo $this->Url->build(['action' => 'edit']); ?>/{{item.id}}" class="btn btn-success">Editar</a>
-                <a href="<?php echo $this->Url->build(['action' => 'delete']); ?>/{{item.id}}" class="btn btn-success">Ocultar</a>
+                <a href="<?php echo $this->Url->build(['action' => 'edit']); ?>/{{item.id}}" class="btn amber darken-2" title="Editar"><i class="material-icons">edit</i></a>
+                <a href="<?php echo $this->Url->build(['action' => 'delete']); ?>/{{item.id}}" class="btn red darken-3" title="Ocultar"><i class="material-icons">remove_circle_outline</i></a>
             </td>
         </tr>
     </tbody>
