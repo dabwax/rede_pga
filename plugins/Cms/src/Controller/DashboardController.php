@@ -8,29 +8,46 @@ class DashboardController extends AppController
 {
     public $protected_area = true;
 
+/**
+ * Action utilizada para definir qual é o estudante atual.
+ */
 	public function set_current_user_selected($user_id = null)
-    {
-    	$user_id = (empty($user_id)) ? intval($this->request->query('user_id')) : $user_id;
+  {
+    $cookie_current_user_selected = $this->Cookie->read('current_user_selected');
+    
+  	$user_id = (empty($user_id)) ? intval($this->request->query('user_id')) : $user_id;
 
-    	$table = TableRegistry::get("Users");
+  	$table = TableRegistry::get("Users");
 
-    	$user = $table->get($user_id);
+  	$user = $table->get($user_id);
 
-    	$this->Cookie->write('current_user_selected', $user);
+  	$this->Cookie->write('current_user_selected', $user);
 
-    	$this->Flash->success("O estudante foi alterado.");
+  	$this->Flash->success("O estudante foi alterado.");
 
-    	return $this->redirect($this->referer());
-    	$this->autoRender = false;
-    }
+  	return $this->redirect($this->referer());
+  	$this->autoRender = false;
+  }
 
-	public function index()
-	{
+  public function set_current_user()
+  {
     $table_users = TableRegistry::get("Users");
     $g_users = $table_users->find()->all();
 
-    $this->set(compact("g_users"));
-	}
+    $cookie_current_user_selected = $this->Cookie->read('current_user_selected');
+
+    $this->set(compact("g_users", "cookie_current_user_selected"));
+  }
+
+  public function index()
+  {
+    $table_users = TableRegistry::get("Users");
+    $g_users = $table_users->find()->all();
+
+    $cookie_current_user_selected = $this->Cookie->read('current_user_selected');
+
+    $this->set(compact("g_users", "cookie_current_user_selected"));
+  }
 
   public function config_actors()
   {

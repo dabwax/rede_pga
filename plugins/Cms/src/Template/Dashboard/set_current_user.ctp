@@ -1,7 +1,7 @@
   <div id="role-check" class="text-center">
 
-    <?php if(!empty($g_users->toArray()) && empty($cookie_current_user_selected)) : ?>
-    <h2>Selecione um estudante para administrar</h2>
+    <?php if(!empty($g_users->toArray())) : ?>
+    <span class="card-subtitle">Selecione um estudante para administrar</span>
 
     <?php foreach($g_users as $u) : ?>
     <a href="<?php echo $this->Url->build(['controller' => 'Dashboard', 'action' => 'set_current_user_selected', $u->id]); ?>" class="mugshot">
