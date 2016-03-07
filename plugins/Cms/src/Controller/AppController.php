@@ -20,7 +20,8 @@ class AppController extends BaseController
      */
     public function initialize()
     {
-
+      parent::initialize();
+      
         $this->loadComponent('Flash');
         $this->loadComponent('Cookie');
         $this->loadComponent('Upload');

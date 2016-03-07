@@ -1,19 +1,5 @@
-  <div id="role-check" class="text-center">
+<p>Olá! Este é o administrador do PEP. Aqui você pode gerenciar as informações do aluno e dos seus respectivos atores.</p>
 
-    <?php if(!empty($g_users->toArray()) && empty($cookie_current_user_selected)) : ?>
-    <h2>Selecione um estudante para administrar</h2>
+<p>Os três botões acima são para: <strong>Editar configurações do aluno</strong>, <strong>gerenciar atores</strong> e <strong>mudar de aluno</strong>.</p>
 
-    <?php foreach($g_users as $u) : ?>
-    <a href="<?php echo $this->Url->build(['controller' => 'Dashboard', 'action' => 'set_current_user_selected', $u->id]); ?>" class="mugshot">
-
-      <div class='bola'>
-        <?php echo $this->Html->image('/uploads/' . $u->profile_attachment, ['class' => 'img-circle', 'style' => 'width: 100px; height: 90px;']); ?>
-      </div>
-
-      <div class="legenda"><?php echo $u->full_name; ?></div>
-
-    </a>
-  <?php endforeach; ?>
-  <?php endif; ?>
-
-  </div>
+<p>Espero que faça um bom proveito! Obrigado. :-)</p>

@@ -1,15 +1,16 @@
 <div class="inputs index large-10 medium-9 columns" ng-controller="AdminInputsCtrl" ng-init='items = <?php echo json_encode($inputs, JSON_HEX_APOS); ?>'>
+    
+    <div class="page-title red darken-4">
+        <h2>Inputs</h2> 
+    </div> <!-- .page-title -->
 
-    <a href="<?php echo $this->Url->build(['action' => 'add']); ?>" class="btn btn-primary pull-right">Adicionar Novo Input</a>
-
-    <h2>Inputs</h2>
-    <hr>
+    <a href="<?php echo $this->Url->build(['action' => 'add']); ?>" class="btn btn-primary right">Adicionar Novo Input</a>
 
     <table class="table">
     <thead>
         <tr>
-            <th><?= $this->Paginator->sort('name', 'Nome') ?></th>
-            <th><?= $this->Paginator->sort('model', 'Atores') ?></th>
+            <th>Nome do campo</th>
+            <th>Atores destinados</th>
             <th class="actions"><?= __('Ações') ?></th>
         </tr>
     </thead>
