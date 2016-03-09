@@ -29,7 +29,7 @@ angular.module('RedePga')
   return {
     link: function(scope, elem, attrs)
     {
-      $(elem).select2();
+      //$(elem).select2();
     }
   }
 })

@@ -106,9 +106,7 @@
           </div>
         </div> <!-- .card -->
 
-        <div class="card">   
-            <?= $this->fetch('content') ?>
-        </div>
+        <?= $this->fetch('content') ?>
         
       </div>
     </div>

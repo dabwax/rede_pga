@@ -21,15 +21,12 @@ class ChartsController extends AppController
     {
         $current_user_selected = $this->getCurrentUser();
 
-        $query = $this->Charts->find()->contain(['Users'])->where(
+        $charts = $this->Charts->find()->contain(['Users'])->where(
         [
             'Charts.user_id' => $current_user_selected['id']
-        ]);
-
-        $charts = $this->paginate($query);
+        ])->all()->toArray();
 
         $this->set('charts', $charts);
-        $this->set('_serialize', ['charts']);
     }
 
     /**

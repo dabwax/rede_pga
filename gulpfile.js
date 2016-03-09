@@ -26,7 +26,8 @@ gulp.task('js', function() {
   	'webroot/js/redepga.js',
   	'webroot/js/controllers.js',
   	'webroot/js/directives.js',
-  	'webroot/js/services.js',
+    'webroot/js/services.js',
+  	'webroot/js/cms.js',
   ])
     .pipe(plumber())
     .pipe( concat('main.js') ) // concat pulls all our files together before minifying them
@@ -46,5 +47,6 @@ gulp.task('watch', function () {
   gulp.watch('webroot/js/controllers.js', ['js']);
   gulp.watch('webroot/js/directives.js', ['js']);
   gulp.watch('webroot/js/services.js', ['js']);
+  gulp.watch('webroot/js/cms.js', ['js']);
   
 });
