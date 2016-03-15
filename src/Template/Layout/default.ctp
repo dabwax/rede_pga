@@ -10,7 +10,7 @@
 	<title>PEP - Plataforma de Ensino Personalizado</title>
 </head>
 <body class="pep-login">
-
+	<?php if($userLogged) : ?>
 	<div class="navbar-fixed">
 		<nav>
 			<div class="nav-wrapper teal lighten-5">
@@ -32,13 +32,18 @@
 			</div>
 		</nav>
 	</div>
-	
+	<?php endif; ?>
 	<div class="container">
  		<?= $this->fetch('content') ?>
 	</div>
-
-</body>
 	
 	<?php echo $this->element("/../Layout/assets"); ?>
+	<?= $this->fetch('meta') ?>
+    <?= $this->fetch('css') ?>
+    <?= $this->fetch('script') ?>
     <?= $this->Flash->render() ?>
+    <?php echo $this->Flash->render('auth',['element' => 'Flash/error']); ?>
+
+</body>
+
 </html>

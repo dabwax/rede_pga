@@ -15,7 +15,6 @@
 namespace Cake\Collection\Iterator;
 
 use Cake\Collection\CollectionTrait;
-use Cake\Collection\Iterator\TreePrinter;
 use RecursiveIterator;
 use RecursiveIteratorIterator;
 
@@ -39,7 +38,7 @@ class TreeIterator extends RecursiveIteratorIterator
     /**
      * Constructor
      *
-     * @param RecursiveIterator $items The iterator to flatten.
+     * @param \RecursiveIterator $items The iterator to flatten.
      * @param int $mode Iterator mode.
      * @param int $flags Iterator flags.
      */

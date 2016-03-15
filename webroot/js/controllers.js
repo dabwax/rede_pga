@@ -16,65 +16,6 @@ angular.module("RedePga")
   };
 
 }])
-.controller('ConfigurarAtoresCtrl', ['$scope', function($scope) {
-
-  $scope.actor = {
-    model: "Protectors"
-  };
-
-  $scope.get_label = function(model) {
-
-    var labels = {
-      "mediator": "Mediador",
-      "coordinator": "Coordenador",
-      "dad": "Pai",
-      "mom": "Mãe",
-      "therapist": "Terapeuta",
-      "tutor": "Tutor"
-    };
-
-    return labels[model];
-  };
-
-  $scope.set_model = function(model) {
-    $scope.actor = {
-      model: model
-    }
-
-    if(model == "Tutors")
-    {
-      $scope.actor.role = "tutor";
-    }
-
-    if(model == "Therapists")
-    {
-      $scope.actor.role = "therapist";
-    }
-  };
-
-  $scope.set_actor = function(obj, model) {
-    
-    obj.model = model;
-
-    obj.instituition_id = $scope.instituitions[obj.instituition_id];
-
-    $scope.actor = obj;
-  };
-
-  // Opening accordion based on URL
-  var url = document.location.toString();
-
-  if ( url.match('#') ) {
-
-    var hash = url.split('#')[1];
-    var model = hash.replace('c_', '');
-
-    $scope.set_model(model);
-
-    $('.panel-collapse').removeClass('in');
-    $('#'+hash).addClass('in');
-  }
-}])
 
 .controller('FeedCtrl', ['$scope', function($scope) {
   $scope.reset_search = function()

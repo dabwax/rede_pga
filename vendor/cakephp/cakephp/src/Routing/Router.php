@@ -16,8 +16,6 @@ namespace Cake\Routing;
 
 use Cake\Core\Configure;
 use Cake\Network\Request;
-use Cake\Routing\RouteBuilder;
-use Cake\Routing\RouteCollection;
 use Cake\Utility\Inflector;
 
 /**
@@ -163,7 +161,7 @@ class Router
      * Get or set default route class.
      *
      * @param string|null $routeClass Class name.
-     * @return string|void
+     * @return string|null
      */
     public static function defaultRouteClass($routeClass = null)
     {
@@ -177,7 +175,7 @@ class Router
      * Gets the named route patterns for use in config/routes.php
      *
      * @return array Named route elements
-     * @see Router::$_namedExpressions
+     * @see \Cake\Routing\Router::$_namedExpressions
      */
     public static function getNamedExpressions()
     {
@@ -405,8 +403,8 @@ class Router
      * Pops a request off of the request stack.  Used when doing requestAction
      *
      * @return \Cake\Network\Request The request removed from the stack.
-     * @see Router::pushRequest()
-     * @see Object::requestAction()
+     * @see \Cake\Routing\Router::pushRequest()
+     * @see \Cake\Routing\RequestActionTrait::requestAction()
      */
     public static function popRequest()
     {
@@ -423,7 +421,7 @@ class Router
      * Get the current request object, or the first one.
      *
      * @param bool $current True to get the current request, or false to get the first one.
-     * @return \Cake\Network\Request|null.
+     * @return \Cake\Network\Request|null
      */
     public static function getRequest($current = false)
     {
@@ -447,7 +445,7 @@ class Router
             return;
         }
         foreach (static::$_initialState as $key => $val) {
-            if ($key != '_initialState') {
+            if ($key !== '_initialState') {
                 static::${$key} = $val;
             }
         }
@@ -493,8 +491,8 @@ class Router
      *
      * @param array $url The URL array being modified.
      * @return array The modified URL.
-     * @see Router::url()
-     * @see Router::addUrlFilter()
+     * @see \Cake\Routing\Router::url()
+     * @see \Cake\Routing\Router::addUrlFilter()
      */
     protected static function _applyUrlFilters($url)
     {
@@ -573,16 +571,11 @@ class Router
                 $output = static::fullBaseUrl() . $output;
             }
             return $output;
-        } elseif (is_array($url)) {
+        }
+        if (is_array($url)) {
             if (isset($url['_full']) && $url['_full'] === true) {
                 $full = true;
                 unset($url['_full']);
-            }
-            // Compatibility for older versions.
-            if (isset($url['?'])) {
-                $q = $url['?'];
-                unset($url['?']);
-                $url = array_merge($url, $q);
             }
             if (isset($url['#'])) {
                 $frag = '#' . $url['#'];
@@ -651,12 +644,12 @@ class Router
      *
      * ### Note:
      *
-     * If you change the configuration value ``App.fullBaseUrl`` during runtime
+     * If you change the configuration value `App.fullBaseUrl` during runtime
      * and expect the router to produce links using the new setting, you are
      * required to call this method passing such value again.
      *
      * @param string|null $base the prefix for URLs generated containing the domain.
-     * For example: ``http://example.com``
+     * For example: `http://example.com`
      * @return string
      */
     public static function fullBaseUrl($base = null)
@@ -881,7 +874,7 @@ class Router
     {
         $builder = new RouteBuilder(static::$_collection, '/', [], [
             'routeClass' => static::defaultRouteClass(),
-            'extensions' => static::$_defaultExtensions
+            'extensions' => static::$_defaultExtensions,
         ]);
         $builder->scope($path, $params, $callback);
     }
@@ -946,6 +939,9 @@ class Router
         if (empty($options['path'])) {
             $options['path'] = '/' . Inflector::underscore($name);
         }
+        if (isset($options['_namePrefix'])) {
+            $params['_namePrefix'] = $options['_namePrefix'];
+        }
         static::scope($options['path'], $params, $callback);
     }
 
@@ -956,6 +952,9 @@ class Router
      */
     public static function routes()
     {
+        if (!static::$initialized) {
+            static::_loadRoutes();
+        }
         return static::$_collection->routes();
     }
 

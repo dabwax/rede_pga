@@ -14,14 +14,13 @@
  */
 namespace Cake\ORM;
 
+use ArrayObject;
 use Cake\Collection\Collection;
 use Cake\Database\Expression\TupleComparison;
 use Cake\Database\Type;
 use Cake\Datasource\EntityInterface;
-use Cake\ORM\Association;
-use Cake\ORM\AssociationsNormalizerTrait;
-use Cake\ORM\Table;
-use \RuntimeException;
+use Cake\Datasource\InvalidPropertyInterface;
+use RuntimeException;
 
 /**
  * Contains logic to convert array data into entities.
@@ -93,6 +92,16 @@ class Marshaller
      *   the accessible fields list in the entity will be used.
      * * accessibleFields: A list of fields to allow or deny in entity accessible fields.
      *
+     * The above options can be used in each nested `associated` array. In addition to the above
+     * options you can also use the `onlyIds` option for HasMany and BelongsToMany associations.
+     * When true this option restricts the request data to only be read from `_ids`.
+     *
+     * ```
+     * $result = $marshaller->one($data, [
+     *   'associated' => ['Tags' => ['onlyIds' => true]]
+     * ]);
+     * ```
+     *
      * @param array $data The data to hydrate.
      * @param array $options List of options
      * @return \Cake\ORM\Entity
@@ -120,6 +129,9 @@ class Marshaller
         $properties = [];
         foreach ($data as $key => $value) {
             if (!empty($errors[$key])) {
+                if ($entity instanceof InvalidPropertyInterface) {
+                    $entity->invalid($key, $value);
+                }
                 continue;
             }
             $columnType = $schema->columnType($key);
@@ -197,8 +209,8 @@ class Marshaller
             $data = $data[$tableName];
         }
 
-        $data = new \ArrayObject($data);
-        $options = new \ArrayObject($options);
+        $data = new ArrayObject($data);
+        $options = new ArrayObject($options);
         $this->_table->dispatchEvent('Model.beforeMarshal', compact('data', 'options'));
 
         return [(array)$data, (array)$options];
@@ -215,7 +227,7 @@ class Marshaller
     protected function _marshalAssociation($assoc, $value, $options)
     {
         if (!is_array($value)) {
-            return;
+            return null;
         }
         $targetTable = $assoc->target();
         $marshaller = $targetTable->marshaller();
@@ -223,11 +235,19 @@ class Marshaller
         if (in_array($assoc->type(), $types)) {
             return $marshaller->one($value, (array)$options);
         }
+        if ($assoc->type() === Association::ONE_TO_MANY || $assoc->type() === Association::MANY_TO_MANY) {
+            $hasIds = array_key_exists('_ids', $value);
+            $onlyIds = array_key_exists('onlyIds', $options) && $options['onlyIds'];
+
+            if ($hasIds && is_array($value['_ids'])) {
+                return $this->_loadAssociatedByIds($assoc, $value['_ids']);
+            }
+            if ($hasIds || $onlyIds) {
+                return [];
+            }
+        }
         if ($assoc->type() === Association::MANY_TO_MANY) {
             return $marshaller->_belongsToMany($assoc, $value, (array)$options);
-        }
-        if ($assoc->type() === Association::ONE_TO_MANY && array_key_exists('_ids', $value) && is_array($value['_ids'])) {
-            return $this->_loadAssociatedByIds($assoc, $value['_ids']);
         }
         return $marshaller->many($value, (array)$options);
     }
@@ -265,22 +285,15 @@ class Marshaller
      * Builds the related entities and handles the special casing
      * for junction table entities.
      *
-     * @param Association $assoc The association to marshal.
+     * @param \Cake\ORM\Association $assoc The association to marshal.
      * @param array $data The data to convert into entities.
      * @param array $options List of options.
      * @return array An array of built entities.
      */
     protected function _belongsToMany(Association $assoc, array $data, $options = [])
     {
-        // Accept _ids = [1, 2]
         $associated = isset($options['associated']) ? $options['associated'] : [];
-        $hasIds = array_key_exists('_ids', $data);
-        if ($hasIds && is_array($data['_ids'])) {
-            return $this->_loadAssociatedByIds($assoc, $data['_ids']);
-        }
-        if ($hasIds) {
-            return [];
-        }
+
         $data = array_values($data);
 
         $target = $assoc->target();
@@ -309,9 +322,7 @@ class Marshaller
             $query->andWhere(function ($exp) use ($conditions) {
                 return $exp->or_($conditions);
             });
-        }
 
-        if (isset($query)) {
             $keyFields = array_keys($primaryKey);
 
             $existing = [];
@@ -328,8 +339,10 @@ class Marshaller
                     }
                 }
                 $key = implode(';', $key);
+
+                // Update existing record and child associations
                 if (isset($existing[$key])) {
-                    $records[$i] = $existing[$key];
+                    $records[$i] = $this->merge($existing[$key], $data[$i], $options);
                 }
             }
         }
@@ -342,6 +355,7 @@ class Marshaller
         }
 
         foreach ($records as $i => $record) {
+            // Update junction table data in _joinData.
             if (isset($data[$i]['_joinData'])) {
                 $joinData = $jointMarshaller->one($data[$i]['_joinData'], $nested);
                 $record->set('_joinData', $joinData);
@@ -353,12 +367,16 @@ class Marshaller
     /**
      * Loads a list of belongs to many from ids.
      *
-     * @param Association $assoc The association class for the belongsToMany association.
+     * @param \Cake\ORM\Association $assoc The association class for the belongsToMany association.
      * @param array $ids The list of ids to load.
      * @return array An array of entities.
      */
     protected function _loadAssociatedByIds($assoc, $ids)
     {
+        if (empty($ids)) {
+            return [];
+        }
+
         $target = $assoc->target();
         $primaryKey = (array)$target->primaryKey();
         $multi = count($primaryKey) > 1;
@@ -381,7 +399,7 @@ class Marshaller
     /**
      * Loads a list of belongs to many from ids.
      *
-     * @param Association $assoc The association class for the belongsToMany association.
+     * @param \Cake\ORM\Association $assoc The association class for the belongsToMany association.
      * @param array $ids The list of ids to load.
      * @return array An array of entities.
      * @deprecated Use _loadAssociatedByIds()
@@ -399,7 +417,8 @@ class Marshaller
      *
      * When merging HasMany or BelongsToMany associations, all the entities in the
      * `$data` array will appear, those that can be matched by primary key will get
-     * the data merged, but those that cannot, will be discarded.
+     * the data merged, but those that cannot, will be discarded. `ids` option can be used
+     * to determine whether the association must use the `_ids` format.
      *
      * ### Options:
      *
@@ -409,6 +428,16 @@ class Marshaller
      * * fieldList: A whitelist of fields to be assigned to the entity. If not present
      *   the accessible fields list in the entity will be used.
      * * accessibleFields: A list of fields to allow or deny in entity accessible fields.
+     *
+     * The above options can be used in each nested `associated` array. In addition to the above
+     * options you can also use the `onlyIds` option for HasMany and BelongsToMany associations.
+     * When true this option restricts the request data to only be read from `_ids`.
+     *
+     * ```
+     * $result = $marshaller->merge($entity, $data, [
+     *   'associated' => ['Tags' => ['onlyIds' => true]]
+     * ]);
+     * ```
      *
      * @param \Cake\Datasource\EntityInterface $entity the entity that will get the
      * data merged in
@@ -439,6 +468,9 @@ class Marshaller
         $properties = $marshalledAssocs = [];
         foreach ($data as $key => $value) {
             if (!empty($errors[$key])) {
+                if ($entity instanceof InvalidPropertyInterface) {
+                    $entity->invalid($key, $value);
+                }
                 continue;
             }
 
@@ -621,16 +653,19 @@ class Marshaller
      */
     protected function _mergeBelongsToMany($original, $assoc, $value, $options)
     {
-        $hasIds = array_key_exists('_ids', $value);
         $associated = isset($options['associated']) ? $options['associated'] : [];
+
+        $hasIds = array_key_exists('_ids', $value);
+        $onlyIds = array_key_exists('onlyIds', $options) && $options['onlyIds'];
+
         if ($hasIds && is_array($value['_ids'])) {
             return $this->_loadAssociatedByIds($assoc, $value['_ids']);
         }
-        if ($hasIds) {
+        if ($hasIds || $onlyIds) {
             return [];
         }
 
-        if (!in_array('_joinData', $associated) && !isset($associated['_joinData'])) {
+        if (!empty($associated) && !in_array('_joinData', $associated) && !isset($associated['_joinData'])) {
             return $this->mergeMany($original, $value, $options);
         }
 
@@ -669,19 +704,27 @@ class Marshaller
         }
 
         $options['accessibleFields'] = ['_joinData' => true];
+
         $records = $this->mergeMany($original, $value, $options);
         foreach ($records as $record) {
             $hash = spl_object_hash($record);
             $value = $record->get('_joinData');
 
+            // Already an entity, no further marshalling required.
+            if ($value instanceof EntityInterface) {
+                continue;
+            }
+
+            // Scalar data can't be handled
             if (!is_array($value)) {
                 $record->unsetProperty('_joinData');
                 continue;
             }
 
+            // Marshal data into the old object, or make a new joinData object.
             if (isset($extra[$hash])) {
                 $record->set('_joinData', $marshaller->merge($extra[$hash], $value, $nested));
-            } else {
+            } elseif (is_array($value)) {
                 $joinData = $marshaller->one($value, $nested);
                 $record->set('_joinData', $joinData);
             }

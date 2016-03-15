@@ -20,6 +20,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Filesystem\File;
 use Cake\Filesystem\Folder;
+use Cake\Utility\Inflector;
 
 /**
  * The Plugin Task handles creating an empty plugin, ready to be used
@@ -64,7 +65,7 @@ class PluginTask extends BakeTask
     {
         if (empty($name)) {
             $this->err('<error>You must provide a plugin name in CamelCase format.</error>');
-            $this->err('To make an "Example" plugin, run <info>`cake bake plugin Example`</info>.');
+            $this->err('To make an "MyExample" plugin, run <info>`cake bake plugin MyExample`</info>.');
             return false;
         }
         $plugin = $this->_camelize($name);
@@ -110,6 +111,9 @@ class PluginTask extends BakeTask
 
         $this->hr();
         $this->out(sprintf('<success>Created:</success> %s in %s', $plugin, $this->path . $plugin), 2);
+
+        $emptyFile = $this->path . 'empty';
+        $this->_deleteEmptyFile($emptyFile);
 
         return true;
     }
@@ -165,6 +169,7 @@ class PluginTask extends BakeTask
             'package' => $package,
             'namespace' => $namespace,
             'plugin' => $pluginName,
+            'routePath' => Inflector::dasherize($pluginName),
             'path' => $path,
             'root' => ROOT,
         ]);

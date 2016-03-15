@@ -50,23 +50,23 @@
 			<td class="text-center">
 
 
-				<?php if(empty($permissions[$m]->bate_papo)) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/bate_papo') ?>" class="btn btn-default" style="color: green !important;"><i style="color: green !important;" class="fa fa-eye-slash"></i></a>
+				<?php if(empty($permissions[$m]->batepapo)) : ?>
+					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/batepapo') ?>" class="btn btn-default" style="color: green !important;"><i style="color: green !important;" class="fa fa-eye-slash"></i></a>
 				<?php endif; ?>
 
-				<?php if($permissions[$m]->bate_papo == 1) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/bate_papo') ?>" class="btn btn-default"><i class="fa fa-eye" style="color: blue;"></i></a>
+				<?php if($permissions[$m]->batepapo == 1) : ?>
+					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/batepapo') ?>" class="btn btn-default"><i class="fa fa-eye" style="color: blue;"></i></a>
 				<?php endif; ?>
 			</td>
 			<td class="text-center">
 
 
-				<?php if(empty($permissions[$m]->input)) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/input') ?>" class="btn btn-default" style="color: green !important;"><i style="color: green !important;" class="fa fa-eye-slash"></i></a>
+				<?php if(empty($permissions[$m]->registros)) : ?>
+					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/registros') ?>" class="btn btn-default" style="color: green !important;"><i style="color: green !important;" class="fa fa-eye-slash"></i></a>
 				<?php endif; ?>
 
-				<?php if($permissions[$m]->input == 1) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/input') ?>" class="btn btn-default"><i class="fa fa-eye" style="color: blue;"></i></a>
+				<?php if($permissions[$m]->registros == 1) : ?>
+					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/registros') ?>" class="btn btn-default"><i class="fa fa-eye" style="color: blue;"></i></a>
 				<?php endif; ?>
 			</td>
 			<td class="text-center">

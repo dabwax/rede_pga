@@ -7,16 +7,23 @@ use Cake\ORM\TableRegistry;
 
 class AuthenticationController extends AppController
 {
-  public $protected_area = false;
 
   public function initialize()
   {
-    if($this->request->params['action'] == 'edit')
-    {
-      $this->protected_area = true;
-    }
-
     parent::initialize();
+
+    // vamos verificar qual o modelo que o AuthComponent deverá carregar
+    // isso é baseado na escolha de ator do usuário
+    $ator_selecionado = $this->detectarAtor();
+
+    if(!empty($ator_selecionado['table'])) {
+      $this->Auth->config('authenticate', [
+        'Form' => [
+           'userModel' => $ator_selecionado['table']
+          ,'finder' => 'auth' . ucfirst($ator_selecionado['role'])
+        ],
+      ]);
+    }
   }
 
   public function edit()
@@ -51,78 +58,58 @@ class AuthenticationController extends AppController
     $this->set(compact("user"));
   }
 
-  public function login()
-  {
-    $this->layout = 'login';
-
-    $login = new LoginForm();
-
-    $this->set(compact("login"));
-
-    if($this->request->is("post"))
-    {
-      $form = $this->request->data;
-
-      // Role
-      $role = explode(".", $form['role']);
-      $role_table = $role[0];
-      $role_role = $role[1];
-
-      // Carrega o model selecionado
-      $role_model = TableRegistry::get(ucfirst($role_table));
-
-
-      if($role_table == 'users')
-      {
-        $where = [];
-      } else {
-        $where = ['role' => $role_role];
-      }
-
-      // Busca no model usuários deste role
-      $find = $role_model->find()->where($where)->all()->toArray();
-
-      // Itera os usuários para ver se existe algum com este usuário
-      $username = $form['username'];
-      $password = $form['password'];
-
-      $user_found = false;
-      foreach($find as $f)
-      {
-        if($f->username == $username && $f->password == $password)
-        {
-          $user_found = $f;
-        }
-      }
-
-
-      if($user_found)
-      {
-            $user_found->role_table = ucfirst($role_table);
-            $user_found->role_role = $role[1];
-            $this->Cookie->write('admin_logged', $user_found);
-            $this->Flash->success("Seja bem-vindo!");
-
-            if(!empty($f->clinical_condition))
-            {
-              $this->Flash->success("Seja bem-vindo querido aluno(a)!");
-              return $this->redirect('/');
-            }
-            
-            return $this->redirect('/feed/listar');
-      } else {
-        $this->Flash->error("Usuário e/ou senha inválidos.");
-        return $this->redirect('/login');
-      }
-
+  // função utilizada para detectar o table/role do ator selecionado
+  private function detectarAtor() {
+    $tmp = explode(".", @$this->request->data['role']);
+    
+    if(!empty($this->request->data['role'])) {
+      return [
+         'table' => $tmp[0]
+        ,'role' => $tmp[1]
+        ,'model' => TableRegistry::get(ucfirst($tmp[0]))
+      ];
+    } else {
+      return false;
     }
   }
 
+/**
+ * Action de login.
+ * Varia de acordo com o ator.
+ */
+  public function login()
+  {
+    // se houver requisição POST
+    if ($this->request->is('post')) {
+
+      // Tenta identificar o usuário
+      $user = $this->Auth->identify();
+
+      if ($user) {
+
+        // inclui informações extras de login
+        $ator_selecionado = $this->detectarAtor();
+        $user['table'] = $ator_selecionado['table'];
+
+        // autentica
+        $this->Auth->setUser($user);
+
+        // redireciona
+        return $this->redirect($this->Auth->redirectUrl());
+      } else {
+        $this->Flash->error(__('E-mail ou senha inválidos. Tente novamente.'), [
+            'key' => 'auth'
+        ]);
+        return $this->redirect(['action' => 'login']);
+      } // $user
+
+    } // POST
+  } // login()
+
   public function logout()
   {
-    $this->Cookie->delete("admin_logged");
     $this->Flash->success("Nos vemos em breve! :)");
-    return $this->redirect('/login');
+    return $this->redirect($this->Auth->logout());
   }
 
 }

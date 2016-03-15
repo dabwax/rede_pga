@@ -76,6 +76,12 @@ class DashboardController extends AppController
       // shortcut
       $data = $this->request->data;
 
+      // Se não tiver sido preenchido nenhuma senha, remove o campo dela
+      // para nao bugar e atualizar a senha para vazio
+      if(strlen($data['password']) <= 0) {
+        unset($data['password']);
+      }
+
       // generates model object
       $table = TableRegistry::get($data['model']);
 

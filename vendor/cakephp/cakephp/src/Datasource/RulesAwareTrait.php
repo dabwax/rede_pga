@@ -15,8 +15,6 @@
 namespace Cake\Datasource;
 
 use ArrayObject;
-use Cake\Datasource\EntityInterface;
-use Cake\Datasource\RulesChecker;
 use Cake\Event\EventDispatcherInterface;
 
 /**
@@ -31,6 +29,7 @@ use Cake\Event\EventDispatcherInterface;
  */
 trait RulesAwareTrait
 {
+
     /**
      * The domain rules to be applied to entities saved by this table
      *

@@ -53,6 +53,7 @@ use Cake\Network\Request;
 use Cake\Routing\DispatcherFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+use Cake\I18n\Time;
 
 /**
  * Read configuration file and inject configuration into various
@@ -99,6 +100,9 @@ mb_internal_encoding(Configure::read('App.encoding'));
  */
 ini_set('intl.default_locale', 'pt_BR');
 setlocale(LC_ALL, 'pt_BR');
+
+Time::$defaultLocale = 'pt-BR';
+Time::setToStringFormat('dd/MM/YYYY');
 
 /**
  * Register application error and exception handlers.
@@ -201,3 +205,5 @@ Plugin::load('Cms', ['bootstrap' => false, 'routes' => true, 'autoload' => true]
 
 Plugin::load('Estudante', ['bootstrap' => false, 'routes' => true, 'autoload' => true]);
 
+
+Plugin::load('DebugKit', ['bootstrap' => true, 'routes' => true]);
