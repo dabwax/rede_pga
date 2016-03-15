@@ -20,7 +20,7 @@ class FeedController extends AppController
 			$this->view = "dashboard_aluno";
 
 		// get all lessons from current user
-		$query = $lessons->buscaAulas( $this->currentUser('user_id') );
+		$query = $lessons->buscaAulas( $this->userLogged['user_id'] );
 
 		// if has any hashtag
 		if(!empty($hashtag_id))
