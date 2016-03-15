@@ -43,10 +43,8 @@ class AppController extends Controller
         ]
       ]);
 
-      $this->userLogged = $this->getUserLogged();
-      
-
       // Envia as credenciais do usuário logado
+      $this->userLogged = $this->Auth->user();
       $this->set('userLogged', $this->userLogged );
 
       //$this->Auth->allow();
@@ -61,36 +59,6 @@ class AppController extends Controller
       $get_atores = $this->getAtores();
 
       $this->set(compact("admin_logged", "get_atores", "permissions"));
-    }
-
-/**
- * Função utilizada para definir permissões de página.
- * Elas são configuradas através do administrador.
- */
-    public function getPermissions()
-    {
-
-      // Permissões - ACL
-      $permissions = [
-        'Protectors' => false,
-        'Schools' => false,
-        'Therapists' => false,
-        'Users' => false,
-      ];
-
-      $table = TableRegistry::get("Permissions");
-
-      // busca todas as permissões do BD
-      $all = $table->find()->all();
-
-      // armazena elas
-      foreach($all as $a)
-      {
-        $permissions[$a->model] = $a;
-      }
-
-      // retorna
-      return $permissions;
     }
 
 /**
@@ -118,6 +86,64 @@ class AppController extends Controller
     }
 
 /**
+ * Função para recuperar todos os atores do usuário logado.
+ */
+    public function getAtores()
+    {
+      // Busca os models
+      $models = [
+        'Protectors'  => TableRegistry::get("Protectors"),
+        'Schools'     => TableRegistry::get("Schools"),
+        'Therapists'  => TableRegistry::get("Therapists"),
+        'Users'       => TableRegistry::get("Users"),
+        'Tutors'      => TableRegistry::get("Tutors"),
+      ];
+
+      // se a coluna "user_id" estiver vazia, porém a de ID estiver preenchida
+      // significa que o usuário logado é um estudante
+      // ou seja, fazemos um campo fake `user_id` utilizando a ID do usuário
+      // para podermos puxar todos os estudantes corretamente
+      if(empty($this->userLogged['user_id']) && !empty($this->userLogged['id']))
+      {
+        $this->userLogged['user_id'] = $this->userLogged['id'];
+      }
+
+      // WHERE da consulta
+      $where = [
+        'user_id' => $this->userLogged['user_id']
+      ];
+
+      // roda as consultas
+      $atores = [
+        'Protectors'  => $models['Protectors']->find()->where($where)->all()->toArray(),
+        'Schools'     => $models['Schools']->find()->where($where)->all()->toArray(),
+        'Tutors'      => $models['Tutors']->find()->where($where)->all()->toArray(),
+        'Users'       => $models['Users']->find()->where(['id' => $this->userLogged['user_id'] ])->all()->toArray(),
+        'Therapists'  => $models['Therapists']->find()->where($where)->all()->toArray(),
+      ];
+
+      return $atores;
+    }
+
+/**
+ * (PRECISA DE REFATORAÇÃO)
+ * Método utilizado pelo CMS para verificar se admin está logado.
+ */
+    public function getAdminLogged()
+    {
+      return $this->userLogged;
+    }
+
+/**
+ * Verifica se o usuário logado é um estudante.
+ * Helper method.
+ */
+    public function currentUserIsStudent()
+    {
+      return ($this->userLogged['role'] == "user");
+    }
+
+/**
  * Verifica se é o front-end (ou seja, não é o CMS).
  * Helper method.
  */
@@ -126,84 +152,44 @@ class AppController extends Controller
     }
 
 /**
- * Função para recuperar todos os atores do usuário logado.
+ * Recupera informação específica do usuário logado.
+ * Helper method.
  */
-    public function getAtores()
-    {   
-      $protectors_table = TableRegistry::get("Protectors");
-      $schools_table = TableRegistry::get("Schools");
-      $tutors_table = TableRegistry::get("Tutors");
-      $users_table = TableRegistry::get("Users");
-      $therapists_table = TableRegistry::get("Therapists");
-
-      $admin_logged = $this->Cookie->read("admin_logged");
-      $current_user_selected = $this->Cookie->read("current_user_selected");
-
-      if(empty($admin_logged['user_id']) && !empty($admin_logged['id']))
-      {
-        $admin_logged['user_id'] = $admin_logged['id'];
-
-        $this->Cookie->write("admin_logged", $admin_logged);
-      }
-
-      if(!empty($current_user_selected))
-      {
-        $admin_logged['user_id'] = $current_user_selected['id'];
-      }
-
-      $where = [
-        'user_id' => $admin_logged['user_id']
-      ];
-
-      $atores = [
-        'Protectors' => $protectors_table->find()->where($where)->all()->toArray(),
-        'Schools' => $schools_table->find()->where($where)->all()->toArray(),
-        'Tutors' => $tutors_table->find()->where($where)->all()->toArray(),
-        'Users' => $users_table->find()->where(['id' => $admin_logged['user_id']])->all()->toArray(),
-        'Therapists' => $therapists_table->find()->where($where)->all()->toArray(),
-      ];
-
-      return $atores;
-    }
-
-    public function getUserLogged()
-    {
-      return $this->Auth->user();
-    }
-
-    public function getAdminLogged()
-    {
-      return $this->getUserLogged();
-      /*
-      $admin_logged = $this->Cookie->read("admin_logged");
-
-      if(empty($admin_logged['user_id']))
-      {
-        $admin_logged['user_id'] = $admin_logged['id'];
-      }
-
-      $users_table = TableRegistry::get("Users");
-
-      if(!empty($admin_logged['user_id']))
-      {
-        $admin_logged['user'] = $users_table->get($admin_logged['user_id']);
-      }*/
-      
-      return $admin_logged;
-    }
-
-    public function currentUserIsStudent()
-    {
-      $current_user = $this->getAdminlogged();
-      
-      return ($current_user['role_role'] == "user");
-    }
-
     public function currentUser($key)
     {
-      $current_user = $this->getAdminlogged();
-      
-      return $current_user[$key];
+      return $this->userLogged[$key];
+    }
+
+/**
+ * Função utilizada para definir permissões de página.
+ * Elas são configuradas através do administrador.
+ * Helper method.
+ */
+    public function getPermissions()
+    {
+
+      // Permissões - ACL
+      $permissions = [
+        'Protectors' => false,
+        'Schools' => false,
+        'Tutors' => false,
+        'Therapists' => false,
+        'Users' => false,
+      ];
+
+      $table = TableRegistry::get("Permissions");
+
+      // busca todas as permissões do BD
+      $all = $table->find()->all();
+
+      // armazena elas
+      foreach($all as $a)
+      {
+        $permissions[$a->model] = $a;
+      }
+
+      // retorna
+      return $permissions;
     }
 
 }

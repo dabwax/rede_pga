@@ -8,7 +8,7 @@ class FeedController extends AppController
 {
 	public $protected_area = true;
 
-	public function listar($hashtag_id = null)
+	public function index($hashtag_id = null)
 	{
 		// Get all tables
 		$lessons 			= TableRegistry::get("Lessons");
