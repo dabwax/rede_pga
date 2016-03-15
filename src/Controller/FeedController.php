@@ -8,8 +8,10 @@ class FeedController extends AppController
 {
 	public $protected_area = true;
 
-	public function index($hashtag_id = null)
+	public function api()
 	{
+    	$this->autoRender = false;
+
 		// Get all tables
 		$lessons 			= TableRegistry::get("Lessons");
 		// get current actors
@@ -21,6 +23,8 @@ class FeedController extends AppController
 
 		// get all lessons from current user
 		$query = $lessons->buscaAulas( $this->userLogged['user_id'] );
+
+		$hashtag_id = @$_GET['hashtag_id'];
 
 		// if has any hashtag
 		if(!empty($hashtag_id))
@@ -75,6 +79,21 @@ class FeedController extends AppController
 
 		} // end - iterate lessons
 
-		$this->set(compact("query", "hashtag"));
+		echo json_encode(array_values($query));
+	}
+
+	public function index()
+	{
+		
+		$lessons = TableRegistry::get("Lessons");
+
+		// if has any hashtag
+		if(!empty($_GET['hashtag_id']))
+		{
+			$hashtag = $lessons->LessonHashtags->Hashtags->get($_GET['hashtag_id']);
+
+			$this->set(compact("hashtag"));
+		} // end - hashtag
+
 	}
 }

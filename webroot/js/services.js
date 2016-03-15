@@ -1,5 +1,15 @@
 angular.module("RedePga")
 
+.factory("Feed", ["$http", function($http) {
+
+	return {
+		fetch_all: function(params)
+		{
+			return $http.get(baseUrl + "feed/api/" + params);
+		}
+	};
+
+}])
 .factory("Inputs", ["$http", function($http) {
 
 	return {

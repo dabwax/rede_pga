@@ -1,21 +1,17 @@
-<div class="row" ng-controller="FeedCtrl" ng-init='lessons = <?php echo json_encode(array_values($query) ); ?>; current_user = <?php echo json_encode( $userLogged ); ?>; '>
+<div class="row" ng-controller="FeedCtrl">
 
 	<!-- Título da página -->
 	<div class="page-title red darken-3">
 	    <h2>Feed</h2>
-
-		<?php if(!empty($hashtag)) : ?>
-		<h2>Filtrando pela hashtag: <strong><?php echo $hashtag->name; ?></strong></h2>
-		<?php endif; ?>
-
-		<p class="subtitle">Resumo das últimas aulas cadastradas.</p>
+		
+		<p class="subtitle"><?php if(!empty($hashtag)) : ?><strong>Filtrando pela hashtag: <?php echo $hashtag->name; ?>.</strong><?php endif; ?> Resumo das últimas aulas cadastradas.</p>
 
 	    <div class="actions">
-	        <a href="<?php echo $this->Url->build(['controller' => 'registros', 'action' => 'adicionar']); ?>" class="waves-effect waves-light btn green"><i class="material-icons left">add</i> nova aula</a>
 
 			<?php if(!empty($hashtag)) : ?>
-				<a href="<?php echo $this->Url->build('/feed'); ?>" class="btn green">Remover filtro</a>
+				<a href="<?php echo $this->Url->build('/'); ?>" class="btn grey">Remover filtro</a>
 			<?php endif; ?>
+	        <a href="<?php echo $this->Url->build(['controller' => 'registros', 'action' => 'adicionar']); ?>" class="waves-effect waves-light btn green"><i class="material-icons left">add</i> nova aula</a>
 
 	    </div> <!-- .actions -->
 
@@ -59,6 +55,13 @@
 					</span>
 					{{lesson.actors[author_id].full_name }}
 				</div> <!-- .chip -->
+				
+				<div class="clearfix"></div>
+
+				<!-- Listagem de atores participantes -->
+				<a href="<?php echo $this->Url->build('/feed/') ?>?hashtag_id={{entries.hashtag.id}}" class="chip chip-hashtag grey lighten-3" ng-repeat="(id, entries) in lesson.lesson_hashtags">
+					#{{entries.hashtag.name }}
+				</a> <!-- .chip -->
 				
 
 			</div> <!-- .card-content -->

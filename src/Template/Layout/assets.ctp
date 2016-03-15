@@ -14,7 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.js"></script>
 
 <!-- AngularJS -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
 <script src="https://code.angularjs.org/1.4.8/i18n/angular-locale_pt-br.js"></script>
 <script src="http://krescruz.github.io/angular-materialize/src/angular-materialize.js"></script>
 

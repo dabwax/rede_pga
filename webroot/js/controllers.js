@@ -17,7 +17,17 @@ angular.module("RedePga")
 
 }])
 
-.controller('FeedCtrl', ['$scope', function($scope) {
+.controller('FeedCtrl', ['$scope', 'Feed', '$window', function($scope, Feed, $window) {
+
+  $scope.lessons = [];
+
+  Feed.fetch_all($window.location.search).then(function(result) {
+    console.log(result.data);
+    $scope.lessons = result.data;
+  }, function() {
+    alert("Ocorreu um erro ao carregar os exercícios do site!");
+  });
+
   $scope.reset_search = function()
   {
     $scope.search.$ = '';
