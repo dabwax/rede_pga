@@ -30,13 +30,23 @@ angular.module("RedePga")
        "dad": "Pai"
       ,"mom": "Mãe"
       ,"tutor": "Tutor"
-      ,"therapist": "Terapeuta"
-      ,"mediator": "Mediador"
-      ,"coordinator": "Coordenador"
-      ,"user": "Estudante"
+      ,"therapist": "Terap."
+      ,"mediator": "Mediad."
+      ,"coordinator": "Coord."
+      ,"user": "Est."
     };
 
     return roles[role];
+  }
+
+  $scope.mostrarDados = function(role, actors) {
+
+    if(role != null) {
+      $scope.mostrar = role;
+    } else {
+      first = actors[Object.keys(actors)[0]];
+      $scope.mostrar = first.role;
+    }
   }
 }])
 .controller('ExerciciosCtrl', ['$scope', '$http', '$timeout', '$interval', 'Exercicios', 'Upload', function($scope, $http, $timeout, $interval, Exercicios, Upload) {

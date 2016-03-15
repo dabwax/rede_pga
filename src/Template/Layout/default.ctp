@@ -9,7 +9,8 @@
     <?= $this->Html->css('/css/style.css'); ?>
 	<title>PEP - Plataforma de Ensino Personalizado</title>
 </head>
-<body class="pep-login">
+<body class="pep-login pep-<?php echo strtolower($this->request->params['controller']); ?>">
+	
 	<?php if($userLogged) : ?>
 	<div class="navbar-fixed">
 		<nav>

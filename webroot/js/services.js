@@ -14,7 +14,6 @@ angular.module("RedePga")
 	};
 
 }])
-
 .factory("Exercicios", ["$http", "Upload", function($http, Upload) {
 
 	return {
