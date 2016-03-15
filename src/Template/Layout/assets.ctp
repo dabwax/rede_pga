@@ -16,7 +16,7 @@
 <!-- AngularJS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
 <script src="https://code.angularjs.org/1.4.8/i18n/angular-locale_pt-br.js"></script>
-<script src="http://krescruz.github.io/angular-materialize/src/angular-materialize.js"></script>
+<?= $this->Html->script('/vendors/angular-materialize.js'); ?>
 
 <!-- ng-file-upload -->
 <?= $this->Html->script('/vendors/ng-file-upload-master/dist/ng-file-upload-all.min.js'); ?>

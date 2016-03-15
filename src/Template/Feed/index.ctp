@@ -108,7 +108,8 @@
 
 		</div>
 		<div class="modal-footer">
-		  <a href="#!" class="modal-action modal-close waves-effect waves-green btn red">Fechar</a>
+		  <a href="<?php echo $this->Url->build(['controller' => 'registros', 'action' => 'editar']); ?>/{{lesson.id}}" class="modal-action modal-close waves-effect waves-green btn-flat">Adicionar novas informações a esta aula</a>
+		  <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Fechar</a>
 		</div>
 	</div> <!-- #modal -->
 
