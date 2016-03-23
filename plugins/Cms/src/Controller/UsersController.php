@@ -2,34 +2,90 @@
 namespace Cms\Controller;
 
 use Cms\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
-/**
- * Users Controller
- *
- * @property \Cms\Model\Table\UsersTable $Users
- */
 class UsersController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
-    public function index()
+    public function config_actors()
     {
-        $this->paginate = [
-            'contain' => ['Instituitions']
-        ];
-        $this->set('users', $this->paginate($this->Users));
-        $this->set('_serialize', ['users']);
-    }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
+    // generate labels
+    $labels = [
+       'Protectors' => 'Pai / Mãe'
+      ,'Schools' => 'Mediador / Coordenador'
+      ,'Therapists' => 'Terapeuta'
+      ,'Tutors' => 'Tutor'
+    ];
+
+    // get all actors from this student
+    $actors = $this->getAtores();
+
+    $instituitions = TableRegistry::get("instituitions");
+    $instituitions = $instituitions->find('list')->all();
+
+    // send to view
+    $this->set(compact("labels", "actors", "instituitions"));
+
+    // if POST request
+    if($this->request->is(["post", "put"])) {
+
+      // shortcut
+      $data = $this->request->data;
+
+      // Se não tiver sido preenchido nenhuma senha, remove o campo dela
+      // para nao bugar e atualizar a senha para vazio
+      if(strlen($data['password']) <= 0) {
+        unset($data['password']);
+      }
+
+      // generates model object
+      $table = TableRegistry::get($data['model']);
+
+      // generates entity object
+      $entity = $table->newEntity();
+
+      // if has any ID, update it
+      if(!empty($data['id']))
+      {
+        $entity = $table->get($data['id']);
+      }
+
+      $entity = $table->patchEntity($entity, $data);
+
+      if(!empty($data['instituition_id']))
+      {
+
+        $table2 = TableRegistry::get("Instituitions");
+
+        // start - get instituition name input and converts to ID
+        $tmp = $table2->find()->where(['name LIKE' => '%' . $data['instituition_id'] . '%' ])->first();
+
+        if($tmp)
+        {
+            $entity->instituition_id = $tmp->id;
+        } else {
+            $tmp = $table2->newEntity(['name' => $data['instituition_id'] ]);
+            $table2->save($tmp);
+
+            $entity->instituition_id = $tmp->id;
+        }
+        // end - get instituition name
+
+      }
+
+      // save entity
+      $table->save($entity);
+
+      // alert
+      $this->Flash->success($labels[$data['model']] . ' foi atualizado!');
+
+      // redirect
+      return $this->redirect(['action' => 'config_actors', '#' => 'c_' . $data['model'] ]);
+    } // end POST request
+
+  }
+
     public function add()
     {
         $user = $this->Users->newEntity();
@@ -67,13 +123,6 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id User id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
@@ -100,10 +149,10 @@ class UsersController extends AppController
             // end - get instituition name
 
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('As informações do estudante foram atualizadas.'));
+                return $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__('Não foi possível salvar o estudante. Verifique os dados.'));
             }
         }
         $instituitions = $this->Users->Instituitions->find('list', ['limit' => 200]);
@@ -114,16 +163,8 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id User id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
@@ -131,5 +172,25 @@ class UsersController extends AppController
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+/**
+ * Action utilizada para remover atores.
+ * Primeiro parametro é o nome do model.
+ * Segundo é o ID a ser removido.
+ * Esta action é usada na página de configuração de ator.
+ */
+    public function delete_actor($model = null, $id = null)
+    {
+      $table = TableRegistry::get($model);
+
+      $entry = $table->get($id);
+
+        if ($table->delete($entry)) {
+            $this->Flash->success(__('O ator foi removido.'));
+        } else {
+            $this->Flash->error(__('Não foi possível remover o ator.'));
+        }
+        return $this->redirect(['action' => 'config_actors']);
     }
 }

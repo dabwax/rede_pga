@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-
   <!-- Estilização da aplicação minificada -->
     <?= $this->Html->css('/css/style.css'); ?>
   <title>PEP - Plataforma de Ensino Personalizado</title>
@@ -19,7 +18,7 @@
         <a href="<?php echo $this->Url->build('/cms'); ?>" class="brand-logo center">
         <?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?>
         
-        <?php if(!empty($g_users->toArray())) : ?>
+        <?php if(!empty($estudanteAtual)) : ?>
           CMS
       <?php endif; ?>
       </a>
@@ -79,27 +78,26 @@
         <div class="card-panel indigo darken-4">
           <div class="card-content">
             
-            <span class="card-title white-text">Estudante Atual: <?php echo @$current_user_selected['full_name']; ?></span>
-            <?php if(empty($g_users->toArray())) : ?>
+            <span class="card-title white-text">Estudante Atual: <?php echo @$estudanteAtual['full_name']; ?></span>
+
+            <?php if(empty($estudanteAtual)) : ?>
               <div class="alert alert-danger pull-left" style="margin: 20px;">
                 Não há estudantes cadastrados. Isto fará com que o sistema não funcione. <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'add']) ?>">Adicione um novo estudante</a>.
               </div>
             <?php endif; ?>
 
-            <?php if(!empty($g_users->toArray()) && @$admin_logged) : ?>
-            <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'edit', @$current_user_selected['id']]); ?>" class="btn btn-floating deep-orange darken-3" title="Editar Dados do Aluno Atual">
-              <i class="material-icons left">edit</i>
-              Editar aluno
-            </a>
+            <?php if(!empty($estudanteAtual)) : ?>
 
-            <a href="<?php echo $this->Url->build(['controller' => 'dashboard', 'action' => 'config_actors']); ?>" class="btn amber accent-3 btn-floating" title="Configurar Atores">
-              <i class="material-icons left">settings</i>
-              Configurar atores
-            </a>
+            <div class="clearfix"></div>
 
-            <a href="<?php echo $this->Url->build(['controller' => 'dashboard', 'action' => 'set_current_user']); ?>" class="btn lime accent-4 btn-floating" title="Trocar de Aluno">
+            <a href="<?php echo $this->Url->build(['controller' => 'dashboard', 'action' => 'set_current_user']); ?>" class="btn lime accent-5" title="Trocar de Aluno">
               <i class="material-icons left">find_replace</i>
               Trocar de aluno
+            </a>
+
+            <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'edit', @$estudanteAtual['id']]); ?>" class="btn deep-orange darken-3" title="Editar Dados do Aluno Atual">
+              <i class="material-icons left">edit</i>
+              Editar aluno atual
             </a>
             <?php endif; ?>
 
@@ -114,6 +112,6 @@
   </div>
 
 </body>
-  <?php echo $this->element("/../Layout/assets"); ?>
-    <?= $this->Flash->render() ?>
+  <?php echo $this->element("/assets"); ?>
+  <?= $this->Flash->render() ?>
 </html>

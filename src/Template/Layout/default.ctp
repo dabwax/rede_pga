@@ -38,10 +38,7 @@
  		<?= $this->fetch('content') ?>
 	</div>
 	
-	<?php echo $this->element("/../Layout/assets"); ?>
-	<?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+	<?php echo $this->element("/assets"); ?>
     <?= $this->Flash->render() ?>
     <?php echo $this->Flash->render('auth',['element' => 'Flash/error']); ?>
 

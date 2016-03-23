@@ -1,4 +1,11 @@
-  <div id="role-check" class="text-center">
+  <div id="role-check" class="text-center card-panel">
+
+
+    <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'add']); ?>" class="btn green"> <i class="material-icons">add</i> Clique aqui para adicionar novo estudante</a>
+    <div class="clearfix"></div>
+
+    <strong style="margin-top: 20px; margin-bottom: 20px; display: inline-block;">ou....</strong>
+    <div class="clearfix"></div>
 
     <?php if(!empty($g_users->toArray())) : ?>
     <span class="card-subtitle">Selecione um estudante para administrar:</span>

@@ -30,7 +30,7 @@ class TherapistsTable extends Table
     public function findAuthTherapist($query, $options)
     {
         $query
-            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone'])
+            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
             ->where(['role' => 'therapist']);
 
         return $query;

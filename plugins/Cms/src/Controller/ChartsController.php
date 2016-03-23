@@ -19,35 +19,38 @@ class ChartsController extends AppController
      */
     public function index()
     {
-        $current_user_selected = $this->getCurrentUser();
+        $estudanteAtual = $this->estudanteAtual();
 
         $charts = $this->Charts->find()->contain(['Users'])->where(
         [
-            'Charts.user_id' => $current_user_selected['id']
+            'Charts.user_id' => $estudanteAtual['id']
         ])->all()->toArray();
 
         $this->set('charts', $charts);
     }
 
     /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
+     * Página de inserção de novos gráficos.
      */
     public function add()
     {
-        $current_user_selected = $this->getCurrentUser();
-        $chart = $this->Charts->newEntity(['user_id' => $current_user_selected['id']]);
+        // Busca dados do estudante atual
+        $estudanteAtual = $this->estudanteAtual();
 
-        $chart_themes_table = TableRegistry::get("ChartThemes");
-        $chart_themes = $chart_themes_table->find('list', ['keyField' => 'id', 'valueField' => 'theme_id'])->all();
+        // Adiciona novo gráfico pertencendo ao estudante atual
+        $chart = $this->Charts->newEntity([
+            'user_id' => $estudanteAtual['id']
+        ]);
 
+        // Se houver requisição POST
         if ($this->request->is('post')) {
+            // Atualiza entidade com dados do formulário
             $chart = $this->Charts->patchEntity($chart, $this->request->data);
+
+            // Se for possível salvar o gráfico
             if ($this->Charts->save($chart)) {
 
-                // salva as matérias
-
+                // Se houver matérias no gráfico, salvá-las também
                 if(!empty($this->request->data['themes']))
                 {
                     foreach($this->request->data['themes'] as $td)
@@ -58,16 +61,19 @@ class ChartsController extends AppController
                     }
                 }
 
-                $this->Flash->success(__('The chart has been saved.'));
+                // Alerta e redirecionamento
+                $this->Flash->success(__('O gráfico foi cadastrado cmo sucesso.'));
                 return $this->redirect(['action' => 'edit', $chart->id]);
             } else {
-                $this->Flash->error(__('The chart could not be saved. Please, try again.'));
+                $this->Flash->error(__('Não foi possível salvar o gráfico.'));
             }
         }
-        $users = $this->Charts->Users->find('list', ['limit' => 200]);
+
+        // Matérias pro select
         $themes = $this->Charts->Themes->find('list', ['limit' => 200]);
-        $this->set(compact('chart', 'users', 'themes'));
-        $this->set('_serialize', ['chart']);
+
+        // Envia dados para a view
+        $this->set(compact('chart', 'themes'));
     }
 
     /**

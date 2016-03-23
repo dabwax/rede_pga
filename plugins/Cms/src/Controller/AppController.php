@@ -3,72 +3,61 @@
 namespace Cms\Controller;
 
 use App\Controller\AppController as BaseController;
-use Cake\I18n\Time;
 use Cake\Database\Type;
 use Cake\ORM\TableRegistry;
 
+/**
+ * AppController do CMS.
+ */
 class AppController extends BaseController
 {
-	public $protected_area = true;
 
-    /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading components.
-     *
-     * @return void
-     */
     public function initialize()
     {
+      // Herança
       parent::initialize();
       
-        $this->loadComponent('Flash');
-        $this->loadComponent('Cookie');
-        $this->loadComponent('Upload');
-
-
-        // Se o controller for uma área restrita
-       if($this->protected_area == true) {
-           // Recupera a sessão de admin
-           $admin_logged = $this->Cookie->read("cms_logged");
-
-           // Se não houver sessão de admin, redireciona o usuário para o login
-           if(empty($admin_logged))
-           {
-               $this->Flash->error("Você não tem permissão para acessar esta página! Faça seu login.");
-               return $this->redirect('/cms/authentication/login');
-           } else {
-             $this->set(compact("admin_logged"));
-           } // fim - return
-       } else {
-        
-       } // fim - areaRestrita
-
-       $table_users = TableRegistry::get("Users");
-       $g_users = $table_users->find()->all();
-       $current_user_selected = $this->getCurrentUser();
-       
-       $this->set(compact("g_users", "current_user_selected"));
-
-      Time::$defaultLocale = 'pt-BR';
-      Time::setToStringFormat('dd/MM/YYYY');
-    }
-
-    public function getCurrentUser()
-    {
-      $current_user_selected = $this->Cookie->read("current_user_selected");
-
-      if(empty($current_user_selected))
-      {
-        $table = TableRegistry::get("Users");
-
-        $user = $table->find()->first();
-
-        $this->Cookie->write('current_user_selected', $user);
-
-        $current_user_selected = $this->Cookie->read("current_user_selected");
+      // Verifica se o usuário que está tentando visualizar o CMS
+      // é um usuário administrador
+      if(!$this->verificarAdministrador()) {
+          $this->Flash->error("Você não é um administrador para acessar o CMS. Você foi expulso!");
+          return $this->redirect($this->Auth->logout());
       }
 
-      return $current_user_selected; 
+      // Vamos puxar sempre as informações do estudante atual
+      $this->estudanteAtual();
+    }
+
+/**
+ * Função usada para verificar se o usuário tem permissão
+ * para ver o CMS.
+ */
+    public function verificarAdministrador()
+    {
+        return (bool) $this->Auth->user('is_admin');
+    }
+
+/**
+ * Função utilizada para puxar as informações do estudante atual.
+ */
+    public function estudanteAtual()
+    {
+      // Le o cookie de estudanteAtual
+      // Se não houver nenhum estudante preenchido
+      if(empty( $this->Cookie->read("estudanteAtual") )) {
+        // Busca o primeiro estudante do banco de dados
+        $estudantes = TableRegistry::get("Users");
+
+        $this->Cookie->write('estudanteAtual', $estudantes->find()->first() );
+      }
+
+      // Tmp
+      $estudanteAtual = $this->Cookie->read("estudanteAtual");
+
+      // Envia para todas as views do CMS
+      $this->set(compact("estudanteAtual"));
+
+      // Retorna os dados do estudante atual
+      return $estudanteAtual; 
     }
 }

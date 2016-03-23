@@ -46,12 +46,12 @@
 
             <label for="date_start">Filtro dos Dados (Data Inicial - apenas para demonstração)</label>
         <p class="input-field">
-            <input type="text" id="date_start" kendo-date-picker k-format="'dd/MM/yyyy'" ng-model="emptyChart.options.date_start">
+            <input type="text" id="date_start" datepicker ng-model="emptyChart.options.date_start">
         </p> <!-- .input-field -->
 
             <label for="date_finish">Filtro dos Dados (Data Final - apenas para demonstração)</label>
         <p class="input-field">
-            <input type="text" id="date_finish" kendo-date-picker k-format="'dd/MM/yyyy'" ng-model="emptyChart.options.date_finish">
+            <input type="text" id="date_finish" datepicker ng-model="emptyChart.options.date_finish">
         </p> <!-- .input-field -->
 
         <p>
@@ -86,12 +86,12 @@
                         <option value="pie">Pizza</option>
                     </select>
                     <label for="">Input</label>
-                    <select ng-model="emptyChart.series[key].input_id" ng-change="trocou()" class="browser-default">
+                    <select ng-model="emptyChart.series[key].input_id" ng-change="trocou(key)" class="browser-default">
                         <option value="">Selecionar</option>
                         <option ng-repeat="input in inputs" value="{{input.id}}">{{input.name}}</option>
                     </select>
                     <label for="">Matéria</label>
-                    <select ng-model="emptyChart.series[key].theme_id" ng-change="trocou()" class="browser-default">
+                    <select ng-model="emptyChart.series[key].theme_id" ng-change="trocou(key)" class="browser-default">
                         <option value="">Todas</option>
                         <option ng-repeat="materia in materias" value="{{materia.id}}">{{materia.name}}</option>
                     </select>

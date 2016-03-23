@@ -1,16 +1,24 @@
 angular.module('RedePga')
 
-.directive('shortcut', function() {
+
+.directive('datepicker', function() {
   return {
-    restrict: 'E',
-    replace: true,
-    scope: true,
-    link:    function postLink(scope, iElement, iAttrs){
-      jQuery(document).on('keypress', function(e){
-         scope.$apply(scope.keyPressed(e));
-       });
+    link: function(scope, elem, attrs)
+    {
+      $(elem).datepicker({
+        dateFormat: "dd/mm/yy"
+      });
     }
-  };
+  }
+})
+
+.directive('tabs', function() {
+  return {
+    link: function(scope, elem, attrs)
+    {
+      $(elem).tabs();
+    }
+  }
 })
 
 .directive('selectAluno', function() {
@@ -20,29 +28,6 @@ angular.module('RedePga')
       $(elem).change(function() {
 
         $(this).parent().submit();
-      });
-    }
-  }
-})
-
-.directive('selectTwo', function() {
-  return {
-    link: function(scope, elem, attrs)
-    {
-      //$(elem).select2();
-    }
-  }
-})
-
-.directive('slimscroll', function() {
-  return {
-    link: function(scope, elem, attrs)
-    {
-      $(elem).slimScroll({
-        height: '480px',
-        alwaysVisible: true,
-        railVisible: true,
-        position: "right"
       });
     }
   }
@@ -81,37 +66,4 @@ angular.module('RedePga')
 
     }
   };
-})
-
-.directive('datepicker', function() {
-   return function(scope, element, attrs) {
-
-      // $.datepicker.regional[ "pt-BR" ] = {
-      // closeText: "Fechar",
-      // prevText: "&#x3C;Anterior",
-      // nextText: "Próximo&#x3E;",
-      // currentText: "Hoje",
-      // monthNames: [ "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
-      // "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro" ],
-      // monthNamesShort: [ "Jan","Fev","Mar","Abr","Mai","Jun",
-      // "Jul","Ago","Set","Out","Nov","Dez" ],
-      // dayNames: [ "Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado" ],
-      // dayNamesShort: [ "Dom","Seg","Ter","Qua","Qui","Sex","Sáb" ],
-      // dayNamesMin: [ "Dom","Seg","Ter","Qua","Qui","Sex","Sáb" ],
-      // weekHeader: "Sm",
-      // dateFormat: "dd/mm/yy",
-      // firstDay: 0,
-      // isRTL: false,
-      // showMonthAfterYear: false,
-      // yearSuffix: "" };
-      // $.datepicker.setDefaults( $.datepicker.regional[ "pt-BR" ] );
-
-       $(element).datepicker({
-           inline: true,
-           dateFormat: 'dd/mm/yy',
-           changeMonth: true,
-           changeYear: true,
-           yearRange : 'c-65:c+10'
-       });
-   }
 })

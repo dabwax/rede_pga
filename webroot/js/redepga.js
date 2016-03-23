@@ -1,7 +1,6 @@
-angular.module('RedePga', ["kendo.directives", "ngFileUpload", "highcharts-ng", 'ui.materialize']);
+angular.module('RedePga', ["ngFileUpload", "highcharts-ng"]);
 
 $(document).ready(function() {
-	kendo.culture("pt-BR");
 
 	$(".button-collapse").sideNav();
 	

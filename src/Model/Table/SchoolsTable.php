@@ -14,7 +14,7 @@ class SchoolsTable extends Table
     public function findAuthCoordinator($query, $options)
     {
         $query
-            ->select(['id', 'user_id', 'instituition_id', 'role', 'username', 'password', 'full_name', 'phone'])
+            ->select(['id', 'user_id', 'instituition_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
             ->where(['role' => 'coordinator']);
 
         return $query;
@@ -26,7 +26,7 @@ class SchoolsTable extends Table
     public function findAuthMediator($query, $options)
     {
         $query
-            ->select(['id', 'user_id', 'instituition_id', 'role', 'username', 'password', 'full_name', 'phone'])
+            ->select(['id', 'user_id', 'instituition_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
             ->where(['role' => 'mediator']);
 
         return $query;

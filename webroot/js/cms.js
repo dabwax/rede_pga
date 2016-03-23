@@ -1,9 +1,19 @@
 angular.module("RedePga")
 
+.controller("FormularioEdicaoUsuario", ["$scope", function($scope) {
+
+}])
+
 .controller("ConfigurarAtoresCtrl", ["$scope", "$http", "$filter", "$timeout", function($scope, $http, $filter, $timeout) {
 	$scope.actor = {
     	model: "Protectors"
 	};
+
+	$scope.cancelarEdicao = function() {
+		$scope.actor = {
+	    	model: "Protectors"
+		};
+	}
 
 	$scope.get_label = function(model) {
 
@@ -125,15 +135,25 @@ angular.module("RedePga")
 	});
 
 	// Função chamada quando um input/matéria é definido
-	$scope.trocou = function() {
+	$scope.trocou = function(key) {
+
 		// Busca cálculo
-		$http({
-			method: "POST",
-			url: baseUrl + "cms/api/materias_disponiveis"
-		}).then(function sucess(response) {
-			$scope.materias = response.data;
+		$http.post(baseUrl + "cms/api/calcular_serie", [{
+			materia: $scope.emptyChart.series[key].theme_id,
+			input: $scope.emptyChart.series[key].input_id,
+			filtro: {
+				data_inicial: $scope.emptyChart.options.date_start,
+				data_final: $scope.emptyChart.options.date_finish
+			},
+			formato: $scope.emptyChart.options.format
+		}]).then(function sucess(response) {
+
+			console.log(response);
+
+			// $scope.emptyChart.series[key].data = [];
 		}, function error(response) {
 
+			console.log(response);
 		});
 	}
 

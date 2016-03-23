@@ -27,7 +27,7 @@ class ProtectorsTable extends Table
     public function findAuthDad($query, $options)
     {
         $query
-            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone'])
+            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
             ->where(['role' => 'dad']);
 
         return $query;
@@ -39,7 +39,7 @@ class ProtectorsTable extends Table
     public function findAuthMom($query, $options)
     {
         $query
-            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone'])
+            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
             ->where(['role' => 'mom']);
 
         return $query;
