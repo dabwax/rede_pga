@@ -4,19 +4,9 @@ namespace Cms\Controller;
 use Cms\Controller\AppController;
 use Cake\ORM\TableRegistry;
 
-/**
- * Charts Controller
- *
- * @property \Cms\Model\Table\ChartsTable $Charts
- */
 class ChartsController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
         $estudanteAtual = $this->estudanteAtual();
@@ -50,27 +40,13 @@ class ChartsController extends AppController
             // Se for possível salvar o gráfico
             if ($this->Charts->save($chart)) {
 
-                // Se houver matérias no gráfico, salvá-las também
-                if(!empty($this->request->data['themes']))
-                {
-                    foreach($this->request->data['themes'] as $td)
-                    {
-                        $tmp = $chart_themes_table->newEntity(['chart_id' => $chart->id, 'theme_id' => $td]);
-
-                        $chart_themes_table->save($tmp);
-                    }
-                }
-
                 // Alerta e redirecionamento
                 $this->Flash->success(__('O gráfico foi cadastrado cmo sucesso.'));
-                return $this->redirect(['action' => 'edit', $chart->id]);
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('Não foi possível salvar o gráfico.'));
             }
         }
-
-        // Matérias pro select
-        $themes = $this->Charts->Themes->find('list', ['limit' => 200]);
 
         // Envia dados para a view
         $this->set(compact('chart', 'themes'));

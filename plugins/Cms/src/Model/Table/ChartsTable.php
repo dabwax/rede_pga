@@ -7,22 +7,9 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cms\Model\Entity\Chart;
 
-/**
- * Charts Model
- *
- * @property \Cake\ORM\Association\BelongsTo $Users
- * @property \Cake\ORM\Association\BelongsTo $Themes
- * @property \Cake\ORM\Association\HasMany $ChartInputs
- */
 class ChartsTable extends Table
 {
 
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -36,14 +23,9 @@ class ChartsTable extends Table
             'joinType' => 'INNER',
             'className' => 'Cms.Users'
         ]);
-        $this->belongsTo('Themes', [
-            'foreignKey' => 'theme_id',
-            'joinType' => 'INNER',
-            'className' => 'Cms.Themes'
-        ]);
-        $this->hasMany('ChartInputs', [
+        $this->hasMany('ChartSeries', [
             'foreignKey' => 'chart_id',
-            'className' => 'Cms.ChartInputs'
+            'className' => 'Cms.ChartSeries'
         ]);
     }
 

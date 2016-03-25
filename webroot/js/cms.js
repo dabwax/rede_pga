@@ -69,47 +69,66 @@ angular.module("RedePga")
 }])
 .controller("NovoGraficoCtrl", ["$scope", "$http", "$filter", "$timeout", function($scope, $http, $filter, $timeout) {
 	$scope.emptyChart = {
-		title: {
-			text: "Exemplo"
-		},
-		subtitle: {
-			text: "Subtítulo aqui"
-		},
-		options: {
-			date_start: "01/01/" + $filter('date')(new Date(), 'yyyy'),
-			date_finish: $filter('date')(new Date(), 'dd/MM/yyyy'),
-			format: "mensal",
-			chart: {
-				type: "line"
-			}
-		},
-		series: [
-			{
-				"name": "Dados de exemplo - preencha o cadastro corretamente",
-				"type": "line",
-	      		"data": [
-			        1,
-			        2,
-			        4,
-			        7,
-			        3
-		      	],
-	      		"id": "series-0",
-	      		"color": "#CFC000"
-	  		}
-		],
-		xAxis: {
-
-		}
-	};
+  "options": {
+    "chart": {
+      "type": "areaspline"
+    },
+    "plotOptions": {
+      "series": {
+        "stacking": ""
+      }
+    }
+  },
+  "series": [
+    {
+      "name": "Some data",
+			"color": "#AAAAAA",
+      "data": [
+        1,
+        2,
+        4,
+        7,
+        3
+      ],
+      "id": "series-0"
+    },
+    {
+      "name": "Some data 3",
+			"color": "#CCCCCC",
+      "data": [
+        3,
+        1,
+        null,
+        5,
+        2
+      ],
+      "connectNulls": true,
+      "id": "series-1"
+    }
+  ],
+  "title": {
+    "text": "Hello"
+  },
+  "subtitle": {
+    "text": "World"
+  },
+  "credits": {
+    "enabled": true
+  },
+  "loading": false,
+	"filter_start": "01/01/" + $filter('date')(new Date(), 'yyyy'),
+	"filter_end": $filter('date')(new Date(), 'dd/MM/yyyy'),
+	"format": "diario",
+  "size": {}
+};
 
 	// Observador do campo de formato
 	$scope.$watch("emptyChart.options.format", function (newValue, oldValue) {
 		$timeout(function() {
 			if(newValue == "mensal") {
-				$scope.emptyChart.xAxis.categories = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+				//$scope.emptyChart.xAxis.categories = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 			} else {
-				$scope.emptyChart.xAxis.categories = null;
+				//$scope.emptyChart.xAxis.categories = null;
 			}
 		});
 	});

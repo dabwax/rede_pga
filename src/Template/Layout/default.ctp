@@ -10,7 +10,7 @@
 	<title>PEP - Plataforma de Ensino Personalizado</title>
 </head>
 <body class="pep-login pep-<?php echo strtolower($this->request->params['controller']); ?>">
-	
+
 	<?php if($userLogged) : ?>
 	<div class="navbar-fixed">
 		<nav>
@@ -19,6 +19,9 @@
 
 				<a class="teal-text right" href="<?php echo $this->Url->build('/sair'); ?>" title="Sair"><i class="material-icons left">power_settings_new</i></a>
 
+				<?php if($userLogged['is_admin']) : ?>
+					<a href="<?php echo $this->Url->build('/cms'); ?>" class="btn red right" style="margin-top: 12px; margin-right: 12px;">Abrir CMS</a>
+				<?php endif; ?>
 				<a href="#" id="pep-menu-btn" data-activates="mobile-menu" class="button-collapse teal-text"><i class="material-icons">menu</i></a>
 
 				<ul class="side-nav teal-text" id="mobile-menu">
@@ -37,7 +40,7 @@
 	<div class="container">
  		<?= $this->fetch('content') ?>
 	</div>
-	
+
 	<?php echo $this->element("/assets"); ?>
     <?= $this->Flash->render() ?>
     <?php echo $this->Flash->render('auth',['element' => 'Flash/error']); ?>
