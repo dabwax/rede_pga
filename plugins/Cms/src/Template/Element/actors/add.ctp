@@ -5,8 +5,8 @@
 <input type="hidden" name="id" value="{{actor.id}}">
 
 <div class="col s6">
-	
-	
+
+
 	<div class="field">
 		<label>Nome Completo</label>
 
@@ -21,14 +21,14 @@
 
 	<div class="field">
 		<label>Telefone</label>
-		
+
 			<input type="text" class="form-control" name="phone" required ng-model="actor.phone" ui-mask="(99) 9999-9999?9"  ui-mask-placeholder ui-mask-placeholder-char="space">
 	</div> <!-- .field -->
 
 </div> <!-- .col s6 -->
 
 <div class="col s6">
-	
+
 	<div class="field">
 		<label>Cargo</label>
 
@@ -50,19 +50,19 @@
 
 	<div class="field">
 		<label>Senha</label>
-		
+
 			<input type="text" class="form-control" name="password" ng-model="actor.password">
-		
+
 		<p>
-		<input type="checkbox" name="is_admin" id="is_admin" ng-model="actor.is_admin"> 
+		<input type="checkbox" name="is_admin" id="is_admin" value="1" ng-model="actor.is_admin"> 
 		<label for="is_admin">É um usuário administrador (Poderá ver o CMS)</label>
 		</p>
-		
+
 	</div> <!-- .field -->
-	
+
 	<div class="field" ng-if="'<?php echo $k; ?>' == 'Schools'">
 		<label>Escola</label>
-		
+
 			<input type="text" class="form-control" name="instituition_id" required ng-model="actor.instituition_id">
 	</div> <!-- .field -->
 
@@ -71,7 +71,7 @@
 <div class="clearfix"></div>
 
 <div class="col-lg-12">
-	
+
 	<button type="submit" class="btn green"><i class="material-icons">save</i> Salvar Ator</button>
 	<a href="<?php echo $this->Url->build(['action' => 'delete_actor']); ?>/{{actor.model}}/{{actor.id}}" class="btn red white-text" ng-if="actor.id"><i class="material-icons">delete</i> Excluir Ator</a>
 	<a href="javascript:;" ng-click="cancelarEdicao()" class="btn btn-flat right" ng-if="actor.id"><i class="material-icons">close</i> Cancelar Edição</a>

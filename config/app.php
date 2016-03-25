@@ -217,7 +217,7 @@ return [
              */
             //'port' => 'nonstandard_port_number',
             'username' => 'root',
-            'password' => 'relogio123',
+            'password' => '',
             'database' => 'pep',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
