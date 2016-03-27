@@ -66,6 +66,13 @@ angular.module("RedePga")
 		$('.panel-collapse').removeClass('in');
 		$('#'+hash).addClass('in');
 	}
+
+	$(document).on("click", ".ui-tabs-anchor", function() {
+
+		$timeout(function() {
+			$scope.cancelarEdicao();
+		});
+	});
 }])
 .controller("NovoGraficoCtrl", ["$scope", "$http", "$filter", "$timeout", function($scope, $http, $filter, $timeout) {
 	$scope.emptyChart = {
@@ -77,11 +84,14 @@ angular.module("RedePga")
       "series": {
         "stacking": ""
       }
-    }
+    },
+		"xAxis": {
+			"categories": []
+		}
   },
   "series": [
     {
-      "name": "Some data",
+      "name": "Linha Exemplo",
 			"color": "#AAAAAA",
       "data": [
         1,
@@ -91,19 +101,6 @@ angular.module("RedePga")
         3
       ],
       "id": "series-0"
-    },
-    {
-      "name": "Some data 3",
-			"color": "#CCCCCC",
-      "data": [
-        3,
-        1,
-        null,
-        5,
-        2
-      ],
-      "connectNulls": true,
-      "id": "series-1"
     }
   ],
   "title": {
@@ -157,40 +154,41 @@ angular.module("RedePga")
 	$scope.trocou = function(key) {
 
 		// Busca cálculo
-		$http.post(baseUrl + "cms/api/calcular_serie", [{
+		var dados = {
+			grafico: {
+				data_inicial: $scope.emptyChart.filter_start,
+				data_final: $scope.emptyChart.filter_end,
+				formato: $scope.emptyChart.format,
+				tipo: $scope.emptyChart.options.chart.type
+			},
 			materia: $scope.emptyChart.series[key].theme_id,
 			input: $scope.emptyChart.series[key].input_id,
-			filtro: {
-				data_inicial: $scope.emptyChart.options.date_start,
-				data_final: $scope.emptyChart.options.date_finish
-			},
-			formato: $scope.emptyChart.options.format
-		}]).then(function sucess(response) {
+		};
+		$http.post(baseUrl + "cms/api/calcular_serie", dados).then(function sucess(response) {
 
-			console.log(response);
+			$scope.emptyChart.options.xAxis.categories = response.data.eixo_x;
+			$scope.emptyChart.series[key].data = response.data.serie;
+						console.log($scope.emptyChart);
 
 			// $scope.emptyChart.series[key].data = [];
 		}, function error(response) {
 
-			console.log(response);
 		});
 	}
 
 	// Função chamada quando é adicionado uma nova série
 	$scope.adicionar = function() {
-		$scope.emptyChart.series.push({
-			"name": "Dados de exemplo - preencha o cadastro corretamento",
-			"type": "line",
-      		"data": [
-		        Math.floor((Math.random() * 10) + 1),
-		        Math.floor((Math.random() * 10) + 1),
-		        Math.floor((Math.random() * 10) + 1),
-		        Math.floor((Math.random() * 10) + 1),
-		        Math.floor((Math.random() * 10) + 1)
-	      	],
-      		"id": "series-" + $scope.emptyChart.series.length + 1,
-      		"color": "#CFC000"
-  		});
+
+		var ultima_serie = angular.copy($scope.emptyChart.series.slice(-1)[0]);
+		delete ultima_serie.$$hashKey;
+
+		ultima_serie.name = ultima_serie.name + "1";
+		ultima_serie.id = ultima_serie.id + "1";
+
+		$timeout(function() {
+
+			$scope.emptyChart.series.push(ultima_serie);
+		});
 	}
 
 }]);

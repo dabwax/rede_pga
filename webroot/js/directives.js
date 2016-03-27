@@ -1,5 +1,36 @@
 angular.module('RedePga')
 
+.directive('loading', ['$http', function ($http) {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        scope.isLoading = function () {
+          return $http.pendingRequests.length > 0;
+        };
+        scope.$watch(scope.isLoading, function (value) {
+          if (value) {
+            element.removeClass('ng-hide');
+          } else {
+            element.addClass('ng-hide');
+          }
+        });
+      }
+    };
+}])
+
+.directive('modal', function() {
+  return {
+    link: function(scope, elem, attrs)
+    {
+      $(elem).click(function() {
+
+        var href = $(elem).data("lesson-id");
+
+        $("#modal" + href).openModal();
+      });
+    }
+  }
+})
 
 .directive('datepicker', function() {
   return {

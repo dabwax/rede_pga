@@ -24,7 +24,7 @@ class LessonEntriesTable extends Table
 			'input_id' 			=> $registro['id'],
 			'model_id' 			=> $admin_logged['id'],
 			'user_id' 			=> $admin_logged['user_id'],
-			'model' 			=> $admin_logged['role_table'],
+			'model' 			=> $admin_logged['table'],
 			'value'				=> $registro['value']
 		];
 
@@ -39,7 +39,7 @@ class LessonEntriesTable extends Table
 		}
 
 		$this->save($entity);
-        
+
 	endforeach;
   }
 

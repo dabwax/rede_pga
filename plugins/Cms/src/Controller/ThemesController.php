@@ -18,14 +18,13 @@ class ThemesController extends AppController
      */
     public function index()
     {
-        $current_user_selected = $this->getCurrentUser();
+        $estudanteAtual = $this->estudanteAtual();
 
         $query = $this->Themes->find()->contain(['Users'])->where(
         [
-            'Themes.user_id' => $current_user_selected['id']
-        ]);
-        $this->set('themes', $this->paginate($query));
-        $this->set('_serialize', ['themes']);
+            'Themes.user_id' => $estudanteAtual['id']
+        ])->all();
+        $this->set('themes', $query);
     }
 
     /**
@@ -51,13 +50,13 @@ class ThemesController extends AppController
      */
     public function add()
     {
-        $current_user_selected = $this->getCurrentUser();
+        $estudanteAtual = $this->estudanteAtual();
 
-        $theme = $this->Themes->newEntity(['user_id' => $current_user_selected['id']]);
+        $theme = $this->Themes->newEntity(['user_id' => $estudanteAtual['id']]);
         if ($this->request->is('post')) {
             $theme = $this->Themes->patchEntity($theme, $this->request->data);
             if ($this->Themes->save($theme)) {
-                $this->Flash->success(__('The theme has been saved.'));
+                $this->Flash->success(__('A matéria foi salva.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The theme could not be saved. Please, try again.'));
@@ -83,7 +82,7 @@ class ThemesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $theme = $this->Themes->patchEntity($theme, $this->request->data);
             if ($this->Themes->save($theme)) {
-                $this->Flash->success(__('The theme has been saved.'));
+                $this->Flash->success(__('A matéria foi salva.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The theme could not be saved. Please, try again.'));

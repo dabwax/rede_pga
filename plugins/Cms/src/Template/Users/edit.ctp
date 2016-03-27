@@ -1,8 +1,8 @@
 <div class="page-title red darken-3">
-    <h2>Edição de Estudante</h2>
+    <h2>Edição de Aluno</h2>
 
     <div class="actions">
-        <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'config_actors']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">settings</i> Configurar atores</a>
+        <a href="<?php echo $this->Url->build(['controller' => 'users', 'action' => 'configurar_atores']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">settings</i> Configurar atores</a>
     </div> <!-- .actions -->
 
     <div class="clearfix"></div>
@@ -21,7 +21,7 @@
         echo $this->Form->input('full_name', ['label' => 'Nome', 'class' => 'form-control']);
         echo $this->Form->input('description', ['label' => 'Observação', 'class' => 'form-control', 'type' => 'textarea']);
         ?>
-        
+
     </div>
 
     <div class="col s4">
@@ -58,7 +58,7 @@
 
 
     <div class="col s6">
-        
+
     <?php
         echo $this->Form->input('password', ['label' => 'Senha', 'class' => 'form-control', 'value' => '']);
     ?>

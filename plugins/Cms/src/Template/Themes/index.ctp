@@ -1,11 +1,19 @@
-<div class="themes index large-10 medium-9 columns">
+<div class="page-title red darken-3">
+    <h2>Matérias</h2>
 
-    <a href="<?php echo $this->Url->build(['action' => 'add']); ?>" class="btn btn-primary">Adicionar</a>
+    <div class="actions">
+        <a href="<?php echo $this->Url->build(['action' => 'add']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">add</i> novo</a>
+    </div> <!-- .actions -->
+
+    <div class="clearfix"></div>
+</div> <!-- .page-title -->
+
+<div class="card-panel">
 
     <table class="table">
     <thead>
         <tr>
-            <th><?= $this->Paginator->sort('name', 'Matéria') ?></th>
+            <th>Matéria</th>
             <th class="actions"><?= __('Ações') ?></th>
         </tr>
     </thead>
@@ -14,19 +22,14 @@
         <tr>
             <td><?= h($theme->name) ?></td>
             <td class="actions">
-                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $theme->id], ['class' => 'btn btn-default']) ?>
-                <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $theme->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $theme->id)]) ?>
+
+                              <a href="<?php echo $this->Url->build(['action' => 'edit', $theme->id]); ?>" class="btn amber darken-2" title="Editar"><i class="material-icons">edit</i></a>
+                              <a href="<?php echo $this->Url->build(['action' => 'delete', $theme->id]); ?>" class="btn red darken-3" title="Ocultar"><i class="material-icons">remove_circle_outline</i></a>
+
             </td>
         </tr>
 
     <?php endforeach; ?>
     </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('anterior')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('próximo') . ' >') ?>
-        </ul>
-    </div>
 </div>

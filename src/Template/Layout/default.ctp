@@ -11,6 +11,10 @@
 </head>
 <body class="pep-login pep-<?php echo strtolower($this->request->params['controller']); ?>">
 
+	<div class="loader" data-loading>
+		<?php echo $this->Html->image("spinner.gif") ?>
+	</div>
+
 	<?php if($userLogged) : ?>
 	<div class="navbar-fixed">
 		<nav>

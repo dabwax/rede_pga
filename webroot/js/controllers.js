@@ -8,7 +8,6 @@ angular.module("RedePga")
 
       $http.get(baseUrl + "cms/inputs/sortable?" + data).then(function(result) {
 
-        console.log(result.data);
 
       });
 
@@ -22,7 +21,7 @@ angular.module("RedePga")
   $scope.lessons = [];
 
   Feed.fetch_all($window.location.search).then(function(result) {
-    console.log(result.data);
+    //console.log(result.data);
     $scope.lessons = result.data;
   }, function() {
     alert("Ocorreu um erro ao carregar os exercícios do site!");
@@ -51,16 +50,19 @@ angular.module("RedePga")
 
   $scope.mostrarDados = function(role, actors) {
 
-    if(role != null) {
-      $scope.mostrar = role;
-    } else {
-      first = actors[Object.keys(actors)[0]];
-      $scope.mostrar = first.role;
-    }
+
+      if(role != null) {
+        $scope.mostrar = role;
+      } else {
+        if(actors.length > 0) {
+          first = actors[Object.keys(actors)[0]];
+          $scope.mostrar = first.role;
+        }
+      }
   }
 }])
 .controller('ExerciciosCtrl', ['$scope', '$http', '$timeout', '$interval', 'Exercicios', 'Upload', function($scope, $http, $timeout, $interval, Exercicios, Upload) {
-  
+
   Exercicios.fetch_all().then(function(result) {
     $scope.exercicios = result.data;
   }, function() {
@@ -132,7 +134,7 @@ angular.module("RedePga")
 }])
 
 .controller('BatePapoCtrl', ['$scope', '$http', '$timeout', '$interval', 'Mensagens', function($scope, $http, $timeout, $interval, Mensagens) {
-  
+
   Mensagens.fetch_all().then(function(result) {
     $scope.mensagens = result.data;
   }, function() {
@@ -181,7 +183,7 @@ angular.module("RedePga")
 
       alert("Não foi possível incluir a mensagem!");
     });
-    
+
   };
 
   $scope.btn_nova_mensagem = function()
@@ -274,7 +276,7 @@ angular.module("RedePga")
   $scope.reset_search = function()
   {
     $scope.search.$ = '';
-    
+
     $scope.voltarParaAulas();
   };
 
@@ -344,15 +346,23 @@ angular.module("RedePga")
 
 }])
 
-.controller('EditarRegistroCtrl', ['$scope', 'Inputs', function($scope, Inputs) {
+.controller('EditarRegistroCtrl', ['$scope', 'Inputs', '$timeout', function($scope, Inputs, $timeout) {
   $scope.registros = [];
 
-  $scope.lesson_id = angular.element("#registros-container").data("id");
+  $scope.init = function() {
 
-  Inputs.fetch_all($scope.lesson_id).then(function(result) {
-    $scope.registros = result.data.registros;
-    $scope.campos = result.data.campos;
-  });
+    $scope.hashtags = $("#registros-container").data('hashtags');
+    $scope.materias = $("#registros-container").data('materias');
+    $scope.admin_logged = $("#registros-container").data('admin-logged');
+    $scope.lesson_id = $("#registros-container").data('lesson-id');
+
+    console.log($scope.lesson_id);
+
+    Inputs.fetch_all($scope.lesson_id).then(function(result) {
+      $scope.registros = result.data.registros;
+      $scope.campos = result.data.campos;
+    });
+  };
 
 }])
 
@@ -373,14 +383,10 @@ angular.module("RedePga")
 
   $scope.avancar = false;
 
-  $scope.mudouData = function() {
+  $scope.mudouData = function(date) {
+    console.log(date);
 
-    var data_formatada = kendo.toString(this.value(), 'yyyy-MM-dd');
-
-    Inputs.validar_data(data_formatada).then(function(result) {
-
-      console.log(result.data);
-
+    Inputs.validar_data(date).then(function(result) {
 
       if(result.data.status == "INDISPONÍVEL") {
         $scope.avancar = false;
@@ -389,7 +395,7 @@ angular.module("RedePga")
       }
 
       Materialize.toast(result.data.message, 10000);
-      
+
     });;
 
   }

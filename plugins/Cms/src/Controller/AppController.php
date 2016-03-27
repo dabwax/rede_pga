@@ -16,7 +16,7 @@ class AppController extends BaseController
     {
       // Herança
       parent::initialize();
-      
+
       // Verifica se o usuário que está tentando visualizar o CMS
       // é um usuário administrador
       if(!$this->verificarAdministrador()) {
@@ -58,6 +58,6 @@ class AppController extends BaseController
       $this->set(compact("estudanteAtual"));
 
       // Retorna os dados do estudante atual
-      return $estudanteAtual; 
+      return $estudanteAtual;
     }
 }

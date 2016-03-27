@@ -1,8 +1,8 @@
 <div class="row" ng-controller="AdicionarRegistrosCtrl">
-  
+
   <div class="col s12">
     <div class="card">
-      
+
       <?= $this->Form->create($lesson); ?>
 
       <div class="card-content">
@@ -12,7 +12,7 @@
         <div class="input-field">
           <strong>Data da Aula *</strong>
           <div class="clearfix"></div>
-          <input name="date" type="text" ng-model="lesson.date" kendo-date-picker k-format="'dd/MM/yyyy'" k-change="mudouData" />
+          <input name="date" type="text" ng-model="lesson.date" datepicker ng-change="mudouData(lesson.date)" />
         </div>
 
         <div class="input-field">

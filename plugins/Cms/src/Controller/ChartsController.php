@@ -48,8 +48,17 @@ class ChartsController extends AppController
             }
         }
 
+        $types = [
+           "line" =>"Linha"
+          ,"spline" =>"Linha 2"
+          ,"area" =>"Área"
+          ,"areaspline" =>"Área 2"
+          ,"column" =>"Coluna"
+          ,"bar" =>"Barra"
+          ,"pie" =>"Pizza"
+        ];
         // Envia dados para a view
-        $this->set(compact('chart', 'themes'));
+        $this->set(compact('chart', 'themes', "types"));
     }
 
     /**

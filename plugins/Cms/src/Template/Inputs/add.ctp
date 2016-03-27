@@ -8,16 +8,16 @@
     <div class="clearfix"></div>
 </div> <!-- .page-title -->
 
-<div class="card-content" ng-controller="CmsInputCtrl" ng-init='input = <?php echo json_encode($input); ?>; input.type = "registro_textual";'>
+<div class="card-panel" ng-controller="CmsInputCtrl" ng-init='input = <?php echo json_encode($input); ?>; input.type = "registro_textual";'>
 
 <?= $this->Form->create($input) ?>
 
 <?php echo $this->Form->input('user_id', ['options' => $users, 'label' => 'Estudante', 'class' => 'form-control', 'type' => 'hidden']); ?>
 
     <fieldset>
-        <div class="input-field col s6">
+        <div class="input col s6">
           <label for="type">Tipo de Input</label>
-        <?php 
+        <?php
             echo $this->Form->input('type', [
             'label' => false,
             'div' => false,
@@ -34,9 +34,9 @@
             'ng-model' => 'input.type'
             ]); ?>
         </div>
-        <div class="input-field col s6">
+        <div class="input col s6">
         <label for="">Atores</label>
-        <?php 
+        <?php
             echo $this->Form->input('model', [
             'label' => false,
             'options' => [
@@ -48,6 +48,7 @@
             ],
             'class' => 'browser-default',]); ?>
         </div>
+        <div class="clearfix"></div>
         <?php
             echo $this->Form->input('name', ['label' => 'Nome', 'class' => 'form-control']);
         ?>

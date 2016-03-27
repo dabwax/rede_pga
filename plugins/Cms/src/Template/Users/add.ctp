@@ -1,4 +1,4 @@
-<div class="users form large-10 medium-9 columns">
+<div class="card-panel">
 
     <h2><?= __('Adicionar Estudante') ?></h2>
     <hr>

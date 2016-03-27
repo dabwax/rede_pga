@@ -54,7 +54,7 @@
 			<input type="text" class="form-control" name="password" ng-model="actor.password">
 
 		<p>
-		<input type="checkbox" name="is_admin" id="is_admin" value="1" ng-model="actor.is_admin"> 
+		<input type="checkbox" name="is_admin" id="is_admin" value="1" ng-model="actor.is_admin">
 		<label for="is_admin">É um usuário administrador (Poderá ver o CMS)</label>
 		</p>
 
@@ -73,7 +73,11 @@
 <div class="col-lg-12">
 
 	<button type="submit" class="btn green"><i class="material-icons">save</i> Salvar Ator</button>
-	<a href="<?php echo $this->Url->build(['action' => 'delete_actor']); ?>/{{actor.model}}/{{actor.id}}" class="btn red white-text" ng-if="actor.id"><i class="material-icons">delete</i> Excluir Ator</a>
+
+	<?php if($estudanteAtual['full_name'] != "Fulano de Tal") : ?>
+		<a href="<?php echo $this->Url->build(['action' => 'delete_actor']); ?>/{{actor.model}}/{{actor.id}}" class="btn red white-text" ng-if="actor.id"><i class="material-icons">delete</i> Excluir Ator</a>
+	<?php endif; ?>
+
 	<a href="javascript:;" ng-click="cancelarEdicao()" class="btn btn-flat right" ng-if="actor.id"><i class="material-icons">close</i> Cancelar Edição</a>
 
 </div> <!-- .col-lg-12 -->

@@ -3,11 +3,12 @@ namespace Cms\Controller;
 
 use Cms\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\Auth\DefaultPasswordHasher;
 
 class UsersController extends AppController
 {
 
-    public function config_actors()
+    public function configurar_atores()
     {
 
     // generate labels
@@ -37,6 +38,8 @@ class UsersController extends AppController
       // para nao bugar e atualizar a senha para vazio
       if(strlen($data['password']) <= 0) {
         unset($data['password']);
+      } else {
+        	$data['password'] = (new DefaultPasswordHasher)->hash($data['password']);
       }
 
       // generates model object
@@ -81,7 +84,7 @@ class UsersController extends AppController
       $this->Flash->success($labels[$data['model']] . ' foi atualizado!');
 
       // redirect
-      return $this->redirect(['action' => 'config_actors', '#' => 'c_' . $data['model'] ]);
+      return $this->redirect(['action' => 'configurar_atores', '#' => 'c_' . $data['model'] ]);
     } // end POST request
 
   }
@@ -110,17 +113,41 @@ class UsersController extends AppController
 
             if ($this->Users->save($user)) {
 
-                $this->Cookie->write('current_user_selected', $user);
+                $this->Cookie->write('estudanteAtual', $user);
 
-                $this->Flash->success(__('O estudante foi cadastrado. Agora você irá configurar os atores.'));
-                return $this->redirect(['controller' => 'dashboard', 'action' => 'config_actors']);
+                $this->Flash->success(__('O aluno foi cadastrado. Agora você irá configurar os atores.'));
+                return $this->redirect(['action' => 'configurar_atores']);
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__('Não foi possível salvar o aluno.'));
             }
         }
         $instituitions = $this->Users->Instituitions->find('list', ['limit' => 200]);
         $this->set(compact('user', 'instituitions'));
         $this->set('_serialize', ['user']);
+    }
+
+/**
+ * Action utilizada para definir qual é o aluno atual.
+ */
+    public function trocar_aluno($id = null)
+    {
+        $estudanteAtual = $this->estudanteAtual();
+        $users = TableRegistry::get("Users");
+
+        if(!empty($id)) {
+
+          $user = $users->get($id);
+
+          $this->Cookie->write('estudanteAtual', $user );
+          $this->Flash->success("O aluno foi alterado para {$user->full_name}.");
+
+          return $this->redirect('/cms');
+        } else {
+
+          $users = $users->find()->all();
+
+          $this->set(compact("users"));
+        }
     }
 
     public function edit($id = null)
@@ -167,11 +194,11 @@ class UsersController extends AppController
     {
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('O aluno foi removido.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Não foi possível remover o aluno.'));
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect('/cms');
     }
 
 /**

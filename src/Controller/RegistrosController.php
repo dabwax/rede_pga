@@ -17,7 +17,9 @@ class RegistrosController extends AppController
     $lessons_table = TableRegistry::get("Lessons");
 
     // Busca o registro da aula na data especificada
-    $lesson = $lessons_table->find()->where(['date' => $_GET['data'] ])->first();
+    $date = \DateTime::createFromFormat("d/m/Y", $_GET['data']);
+
+    $lesson = $lessons_table->find()->where(['date' => $date->format("Y-m-d") ])->first();
 
     $return = [];
 
@@ -54,7 +56,7 @@ class RegistrosController extends AppController
     $lesson = $lessons_table->find()->contain(['LessonEntries' => function($q) {
 
       $where = [
-        'LessonEntries.model' => $this->currentUser('role_table')
+        'LessonEntries.model' => $this->currentUser('table')
         ,'LessonEntries.model_id' => $this->currentUser('id')
       ];
 
@@ -101,26 +103,28 @@ class RegistrosController extends AppController
     }
 
     // Itera os registros da aula
-    foreach($lesson->lesson_entries as $lesson_entry)
-    {
-
-      // Itera os inputs
-      foreach($resultado['registros'] as $key => $registro)
+    if(!empty($lesson->lesson_entries)) {
+      foreach($lesson->lesson_entries as $lesson_entry)
       {
-        // Se o id do input iterado for igual o ID do input do registro da aula,
-        // inclui o value dela para este campo
-        if($registro['id'] == $lesson_entry->input_id)
-        {
 
-          if(empty($admin_logged['clinical_condition']))
+        // Itera os inputs
+        foreach($resultado['registros'] as $key => $registro)
+        {
+          // Se o id do input iterado for igual o ID do input do registro da aula,
+          // inclui o value dela para este campo
+          if($registro['id'] == $lesson_entry->input_id)
           {
-            $resultado['registros'][$key]['value']            = $lesson_entry->value;
-            $resultado['registros'][$key]['lesson_entry_id']  = $lesson_entry->id;
+
+            if(empty($admin_logged['clinical_condition']))
+            {
+              $resultado['registros'][$key]['value']            = $lesson_entry->value;
+              $resultado['registros'][$key]['lesson_entry_id']  = $lesson_entry->id;
+            }
           }
         }
-      }
 
-    }
+      }
+    } // fim - se houver registro de aula
 
     echo json_encode($resultado);
 
@@ -138,7 +142,7 @@ class RegistrosController extends AppController
 
     // busca aulas do usuário logado que a data seja pertencente ao ano selecionado
     $lessons_table = TableRegistry::get("Lessons");
-    
+
 
     $user_id = (empty($admin_logged['clinical_condition'])) ? $admin_logged['user_id'] : $admin_logged['id'];
 
@@ -154,7 +158,7 @@ class RegistrosController extends AppController
         $admin_logged = $this->getAdminLogged();
 
         $user_id = (empty($admin_logged['clinical_condition'])) ? $admin_logged['user_id'] : $admin_logged['id'];
-    
+
         $where2 = [
           'LessonEntries.user_id' => $user_id,
         ];
@@ -226,10 +230,6 @@ class RegistrosController extends AppController
       echo json_encode($return);
   }
 
-  public function listar()
-  {
-  }
-
   public function adicionar()
   {
     $lessons_table = TableRegistry::get("Lessons");
@@ -257,11 +257,12 @@ class RegistrosController extends AppController
       }
     }
   }
-  
+
   public function editar($lesson_id = null, $redirect_to_input_id = null)
   {
+
     // Dados do usuário logado
-    $admin_logged         = $this->getAdminLogged();
+    $admin_logged         = $this->userLogged;
 
     // DataTable's
     $themes_table          = TableRegistry::get("Themes");
@@ -277,7 +278,7 @@ class RegistrosController extends AppController
     $materias             = $themes_table->getSelectMaterias($admin_logged['user_id']);
 
     // Atribui as matérias existentes ao objeto do formulário
-    $aula->materias       = $lesson_themes_table->getMateriasDefinidas($lesson_id, $admin_logged['user_id'], $admin_logged['role_table'], $admin_logged['id']);
+    $aula->materias       = $lesson_themes_table->getMateriasDefinidas($lesson_id, $admin_logged['user_id'], $admin_logged['table'], $admin_logged['id']);
     $aula->hashtags       = $lesson_hashtags_table->getHashtagsDefinidas($lesson_id, $admin_logged);
 
     // Se houver requisição POST
@@ -295,28 +296,31 @@ class RegistrosController extends AppController
 
       // Redireciona o usuário
 
-      if($admin_logged['role_role'] != "user")
+      if($admin_logged['role'] != "user")
       {
-        $this->Flash->success("Seu registro foi atualizado! Obrigado. :)");
-        return $this->redirect("/registros/editar/" . $lesson_id . "?status=sucesso");
+        $this->Flash->success("Os seus dados referentes a aula {$aula->date->format('d/m/Y')} foram atualizados! Obrigado. :)");
       } else {
         $this->Flash->success("Obrigado pela sua opinião, querido aluno. :)");
-        return $this->redirect("/registros/listar");
       }
+      return $this->redirect("/");
     }
 
     // Envia váriaveis pra view
-    $this->set(compact("materias", "aula", "redirect_to_input_id"));
+    $this->set(compact("materias", "aula", "redirect_to_input_id", "admin_logged"));
   }
 
   public function excluir($id = null)
   {
-    $lessons_table  = TableRegistry::get("Lessons");
-    $entity         = $lessons_table->get($id);
+    $lessons  = TableRegistry::get("Lessons");
+    $entries = $lessons->LessonEntries->find()->where(['lesson_id' => $id ])->all();
 
-    $lessons_table->delete($entity);
-    
-    return $this->redirect('/listar');
+    foreach($entries as $e) {
+      $lessons->LessonEntries->delete($e);
+    }
+
+    $this->Flash->success("Sua participação da aula foi removida!");
+
+    return $this->redirect('/');
   }
 
 }

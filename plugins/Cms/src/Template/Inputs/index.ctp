@@ -8,7 +8,7 @@
     <div class="clearfix"></div>
 </div> <!-- .page-title -->
 
-<div class="card-content" ng-controller="AdminInputsCtrl" ng-init='items = <?php echo json_encode($inputs, JSON_HEX_APOS); ?>'>
+<div class="card-panel" ng-controller="AdminInputsCtrl" ng-init='items = <?php echo json_encode($inputs, JSON_HEX_APOS); ?>'>
 
     <table class="table">
     <thead>

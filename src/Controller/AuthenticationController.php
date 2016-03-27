@@ -61,7 +61,7 @@ class AuthenticationController extends AppController
   // função utilizada para detectar o table/role do ator selecionado
   private function detectarAtor() {
     $tmp = explode(".", @$this->request->data['role']);
-    
+
     if(!empty($this->request->data['role'])) {
       return [
          'table' => $tmp[0]

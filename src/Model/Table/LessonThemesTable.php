@@ -18,14 +18,14 @@ class LessonThemesTable extends Table
 
   public function getMateriasDefinidas($lesson_id, $user_id, $model = null, $model_id = null)
   {
-  	
+
     $materias = [];
 
     // Agora vamos incluir as matérias não-existentes
     $themes_table = TableRegistry::get("Themes");
     $where = ['user_id' => $user_id ];
     $themes = $themes_table->find('all')->where($where)->all();
-    
+
     foreach($themes as $f)
     {
       $materias[$f->id] = [
@@ -85,7 +85,7 @@ class LessonThemesTable extends Table
               'observation'     => $materia['observation'],
               'nota_esperada'   => $materia['nota_esperada'],
               'nota_alcancada'  => $materia['nota_alcancada'],
-              'model' => $current_user['role_table'],
+              'model' => $current_user['table'],
               'model_id' => $current_user['id']
             ]);
 
@@ -100,7 +100,7 @@ class LessonThemesTable extends Table
             $tmp->observation     = $materia['observation'];
             $tmp->nota_esperada   = $materia['nota_esperada'];
             $tmp->nota_alcancada  = $materia['nota_alcancada'];
-            $tmp->model           = $current_user['role_table'];
+            $tmp->model           = $current_user['table'];
             $tmp->model_id        = $current_user['id'];
 
             $this->save($tmp);
@@ -116,7 +116,7 @@ class LessonThemesTable extends Table
         ];
 
         $find = $this->deleteAll($where);
-        
+
       }// if materia enabled == 1
 
     } // foreach
