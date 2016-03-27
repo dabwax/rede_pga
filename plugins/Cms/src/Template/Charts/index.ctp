@@ -34,7 +34,9 @@
         </table>
         <?php endif; ?>
 
+                <?php if(empty($charts)) : ?>
          <div class="card-panel teal lighten-2 white-text">Não há gráficos cadastrados até o momento.</div>
 
+         <?php endif; ?>
     </div> <!-- .card-content -->
 </div> <!-- .card -->

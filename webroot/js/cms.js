@@ -110,7 +110,7 @@ angular.module("RedePga")
     "text": "World"
   },
   "credits": {
-    "enabled": true
+    "enabled": false
   },
   "loading": false,
 	"filter_start": "01/01/" + $filter('date')(new Date(), 'yyyy'),
@@ -119,6 +119,13 @@ angular.module("RedePga")
   "size": {}
 };
 
+	$timeout(function() {
+		var currentChart = $("#card-grafico").data("chart");
+
+		if(currentChart != "undefined") {
+			$scope.emptyChart = currentChart;
+		}
+	});
 	// Observador do campo de formato
 	$scope.$watch("emptyChart.options.format", function (newValue, oldValue) {
 		$timeout(function() {

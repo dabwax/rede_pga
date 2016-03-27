@@ -7,6 +7,11 @@ use Cake\ORM\TableRegistry;
 class ApiController extends AppController
 {
 
+  public function initialize() {
+    parent::initialize();
+    $this->Auth->allow();
+  }
+
 /**
  * Action utilizada para calcular a série de um gráfico.
  * Utilizado principalmente no cadastramento de gráfico
@@ -19,6 +24,10 @@ class ApiController extends AppController
 
         // Dados Recebidos
         $dados_recebidos = json_decode(file_get_contents("php://input"));
+
+        if(empty($dados_recebidos)) {
+          $dados_recebidos = json_decode(json_encode($_POST, FALSE));
+        }
 
         // retorno padrão do AJAX
         $resultado = ["status" => "sucesso", "serie" => [], "eixo_x" => [] ];

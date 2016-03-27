@@ -79,12 +79,18 @@ class FeedController extends AppController
 
 		} // end - iterate lessons
 
+		foreach($query as $q) {
+			$q->date_d = $q->date->format("d");
+			$q->date_m = $q->date->format("m");
+			$q->date_y = $q->date->format("Y");
+		}
+
 		echo json_encode(array_values($query));
 	}
 
 	public function index()
 	{
-		
+
 		$lessons = TableRegistry::get("Lessons");
 
 		// if has any hashtag

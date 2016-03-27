@@ -14,6 +14,7 @@
 namespace App\View;
 
 use Cake\View\View;
+use Cake\Network\Http\Client;
 
 /**
  * App View class
@@ -31,5 +32,82 @@ class AppView extends View
      */
     public function initialize()
     {
+    }
+
+    public function formatarGrafico($chart = null) {
+      $default = [
+        "options" => [
+          "chart" => [
+            "type" => $chart->type
+          ],
+          "plotOptions" => [
+            "series" => [
+              "stacking" => ""
+            ]
+          ],
+          "xAxis" => [
+            "categories" => []
+          ]
+        ],
+        "series" => [
+          [
+            "name" => "Linha Exemplo (PHP)",
+            "color" => "red",
+            "data" => [1, 2],
+            "id" => "series-0"
+          ]
+        ],
+        "title" => [
+          "text" => $chart->name
+        ],
+        "subtitle" => [
+          "text" => $chart->subname
+        ],
+        "credits" => [
+          "enabled" => false
+        ],
+        "loading" => false,
+        "size" => [],
+        "filter_start" => $chart->filter_start,
+        "filter_end" => $chart->filter_end
+      ];
+
+
+      if(!empty($chart->chart_series)) {
+        // limpa as series
+        $default['series'] = [];
+
+        $http = new Client();
+
+        foreach($chart->chart_series as $serie) {
+          // requisição a API
+          $url = $this->Url->build("/", true);
+
+          $jsonPayload = [
+            'grafico' => [
+              'data_inicial' => $chart->filter_start,
+              'data_final' => $chart->filter_end,
+              'formato' => $chart->format,
+            ],
+            'input' => $serie->input_id,
+            'materia' => $serie->theme_id,
+          ];
+          $response = $http->post($url . 'cms/api/calcular_serie', $jsonPayload, ['type' => 'json']);
+          $response = $response->json;
+
+          $default['series'][] = [
+            'id' => $serie->id,
+            'name' => $serie->name,
+            'color' => $serie->color,
+            'type' => $serie->type,
+            'input_id' => strval($serie->input_id),
+            'theme_id' => strval($serie->theme_id),
+            'data' =>$response['serie']
+          ];;
+          $default['options']['xAxis']['categories'] = $response['eixo_x'];
+        }
+      }
+
+      return json_encode($default, JSON_HEX_APOS);
     }
 }

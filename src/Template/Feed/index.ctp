@@ -40,7 +40,7 @@
 			<div class="card-content">
 
 				<!-- Card Title -->
-				<span class="card-title text-center">{{lesson.date | date: 'dd/MM'}}<small>/{{lesson.date | date: 'y'}}</small></span>
+				<span class="card-title text-center">{{lesson.date_d}}/{{lesson.date_m}}<small>/{{lesson.date_y}}</small></span>
 
 				<div class="clearfix"></div>
 
@@ -80,7 +80,7 @@
 	<!-- Modal Structure -->
 	<div id="modal{{lesson.id}}" class="modal bottom-sheet" ng-repeat="lesson in lessons | filter:search:strict">
 		<div class="modal-content">
-			<h4>{{lesson.date | date: 'dd'}} de {{lesson.date | date: 'MMMM'}} de {{lesson.date | date: 'y'}}</h4>
+			<h4>{{lesson.date_d}} de {{lesson.date | date: 'MMMM'}} de {{lesson.date | date: 'y'}}</h4>
 
 			<div class="card-panel red white-text" ng-if="lesson.actors.length == 0">Não há dados de atores nesta aula ainda. Aproveite e inclua alguns dados! <a href="<?php echo $this->Url->build(['controller' => 'registros', 'action' => 'editar']); ?>/{{lesson.id}}">Clique aqui</a></div>
 
