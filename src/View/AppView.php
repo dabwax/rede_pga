@@ -54,24 +54,41 @@ class AppView extends View
             "name" => "Linha Exemplo (PHP)",
             "color" => "red",
             "data" => [1, 2],
-            "id" => "series-0"
+            "id" => "series-0",
+            "type" => "bar"
           ]
         ],
         "title" => [
-          "text" => $chart->name
+          "text" => "Gráfico de Demonstração"
         ],
         "subtitle" => [
-          "text" => $chart->subname
+          "text" => "Subtítulo aqui"
         ],
         "credits" => [
           "enabled" => false
         ],
         "loading" => false,
         "size" => [],
-        "filter_start" => $chart->filter_start,
-        "filter_end" => $chart->filter_end
+        "filter_start" => (new \DateTime())->format("01/01/Y"),
+        "filter_end" => (new \DateTime())->format("d/m/Y"),
+        'format' => 'diario'
       ];
 
+      if(!empty($chart->name)) {
+        $default['title']['text'] = $chart->name;
+      }
+
+      if(!empty($chart->subname)) {
+        $default['subtitle']['text'] = $chart->subname;
+      }
+
+      if(!empty($chart->filter_start)) {
+        $default['filter_start'] = $chart->filter_start;
+      }
+
+      if(!empty($chart->filter_end)) {
+        $default['filter_end'] = $chart->filter_end;
+      }
 
       if(!empty($chart->chart_series)) {
         // limpa as series

@@ -48,6 +48,17 @@ angular.module("RedePga")
     return roles[role];
   }
 
+  $scope.materiaAtual = false;
+
+  $scope.mostrarMateria = function(theme_id) {
+
+    if($scope.materiaAtual == false) {
+      $scope.materiaAtual = theme_id;
+    } else {
+      $scope.materiaAtual = false;
+    }
+  }
+
   $scope.mostrarDados = function(role, actors) {
 
 

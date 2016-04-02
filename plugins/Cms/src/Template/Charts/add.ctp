@@ -8,7 +8,7 @@
     <div class="clearfix"></div>
 </div> <!-- .page-title -->
 
-<div class="card" ng-controller="NovoGraficoCtrl">
+<div id="card-grafico" class="card" ng-controller="NovoGraficoCtrl" data-chart='<?php echo $this->formatarGrafico($chart); ?>'>
     <div class="card-content">
 
         <?= $this->Form->create($chart) ?>
@@ -25,15 +25,19 @@
 
           <?php echo $this->Form->input("subname", ["id" =>"chart_subname", "ng-model" =>"emptyChart.subtitle.text","label"=>"Sub-título"]) ?>
 
-          <?php echo $this->Form->input("type", ["id" =>"chart_type", "ng-model" =>"emptyChart.options.chart.type","label"=>"Formato","class"=>"browser-default","options"=>$types]) ?>
+          <?php echo $this->Form->input("filter_start", ["id" =>"date_start", "datepicker", "ng-model" =>"emptyChart.filter_start","label"=>"Filtro dos Dados (Data Inicial - apenas para demonstração)", "ng-change" => "mudouGrafico()"]) ?>
 
-          <?php echo $this->Form->input("filter_start", ["id" =>"date_start", "datepicker", "ng-model" =>"emptyChart.filter_start","label"=>"Filtro dos Dados (Data Inicial - apenas para demonstração)"]) ?>
+          <?php echo $this->Form->input("filter_end", ["id" =>"date_end", "datepicker", "ng-model" =>"emptyChart.filter_end","label"=>"Filtro dos Dados (Data Final - apenas para demonstração)", "ng-change" => "mudouGrafico()"]) ?>
 
-          <?php echo $this->Form->input("filter_end", ["id" =>"date_end", "datepicker", "ng-model" =>"emptyChart.filter_end","label"=>"Filtro dos Dados (Data Final - apenas para demonstração)"]) ?>
+          <p>
+            <input name="format" type="radio" id="mensal" ng-model="emptyChart.format" ng-change="mudouGrafico()" value="mensal" />
+            <label for="mensal">Mensal</label>
+          </p>
 
-          <input name="format" type="radio" id="mensal" ng-model="emptyChart.format" value="mensal" />
-
-          <input name="format" type="radio" id="diario" ng-model="emptyChart.format" value="diario" />
+          <p>
+            <input name="format" type="radio" id="diario" ng-model="emptyChart.format" ng-change="mudouGrafico()" value="diario" />
+            <label for="diario">Diário</label>
+          </p>
 
         <div class="card pink lighten-5">
             <div class="card-content">
@@ -41,7 +45,7 @@
 
                 <a href="javascript:;" class="btn red" ng-click="adicionar()">Adicionar Série</a>
 
-                <p class="serie-item pink lighten-4" style="margin-top: 10px;" ng-repeat="(key, value) in emptyChart.series track by $index">
+                <div class="serie-item pink lighten-4" style="margin-top: 10px;" ng-repeat="(key, value) in emptyChart.series track by $index">
                     <label for="">Título</label>
                     <input type="text" name="chart_series[{{key}}][name]" ng-model="emptyChart.series[key].name">
                     <label for="">Cor</label>
@@ -53,13 +57,14 @@
                         <option value="<?php echo $k; ?>"><?php echo $v; ?></option>
                       <?php endforeach; ?>
                     </select>
+
                     <label for="">Input</label>
                     <select name="chart_series[{{key}}][input_id]" ng-model="emptyChart.series[key].input_id" ng-change="trocou(key)" class="browser-default">
                         <option value="">Selecionar</option>
                         <option ng-repeat="input in inputs" value="{{input.id}}">{{input.name}}</option>
                     </select>
 
-                    <div ng-if="emptyChart.series[key].input_id">
+                    <div ng-show="emptyChart.series[key].input_id">
 
                       <label for="">Matéria</label>
                       <select name="chart_series[{{key}}][theme_id]" ng-model="emptyChart.series[key].theme_id" ng-change="trocou(key)" class="browser-default">
@@ -69,7 +74,7 @@
 
                     </div>
 
-                </p>
+                </div>
             </div>
         </div>
 

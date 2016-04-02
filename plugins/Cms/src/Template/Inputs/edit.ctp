@@ -21,8 +21,6 @@
 
         <div class="config" ng-if="input.type == 'escala_texto'">
 
-            <strong>Dica: Se você pressionar Ctrl+B, automaticamente irá adicionar mais uma opção</strong>
-
             <div class="clearfix"></div>
 
             <a href="javascript:;" class="btn btn-xs btn-info" style="margin-bottom: 20px; margin-top: 20px;" ng-click="adicionar_mais()">Adicionar +</a>

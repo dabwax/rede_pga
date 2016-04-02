@@ -69,7 +69,8 @@
 
                 <div ng-if="registro.type === 'escala_texto'">
 
-                  <select id="input{{registro.id}}" class="form-control" name="registros[{{indice}}][value]" ng-model="registro.value"  ng-options="option for option in registro.config.options track by option">
+                  <select id="input{{registro.id}}" class="form-control browser-default" name="registros[{{indice}}][value]" ng-model="registro.value"  ng-options="option for option in registro.config.options track by option">
+                  <option value="">Selecionar</option>
                   </select>
 
                 </div> <!-- escala_texto -->

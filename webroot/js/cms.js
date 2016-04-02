@@ -75,50 +75,8 @@ angular.module("RedePga")
 	});
 }])
 .controller("NovoGraficoCtrl", ["$scope", "$http", "$filter", "$timeout", function($scope, $http, $filter, $timeout) {
-	$scope.emptyChart = {
-  "options": {
-    "chart": {
-      "type": "areaspline"
-    },
-    "plotOptions": {
-      "series": {
-        "stacking": ""
-      }
-    },
-		"xAxis": {
-			"categories": []
-		}
-  },
-  "series": [
-    {
-      "name": "Linha Exemplo",
-			"color": "#AAAAAA",
-      "data": [
-        1,
-        2,
-        4,
-        7,
-        3
-      ],
-      "id": "series-0"
-    }
-  ],
-  "title": {
-    "text": "Hello"
-  },
-  "subtitle": {
-    "text": "World"
-  },
-  "credits": {
-    "enabled": false
-  },
-  "loading": false,
-	"filter_start": "01/01/" + $filter('date')(new Date(), 'yyyy'),
-	"filter_end": $filter('date')(new Date(), 'dd/MM/yyyy'),
-	"format": "diario",
-  "size": {}
-};
 
+	// Recupera os dados do gráfico
 	$timeout(function() {
 		var currentChart = $("#card-grafico").data("chart");
 
@@ -126,15 +84,10 @@ angular.module("RedePga")
 			$scope.emptyChart = currentChart;
 		}
 	});
+
 	// Observador do campo de formato
 	$scope.$watch("emptyChart.options.format", function (newValue, oldValue) {
-		$timeout(function() {
-			if(newValue == "mensal") {
-				//$scope.emptyChart.xAxis.categories = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-			} else {
-				//$scope.emptyChart.xAxis.categories = null;
-			}
-		});
+		
 	});
 
 	// Busca todos os inputs disponíveis
@@ -157,6 +110,14 @@ angular.module("RedePga")
 
 	});
 
+	$scope.mudouGrafico = function() {
+		$scope.emptyChart.series.forEach(function(value, key) {
+			if(value.input_id) {
+				$scope.trocou(key);
+			}
+		});
+	};
+
 	// Função chamada quando um input/matéria é definido
 	$scope.trocou = function(key) {
 
@@ -166,7 +127,7 @@ angular.module("RedePga")
 				data_inicial: $scope.emptyChart.filter_start,
 				data_final: $scope.emptyChart.filter_end,
 				formato: $scope.emptyChart.format,
-				tipo: $scope.emptyChart.options.chart.type
+				tipo: $scope.emptyChart.series[key].type
 			},
 			materia: $scope.emptyChart.series[key].theme_id,
 			input: $scope.emptyChart.series[key].input_id,
@@ -181,6 +142,8 @@ angular.module("RedePga")
 		}, function error(response) {
 
 		});
+
+		console.log($scope.emptyChart.series[key].input_id);
 	}
 
 	// Função chamada quando é adicionado uma nova série
