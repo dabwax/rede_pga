@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- Estilização da aplicação minificada -->
-    <?= $this->Html->css('/css/style.css'); ?>
+    <?= $this->Html->css('/application.css'); ?>
   <title>PEP - Plataforma de Ensino Personalizado</title>
 </head>
 <body class="pep-login">
@@ -15,65 +15,54 @@
   	<div class="loader" data-loading>
   		<?php echo $this->Html->image("spinner.gif") ?>
   	</div>
-  <div class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <a href="<?php echo $this->Url->build('/cms'); ?>" class="brand-logo center">
-        <?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?>
 
-        <?php if(!empty($estudanteAtual)) : ?>
-          CMS
-      <?php endif; ?>
-      </a>
+    <ul class="side-nav side-nav-cms fixed">
 
+        <li>
+          <a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo center"><?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?></a>
+          <p class="titulo-cms">CMS</p>
+          <div class="clearfix"></div>
+        </li>
 
-        <a class="right" href="<?php echo $this->Url->build('/sair'); ?>" title="Sair"><i class="material-icons left">power_settings_new</i></a>
-
-        <a href="#" id="pep-menu-btn" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-
-        <ul class="side-nav teal-text" id="mobile-menu">
-        <li class="<?php echo ($this->request->params['controller'] == 'Inputs') ? 'current' : ''; ?>">
-        <a href="<?= $this->Url->build('/cms/inputs'); ?>">
+        <li class="<?php echo ($this->request->params['controller'] == 'Inputs') ? 'selecionado' : ''; ?>">
         <i class="material-icons left">edit</i>
+        <a href="<?= $this->Url->build('/cms/inputs'); ?>">
         <span class="title">Inputs</span>
         <span class="arrow "></span>
         </a>
         </li>
-        <li class="<?php echo ($this->request->params['controller'] == 'Themes') ? 'current' : ''; ?>">
+
+        <li class="<?php echo ($this->request->params['controller'] == 'Themes') ? 'selecionado' : ''; ?>">
+        <i class="material-icons left">book</i>
         <a href="<?= $this->Url->build('/cms/themes'); ?>">
-        <i class="material-icons left">edit</i>
         <span class="title">Matérias</span>
         <span class="arrow "></span>
         </a>
         </li>
-        <li class="<?php echo ($this->request->params['controller'] == 'Charts') ? 'current' : ''; ?>">
+        <li class="<?php echo ($this->request->params['controller'] == 'Charts') ? 'selecionado' : ''; ?>">
+        <i class="material-icons left">insert_chart</i>
         <a href="<?= $this->Url->build('/cms/charts'); ?>">
-        <i class="material-icons left">edit</i>
         <span class="title">Gráficos</span>
         <span class="arrow "></span>
         </a>
         </li>
-        <li class="<?php echo ($this->request->params['controller'] == 'Permissions') ? 'current' : ''; ?>">
+        <li class="<?php echo ($this->request->params['controller'] == 'Permissions') ? 'selecionado' : ''; ?>">
+        <i class="material-icons left">verified_user</i>
         <a href="<?= $this->Url->build('/cms/permissions'); ?>">
-        <i class="material-icons left">edit</i>
-        <span class="title">Permissões de Página</span>
+        <span class="title">Permissões</span>
         <span class="arrow "></span>
         </a>
         </li>
-        <li class="<?php echo ($this->request->params['controller'] == 'Settings') ? 'current' : ''; ?>">
+        <li class="<?php echo ($this->request->params['controller'] == 'Settings') ? 'selecionado' : ''; ?>">
+        <i class="material-icons left">settings</i>
         <a href="<?= $this->Url->build('/cms/settings'); ?>">
-        <i class="material-icons left">edit</i>
-        <span class="title">Config. do PEP</span>
+        <span class="title">Config.</span>
         <span class="arrow "></span>
         </a>
         </li>
         </ul>
 
-      </div>
-    </nav>
-  </div>
-
-  <div class="container">
+  <div id="main" class="container">
 
     <div class="row">
       <div class="col s12">

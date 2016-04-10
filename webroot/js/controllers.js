@@ -146,6 +146,7 @@ angular.module("RedePga")
 
 .controller('BatePapoCtrl', ['$scope', '$http', '$timeout', '$interval', 'Mensagens', function($scope, $http, $timeout, $interval, Mensagens) {
 
+
   Mensagens.fetch_all().then(function(result) {
     $scope.mensagens = result.data;
   }, function() {

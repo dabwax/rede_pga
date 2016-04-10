@@ -24,7 +24,7 @@ angular.module('RedePga')
     {
       $(elem).click(function() {
 
-        var href = $(elem).data("lesson-id");
+        var href = $(elem).data("id");
 
         $("#modal" + href).openModal();
       });

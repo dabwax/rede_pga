@@ -11,13 +11,16 @@ var plumber = require('gulp-plumber');
 gulp.task('default', ['css', 'js', 'watch']);
 
 gulp.task('css', function () {
-    gulp.src('webroot/css/style.styl')
+    gulp.src('webroot/stylesheets/application.styl')
       .pipe(plumber())
-      .pipe(stylus({compress: false, paths: ['webroot/css', 'webroot/css/pages', 'webroot/css/sections']}))
+      .pipe(stylus({compress: false, paths: [
+        'webroot/stylesheets',
+        'webroot/stylesheets/pages',
+        'webroot/stylesheets/sections']}))
         .pipe(autoprefixer())
         .pipe(minifyCSS())
-        .pipe(rename('style.css'))
-        .pipe(gulp.dest('webroot/css'))
+        .pipe(rename('application.css'))
+        .pipe(gulp.dest('webroot/'))
         .pipe(livereload());
 });
 
@@ -40,9 +43,9 @@ gulp.task('watch', function () {
     host: null
   });
 
-  gulp.watch('webroot/css/*.styl', ['css']);
-  gulp.watch('webroot/css/pages/*.styl', ['css']);
-  gulp.watch('webroot/css/sections/*.styl', ['css']);
+  gulp.watch('webroot/stylesheets/*.styl', ['css']);
+  gulp.watch('webroot/stylesheets/pages/*.styl', ['css']);
+  gulp.watch('webroot/stylesheets/sections/*.styl', ['css']);
   gulp.watch('webroot/js/redepga.js', ['js']);
   gulp.watch('webroot/js/controllers.js', ['js']);
   gulp.watch('webroot/js/directives.js', ['js']);

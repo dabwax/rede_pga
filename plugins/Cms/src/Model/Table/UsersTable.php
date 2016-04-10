@@ -84,8 +84,8 @@ class UsersTable extends Table
             ])
             ->add('full_name', [
                 'length' => [
-                    'rule' => ['minLength', 10],
-                    'message' => 'O nome deve ter pelo menos 10 caracteres',
+                    'rule' => ['minLength', 2],
+                    'message' => 'O nome deve ter pelo menos 2 caracteres',
                 ]
             ])
             ->add('date_of_birth', [
@@ -96,8 +96,8 @@ class UsersTable extends Table
             ])
             ->add('clinical_condition', [
                 'length' => [
-                    'rule' => ['minLength', 3],
-                    'message' => 'Insira uma condição clínica válida',
+                    'rule' => ['minLength', 2],
+                    'message' => 'A condição clínica deve ter pelo menos 2 caracteres',
                 ]
             ])
             ->add('instituition_id', [

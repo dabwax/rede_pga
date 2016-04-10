@@ -74,6 +74,14 @@ class AppView extends View
         'format' => 'diario'
       ];
 
+      if(!empty($_GET['inicio'])) {
+        $chart->filter_start = $_GET['inicio'];
+      }
+
+      if(!empty($_GET['fim'])) {
+        $chart->filter_end = $_GET['fim'];
+      }
+
       if(!empty($chart->name)) {
         $default['title']['text'] = $chart->name;
       }

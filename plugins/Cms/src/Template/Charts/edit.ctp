@@ -25,8 +25,6 @@
 
           <?php echo $this->Form->input("subname", ["id" =>"chart_subname", "ng-model" =>"emptyChart.subtitle.text","label"=>"Sub-título"]) ?>
 
-          <?php echo $this->Form->input("type", ["id" =>"chart_type", "ng-model" =>"emptyChart.options.chart.type","label"=>"Formato","class"=>"browser-default","options"=>$types]) ?>
-
           <?php echo $this->Form->input("filter_start", ["id" =>"date_start", "datepicker", "ng-model" =>"emptyChart.filter_start","label"=>"Filtro dos Dados (Data Inicial - apenas para demonstração)"]) ?>
 
           <?php echo $this->Form->input("filter_end", ["id" =>"date_end", "datepicker", "ng-model" =>"emptyChart.filter_end","label"=>"Filtro dos Dados (Data Final - apenas para demonstração)"]) ?>
