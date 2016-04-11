@@ -1,7 +1,7 @@
 <div class="card-content">
 
 	<!-- Card Title -->
-	<span class="card-title text-center">{{lesson.date_d}}/{{lesson.date_m}}<small>/{{lesson.date_y}}</small></span>
+	<span class="card-title text-center">{{lesson.date_d}}/{{lesson.date_m}}/{{lesson.date_y}}</span>
 
 	<div class="clearfix"></div>
 
@@ -10,12 +10,9 @@
 	</div>
 
 	<!-- Listagem de atores participantes -->
-	<div class="chip" ng-repeat="(author_id, entries) in lesson.formatted_data">
-		<span class="cargo indigo lighten-5">
-			{{role_helper(lesson.actors[author_id].role)}}
-		</span>
-		{{lesson.actors[author_id].full_name }}
-	</div> <!-- .chip -->
+	<p ng-repeat="(author_id, entries) in lesson.formatted_data">
+			{{role_helper(lesson.actors[author_id].role)}}: {{lesson.actors[author_id].full_name }}
+	</p> <!-- .chip -->
 
 	<div class="clearfix"></div>
 
