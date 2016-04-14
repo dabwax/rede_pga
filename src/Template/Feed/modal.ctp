@@ -1,5 +1,5 @@
 <!-- Modal Structure -->
-<div id="modal{{lesson.id}}" class="modal modal-fixed-footer" ng-repeat="lesson in lessons | filter:search:strict">
+<div id="modal{{lesson.id}}" class="modal " ng-repeat="lesson in lessons | filter:search:strict">
   <div class="modal-content">
     <h4 class="center">{{lesson.date_d}}/{{lesson.date_m}}/{{lesson.date_y}}</h4>
 
@@ -99,7 +99,7 @@
   </div>
 
   <div class="modal-footer">
-    <a href="<?php echo $this->Url->build(['controller' => 'registros', 'action' => 'editar']); ?>/{{lesson.id}}" class="modal-action modal-close waves-effect waves-green btn-flat">Adicionar novas informações a esta aula</a>
+    <a href="<?php echo $this->Url->build(['controller' => 'registros', 'action' => 'editar']); ?>/{{lesson.id}}" class="modal-action modal-close waves-effect waves-green btn-flat">Editar informações a esta aula</a>
     <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Fechar</a>
   </div>
 </div> <!-- #modal -->

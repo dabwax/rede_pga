@@ -22,19 +22,19 @@
 
         <div class="form-body">
 
-          <div class="col s8">
+          <div class="col s12 l8">
 
             <strong>Inputs</strong>
 
             <div class="form-group campo campo-{{indice}}" ng-repeat="(indice, registro) in registros">
 
-              <div class="col s3">
+              <div class="col s4 l3">
 
                   <span class="label label-primary">{{registro.name}}</span>
 
               </div> <!-- .col-md-3 -->
 
-              <div class="col s9">
+              <div class="col s8 l9">
 
                   <input name="registros[{{indice}}][id]" ng-model="registro.id" type="hidden" value="{{registro.id}}" class="form-control">
                   <input name="registros[{{indice}}][status]" ng-model="registro.status" type="hidden" value="{{registro.status}}" class="form-control">
@@ -86,7 +86,7 @@
 
           </div> <!-- .col-lg-8 -->
 
-          <div class="col s4">
+          <div class="col s12 l4">
 
             <div class="campo" ng-if="!admin_logged.clinical_condition">
               <strong>Matérias</strong>
@@ -133,6 +133,8 @@
 
             <?php echo $this->Form->input("observation", ["editor", "label" => false]); ?>
 
+              <a href="<?php echo $this->Url->build(['action' => 'excluir', $aula->id]); ?>" class="btn-remover-dados-aula" onclick="if(!confirm('Você tem certeza disto? Esta ação é permanente!')) { return false; }">remover meus dados desta aula</a></small>
+
           </div>
 
         </div> <!-- .form-body -->
@@ -144,7 +146,6 @@
                 <i class="fa fa-pencil"></i> Salvar dados
               </button>
 
-              <small class="text-center" style="display: block; margin-top: 10px;"><a href="<?php echo $this->Url->build(['action' => 'excluir', $aula->id]); ?>" style="color: #f00 !important;" onclick="if(!confirm('Você tem certeza disto? Esta ação é permanente!')) { return false; }">remover meus dados desta aula</a></small>
             </div>
           </div>
         </div> <!-- .form-actions -->

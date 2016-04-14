@@ -49,6 +49,7 @@ Router::scope('/', function ($routes) {
      */
     $routes->connect('/', ['controller' => 'Feed', 'action' => 'index']);
     $routes->connect('/cms', ['plugin' => 'Cms', 'controller' => 'Dashboard', 'action' => 'index']);
+    $routes->connect('/admin', ['plugin' => 'Cms', 'controller' => 'Dashboard', 'action' => 'index']);
     $routes->connect('/login', ['controller' => 'Authentication', 'action' => 'login']);
     $routes->connect('/sair', ['controller' => 'Authentication', 'action' => 'logout']);
     $routes->connect('/minha-conta', ['controller' => 'Authentication', 'action' => 'edit']);

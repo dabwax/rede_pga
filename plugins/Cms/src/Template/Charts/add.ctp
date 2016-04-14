@@ -13,13 +13,8 @@
 
         <?= $this->Form->create($chart) ?>
 
-        <div id="demonstracao" class="col s6">
-            <p><strong>Demonstração:</strong></p>
 
-            <highchart id="grafico_demonstracao" config="emptyChart"></highchart>
-        </div> <!-- #demonstracao -->
-
-        <div class="col s6">
+        <div class="col s12 l6">
 
           <?php echo $this->Form->input("name", ["id" =>"chart_name", "ng-model" =>"emptyChart.title.text","label"=>"Título"]) ?>
 
@@ -81,6 +76,12 @@
         <button class="btn btn-primary btn-block"><i class="fa fa-floppy-o"></i> Salvar</button>
 
         </div> <!-- .col -->
+
+        <div id="demonstracao" class="col s12 l6">
+            <p><strong>Demonstração:</strong></p>
+
+            <highchart id="grafico_demonstracao" config="emptyChart"></highchart>
+        </div> <!-- #demonstracao -->
 
         <?php echo $this->Form->end(); ?>
 

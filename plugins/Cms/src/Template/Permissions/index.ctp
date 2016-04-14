@@ -1,16 +1,22 @@
+<div class="row">
+<div class="page-title">
+	<h2>Permissões</h2>
+</div>
+<div class="clearfix"></div>
+<div class="card">
 <table class="table">
-	<thead>
+	<thead style="font-weight: bold; text-transform: uppercase; font-size: 16px;">
 		<tr>
-			<td class="text-center">Ator</td>
-			<td class="text-center">Feed</td>
-			<td class="text-center">Evolução</td>
-			<td class="text-center">Bate-Papo</td>
-			<td class="text-center">Input</td>
-			<td class="text-center">Exercícios</td>
+			<td class="center">Ator</td>
+			<td class="center">Feed</td>
+			<td class="center">Evolução</td>
+			<td class="center">Bate-Papo</td>
+			<td class="center">Input</td>
+			<td class="center">Exercícios</td>
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 
 		$models = ['Protectors', 'Schools', 'Tutors', 'Therapists', 'Users'];
 		$labels = [
@@ -20,67 +26,34 @@
 			'Therapists' => 'Terapeutas',
 			'Users' => 'Usuários',
 		];
-		foreach($models as $m)
+		foreach($models as $k => $m)
 		{
 		 ?>
-		<tr>
-			<td class="text-center"> <span class="label label-warning"><?php echo $labels[$m]; ?></span></td>
-			<td class="text-center">
+		<tr class="<?php echo ($k % 2 == 0) ? 'even' : 'odd'; ?>">
+			<td class="center" style="text-transform: uppercase;"> <span class="label label-warning"><?php echo $labels[$m]; ?></span></td>
 
+			<?php $tmp = ['feed', 'evolucao','batepapo','registros','exercicios']; ?>
 
-				<?php if(empty($permissions[$m]->feed)) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/feed') ?>" class="btn btn-default" style="color: green !important;"><i style="color: green !important;" class="fa fa-eye-slash"></i></a>
+			<?php foreach($tmp as $t) : ?>
+
+			<td class="center">
+
+				<?php if(empty($permissions[$m]->$t)) : ?>
+					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/' . $t) ?>" class=""><i class="material-icons">panorama_fish_eye</i></a>
 				<?php endif; ?>
 
-				<?php if($permissions[$m]->feed == 1) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/feed') ?>" class="btn btn-default"><i class="fa fa-eye" style="color: blue;"></i></a>
-				<?php endif; ?>
-			</td>
-			<td class="text-center">
-
-
-				<?php if(empty($permissions[$m]->evolucao)) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/evolucao') ?>" class="btn btn-default" style="color: green !important;"><i style="color: green !important;" class="fa fa-eye-slash"></i></a>
-				<?php endif; ?>
-
-				<?php if($permissions[$m]->evolucao == 1) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/evolucao') ?>" class="btn btn-default"><i class="fa fa-eye" style="color: blue;"></i></a>
+				<?php if($permissions[$m]->$t == 1) : ?>
+					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/' . $t) ?>">
+					<i class="material-icons">remove_red_eye</i>
+					</a>
 				<?php endif; ?>
 			</td>
-			<td class="text-center">
 
-
-				<?php if(empty($permissions[$m]->batepapo)) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/batepapo') ?>" class="btn btn-default" style="color: green !important;"><i style="color: green !important;" class="fa fa-eye-slash"></i></a>
-				<?php endif; ?>
-
-				<?php if($permissions[$m]->batepapo == 1) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/batepapo') ?>" class="btn btn-default"><i class="fa fa-eye" style="color: blue;"></i></a>
-				<?php endif; ?>
-			</td>
-			<td class="text-center">
-
-
-				<?php if(empty($permissions[$m]->registros)) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/registros') ?>" class="btn btn-default" style="color: green !important;"><i style="color: green !important;" class="fa fa-eye-slash"></i></a>
-				<?php endif; ?>
-
-				<?php if($permissions[$m]->registros == 1) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/registros') ?>" class="btn btn-default"><i class="fa fa-eye" style="color: blue;"></i></a>
-				<?php endif; ?>
-			</td>
-			<td class="text-center">
-
-
-				<?php if(empty($permissions[$m]->exercicios)) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/1/exercicios') ?>" class="btn btn-default" style="color: green !important;"><i style="color: green !important;" class="fa fa-eye-slash"></i></a>
-				<?php endif; ?>
-
-				<?php if($permissions[$m]->exercicios == 1) : ?>
-					<a href="<?php echo $this->Url->build('/cms/permissions/update/' . $permissions[$m]->id . '/0/exercicios') ?>" class="btn btn-default"><i class="fa fa-eye" style="color: blue;"></i></a>
-				<?php endif; ?>
-			</td>
+			<?php endforeach; ?>
 		</tr>
 		<?php } ?>
 	</tbody>
 </table>
+</div>
+
+</div>

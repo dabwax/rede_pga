@@ -1,3 +1,5 @@
+<link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+
 <!--Materialize -->
 <?= $this->Html->css('/vendors/materialize/css/materialize.min.css'); ?>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
