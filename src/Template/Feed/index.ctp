@@ -14,7 +14,7 @@
     <div class="col s6">
       <form>
         <div class="input-field grey lighten-2">
-          <input id="search" type="search"  ng-model="search.$" placeholder="Pesquisar aulas por palavra-chave" required>
+          <input id="search" type="search"  ng-model="search.$" placeholder="Pesquisar" required>
           <span class="search-icon"><i class="material-icons">search</i></span>
           <i class="material-icons" ng-click="reset_search()">close</i>
         </div>

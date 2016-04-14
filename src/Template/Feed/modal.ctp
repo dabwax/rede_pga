@@ -17,7 +17,7 @@
 
       <div class="dados-ator">
 
-        <div class="col s6" ng-repeat="entry in entries">
+        <div class="col s12 l6" ng-repeat="entry in entries">
 
           <div style="border: 1px solid #CCC; border-collapse: collapse; padding: 10px; margin-bottom: 10px; min-height: 100px;" ng-if="entry.value != ''">
 
