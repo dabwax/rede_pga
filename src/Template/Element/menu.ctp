@@ -4,7 +4,7 @@
    <a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo center"><?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?></a>
   </li>
 
-  <li ng-class="{'selecionado': paginaAtual == 'feed'}"><i class="material-icons left">home</i><a class="" href="<?php echo $this->Url->build('/'); ?>">Início</a> </li>
+  <li ng-class="{'selecionado': paginaAtual == 'feed'}"><i class="material-icons left">home</i><a class="" href="<?php echo $this->Url->build('/'); ?>">Feed</a> </li>
 
   <li ng-class="{'selecionado': paginaAtual == 'evolucao'}"><i class="material-icons left">insert_chart</i><a class="" href="<?php echo $this->Url->build('/evolucao'); ?>">Evolução</a> </li>
 

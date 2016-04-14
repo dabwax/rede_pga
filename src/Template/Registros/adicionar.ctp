@@ -1,3 +1,5 @@
+<?php echo $this->element("../Registros/custom_assets"); ?>
+
 <div class="row" ng-controller="AdicionarRegistrosCtrl">
 
   <div class="col s12">
@@ -15,8 +17,12 @@
           <input name="date" type="text" ng-model="lesson.date" datepicker ng-change="mudouData(lesson.date)" />
         </div>
 
+
         <div class="input-field">
-          <?= $this->Form->input("observation", ['type' => 'textarea', 'class' => 'materialize-textarea ckeditor', 'label' => 'Observações']); ?>
+          <strong>Observações</strong>
+          <div class="clearfix"></div>
+          <?php echo $this->Form->input("observation", ["editor", "label" => false]); ?>
+
         </div>
 
       </div> <!-- .card-content -->

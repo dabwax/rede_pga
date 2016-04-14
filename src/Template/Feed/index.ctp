@@ -4,7 +4,7 @@
   <div class="page-title red darken-3">
 
     <div class="col s6">
-        <h2>Início</h2>
+        <h2>Feed</h2>
 
       <p class="subtitle"><?php if(!empty($hashtag)) : ?><strong>Filtrando pela hashtag: <?php echo $hashtag->name; ?>.</strong><?php endif; ?> </p>
     </div>

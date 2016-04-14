@@ -1,4 +1,4 @@
-angular.module('RedePga', ["ngFileUpload", "highcharts-ng", "ngTagsInput", "masonry"]);
+angular.module('RedePga', ["ngSanitize", "ngFileUpload", "highcharts-ng", "ngTagsInput", "masonry"]);
 
 $(document).ready(function() {
 

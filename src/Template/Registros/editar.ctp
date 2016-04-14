@@ -1,3 +1,4 @@
+<?php echo $this->element("../Registros/custom_assets"); ?>
 
 <div class="row">
   <!-- Título da página -->
@@ -21,15 +22,9 @@
 
         <div class="form-body">
 
-          <?php if(!empty($_GET['status']) && $_GET['status'] == "sucesso") : ?>
-            <p class="sucesso">
-              <i class="fa fa-check-square-o"></i>
-              <span>
-              Salvo!</span>
-            </p> <!-- .sucesso -->
-          <?php endif; ?>
-
           <div class="col s8">
+
+            <strong>Inputs</strong>
 
             <div class="form-group campo campo-{{indice}}" ng-repeat="(indice, registro) in registros">
 
@@ -57,7 +52,7 @@
                 </div> <!-- intervalo_tempo -->
 
                 <div ng-if="registro.type === 'registro_textual'">
-                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control"></textarea>
+                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control" editor></textarea>
                 </div> <!-- registro_textual -->
 
                 <div ng-if="registro.type === 'escala_numerica'">
@@ -80,7 +75,7 @@
                 </div> <!-- numero -->
 
                 <div ng-if="registro.type === 'texto_privativo'">
-                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control"></textarea>
+                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control" editor></textarea>
                 </div> <!-- numero -->
 
               </div> <!-- .col-md-8 -->
@@ -128,6 +123,17 @@
 
 
           <div class="clearfix"></div>
+
+          <div class="col s12">
+
+
+            <strong>Observações</strong>
+
+            <div class="clearfix"></div>
+
+            <?php echo $this->Form->input("observation", ["editor", "label" => false]); ?>
+
+          </div>
 
         </div> <!-- .form-body -->
 

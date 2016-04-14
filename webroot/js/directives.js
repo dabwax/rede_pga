@@ -43,6 +43,17 @@ angular.module('RedePga')
   }
 })
 
+.directive('editor', function() {
+  return {
+    link: function(scope, elem, attrs)
+    {
+      $(elem).trumbowyg({
+        btns: ['formatting', 'btnGrp-semantic', 'link', 'btnGrp-justify', 'btnGrp-lists']
+      });
+    }
+  }
+})
+
 .directive('tabs', function() {
   return {
     link: function(scope, elem, attrs)

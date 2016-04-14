@@ -86,6 +86,14 @@
 
     </li>
 
+    <!-- Observações -->
+    <li class="collection-item" ng-if="lesson.observation">
+
+      <strong>Observações</strong>
+      <div id="observacao" ng-bind-html="lesson.observation"></div>
+
+    </li>
+
       </ul>
 
   </div>
