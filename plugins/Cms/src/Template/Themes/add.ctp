@@ -1,4 +1,14 @@
-<div class="themes form large-10 medium-9 columns">
+<div class="page-title red darken-3">
+    <h2>Nova Matéria</h2>
+
+    <div class="actions">
+        <a href="<?php echo $this->Url->build(['action' => 'index']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_backspace</i> voltar</a>
+    </div> <!-- .actions -->
+
+    <div class="clearfix"></div>
+</div> <!-- .page-title -->
+
+<div class="card-panel">
     <?= $this->Form->create($theme) ?>
     <fieldset>
         <legend><?= __('Adicionar Matéria') ?></legend>

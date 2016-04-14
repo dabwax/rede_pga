@@ -18,8 +18,8 @@
         "source": "https://github.com/cakephp/bake"
     },
     "require": {
-        "php": ">=5.4",
-        "cakephp/cakephp": "~3.0"
+        "php": ">=5.5.9",
+        "cakephp/cakephp": ">=3.2.0"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "dev-master",
@@ -37,5 +37,6 @@
             "Bake\\Test\\App\\": "tests/test_app/App",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
-    }
+    },
+    "minimum-stability": "beta"
 }

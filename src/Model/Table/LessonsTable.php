@@ -40,10 +40,14 @@ class LessonsTable extends Table
       return $q->contain(["Hashtags"]);
     }];
 
+    $order = [
+      'Lessons.date' => 'DESC'
+    ];
     // query
   	return $this->find()
     ->where($where)
     ->contain($contain)
+    ->order($order)
     ->all()
     ->toArray();
   }

@@ -1,19 +1,91 @@
-<div class="charts form large-10 medium-9 columns">
-    <?= $this->Form->create($chart) ?>
-    <fieldset>
-        <legend><?= __('Adicionar Gráfico') ?></legend>
-        <?php
-            echo $this->Form->input('name', ['label' => 'Nome', 'class' => 'form-control']);
-            echo $this->Form->input('use_media', ['label' => 'Usar média?', 'type' => 'checkbox', 'class' => 'form-control']);
-            echo $this->Form->input('to_user', ['label' => 'É para aparecer SOMENTE para o aluno?', 'type' => 'checkbox', 'class' => 'form-control']);
-            echo $this->Form->input('type', ['label' => 'Tipo', 'class' => 'form-control', 'options' => ['line' => 'Linha', 'bar' => 'Barra', 'donut' => 'Donut', 'radar' => 'Radar', 'pie' => 'Pizza', 'column' => 'Coluna', 'numero_absoluto' => 'Número Absoluto'] ]);
-            echo $this->Form->input('user_id', ['options' => $users, 'label' => 'Estudante', 'class' => 'form-control', 'type' => 'hidden']);
-            echo $this->Form->input("themes", ['options' => $themes, 'multiple' => true, 'label' => 'Matérias (opcional)', 'class' => 'form-control', 'select-two'] );
-        ?>
+<div class="page-title red darken-3">
+    <h2><i class="material-icons left">add</i> Novo Gráfico</h2>
 
-    </fieldset>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-floppy-o"></i> Salvar</button>
-    </div>
-    <?= $this->Form->end() ?>
-</div>
+    <div class="actions">
+        <a href="<?php echo $this->Url->build(['action' => 'index']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_backspace</i> Voltar</a>
+    </div> <!-- .actions -->
+
+    <div class="clearfix"></div>
+</div> <!-- .page-title -->
+
+<div id="card-grafico" class="card" ng-controller="NovoGraficoCtrl" data-chart='<?php echo $this->formatarGrafico($chart); ?>'>
+    <div class="card-content">
+
+        <?= $this->Form->create($chart) ?>
+
+        <div id="demonstracao" class="col s6">
+            <p><strong>Demonstração:</strong></p>
+
+            <highchart id="grafico_demonstracao" config="emptyChart"></highchart>
+        </div> <!-- #demonstracao -->
+
+        <div class="col s6">
+
+          <?php echo $this->Form->input("name", ["id" =>"chart_name", "ng-model" =>"emptyChart.title.text","label"=>"Título"]) ?>
+
+          <?php echo $this->Form->input("subname", ["id" =>"chart_subname", "ng-model" =>"emptyChart.subtitle.text","label"=>"Sub-título"]) ?>
+
+          <?php echo $this->Form->input("filter_start", ["id" =>"date_start", "datepicker", "ng-model" =>"emptyChart.filter_start","label"=>"Filtro dos Dados (Data Inicial - apenas para demonstração)", "ng-change" => "mudouGrafico()"]) ?>
+
+          <?php echo $this->Form->input("filter_end", ["id" =>"date_end", "datepicker", "ng-model" =>"emptyChart.filter_end","label"=>"Filtro dos Dados (Data Final - apenas para demonstração)", "ng-change" => "mudouGrafico()"]) ?>
+
+          <p>
+            <input name="format" type="radio" id="mensal" ng-model="emptyChart.format" ng-change="mudouGrafico()" value="mensal" />
+            <label for="mensal">Mensal</label>
+          </p>
+
+          <p>
+            <input name="format" type="radio" id="diario" ng-model="emptyChart.format" ng-change="mudouGrafico()" value="diario" />
+            <label for="diario">Diário</label>
+          </p>
+
+        <div class="card pink lighten-5">
+            <div class="card-content">
+                <strong class="card-title">Séries</strong>
+
+                <a href="javascript:;" class="btn red" ng-click="adicionar()">Adicionar Série</a>
+
+                <div class="serie-item pink lighten-4" style="margin-top: 10px;" ng-repeat="(key, value) in emptyChart.series track by $index">
+                    <label for="">Título</label>
+                    <input type="text" name="chart_series[{{key}}][name]" ng-model="emptyChart.series[key].name">
+                    <label for="">Cor</label>
+                    <input type="text" name="chart_series[{{key}}][color]" ng-model="emptyChart.series[key].color">
+                    <label for="">Tipo</label>
+
+                    <select name="chart_series[{{key}}][type]" ng-model="emptyChart.series[key].type" class="browser-default">
+                      <?php foreach($types as $k => $v) : ?>
+                        <option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+
+                    <label for="">Input</label>
+                    <select name="chart_series[{{key}}][input_id]" ng-model="emptyChart.series[key].input_id" ng-change="trocou(key)" class="browser-default">
+                        <option value="">Selecionar</option>
+                        <option ng-repeat="input in inputs" value="{{input.id}}">{{input.name}}</option>
+                    </select>
+
+                    <div ng-show="emptyChart.series[key].input_id">
+
+                      <label for="">Matéria</label>
+                      <select name="chart_series[{{key}}][theme_id]" ng-model="emptyChart.series[key].theme_id" ng-change="trocou(key)" class="browser-default">
+                          <option value="">Todas</option>
+                          <option ng-repeat="materia in materias" value="{{materia.id}}">{{materia.name}}</option>
+                      </select>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary btn-block"><i class="fa fa-floppy-o"></i> Salvar</button>
+
+        </div> <!-- .col -->
+
+        <?php echo $this->Form->end(); ?>
+
+        <div class="clearfix"></div>
+
+    </div> <!-- .card-content -->
+
+</div> <!-- .card -->

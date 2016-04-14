@@ -47,7 +47,7 @@ Router::scope('/', function ($routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Feed', 'action' => 'listar']);
+    $routes->connect('/', ['controller' => 'Feed', 'action' => 'index']);
     $routes->connect('/cms', ['plugin' => 'Cms', 'controller' => 'Dashboard', 'action' => 'index']);
     $routes->connect('/login', ['controller' => 'Authentication', 'action' => 'login']);
     $routes->connect('/sair', ['controller' => 'Authentication', 'action' => 'logout']);

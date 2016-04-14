@@ -67,9 +67,15 @@ class <%= $name %>Table extends Table
         $this->primaryKey('<%= current((array)$primaryKey) %>');
 <% endif %>
 <% endif %>
+<% if (!empty($behaviors)): %>
+
+<% endif; %>
 <% foreach ($behaviors as $behavior => $behaviorData): %>
         $this->addBehavior('<%= $behavior %>'<%= $behaviorData ? ", [" . implode(', ', $behaviorData) . ']' : '' %>);
 <% endforeach %>
+<% if (!empty($associations['belongsTo']) || !empty($associations['hasMany']) || !empty($associations['belongsToMany'])): %>
+
+<% endif; %>
 <% foreach ($associations as $type => $assocs): %>
 <% foreach ($assocs as $assoc):
 	$alias = $assoc['alias'];
@@ -94,12 +100,7 @@ foreach ($validation as $field => $rules):
     $validationMethods = [];
     foreach ($rules as $ruleName => $rule):
         if ($rule['rule'] && !isset($rule['provider'])):
-            $validationMethods[] = sprintf(
-                "->add('%s', '%s', ['rule' => '%s'])",
-                $field,
-                $ruleName,
-                $rule['rule']
-            );
+            $validationMethods[] = sprintf("->%s('%s')", $rule['rule'], $field);
         elseif ($rule['rule'] && isset($rule['provider'])):
             $validationMethods[] = sprintf(
                 "->add('%s', '%s', ['rule' => '%s', 'provider' => '%s'])",

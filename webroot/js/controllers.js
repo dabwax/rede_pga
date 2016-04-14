@@ -8,7 +8,6 @@ angular.module("RedePga")
 
       $http.get(baseUrl + "cms/inputs/sortable?" + data).then(function(result) {
 
-        console.log(result.data);
 
       });
 
@@ -16,67 +15,18 @@ angular.module("RedePga")
   };
 
 }])
-.controller('ConfigurarAtoresCtrl', ['$scope', function($scope) {
 
-  $scope.actor = {
-    model: "Protectors"
-  };
+.controller('FeedCtrl', ['$scope', 'Feed', '$window', function($scope, Feed, $window) {
 
-  $scope.get_label = function(model) {
+  $scope.lessons = [];
 
-    var labels = {
-      "mediator": "Mediador",
-      "coordinator": "Coordenador",
-      "dad": "Pai",
-      "mom": "Mãe",
-      "therapist": "Terapeuta",
-      "tutor": "Tutor"
-    };
+  Feed.fetch_all($window.location.search).then(function(result) {
+    //console.log(result.data);
+    $scope.lessons = result.data;
+  }, function() {
+    alert("Ocorreu um erro ao carregar os exercícios do site!");
+  });
 
-    return labels[model];
-  };
-
-  $scope.set_model = function(model) {
-    $scope.actor = {
-      model: model
-    }
-
-    if(model == "Tutors")
-    {
-      $scope.actor.role = "tutor";
-    }
-
-    if(model == "Therapists")
-    {
-      $scope.actor.role = "therapist";
-    }
-  };
-
-  $scope.set_actor = function(obj, model) {
-    
-    obj.model = model;
-
-    obj.instituition_id = $scope.instituitions[obj.instituition_id];
-
-    $scope.actor = obj;
-  };
-
-  // Opening accordion based on URL
-  var url = document.location.toString();
-
-  if ( url.match('#') ) {
-
-    var hash = url.split('#')[1];
-    var model = hash.replace('c_', '');
-
-    $scope.set_model(model);
-
-    $('.panel-collapse').removeClass('in');
-    $('#'+hash).addClass('in');
-  }
-}])
-
-.controller('FeedCtrl', ['$scope', function($scope) {
   $scope.reset_search = function()
   {
     $scope.search.$ = '';
@@ -89,17 +39,41 @@ angular.module("RedePga")
        "dad": "Pai"
       ,"mom": "Mãe"
       ,"tutor": "Tutor"
-      ,"therapist": "Terapeuta"
-      ,"mediator": "Mediador"
-      ,"coordinator": "Coordenador"
-      ,"user": "Estudante"
+      ,"therapist": "Terap."
+      ,"mediator": "Mediad."
+      ,"coordinator": "Coord."
+      ,"user": "Est."
     };
 
     return roles[role];
   }
+
+  $scope.materiaAtual = false;
+
+  $scope.mostrarMateria = function(theme_id) {
+
+    if($scope.materiaAtual == false) {
+      $scope.materiaAtual = theme_id;
+    } else {
+      $scope.materiaAtual = false;
+    }
+  }
+
+  $scope.mostrarDados = function(role, actors) {
+
+
+      if(role != null) {
+        $scope.mostrar = role;
+      } else {
+        if(actors.length > 0) {
+          first = actors[Object.keys(actors)[0]];
+          $scope.mostrar = first.role;
+        }
+      }
+  }
 }])
 .controller('ExerciciosCtrl', ['$scope', '$http', '$timeout', '$interval', 'Exercicios', 'Upload', function($scope, $http, $timeout, $interval, Exercicios, Upload) {
-  
+
   Exercicios.fetch_all().then(function(result) {
     $scope.exercicios = result.data;
   }, function() {
@@ -171,7 +145,8 @@ angular.module("RedePga")
 }])
 
 .controller('BatePapoCtrl', ['$scope', '$http', '$timeout', '$interval', 'Mensagens', function($scope, $http, $timeout, $interval, Mensagens) {
-  
+
+
   Mensagens.fetch_all().then(function(result) {
     $scope.mensagens = result.data;
   }, function() {
@@ -220,7 +195,7 @@ angular.module("RedePga")
 
       alert("Não foi possível incluir a mensagem!");
     });
-    
+
   };
 
   $scope.btn_nova_mensagem = function()
@@ -313,7 +288,7 @@ angular.module("RedePga")
   $scope.reset_search = function()
   {
     $scope.search.$ = '';
-    
+
     $scope.voltarParaAulas();
   };
 
@@ -383,26 +358,67 @@ angular.module("RedePga")
 
 }])
 
-.controller('EditarRegistroCtrl', ['$scope', 'Inputs', function($scope, Inputs) {
+.controller('EditarRegistroCtrl', ['$scope', 'Inputs', '$timeout', function($scope, Inputs, $timeout) {
   $scope.registros = [];
 
-  $scope.lesson_id = angular.element("#registros-container").data("id");
+  $scope.init = function() {
 
-  Inputs.fetch_all($scope.lesson_id).then(function(result) {
-    $scope.registros = result.data.registros;
-    $scope.campos = result.data.campos;
-  });
+    $scope.hashtags = $("#registros-container").data('hashtags');
+    $scope.materias = $("#registros-container").data('materias');
+    $scope.admin_logged = $("#registros-container").data('admin-logged');
+    $scope.lesson_id = $("#registros-container").data('lesson-id');
+
+    console.log($scope.lesson_id);
+
+    Inputs.fetch_all($scope.lesson_id).then(function(result) {
+      $scope.registros = result.data.registros;
+      $scope.campos = result.data.campos;
+    });
+  };
 
 }])
 
-.controller('EvolucaoCtrl', ['$scope', function($scope) {
-  
+.controller('EvolucaoCtrl', ['$scope', '$filter', function($scope, $filter) {
+  // Preenche os campos de data (inicial e final)
+  $scope.date_start   = "01/01/" + $filter('date')(new Date(), 'yyyy');
+  $scope.date_finish  = $filter('date')(new Date(), 'dd/MM/yyyy');
+
+  // Configurações dos gráficos
+  $scope.graficos = {
+    atencao_por_materia_mensal: {"options":{"chart":{"type":"line"},"plotOptions":{"series":{"stacking":"normal"}}},"series":[{"name":"Matemática","data":[1,2,4,7,3,1,10,20,1,10,20],"id":"series-0","type":"line","color":"blue","dashStyle":"ShortDash","connectNulls":true},{"data":[15,20,7,7,4,13,3,15,20,4],"id":"series-4","name":"Física","type":"line","color":"orange","dashStyle":"LongDash","connectNulls":false},{"data":[19,20,9,2,14,1,6,15,15,8],"id":"series-5","name":"Química","type":"line","color":"gray","dashStyle":"ShortDot"},{"data":[18,3,15,3,6,18,11,16,14,5],"id":"series-6","name":"Português","type":"line","color":"yellow"}],"title":{"text":"Atenção por matéria"},"credits":{"enabled":false},"loading":false,"size":{},"subtitle":{"text":"Mensal"},"xAxis":{"categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}}
+    ,atencao_independencia_autonomia_geral_mensal: {"options":{"chart":{"type":"line"},"plotOptions":{"series":{"stacking":"normal"}}},"series":[{"name":"Autonomia","data":[1,2,4,7,3,1,10,20,1,10,20],"id":"series-0","type":"line","color":"blue","dashStyle":"ShortDash","connectNulls":true},{"data":[15,20,7,7,5,13,3,15,20,4],"id":"series-4","name":"Independencia","type":"line","color":"orange","dashStyle":"LongDash","connectNulls":false},{"data":[19,20,9,2,14,1,6,15,15,8],"id":"series-5","name":"Atenção","type":"line","color":"gray","dashStyle":"ShortDot"}],"title":{"text":"Atenção/Independencia/Autonomia"},"credits":{"enabled":false},"loading":false,"size":{},"subtitle":{"text":"(Geral-Mensal)"},"xAxis":{"categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}}
+  };
+
 }])
 
-.controller('AdicionarRegistrosCtrl', ['$scope', function($scope) {
+.controller('AdicionarRegistrosCtrl', ['$scope', '$http', 'Inputs', function($scope, $http, Inputs) {
+
+  $scope.avancar = false;
+
+  $scope.mudouData = function(date) {
+    console.log(date);
+
+    Inputs.validar_data(date).then(function(result) {
+
+      if(result.data.status == "INDISPONÍVEL") {
+        $scope.avancar = false;
+      } else {
+        $scope.avancar = true;
+      }
+
+      Materialize.toast(result.data.message, 10000);
+
+    });;
+
+  }
 }])
 
 .controller('AuthenticationController', ['$scope', function($scope) {
+
+  // Materialize animation effects
+  Materialize.showStaggeredList('#pep-lista-atores');
+  Materialize.fadeInImage('img');
+
   $scope.roleChecked = false;
   $scope.roles = {
     'tutors.tutor' : 'Tutor(a)',

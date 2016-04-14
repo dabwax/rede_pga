@@ -16,7 +16,6 @@ namespace Cake\View\Widget;
 
 use Cake\View\Form\ContextInterface;
 use Cake\View\Helper\IdGeneratorTrait;
-use Cake\View\Widget\WidgetInterface;
 
 /**
  * Input widget class for generating multiple checkboxes.
@@ -51,6 +50,8 @@ class MultiCheckboxWidget implements WidgetInterface
      * - `checkboxWrapper` Renders the containing div/element for
      *   a checkbox and its label. Accepts the `input`, and `label`
      *   variables.
+     * - `multicheckboxWrapper` Renders a wrapper around grouped inputs.
+     * - `multicheckboxTitle` Renders the title element for grouped inputs.
      *
      * @param \Cake\View\StringTemplate $templates Templates list.
      * @param \Cake\View\Widget\LabelWidget $label Label widget instance.
@@ -111,18 +112,48 @@ class MultiCheckboxWidget implements WidgetInterface
             'options' => [],
             'disabled' => null,
             'val' => null,
-            'idPrefix' => null
+            'idPrefix' => null,
+            'templateVars' => []
         ];
-        $out = [];
         $this->_idPrefix = $data['idPrefix'];
         $this->_clearIds();
+        return implode('', $this->_renderInputs($data, $context));
+    }
+
+    /**
+     * Render the checkbox inputs.
+     *
+     * @param array $data The data array defining the checkboxes.
+     * @param \Cake\View\Form\ContextInterface $context The current form context.
+     * @return array An array of rendered inputs.
+     */
+    protected function _renderInputs($data, $context)
+    {
+        $out = [];
         foreach ($data['options'] as $key => $val) {
+            // Grouped inputs in a fieldset.
+            if (is_string($key) && is_array($val) && !isset($val['text'], $val['value'])) {
+                $inputs = $this->_renderInputs(['options' => $val] + $data, $context);
+                $title = $this->_templates->format('multicheckboxTitle', ['text' => $key]);
+                $out[] = $this->_templates->format('multicheckboxWrapper', [
+                    'content' => $title . implode('', $inputs)
+                ]);
+                continue;
+            }
+
+            // Standard inputs.
             $checkbox = [
                 'value' => $key,
                 'text' => $val,
             ];
             if (is_array($val) && isset($val['text'], $val['value'])) {
                 $checkbox = $val;
+            }
+            if (!isset($checkbox['templateVars'])) {
+                $checkbox['templateVars'] = $data['templateVars'];
+            }
+            if (!empty($data['templateVars'])) {
+                $checkbox['templateVars'] = array_merge($data['templateVars'], $checkbox['templateVars']);
             }
             $checkbox['name'] = $data['name'];
             $checkbox['escape'] = $data['escape'];
@@ -136,10 +167,9 @@ class MultiCheckboxWidget implements WidgetInterface
             if (empty($checkbox['id'])) {
                 $checkbox['id'] = $this->_id($checkbox['name'], $checkbox['value']);
             }
-
             $out[] = $this->_renderInput($checkbox, $context);
         }
-        return implode('', $out);
+        return $out;
     }
 
     /**
@@ -154,6 +184,7 @@ class MultiCheckboxWidget implements WidgetInterface
         $input = $this->_templates->format('checkbox', [
             'name' => $checkbox['name'] . '[]',
             'value' => $checkbox['escape'] ? h($checkbox['value']) : $checkbox['value'],
+            'templateVars' => $checkbox['templateVars'],
             'attrs' => $this->_templates->formatAttributes(
                 $checkbox,
                 ['name', 'value', 'text']
@@ -164,6 +195,7 @@ class MultiCheckboxWidget implements WidgetInterface
             'for' => $checkbox['id'],
             'escape' => $checkbox['escape'],
             'text' => $checkbox['text'],
+            'templateVars' => $checkbox['templateVars'],
             'input' => $input,
         ];
         if (!empty($checkbox['checked']) && empty($labelAttrs['class'])) {
@@ -172,6 +204,7 @@ class MultiCheckboxWidget implements WidgetInterface
         $label = $this->_label->render($labelAttrs, $context);
 
         return $this->_templates->format('checkboxWrapper', [
+            'templateVars' => $checkbox['templateVars'],
             'label' => $label,
             'input' => $input
         ]);

@@ -1,85 +1,170 @@
 <?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link      http://cakephp.org CakePHP(tm) Project
- * @since     0.2.9
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- */
 namespace App\Controller;
 
 use Cake\Controller\Controller;
-use Cake\I18n\Time;
 use Cake\Database\Type;
 use Cake\ORM\TableRegistry;
+use Cake\Controller\Component\AuthComponent;
 
 /**
- * Application Controller
- *
- * Add your application-wide methods in the class below, your controllers
- * will inherit them.
- *
- * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
+ * Controller principal do PEP.
  */
 class AppController extends Controller
 {
+  public $userLogged = false;
 
-    /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading components.
-     *
-     * @return void
-     */
+/**
+ * Construtor.
+ */
     public function initialize()
     {
+      // Inicializa componentes do CakePHP
+      parent::initialize();
+      $this->loadComponent('Flash');
+      $this->loadComponent('Upload');
+      $this->loadComponent('Cookie');
 
-        parent::initialize();
-        $this->loadComponent('Flash');
-        $this->loadComponent('Upload');
-        $this->loadComponent('Cookie');
-        $this->loadComponent('Irado');
+      // Inicializa camada de Autenticação
+      $this->loadComponent('Auth', [
+        'loginAction' => [
+            'controller' => 'Authentication',
+            'action' => 'login',
+            'plugin' => false
+        ],
+        'authError' => 'Você precisa de autorização para visualizar esta página.',
+        'authenticate' => [
+            'Form' => [
+              'finder' => 'auth'
+            ]
+        ],
+        'storage' => 'Session',
+        'flash' => [
+          'element' => 'error'
+        ]
+      ]);
 
-        $permissions = $this->getPermissions();
+      // Envia as credenciais do usuário logado
+      $this->userLogged = $this->Auth->user();
+      $this->set('userLogged', $this->userLogged );
 
-        $this->set(compact("permissions"));
+      //$this->Auth->allow();
 
-        // Se o controller for uma área restrita
-       if($this->protected_area == true) {
-           // Recupera a sessão de admin
-           $admin_logged = $this->getAdminLogged();
+      // Recupera todas as permissões
+      $permissions = $this->getPermissions();
 
+      // Roda o método de configuração de ACL
+      $this->configAcl($permissions);
 
-           // Se não houver sessão de admin, redireciona o usuário para o login
-           if(empty($admin_logged))
-           {
-               $this->Flash->error("Você não tem permissão para acessar esta página! Faça seu login.");
-               return $this->redirect('/login');
-           } else {
+      // Recupera os atores do usuário logado
+      $get_atores = $this->getAtores();
 
-            if(!empty(@$admin_logged['clinical_condition']))
-            {
-              $this->layout = "aluno";
-            }
-
-            $this->configAcl();
-
-            $get_atores = $this->getAtores();
-
-            $this->set(compact("admin_logged", "get_atores"));
-           } // fim - return
-       } // fim - areaRestrita
-
-      Time::$defaultLocale = 'pt-BR';
-      Time::setToStringFormat('dd/MM/YYYY');
+      $this->set(compact("admin_logged", "get_atores", "permissions"));
     }
 
+/**
+ * Método utilizado para configurar ACL do site.
+ * Roda baseado nas permissões de páginas configuradas no CMS.
+ */
+    public function configAcl($permissions)
+    {
+
+      // se for front-end e existir usuário logado
+      if($this->isFrontEnd() && !empty($this->userLogged)) {
+
+        // vamos verificar o controller sendo acessado
+        $table = ucfirst($this->userLogged['table']);
+        $property = strtolower($this->request->params['controller']);
+
+        // se a página acessada para o model logado estiver com value 0
+        // desloga o usuário e manda ele para tela de login
+        if($permissions[ $table ]->$property == 0) {
+          return $this->redirect($this->Auth->logout());
+        }
+
+      } // isFrontEnd()
+
+    }
+
+/**
+ * Função para recuperar todos os atores do usuário logado.
+ */
+    public function getAtores()
+    {
+      // Busca os models
+      $models = [
+        'Protectors'  => TableRegistry::get("Protectors"),
+        'Schools'     => TableRegistry::get("Schools"),
+        'Therapists'  => TableRegistry::get("Therapists"),
+        'Users'       => TableRegistry::get("Users"),
+        'Tutors'      => TableRegistry::get("Tutors"),
+      ];
+
+      // se a coluna "user_id" estiver vazia, porém a de ID estiver preenchida
+      // significa que o usuário logado é um estudante
+      // ou seja, fazemos um campo fake `user_id` utilizando a ID do usuário
+      // para podermos puxar todos os estudantes corretamente
+      if(empty($this->userLogged['user_id']) && !empty($this->userLogged['id']))
+      {
+        $this->userLogged['user_id'] = $this->userLogged['id'];
+      }
+
+      // WHERE da consulta
+      $where = [
+        'user_id' => $this->userLogged['user_id']
+      ];
+
+      // roda as consultas
+      $atores = [
+        'Protectors'  => $models['Protectors']->find()->where($where)->all()->toArray(),
+        'Schools'     => $models['Schools']->find()->where($where)->all()->toArray(),
+        'Tutors'      => $models['Tutors']->find()->where($where)->all()->toArray(),
+        'Users'       => $models['Users']->find()->where(['id' => $this->userLogged['user_id'] ])->all()->toArray(),
+        'Therapists'  => $models['Therapists']->find()->where($where)->all()->toArray(),
+      ];
+
+      return $atores;
+    }
+
+/**
+ * (PRECISA DE REFATORAÇÃO)
+ * Método utilizado pelo CMS para verificar se admin está logado.
+ */
+    public function getAdminLogged()
+    {
+      return $this->userLogged;
+    }
+
+/**
+ * Verifica se o usuário logado é um estudante.
+ * Helper method.
+ */
+    public function currentUserIsStudent()
+    {
+      return ($this->userLogged['role'] == "user");
+    }
+
+/**
+ * Verifica se é o front-end (ou seja, não é o CMS).
+ * Helper method.
+ */
+    public function isFrontEnd() {
+      return $this->request->params['plugin'] != "Cms";
+    }
+
+/**
+ * Recupera informação específica do usuário logado.
+ * Helper method.
+ */
+    public function currentUser($key)
+    {
+      return $this->userLogged[$key];
+    }
+
+/**
+ * Função utilizada para definir permissões de página.
+ * Elas são configuradas através do administrador.
+ * Helper method.
+ */
     public function getPermissions()
     {
 
@@ -87,171 +172,24 @@ class AppController extends Controller
       $permissions = [
         'Protectors' => false,
         'Schools' => false,
+        'Tutors' => false,
         'Therapists' => false,
         'Users' => false,
       ];
 
       $table = TableRegistry::get("Permissions");
 
+      // busca todas as permissões do BD
       $all = $table->find()->all();
 
+      // armazena elas
       foreach($all as $a)
       {
         $permissions[$a->model] = $a;
       }
 
+      // retorna
       return $permissions;
-    }
-
-    public function configAcl()
-    {
-      $permissions = $this->getPermissions();
-
-      $admin_logged = $this->Cookie->read("admin_logged");
-
-      if(!empty($admin_logged['role_table']) && $this->request->params['plugin'] != "Cms")
-      {
-        
-        switch ($this->request->params['controller']) {
-          case 'BatePapo':
-
-            if(empty($permissions[$admin_logged['role_table']]->bate_papo)) :
-
-              $this->Flash->error("Você não tem permissão para acessar esta página.");
-              return $this->redirect('/');
-
-            endif;
-            
-            # code...
-            break;
-          case 'Evolucao':
-
-            if(empty($permissions[$admin_logged['role_table']]->evolucao)) :
-
-              $this->Flash->error("Você não tem permissão para acessar esta página.");
-              return $this->redirect('/');
-
-            endif;
-            
-            # code...
-            break;
-
-          case 'Exercicios':
-
-            if(empty($permissions[$admin_logged['role_table']]->exercicios)) :
-
-              $this->Flash->error("Você não tem permissão para acessar esta página.");
-              return $this->redirect('/');
-
-            endif;
-            
-            # code...
-            break;
-          case 'Feed':
-
-            if(empty($permissions[$admin_logged['role_table']]->feed)) :
-
-
-              if(empty(@$admin_logged['clinical_condition']))
-              {
-                $this->Flash->error("Você não tem permissão para acessar esta página.");
-                return $this->redirect('/');
-              }
-            endif;
-            
-            # code...
-            break;
-          case 'Registros':
-
-            if(empty($permissions[$admin_logged['role_table']]->input)) :
-
-              $this->Flash->error("Você não tem permissão para acessar esta página.");
-              return $this->redirect('/');
-
-            endif;
-            
-            # code...
-            break;
-          
-          default:
-            # code...
-            break;
-        }
-      }
-    }
-
-    /**
-     * Função para recuperar todos os autores do usuário logado.
-     */
-    public function getAtores()
-    {   
-      $protectors_table = TableRegistry::get("Protectors");
-      $schools_table = TableRegistry::get("Schools");
-      $tutors_table = TableRegistry::get("Tutors");
-      $users_table = TableRegistry::get("Users");
-      $therapists_table = TableRegistry::get("Therapists");
-
-      $admin_logged = $this->Cookie->read("admin_logged");
-      $current_user_selected = $this->Cookie->read("current_user_selected");
-
-      if(empty($admin_logged['user_id']) && !empty($admin_logged['id']))
-      {
-        $admin_logged['user_id'] = $admin_logged['id'];
-
-        $this->Cookie->write("admin_logged", $admin_logged);
-      }
-
-      if(!empty($current_user_selected))
-      {
-        $admin_logged['user_id'] = $current_user_selected['id'];
-      }
-
-      $where = [
-        'user_id' => $admin_logged['user_id']
-      ];
-
-      $atores = [
-        'Protectors' => $protectors_table->find()->where($where)->all()->toArray(),
-        'Schools' => $schools_table->find()->where($where)->all()->toArray(),
-        'Tutors' => $tutors_table->find()->where($where)->all()->toArray(),
-        'Users' => $users_table->find()->where(['id' => $admin_logged['user_id']])->all()->toArray(),
-        'Therapists' => $therapists_table->find()->where($where)->all()->toArray(),
-      ];
-
-      return $atores;
-    }
-
-    public function getAdminLogged()
-    {
-      $admin_logged = $this->Cookie->read("admin_logged");
-
-      if(empty($admin_logged['user_id']))
-      {
-        $admin_logged['user_id'] = $admin_logged['id'];
-      }
-
-      $users_table = TableRegistry::get("Users");
-
-      if(!empty($admin_logged['user_id']))
-      {
-        $admin_logged['user'] = $users_table->get($admin_logged['user_id']);
-      }
-      
-      return $admin_logged;
-    }
-
-    public function currentUserIsStudent()
-    {
-      $current_user = $this->getAdminlogged();
-      
-      return ($current_user['role_role'] == "user");
-    }
-
-    public function currentUser($key)
-    {
-      $current_user = $this->getAdminlogged();
-      
-      return $current_user[$key];
     }
 
 }

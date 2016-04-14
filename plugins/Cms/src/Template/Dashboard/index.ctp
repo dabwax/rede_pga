@@ -1,19 +1,10 @@
-  <div id="role-check" class="text-center">
+<div class="card-panel">
+<div class="card-content">
 
-    <?php if(!empty($g_users->toArray())) : ?>
-    <h2>Selecione um estudante para administrar</h2>
+	<p>Olá! Este é o administrador do PEP.</p>
 
-    <?php foreach($g_users as $u) : ?>
-    <a href="<?php echo $this->Url->build(['controller' => 'Dashboard', 'action' => 'set_current_user_selected', $u->id]); ?>" class="mugshot">
+	<p>Aqui você pode gerenciar as informações do aluno e dos seus respectivos atores.</p>
 
-      <div class='bola'>
-        <?php echo $this->Html->image('/uploads/' . $u->profile_attachment, ['class' => 'img-circle', 'style' => 'width: 100px; height: 90px;']); ?>
-      </div>
-
-      <div class="legenda"><?php echo $u->full_name; ?></div>
-
-    </a>
-  <?php endforeach; ?>
-  <?php endif; ?>
-
-  </div>
+	<p>Espero que faça um bom proveito! Obrigado. :-)</p>
+</div> <!-- .card-content -->
+</div> <!-- .card-content -->

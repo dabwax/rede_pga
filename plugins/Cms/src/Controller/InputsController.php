@@ -32,11 +32,11 @@ class InputsController extends AppController
      */
     public function index()
     {
-        $current_user_selected = $this->getCurrentUser();
-      
+        $estudanteAtual = $this->estudanteAtual();
+
         $query = $this->Inputs->find()->contain(['Users'])->where(
         [
-            'Inputs.user_id' => $current_user_selected['id'],
+            'Inputs.user_id' => $estudanteAtual['id'],
             'Inputs.status' => 1
         ])->order(['Inputs.position' => 'DESC']);
 
@@ -67,8 +67,8 @@ class InputsController extends AppController
      */
     public function add()
     {
-        $current_user_selected = $this->getCurrentUser();
-        $input = $this->Inputs->newEntity(['user_id' => $current_user_selected['id']]);
+        $estudanteAtual = $this->estudanteAtual();
+        $input = $this->Inputs->newEntity(['user_id' => $estudanteAtual['id']]);
         if ($this->request->is('post')) {
 
 
@@ -93,7 +93,7 @@ class InputsController extends AppController
 
             $input = $this->Inputs->patchEntity($input, $this->request->data);
             if ($this->Inputs->save($input)) {
-                $this->Flash->success(__('The input has been saved.'));
+                $this->Flash->success(__('O input foi salvo.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The input could not be saved. Please, try again.'));
@@ -142,7 +142,7 @@ class InputsController extends AppController
 
             $input = $this->Inputs->patchEntity($input, $this->request->data);
             if ($this->Inputs->save($input)) {
-                $this->Flash->success(__('The input has been saved.'));
+                $this->Flash->success(__('O input foi salvo.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The input could not be saved. Please, try again.'));

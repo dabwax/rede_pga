@@ -7,32 +7,9 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cms\Model\Entity\User;
 
-/**
- * Users Model
- *
- * @property \Cake\ORM\Association\BelongsTo $Instituitions
- * @property \Cake\ORM\Association\HasMany $Charts
- * @property \Cake\ORM\Association\HasMany $Exercises
- * @property \Cake\ORM\Association\HasMany $Hashtags
- * @property \Cake\ORM\Association\HasMany $Inputs
- * @property \Cake\ORM\Association\HasMany $LessonEntries
- * @property \Cake\ORM\Association\HasMany $Lessons
- * @property \Cake\ORM\Association\HasMany $Messages
- * @property \Cake\ORM\Association\HasMany $Parents
- * @property \Cake\ORM\Association\HasMany $Schools
- * @property \Cake\ORM\Association\HasMany $Themes
- * @property \Cake\ORM\Association\HasMany $Therapists
- * @property \Cake\ORM\Association\HasMany $Tutors
- */
 class UsersTable extends Table
 {
 
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -95,5 +72,49 @@ class UsersTable extends Table
             'className' => 'Cms.Tutors'
         ]);
     }
+
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->add('username', [
+                'length' => [
+                    'rule' => ['email'],
+                    'message' => 'Deve ser um e-mail válido',
+                ]
+            ])
+            ->add('full_name', [
+                'length' => [
+                    'rule' => ['minLength', 2],
+                    'message' => 'O nome deve ter pelo menos 2 caracteres',
+                ]
+            ])
+            ->add('date_of_birth', [
+                'dateFormat' => [
+                    'rule' => ['date', 'dmy'],
+                    'message' => 'Deve ser uma data válida',
+                ]
+            ])
+            ->add('clinical_condition', [
+                'length' => [
+                    'rule' => ['minLength', 2],
+                    'message' => 'A condição clínica deve ter pelo menos 2 caracteres',
+                ]
+            ])
+            ->add('instituition_id', [
+                'length' => [
+                    'rule' => ['minLength', 1],
+                    'message' => 'Insira uma escola válida',
+                ]
+            ])
+            ->add('school_grade', [
+                'length' => [
+                    'rule' => ['minLength', 2],
+                    'message' => 'Insira uma série de escola válida',
+                ]
+            ]);
+
+        return $validator;
+    }
+
 
 }

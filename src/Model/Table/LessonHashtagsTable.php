@@ -22,7 +22,7 @@ class LessonHashtagsTable extends Table
   	->contain(['Hashtags'])
   	->where([
       'lesson_id' => $lesson_id
-      ,'model'    => $current_user['role_table']
+      ,'model'    => $current_user['table']
       ,'model_id' => $current_user['id']
     ])
   	->all();
@@ -33,11 +33,11 @@ class LessonHashtagsTable extends Table
   	{
   		$tmp[] = $f->hashtag->name;
   	}
-  	
+
   	return $tmp;
   }
 
-  public function salvarHashtags($aula, $hashtags)
+  public function salvarHashtags($aula, $hashtags, $current_user)
   {
   	$hashtags_table = TableRegistry::get("Hashtags");
 
@@ -64,14 +64,19 @@ class LessonHashtagsTable extends Table
 
     		} else {
     			$entity = $hashtags_table->newEntity(['name' => $hashtag]);
-    			
+
     			$hashtags_table->save($entity);
     		}
 
 
     		if(!$lesson_contain_hashtag)
     		{
-    			$tmp = $this->newEntity(['lesson_id' => $aula->id, 'hashtag_id' => $entity->id]);
+    			$tmp = $this->newEntity([
+            'lesson_id' => $aula->id,
+            'hashtag_id' => $entity->id
+            ,'model'    => $current_user['table']
+            ,'model_id' => $current_user['id']
+          ]);
 
     			$this->save($tmp);
     		}

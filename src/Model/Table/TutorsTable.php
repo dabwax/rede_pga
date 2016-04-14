@@ -5,17 +5,10 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cms\Model\Entity\Protector;
 
 class TutorsTable extends Table
 {
 
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -29,6 +22,18 @@ class TutorsTable extends Table
             'joinType' => 'INNER',
             'className' => 'Cms.Users'
         ]);
+    }
+
+/**
+ * Finder para autenticação.
+ */
+    public function findAuthTutor($query, $options)
+    {
+        $query
+            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
+            ->where(['role' => 'tutor']);
+
+        return $query;
     }
 
 }

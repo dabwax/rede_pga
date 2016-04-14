@@ -1,6 +1,6 @@
 # [Phinx](https://phinx.org): Simple PHP Database Migrations
 
-[![Build Status](https://travis-ci.org/robmorgan/phinx.png?branch=0.2.x-dev)](https://travis-ci.org/robmorgan/phinx)
+[![Build Status](https://travis-ci.org/robmorgan/phinx.png?branch=0.5.x-dev)](https://travis-ci.org/robmorgan/phinx)
 [![Build status](https://ci.appveyor.com/api/projects/status/9vag4892hfq6effr)](https://ci.appveyor.com/project/robmorgan/phinx)
 [![Code Coverage](https://scrutinizer-ci.com/g/robmorgan/phinx/badges/coverage.png?s=9776e35b967f5adb0f4958bd72b617e0a9519f7d)](https://scrutinizer-ci.com/g/robmorgan/phinx/)
 [![Latest Stable Version](https://poser.pugx.org/robmorgan/phinx/version.png)](https://packagist.org/packages/robmorgan/phinx)
@@ -17,6 +17,7 @@ Phinx makes it ridiculously easy to manage the database migrations for your PHP 
 * Write database migrations using database agnostic PHP code.
 * Migrate up and down.
 * Migrate on deployment.
+* Seed data after database creation.
 * Get going in less than 5 minutes.
 * Stop worrying about the state of your database.
 * Take advantage of SCM features such as branching.
@@ -35,12 +36,12 @@ Phinx natively supports the following database adapters:
 
 ### Composer
 
-The fastest way to install Phinx in your project is using Composer (http://getcomposer.org/).
+The fastest way to install Phinx is to add it to your project using Composer (http://getcomposer.org/).
 
 1. Install Composer:
 
     ```
-    curl -s https://getcomposer.org/installer | php
+    curl -sS https://getcomposer.org/installer | php
     ```
 
 1. Require Phinx as a dependency using Composer:
@@ -63,7 +64,7 @@ The fastest way to install Phinx in your project is using Composer (http://getco
 
 ### As a Phar
 
-You can also use the Box application to build Phinx as a Phar archive (http://box-project.org/).
+You can also use the Box application to build Phinx as a Phar archive (https://box-project.github.io/box2/).
 
 1. Clone Phinx from GitHub
 
@@ -87,7 +88,7 @@ You can also use the Box application to build Phinx as a Phar archive (http://bo
 1. Install Box:
 
     ```
-    curl -s http://box-project.org/installer.php | php
+    curl -LSs https://box-project.github.io/box2/installer.php | php
     ```
 
 1. Create a Phar archive
@@ -112,10 +113,58 @@ Follow Rob (@\_rjm\_) on Twitter to stay up to date (http://twitter.com/_rjm_)
 
 ### Version History
 
+**0.5.1** (Wednesday, 30th December 2015)
+
+* **PHP 5.3 is no longer supported!**
+* Add support for Symfony 3.0 components
+* Ensure that the `status` command returns the correct exit code
+* Allow `$version` to be passed into templates
+* Support for MySQL `YEAR` column type
+* Multiple documentation updates and corrections
+
+**0.5.0** (Monday, 30th November 2015)
+
+* Support for seeding data after database creation
+* The migration and seed directories are now nested under `db` by default
+* Moved `Phinx\Migration\Util` to `Phinx\Util\Util`
+* All `insert()` methods now have a slightly different method signature
+* Fixed key/insert operations for MySQL
+* Introduced `AdapterInterface::hasIndexByName()`
+* Improved `dropForeignKey()` handling for SQLite
+* Added support for the MySQL `binary` datatype. BLOBs now use the proper type.
+* The status command shows a count of pending migrations in JSON output
+* We are now testing against PHP 7
+
+**0.4.6** (Friday, 11th September 2015)
+
+* You can now set custom migration templates in the config files
+* Support for MySQL unsigned booleans
+* Support for Postgres `smallint` column types
+* Support for `AFTER` when using `changeColumn()` with MySQL
+* Support for `precision` and `scale` when using the Postgres `decimal` type
+* Fixed a bug where duplicate migration names could be used
+* The schema table is now created with a primary key
+* Fixed issues when using the MySQL `STRICT_TRANS_TABLE` mode
+* Improved the docs in the default migration template
+* Made Box PHAR ignore the bundled `phinx.yml` configuration file
+* Updated Box installer URL
+* Internal code improvements
+* Documentation improvements
+
+**0.4.5** (Tuesday, 1st September 2015)
+
+* The rollback command now supports a date argument
+* Fixed DBLIB DSN strings for Microsoft SQL Server
+* Postgres support for `jsonb` columns added
+* The `addTimestamps()` helper method no longer updates the `created_at` column
+* Fix for Postgres named foreign keys
+* Unit test improvements (including strict warnings)
+* Documentation improvements
+
 **0.4.4** (Sunday, 14th June 2015)
 
 * The `change` method is now the default
-* Added a generic adapter insert method. Warning: The implementation will change
+* Added a generic adapter insert method. Warning: The implementation will change!
 * Updated Symfony depdencies to ~2.7
 * Support for MySQL `BLOB` column types
 * SQLite migration fixes

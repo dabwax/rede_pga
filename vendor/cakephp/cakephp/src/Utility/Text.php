@@ -63,7 +63,7 @@ class Text
      * @param string $separator The token to split the data on.
      * @param string $leftBound The left boundary to ignore separators in.
      * @param string $rightBound The right boundary to ignore separators in.
-     * @return mixed Array of tokens in $data or original input if empty.
+     * @return array|string Array of tokens in $data or original input if empty.
      */
     public static function tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')')
     {
@@ -604,10 +604,10 @@ class Text
 
                     $truncate .= mb_substr($tag[3], 0, $left + $entitiesLength);
                     break;
-                } else {
-                    $truncate .= $tag[3];
-                    $totalLength += $contentLength;
                 }
+
+                $truncate .= $tag[3];
+                $totalLength += $contentLength;
                 if ($totalLength >= $length) {
                     break;
                 }

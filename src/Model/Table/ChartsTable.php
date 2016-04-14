@@ -44,6 +44,9 @@ class ChartsTable extends Table
         $this->hasMany('ChartThemes', [
             'foreignKey' => 'chart_id'
         ]);
+        $this->hasMany('ChartSeries', [
+            'foreignKey' => 'chart_id'
+        ]);
     }
 
     public function buscaGraficos($user_id, $admin_logged = null)
@@ -56,7 +59,7 @@ class ChartsTable extends Table
         {
             $where['to_user'] = 1;
         }
-        
+
         return $this->find()->where($where)->contain([
             'ChartInputs' => function($q) {
                 return $q->contain(['Inputs']);

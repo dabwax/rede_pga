@@ -1,5 +1,5 @@
 <div ng-controller="AuthenticationController" class="row">
-  <div class="col s12 m8 l8 offset-l2 offset-m2">
+  <div class="col s12 m6 l6 offset-l3 offset-m3">
     <div class="card blue-grey lighten-5">
       <div class="card-content center-align">
         <?php echo $this->Html->image("logo_monster.png", ["height" => 120]); ?>
@@ -7,7 +7,7 @@
         <div class="clearfix"></div>
         <span class="card-title">{{getRole()}}</span>
 
-        <ul class="collection" ng-hide="roleChecked">
+        <ul id="pep-lista-atores" class="collection" ng-hide="roleChecked">
           <li class="collection-item"><div>Aluno<a ng-click="setRole('users.user')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
           <li class="collection-item"><div>Pai<a ng-click="setRole('protectors.dad')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
           <li class="collection-item"><div>Mãe<a ng-click="setRole('protectors.mom')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
