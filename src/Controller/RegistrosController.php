@@ -285,6 +285,21 @@ class RegistrosController extends AppController
     if($this->request->is(["post", "put"]))
     {
 
+      // Se a data do formulário for diferente da data anteriormente registrada, vamos atualizá-la
+      if($this->request->data['date'] != $aula->date->format("d/m/Y")) {
+        // Vamos formatar para o padrão da base de dados
+        $dateTime = \DateTime::createFromFormat("d/m/Y", $this->request->data['date']);
+
+        // Atualiza campo
+        $aula->date = $dateTime->format("Y-m-d");
+
+        // Salva
+        $lessons_table->save($aula);
+
+        // Devolve objeto DateTime
+        $aula->date = $dateTime;
+      }
+
       // Salva o input de matérias
       $lesson_themes_table->salvarMaterias($aula, @$this->request->data['materias'], $admin_logged);
 

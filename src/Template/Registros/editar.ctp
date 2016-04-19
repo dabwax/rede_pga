@@ -20,7 +20,7 @@
 
         <?= $this->Form->create($aula); ?>
 
-        <div class="form-body">
+        <div class="form-body" ng-init="lesson_date = '<?= $aula->date->format('d/m/Y'); ?>'">
 
           <div class="col s12 l8">
 
@@ -133,8 +133,14 @@
 
             <?php echo $this->Form->input("observation", ["editor", "label" => false]); ?>
 
-              <a href="<?php echo $this->Url->build(['action' => 'excluir', $aula->id]); ?>" class="btn-remover-dados-aula" onclick="if(!confirm('Você tem certeza disto? Esta ação é permanente!')) { return false; }">remover meus dados desta aula</a></small>
 
+            <strong>Data da Aula</strong>
+
+            <div class="clearfix"></div>
+
+            <?php echo $this->Form->input("date", ["label" => false, "type" => "text", "value" => $aula->date->format('d/m/Y'), 'ng-model' => 'lesson_date', 'ng-change' => 'mudouData(lesson_date)', 'datepicker' ]); ?>
+
+            <a href="<?php echo $this->Url->build(['action' => 'excluir', $aula->id]); ?>" class="btn-remover-dados-aula" onclick="if(!confirm('Você tem certeza disto? Esta ação é permanente!')) { return false; }">remover meus dados desta aula</a></small>
           </div>
 
         </div> <!-- .form-body -->
@@ -142,7 +148,7 @@
         <div class="form-actions" style="margin-bottom: 20px;">
           <div class="row">
             <div class="col-md-offset-3 col-md-9">
-              <button type="submit" class="btn btn-block btn-success green">
+              <button type="submit" ng-disabled="!avancar" class="btn btn-block btn-success green">
                 <i class="fa fa-pencil"></i> Salvar dados
               </button>
 

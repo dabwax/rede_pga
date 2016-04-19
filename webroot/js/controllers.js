@@ -360,6 +360,7 @@ angular.module("RedePga")
 
 .controller('EditarRegistroCtrl', ['$scope', 'Inputs', '$timeout', function($scope, Inputs, $timeout) {
   $scope.registros = [];
+  $scope.avancar = true;
 
   $scope.init = function() {
 
@@ -373,6 +374,20 @@ angular.module("RedePga")
     Inputs.fetch_all($scope.lesson_id).then(function(result) {
       $scope.registros = result.data.registros;
       $scope.campos = result.data.campos;
+    });
+  };
+
+  $scope.mudouData = function(data) {
+    Inputs.validar_data(data).then(function(result) {
+
+      if(result.data.status == "INDISPONÍVEL") {
+        $scope.avancar = false;
+      } else {
+        $scope.avancar = true;
+      }
+
+      Materialize.toast(result.data.message, 10000);
+
     });
   };
 
@@ -396,7 +411,6 @@ angular.module("RedePga")
   $scope.avancar = false;
 
   $scope.mudouData = function(date) {
-    console.log(date);
 
     Inputs.validar_data(date).then(function(result) {
 
@@ -408,7 +422,7 @@ angular.module("RedePga")
 
       Materialize.toast(result.data.message, 10000);
 
-    });;
+    });
 
   }
 }])
