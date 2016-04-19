@@ -84,22 +84,27 @@ class RegistrosController extends AppController
         $default_value = $config->min;
       }
 
-      $resultado['registros'][] = [
-        'id' => $input->id,
-        'type' => $input->type,
-        'model' => $input->model,
-        'name' => $input->name,
-        'config' => $config,
-        'value' => $default_value,
-        'lesson_entry_id' => false
-      ];
-      $resultado['campos'][] = [
-        'id' => $input->id,
-        'type' => $input->type,
-        'model' => $input->model,
-        'name' => $input->name,
-        'config' => json_decode($input->config),
-      ];
+      $belongs_to = "belongs_to_" . $admin_logged['table'];
+
+      if($input->$belongs_to) {
+
+        $resultado['registros'][] = [
+          'id' => $input->id,
+          'type' => $input->type,
+          'model' => $input->model,
+          'name' => $input->name,
+          'config' => $config,
+          'value' => $default_value,
+          'lesson_entry_id' => false
+        ];
+        $resultado['campos'][] = [
+          'id' => $input->id,
+          'type' => $input->type,
+          'model' => $input->model,
+          'name' => $input->name,
+          'config' => json_decode($input->config),
+        ];
+      }
     }
 
     // Itera os registros da aula

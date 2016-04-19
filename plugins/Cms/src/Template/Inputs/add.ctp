@@ -2,7 +2,7 @@
     <h2>Novo Input</h2>
 
     <div class="actions">
-        <a href="<?php echo $this->Url->build(['action' => 'index']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_backspace</i> voltar</a>
+        <a href="<?php echo $this->Url->build(['action' => 'index']); ?>" class="waves-effect waves-light btn grey"><i class="material-icons left">keyboard_backspace</i> voltar</a>
     </div> <!-- .actions -->
 
     <div class="clearfix"></div>
@@ -14,7 +14,6 @@
 
 <?php echo $this->Form->input('user_id', ['options' => $users, 'label' => 'Estudante', 'class' => 'form-control', 'type' => 'hidden']); ?>
 
-    <fieldset>
         <div class="input col s6">
           <label for="type">Tipo de Input</label>
         <?php
@@ -70,7 +69,6 @@
                 <textarea class="form-control" name="config[options][{{index}}]" ng-repeat="(index, option) in input.config.options track by $index" placeholder="Preencha com um nome">{{option}}</textarea>
             </div>
         </div>
-    </fieldset>
 
         <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-floppy-o"></i> Salvar</button>
 

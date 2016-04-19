@@ -1,4 +1,4 @@
-<form action="" method="GET" id="formulario-busca" class="grey lighten-2">
+<form action="" method="GET" id="formulario-busca" <?php if(!empty($_GET['inicio']) && !empty($_GET['fim'])) : ?>ng-init="date_start = '<?php echo $_GET['inicio'] ?>'; date_finish = '<?php echo $_GET['fim'] ?>';"<?php endif; ?> class="grey lighten-2">
 
 
   <div class="col s3">
