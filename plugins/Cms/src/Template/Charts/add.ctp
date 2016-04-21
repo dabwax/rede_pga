@@ -43,8 +43,25 @@
                 <div class="serie-item pink lighten-4" style="margin-top: 10px;" ng-repeat="(key, value) in emptyChart.series track by $index">
                     <label for="">Título</label>
                     <input type="text" name="chart_series[{{key}}][name]" ng-model="emptyChart.series[key].name">
+
                     <label for="">Cor</label>
-                    <input type="text" name="chart_series[{{key}}][color]" ng-model="emptyChart.series[key].color">
+
+                    <select class="browser-default" name="chart_series[{{key}}][color]" ng-model="emptyChart.series[key].color">
+                      <option value="#F22613">Vermelho</option>
+                      <option value="#DB0A5B">Rosa</option>
+                      <option value="#446CB3">Azul Escuro</option>
+                      <option value="#19B5FE">Azul Claro</option>
+                      <option value="#8E44AD">Roxo</option>
+                      <option value="#87D37C">Verde Oliva</option>
+                      <option value="#26A65B">Verde Eucalipto</option>
+                      <option value="#1E824C">Verde Escuro</option>
+                      <option value="#F89406">Laranja</option>
+                      <option value="#F2784B">Salmão</option>
+                      <option value="#F9BF3B">Amarelo</option>
+                      <option value="#6C7A89">Cinza Escuro</option>
+                      <option value="#D2D7D3">Cinza Claro</option>
+                    </select>
+
                     <label for="">Tipo</label>
 
                     <select name="chart_series[{{key}}][type]" ng-model="emptyChart.series[key].type" class="browser-default">

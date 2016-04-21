@@ -51,8 +51,8 @@ class AppView extends View
         ],
         "series" => [
           [
-            "name" => "Linha Exemplo (PHP)",
-            "color" => "#33d1ff",
+            "name" => "Exemplo de Série",
+            "color" => "#446CB3",
             "data" => [1, 2],
             "id" => "series-0",
             "type" => "bar"
