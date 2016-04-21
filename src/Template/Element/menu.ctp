@@ -4,10 +4,8 @@
 
   <li>
    <a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo center"><?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?></a>
-  </li>
+   <a href="#" class="hide-on-large-only menu-mobile" onclick="$('#submenu').toggleClass('hide-on-med-and-down');"><i class="material-icons">menu</i></a>
 
-  <li class="center hide-on-large-only">
-    <a href="#" onclick="$('#submenu').toggleClass('hide-on-med-and-down');"><i class="material-icons">menu</i></a>
   </li>
 
   <ul id="submenu" class="hide-on-med-and-down">
