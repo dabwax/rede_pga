@@ -41,6 +41,9 @@
                 <a href="javascript:;" class="btn red" ng-click="adicionar()">Adicionar Série</a>
 
                 <div class="serie-item pink lighten-4" style="margin-top: 10px;" ng-repeat="(key, value) in emptyChart.series track by $index">
+
+                    <a href="javascript:void(0);" class="btn-deletar-serie" ng-click="deletarSerie(key)"><i class="material-icons">delete_forever</i></a>
+
                     <label for="">Título</label>
                     <input type="text" name="chart_series[{{key}}][name]" ng-model="emptyChart.series[key].name">
 

@@ -62,7 +62,7 @@ class AppView extends View
           "text" => "Gráfico de Demonstração"
         ],
         "subtitle" => [
-          "text" => "Subtítulo aqui"
+          "text" => ""
         ],
         "credits" => [
           "enabled" => false

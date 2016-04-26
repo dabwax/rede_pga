@@ -76,18 +76,19 @@ angular.module("RedePga")
 }])
 .controller("NovoGraficoCtrl", ["$scope", "$http", "$filter", "$timeout", function($scope, $http, $filter, $timeout) {
 
+	$scope.serieEmBranco = null;
+
 	// Recupera os dados do gráfico
 	$timeout(function() {
 		var currentChart = $("#card-grafico").data("chart");
 
 		if(currentChart != "undefined") {
 			$scope.emptyChart = currentChart;
-		}
-	});
 
-	// Observador do campo de formato
-	$scope.$watch("emptyChart.options.format", function (newValue, oldValue) {
-		
+			// Faz bakup da serie em branco, para ser usado no botão de adicionar
+
+			$scope.serieEmBranco = $scope.emptyChart.series[0];
+		}
 	});
 
 	// Busca todos os inputs disponíveis
@@ -149,16 +150,25 @@ angular.module("RedePga")
 	// Função chamada quando é adicionado uma nova série
 	$scope.adicionar = function() {
 
-		var ultima_serie = angular.copy($scope.emptyChart.series.slice(-1)[0]);
-		delete ultima_serie.$$hashKey;
 
-		ultima_serie.name = ultima_serie.name + "1";
-		ultima_serie.id = ultima_serie.id + "1";
+		var clonado = angular.copy($scope.serieEmBranco);
+
+		clonado.name = $scope.serieEmBranco.name + Math.floor((Math.random() * 10000) + 1);
+		clonado.id = $scope.serieEmBranco.id + Math.floor((Math.random() * 10000) + 1);
 
 		$timeout(function() {
 
-			$scope.emptyChart.series.push(ultima_serie);
+			$scope.emptyChart.series.push(clonado);
 		});
 	}
+
+	// Função chamada quando é excluído uma série
+	$scope.deletarSerie = function(key) {
+		if(confirm('Voce tem certeza disto?')) {
+			$scope.emptyChart.series.splice(key, 1);
+		}
+
+		return false;
+	};
 
 }]);

@@ -4,6 +4,14 @@ $(document).ready(function() {
 
   $(".button-collapse").sideNav();
 
+  $(".dropdown-button").on("click", function() {
+
+    setTimeout(function() {
+      $("#slide-out").scrollTop(99999);
+    }, 300);
+
+  });
+
   $('.dropdown-button').dropdown({
     inDuration: 300,
     outDuration: 225,
