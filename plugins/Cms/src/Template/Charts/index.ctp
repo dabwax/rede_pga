@@ -16,6 +16,7 @@
         <thead>
             <tr>
                 <th>Título do Gráfico</th>
+                <th>Sub-Título</th>
                 <th class="actions"><?= __('Ações') ?></th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
         <?php foreach ($charts as $chart): ?>
             <tr>
                 <td><?= h($chart->name) ?></td>
+                <td><?= h($chart->subname) ?></td>
                 <td class="actions">
 
 

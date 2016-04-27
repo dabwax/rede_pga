@@ -34,7 +34,7 @@ class AppView extends View
     {
     }
 
-    public function formatarGrafico($chart = null) {
+    public function formatarGrafico($chart = null, $user_id = null) {
       $default = [
         "options" => [
           "chart" => [
@@ -43,6 +43,13 @@ class AppView extends View
           "plotOptions" => [
             "series" => [
               "stacking" => ""
+            ],
+            "pie" => [
+              "cursor" => "pointer",
+              "dataLabels" => [
+                "enabled" => "true",
+                "format" => '<b>{point.name}</b>: {point.percentage:.1f} %'
+              ]
             ]
           ],
           "xAxis" => [
@@ -50,13 +57,6 @@ class AppView extends View
           ]
         ],
         "series" => [
-          [
-            "name" => "Exemplo de Série",
-            "color" => "#446CB3",
-            "data" => [1, 2],
-            "id" => "series-0",
-            "type" => "bar"
-          ]
         ],
         "title" => [
           "text" => "Gráfico de Demonstração"
@@ -108,17 +108,19 @@ class AppView extends View
           // requisição a API
           $url = $this->Url->build("/", true);
 
-          $jsonPayload = [
-            'grafico' => [
-              'data_inicial' => $chart->filter_start,
-              'data_final' => $chart->filter_end,
-              'formato' => $chart->format,
-            ],
+
+          $dados = [
+            'formato' => $chart->format,
             'input' => $serie->input_id,
             'materia' => $serie->theme_id,
           ];
-          $response = $http->post($url . 'cms/api/calcular_serie', $jsonPayload, ['type' => 'json']);
+
+          $url = $url.'cms/api/calcular_serie/' . $user_id . '/' . $dados['input'] . '/' . $dados['formato'] . '/' . $dados['materia'];
+
+          $response = $http->get($url, ['type' => 'json']);
+
           $response = $response->json;
+
 
           $default['series'][] = [
             'id' => $serie->id,
@@ -127,9 +129,8 @@ class AppView extends View
             'type' => $serie->type,
             'input_id' => strval($serie->input_id),
             'theme_id' => strval($serie->theme_id),
-            'data' =>$response['serie']
-          ];;
-          $default['options']['xAxis']['categories'] = $response['eixo_x'];
+            'data' => $response['data']
+          ];
         }
       }
 

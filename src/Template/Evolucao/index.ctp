@@ -30,9 +30,10 @@
 
   <div class="row">
     <?php foreach($charts as $c) : ?>
-    <div class="col s12 l6" ng-init='abacate = <?php echo $this->formatarGrafico($c); ?>'>
 
-      <highchart config="abacate"></highchart>
+    <div class="col s12 l6">
+
+      <highchart config='<?php echo $this->formatarGrafico($c, $user_id ); ?>'></highchart>
     </div>
   <?php endforeach; ?>
   </div>

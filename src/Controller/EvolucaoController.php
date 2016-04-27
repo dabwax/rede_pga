@@ -13,8 +13,10 @@ class EvolucaoController extends AppController
 		$where = [
 			'Charts.user_id' => $this->userLogged['user_id']
 		];
-		$charts = $charts->find()->where($where)->contain(['ChartSeries'])->all();
+		$charts = $charts->find()->distinct()->where($where)->contain(['ChartSeries'])->all();
 
-		$this->set(compact("charts"));
+    $user_id = $this->userLogged['user_id'];
+
+		$this->set(compact("charts", "user_id"));
 	}
 }

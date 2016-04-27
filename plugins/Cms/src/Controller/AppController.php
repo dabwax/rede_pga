@@ -34,6 +34,11 @@ class AppController extends BaseController
  */
     public function verificarAdministrador()
     {
+
+      if(get_class($this) == "Cms\Controller\ApiController") {
+        return true;
+      }
+
         return (bool) $this->Auth->user('is_admin');
     }
 

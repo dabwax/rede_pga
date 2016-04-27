@@ -8,7 +8,7 @@
     <div class="clearfix"></div>
 </div> <!-- .page-title -->
 
-<div id="card-grafico" class="card" ng-controller="NovoGraficoCtrl" data-chart='<?php echo $this->formatarGrafico($chart); ?>'>
+<div id="card-grafico" class="card" ng-controller="NovoGraficoCtrl" data-chart='<?php echo $this->formatarGrafico($chart, $user_id); ?>' data-user_id='<?php echo $user_id; ?>'>
     <div class="card-content">
 
         <?= $this->Form->create($chart) ?>
@@ -19,10 +19,6 @@
           <?php echo $this->Form->input("name", ["id" =>"chart_name", "ng-model" =>"emptyChart.title.text","label"=>"Título"]) ?>
 
           <?php echo $this->Form->input("subname", ["id" =>"chart_subname", "ng-model" =>"emptyChart.subtitle.text","label"=>"Sub-título"]) ?>
-
-          <?php echo $this->Form->input("filter_start", ["id" =>"date_start", "datepicker", "ng-model" =>"emptyChart.filter_start","label"=>"Filtro dos Dados (Data Inicial - apenas para demonstração)", "ng-change" => "mudouGrafico()"]) ?>
-
-          <?php echo $this->Form->input("filter_end", ["id" =>"date_end", "datepicker", "ng-model" =>"emptyChart.filter_end","label"=>"Filtro dos Dados (Data Final - apenas para demonstração)", "ng-change" => "mudouGrafico()"]) ?>
 
           <p>
             <input name="format" type="radio" id="mensal" ng-model="emptyChart.format" ng-change="mudouGrafico()" value="mensal" />

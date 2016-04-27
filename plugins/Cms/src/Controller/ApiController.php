@@ -17,8 +17,168 @@ class ApiController extends AppController
  * Utilizado principalmente no cadastramento de gráfico
  * e na página de Evolução.
  */
-    public function calcular_serie()
+    public function calcular_serie($user_id = null, $input_id = null, $formato_grafico = 'mensal', $theme_id = null)
     {
+      $this->autoRender = false;
+
+      // Busca o input
+      $inputs = TableRegistry::get("Inputs");
+      $input = $inputs->get($input_id);
+
+      // Geramos o objeto vazio da série
+      $serie = [
+        'name' => '',
+        'data' => []
+      ];
+
+      // Os inputs se encaixam em 2 grupos:
+      // Númericos e Textuais
+
+      // Os numéricos são inputs acumuláveis, pois o seu valor é em número.
+      // Os textuais não são acumuláveis, portanto o que se acumula é a quantidade
+      // de vezes que ela aparece.
+
+      // A nossa primeira verificação é esta: qual grupo este input pertence
+      $grupoNumericos = ['escala_numerica', 'numero'];
+      $grupoTextuais = ['calendario', 'intervalo_tempo', 'registro_textual', 'escala_texto', 'texto_privativo'];
+
+      if(in_array($input->type, $grupoNumericos)) {
+        $serie['type'] = 'numeric';
+      } else if(in_array($input->type, $grupoTextuais)) {
+        $serie['type'] = 'text';
+      } else {
+        throw new \Exception("Tipo de input inválido.");
+      }
+
+      // Acoplamos o nome da série o nome do input
+      $serie['name'] = $input->name;
+
+      // Acoplamos o formato do gráfico a série (apenas para debug)
+      $serie['format'] = $formato_grafico;
+
+      // Vamos buscar todas as aulas que contém este input
+      $lessons = TableRegistry::get("Lessons");
+
+      $where = [
+        'Lessons.user_id' => $user_id,
+      ];
+      $order = [
+        'Lessons.date' => 'ASC'
+      ];
+      $LessonEntries = function($q) use ($input) {
+
+        $where = [
+          'LessonEntries.input_id' => $input->id
+        ];
+
+        return $q->where($where);
+      };
+      $LessonThemes = function($q) use ($theme_id) {
+
+        $where = [];
+
+        if(!empty($theme_id)) {
+          $where['LessonThemes.theme_id'] = $theme_id;
+        }
+
+        return $q->where($where);
+      };
+      $lessons = $lessons->find()
+      ->where($where)
+      ->order($order)
+      ->distinct()
+      ->matching('LessonEntries', $LessonEntries)
+      ->innerJoinWith('LessonThemes', $LessonThemes)
+      ->all()
+      ->toArray();
+
+      // Antes de tudo, vamos fazer logo os gráficos que a série seja do tipo texto
+      // Pois é mais simples
+      if($serie['type'] == "text") {
+
+        $tmp = [];
+
+
+        foreach($lessons as $lesson) {
+
+          $value = $lesson->_matchingData['LessonEntries']->value;
+
+          $tmp[$value] = @$tmp[$value] + 1;
+        }
+
+        foreach($tmp as $key => $val) {
+
+          if($key != "?" && $key != "") {
+            $serie['data'][] = ['name' => $key, 'y' => $val];
+          }
+        }
+
+        echo json_encode($serie);
+
+        die();
+      }
+
+      // Se o gráfico for mensal, vamos incluir os meses
+      if($formato_grafico == "mensal") {
+        $serie['data'] = [
+          ['name' => 'Jan', 'y' => 0],
+          ['name' => 'Fev', 'y' => 0],
+          ['name' => 'Mar', 'y' => 0],
+          ['name' => 'Abr', 'y' => 0],
+          ['name' => 'Mai', 'y' => 0],
+          ['name' => 'Jun', 'y' => 0],
+          ['name' => 'Jul', 'y' => 0],
+          ['name' => 'Ago', 'y' => 0],
+          ['name' => 'Set', 'y' => 0],
+          ['name' => 'Out', 'y' => 0],
+          ['name' => 'Nov', 'y' => 0],
+          ['name' => 'Dez', 'y' => 0]
+        ];
+
+        // Itera as aulas que tem este input e adiciona na série
+        foreach($lessons as $lesson) {
+
+          $y = 0;
+
+          // Se o gráfico for numérico, mostra o valor dele
+          if($serie['type'] == 'numeric' && $lesson->date->format("Y") == date("Y")) {
+
+            $y = floatval($lesson->_matchingData['LessonEntries']->value);
+
+            $indice_do_mes = $lesson->date->format("m") - 1;
+
+            $serie['data'][$indice_do_mes]['y'] = $y;
+          }
+
+        }
+
+
+
+      // Se o gráfico for diário, vamos incluir os dias
+      } else if($formato_grafico == "diario") {
+
+        // Itera as aulas que tem este input e adiciona na série
+        foreach($lessons as $lesson) {
+
+          $y = 0;
+
+          // Se o gráfico for numérico, mostra o valor dele
+          if($serie['type'] == 'numeric') {
+
+            $y = floatval($lesson->_matchingData['LessonEntries']->value);
+
+            if($y > 0) {
+
+              $serie['data'][] = ['name' => $lesson->date->format("d/m/Y"), 'y' => $y];
+            }
+
+          }
+        } // foreach
+      } // se $formato_grafico == "diario"
+
+      echo json_encode($serie);
+
+      /*
         // ajax
         $this->autoRender = false;
 
@@ -117,7 +277,7 @@ class ApiController extends AppController
 
                 $total[$mes][$entrada_aula->value] = @$total[$mes][$entrada_aula->value] + 1;
               }
-              
+
               $total_aulas[$mes] = @$total_aulas[$mes] + 1;
 
               // Se for gráfico diário
@@ -163,7 +323,7 @@ class ApiController extends AppController
                         'y' => $v
                       ];
                     }
-                    
+
                   }
 
                   $resultado['serie'] = array_values($resultado['serie']);
@@ -178,11 +338,12 @@ class ApiController extends AppController
           foreach($config->options as $label) {
             $resultado['eixo_x'][] = $label;
           }*/
-        }
+        // }
 
-        $resultado['total'] = $total;
+        // $resultado['total'] = $total;
 
-        echo json_encode($resultado);
+        // echo json_encode($resultado);
+
     } // calcular_serie
 
 /**
