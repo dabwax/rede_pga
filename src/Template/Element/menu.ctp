@@ -6,6 +6,8 @@
    <a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo center"><?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?></a>
    <a href="#" class="hide-on-large-only menu-mobile" onclick="$('#submenu').toggleClass('hide-on-med-and-down');"><i class="material-icons">menu</i></a>
 
+   <em style="text-align: center; display: block; font-size: 12px; color: #FFF;">Aluno(a) Fulano de Tal</em>
+
   </li>
 
   <ul id="submenu" class="hide-on-med-and-down">

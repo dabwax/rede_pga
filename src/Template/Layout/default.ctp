@@ -21,7 +21,13 @@
 
   <div id="main" class="container">
     <?= $this->fetch('content') ?>
+
   </div>
+
+    <footer id="rodape">
+      <hr>
+      <em>PEP Plataforma de Ensino Profissinalizante. Todos os direitos reservados.</em>
+    </footer>
 
   <?php echo $this->element("/assets"); ?>
     <?= $this->Flash->render() ?>

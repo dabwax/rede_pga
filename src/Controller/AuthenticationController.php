@@ -26,6 +26,20 @@ class AuthenticationController extends AppController
     }
   }
 
+/**
+ * Página de escolha de aluno.
+ */
+  public function trocar_aluno()
+  {
+    $username = ($this->userLogged['username']);
+
+    // Buscar em todos os atores que tenham este username
+    $where = ['username' => $username];
+    $atores_disponiveis = $this->getAtores($where);
+
+    var_dump($atores_disponiveis);
+  }
+
   public function edit()
   {
     $this->protected_area = true;

@@ -88,7 +88,7 @@ class AppController extends Controller
 /**
  * Função para recuperar todos os atores do usuário logado.
  */
-    public function getAtores()
+    public function getAtores($where = null)
     {
       // Busca os models
       $models = [
@@ -109,9 +109,11 @@ class AppController extends Controller
       }
 
       // WHERE da consulta
-      $where = [
-        'user_id' => $this->userLogged['user_id']
-      ];
+      if($where == null) {
+        $where = [
+          'user_id' => $this->userLogged['user_id']
+        ];
+      }
 
       // roda as consultas
       $atores = [
