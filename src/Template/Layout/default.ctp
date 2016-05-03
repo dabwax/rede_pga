@@ -16,7 +16,9 @@
   </div>
 
   <?php if($userLogged) : ?>
-    <?php echo $this->element("menu"); ?>
+    <?php if($this->name != "Relatorio") : ?>
+      <?php echo $this->element("menu"); ?>
+    <?php endif; ?>
   <?php endif; ?>
 
   <div id="main" class="container">

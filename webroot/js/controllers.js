@@ -16,13 +16,29 @@ angular.module("RedePga")
 
 }])
 
-.controller('FeedCtrl', ['$scope', 'Feed', '$window', function($scope, Feed, $window) {
+.controller('FeedCtrl', ['$scope', 'Feed', '$window', '$timeout', function($scope, Feed, $window, $timeout) {
 
   $scope.lessons = [];
 
   Feed.fetch_all($window.location.search).then(function(result) {
     //console.log(result.data);
     $scope.lessons = result.data;
+
+
+    $timeout(function() {
+      var card = $("#masonry-grid").data("card");
+
+      if(card != "") {
+        
+        angular.forEach($scope.lessons, function(value) {
+          var data_formatada = value.date_d + "/" + value.date_m + "/" + value.date_y;
+
+          if(data_formatada == card) {
+            $("#modal" + value.id).openModal();
+          }
+        });
+      }
+    });
   }, function() {
     alert("Ocorreu um erro ao carregar os exercícios do site!");
   });
@@ -408,7 +424,7 @@ angular.module("RedePga")
           var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
 
           if(m) {
-            var url = baseUrl + "evolucao?inicio=" + str + "&fim=" + str;
+            var url = baseUrl + "feed?card=" + str;
             var win = window.open(url, '_blank');
             win.focus();
           }

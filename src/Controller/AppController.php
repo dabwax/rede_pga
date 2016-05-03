@@ -53,13 +53,15 @@ class AppController extends Controller
       }
         $this->set('userLogged', $this->userLogged );
 
-      //$this->Auth->allow();
-
       // Recupera todas as permissões
       $permissions = $this->getPermissions();
 
       // Roda o método de configuração de ACL
       $this->configAcl($permissions);
+
+      if($this->request->params['controller'] == "Relatorio" || $this->request->params['controller'] == "Api") {
+        $this->Auth->allow();
+      }
 
       // Recupera os atores do usuário logado
       $get_atores = $this->getAtores();
@@ -77,15 +79,16 @@ class AppController extends Controller
       // se for front-end e existir usuário logado
       if($this->isFrontEnd() && !empty($this->userLogged)) {
 
-        // vamos verificar o controller sendo acessado
-        $table = ucfirst($this->userLogged['table']);
-        $property = strtolower($this->request->params['controller']);
 
-        // se a página acessada para o model logado estiver com value 0
-        // desloga o usuário e manda ele para tela de login
-        if($permissions[ $table ]->$property == 0) {
-          return $this->redirect($this->Auth->logout());
-        }
+          // vamos verificar o controller sendo acessado
+          $table = ucfirst($this->userLogged['table']);
+          $property = strtolower($this->request->params['controller']);
+
+          // se a página acessada para o model logado estiver com value 0
+          // desloga o usuário e manda ele para tela de login
+          if($permissions[ $table ]->$property == 0) {
+            return $this->redirect($this->Auth->logout());
+          }
 
       } // isFrontEnd()
 

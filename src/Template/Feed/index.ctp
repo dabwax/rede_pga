@@ -11,14 +11,21 @@
 
 
     <!-- Pesquisa -->
-    <div class="col s6">
-      <form>
-        <div class="input-field grey lighten-2">
-          <input id="search" type="search"  ng-model="search.$" placeholder="Pesquisar" required>
-          <span class="search-icon"><i class="material-icons">search</i></span>
-          <i class="material-icons" ng-click="reset_search()">close</i>
+    <div class="col s5 right">
+      <form id="formulario-busca" class="grey lighten-2">
+        <div class="col s9">
+          <label for="search">Pesquisar</label>
+          <input id="search" type="search"  ng-model="search.$" placeholder="" required>
         </div>
+        <div class="col s2">
+          <span class="search-icon btn-enviar-busca"><i class="material-icons">search</i></span>
+        </div>
+        <i class="material-icons" ng-show="search.$" ng-click="reset_search()">close</i>
+
+        <div class="clearfix"></div>
       </form>
+      <div class="clearfix"></div>
+      {{lessons.length}} aulas registradas. 
     </div>
 
       <div class="actions">
@@ -32,7 +39,7 @@
       <div class="clearfix"></div>
   </div> <!-- .page-title -->
 
-  <div id="masonry-grid" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}'>
+  <div id="masonry-grid" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}' data-card="<?php echo @$_GET['card']; ?>">
 
     <!-- Loop -->
     <div masonry-tile class="tile col s12 m4" ng-if="lessons.length > 0" ng-repeat="lesson in lessons | filter:search:strict">
