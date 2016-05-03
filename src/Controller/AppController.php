@@ -45,7 +45,13 @@ class AppController extends Controller
 
       // Envia as credenciais do usuário logado
       $this->userLogged = $this->Auth->user();
-      $this->set('userLogged', $this->userLogged );
+
+      if(!empty($this->userLogged['user_id'])) {
+        $tmp = TableRegistry::get("Users");
+        $this->userLogged['user'] = $tmp->get($this->userLogged['user_id']);
+        
+      }
+        $this->set('userLogged', $this->userLogged );
 
       //$this->Auth->allow();
 

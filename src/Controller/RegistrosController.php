@@ -332,13 +332,24 @@ class RegistrosController extends AppController
   public function excluir($id = null)
   {
     $lessons  = TableRegistry::get("Lessons");
-    $entries = $lessons->LessonEntries->find()->where(['lesson_id' => $id ])->all();
+    $lesson = $lessons->get($id);
+    $entries = $lessons->LessonEntries->find()->where(['lesson_id' => $id, 'model' => $this->userLogged['table'], 'model_id' => $this->userLogged['id'] ])->all();
 
     foreach($entries as $e) {
       $lessons->LessonEntries->delete($e);
     }
 
+    // busca todas entradas de aula desta aula
+    $entries = $lessons->LessonEntries->find()->where(['lesson_id' => $id ])->all()->toArray();
+
     $this->Flash->success("Sua participação da aula foi removida!");
+
+    // se nao houver nenhuma significa que só o ator atual participoud ela entao ela deve ser excluida
+    if(empty($entries)) {
+      $lessons->delete($lesson);
+
+      $this->Flash->success("Como apenas você participou desta aula, ela foi excluida como um todo.");
+    }
 
     return $this->redirect('/');
   }

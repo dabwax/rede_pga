@@ -17,9 +17,27 @@ class ApiController extends AppController
  * Utilizado principalmente no cadastramento de gráfico
  * e na página de Evolução.
  */
-    public function calcular_serie($user_id = null, $input_id = null, $formato_grafico = 'mensal', $theme_id = null)
+    public function calcular_serie()
     {
       $this->autoRender = false;
+
+     // Dados Recebidos
+      $dados_recebidos = json_decode(file_get_contents("php://input"));
+      if(empty($dados_recebidos)) {
+        $dados_recebidos = json_decode(json_encode($_POST, FALSE));
+      }
+
+      /**
+      $user_id = null, $input_id = null, $formato_grafico = 'mensal', $theme_id = null
+      */
+      $user_id = $dados_recebidos->user_id;
+      $input_id = $dados_recebidos->input_id;
+      $formato_grafico = $dados_recebidos->formato_grafico;
+
+      $theme_id = null;
+      if(!empty($dados_recebidos->theme_id)) {
+        $theme_id = $dados_recebidos->theme_id;
+      }
 
       // Busca o input
       $inputs = TableRegistry::get("Inputs");
@@ -62,6 +80,21 @@ class ApiController extends AppController
       $where = [
         'Lessons.user_id' => $user_id,
       ];
+
+      if(!empty($dados_recebidos->inicio)) {
+
+        $inicio = \DateTime::createFromFormat("d/m/Y", $dados_recebidos->inicio);
+        
+        $where['AND'][] = ['Lessons.date >=' => $inicio->format("Y-m-d")];
+      }
+
+      if(!empty($dados_recebidos->fim)) {
+
+        $fim = \DateTime::createFromFormat("d/m/Y", $dados_recebidos->fim);
+        
+        $where['AND'][] = ['Lessons.date <=' => $fim->format("Y-m-d")];
+      }
+
       $order = [
         'Lessons.date' => 'ASC'
       ];

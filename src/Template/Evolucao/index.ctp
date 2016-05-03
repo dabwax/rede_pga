@@ -15,13 +15,14 @@
     </div>
 
     <!-- Pesquisa -->
-    <div class="col s12 l6">
+    <div class="col s12 l5 right">
       <?php echo $this->element("../Evolucao/formulario_busca"); ?>
     </div>
 
         <?php if(!empty($_GET['inicio']) && !empty($_GET['fim'])) : ?>
+          <div class="clearfix"></div>
       <div class="actions">
-        <a href="<?php echo $this->Url->build('/evolucao'); ?>" class="btn grey">Remover filtro</a>
+        <a href="<?php echo $this->Url->build('/evolucao'); ?>" class="btn grey">Limpar busca</a>
       </div>
         <?php endif; ?>
 
@@ -29,13 +30,15 @@
   </div> <!-- .page-title -->
 
   <div class="row">
+  
     <?php foreach($charts as $c) : ?>
+      <div class="grafico" data-dados='<?php echo $this->formatarGrafico($c, $user_id ); ?>'></div>
+    <?php endforeach; ?>
 
-    <div class="col s12 l6">
-
-      <highchart config='<?php echo $this->formatarGrafico($c, $user_id ); ?>'></highchart>
+    <div class="col s12 l6" ng-repeat="grafico in graficos">
+      <highchart config='grafico'></highchart>
     </div>
-  <?php endforeach; ?>
+
   </div>
 
   <?php if(empty($charts->toArray())) : ?>

@@ -6,7 +6,7 @@
    <a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo center"><?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?></a>
    <a href="#" class="hide-on-large-only menu-mobile" onclick="$('#submenu').toggleClass('hide-on-med-and-down');"><i class="material-icons">menu</i></a>
 
-   <em style="text-align: center; display: block; font-size: 12px; color: #FFF;">Aluno(a) Fulano de Tal</em>
+   <em style="text-align: center; display: block; font-size: 14px; color: #FFF;"><?php echo $this->formatarCargo($userLogged['role']); ?> de <?php echo $userLogged['user']->full_name; ?></em>
 
   </li>
 
@@ -22,7 +22,7 @@
   <li>
     <i class="material-icons left">settings</i> <a class='dropdown-button ' href="javascript:;" data-activates='dropdown1'>Config. <i class="material-icons" style="position: relative; top: 6px;">keyboard_arrow_down</i></a>
     <ul id='dropdown1' class="dropdown-content">
-      <li><a href="<?php echo $this->Url->build('/authentication/trocar_aluno'); ?>"><i class="material-icons left">person_pin_circle</i> Trocar Aluno</a></li>
+      <li><a href="<?php echo $this->Url->build('/authentication/trocar_perfil'); ?>"><i class="material-icons left">person_pin_circle</i> Trocar Perfil</a></li>
 
   <?php if($userLogged['is_admin']) : ?>
       <li><a href="<?php echo $this->Url->build('/cms'); ?>"><i class="material-icons left">settings</i> Ir ao Admin</a></li>

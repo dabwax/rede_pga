@@ -37,7 +37,7 @@
     <?php echo $this->Form->end(); ?>
   </div> <!-- #form-login -->
 
-        <em class="small-logo">Plataforma de Ensino Profissionalizante</em>
+        <em class="small-logo">Plataforma de Ensino Personalizado</em>
 
       </div>
     </div>

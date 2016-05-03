@@ -34,6 +34,20 @@ class AppView extends View
     {
     }
 
+    public function formatarCargo($role = null) {
+      $tmp = [
+         "dad" => "Pai"
+        ,"mom" => "Mãe"
+        ,"tutor" => "Tutor"
+        ,"therapist" => "Terap."
+        ,"mediator" => "Mediad."
+        ,"coordinator" => "Coord."
+        ,"user" => "Est."
+      ];
+
+      return $tmp[$role];
+    }
+
     public function formatarGrafico($chart = null, $user_id = null) {
       $default = [
         "options" => [
@@ -42,7 +56,8 @@ class AppView extends View
           ],
           "plotOptions" => [
             "series" => [
-              "stacking" => ""
+              "stacking" => "",
+              "cursor" => 'pointer',
             ],
             "pie" => [
               "cursor" => "pointer",
@@ -115,22 +130,38 @@ class AppView extends View
             'materia' => $serie->theme_id,
           ];
 
-          $url = $url.'cms/api/calcular_serie/' . $user_id . '/' . $dados['input'] . '/' . $dados['formato'] . '/' . $dados['materia'];
+          $url = $url.'cms/api/calcular_serie/';
 
-          $response = $http->get($url, ['type' => 'json']);
+          $payload = [
+            'user_id' => $user_id,
+            'input_id' => $dados['input'],
+            'formato_grafico' => $dados['formato'],
+            'theme_id' => $dados['materia']
+          ];
 
+          if(!empty($_GET['inicio'])) {
+            $payload['inicio'] = $_GET['inicio'];
+          }
+
+          if(!empty($_GET['fim'])) {
+            $payload['fim'] = $_GET['fim'];
+          }
+
+          $response = $http->post($url, $payload, ['type' => 'json']);
+          
           $response = $response->json;
 
-
-          $default['series'][] = [
-            'id' => $serie->id,
-            'name' => $serie->name,
-            'color' => $serie->color,
-            'type' => $serie->type,
-            'input_id' => strval($serie->input_id),
-            'theme_id' => strval($serie->theme_id),
-            'data' => $response['data']
-          ];
+          if(!empty($response['data'])) {
+            $default['series'][] = [
+              'id' => $serie->id,
+              'name' => $serie->name,
+              'color' => $serie->color,
+              'type' => $serie->type,
+              'input_id' => strval($serie->input_id),
+              'theme_id' => strval($serie->theme_id),
+              'data' => $response['data']
+            ];
+          }
         }
       }
 
