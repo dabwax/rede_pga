@@ -88,6 +88,63 @@ angular.module("RedePga")
       }
   }
 }])
+
+.controller('TimelineCtrl', ['$scope', 'Feed', '$window', '$http', function($scope, Feed, $window, $http) {
+
+  $scope.lessons = [];
+
+  $http.get(baseUrl + 'timeline/api').then(function(result) {
+    //console.log(result.data);
+    $scope.lessons = result.data;
+  }, function() {
+    alert("Ocorreu um erro ao carregar os exercícios do site!");
+  });
+
+  $scope.reset_search = function()
+  {
+    $scope.search.$ = '';
+  };
+
+  $scope.role_helper = function(role)
+  {
+
+    var roles = {
+       "dad": "Pai"
+      ,"mom": "Mãe"
+      ,"tutor": "Tutor"
+      ,"therapist": "Terap."
+      ,"mediator": "Mediad."
+      ,"coordinator": "Coord."
+      ,"user": "Est."
+    };
+
+    return roles[role];
+  }
+
+  $scope.materiaAtual = false;
+
+  $scope.mostrarMateria = function(theme_id) {
+
+    if($scope.materiaAtual == false) {
+      $scope.materiaAtual = theme_id;
+    } else {
+      $scope.materiaAtual = false;
+    }
+  }
+
+  $scope.mostrarDados = function(role, actors) {
+
+
+      if(role != null) {
+        $scope.mostrar = role;
+      } else {
+        if(actors.length > 0) {
+          first = actors[Object.keys(actors)[0]];
+          $scope.mostrar = first.role;
+        }
+      }
+  }
+}])
 .controller('ExerciciosCtrl', ['$scope', '$http', '$timeout', '$interval', 'Exercicios', 'Upload', function($scope, $http, $timeout, $interval, Exercicios, Upload) {
 
   Exercicios.fetch_all().then(function(result) {

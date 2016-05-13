@@ -85,7 +85,16 @@ class FeedController extends AppController
 			$q->date_y = $q->date->format("Y");
 		}
 
-		echo json_encode(array_values($query));
+
+      $only_belongs_to_user = [];
+
+      foreach($query as $q) {
+        if($q->current_user_belongs == true) {
+          $only_belongs_to_user[] = $q;
+        }
+      }
+
+		echo json_encode(array_values($only_belongs_to_user));
 	}
 
 	public function index()

@@ -59,10 +59,12 @@
   <?php echo $this->element("../Feed/modal"); ?>
 
     <div class="card-panel grey white-text" ng-if="lessons.length == 0">
-      Não há aulas cadastradas no momento. Use o botão verde ao lado direito para adicionar uma nova.
+      Você ainda não participou de nenhuma aula.
+      <br>
+       Use o botão verde ao lado direito para participar de uma aula.
     </div>
 
-    <div class="card-panel grey lighten-1 white-text" ng-if="(lessons | filter:search:strict).length == 0">
+    <div class="card-panel grey lighten-1 white-text" ng-if="(lessons | filter:search:strict).length == 0 && search.$">
       Não foram encontradas aulas com estes termos: {{search.$}}.
     </div>
 

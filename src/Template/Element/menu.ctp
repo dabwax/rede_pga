@@ -13,6 +13,8 @@
   <ul id="submenu" class="hide-on-med-and-down">
   <li ng-class="{'selecionado': paginaAtual == 'feed'}"><i class="material-icons left">home</i><a class="" href="<?php echo $this->Url->build('/'); ?>">Feed</a> </li>
 
+  <li ng-class="{'selecionado': paginaAtual == 'timeline'}"><i class="material-icons left">timeline</i><a class="" href="<?php echo $this->Url->build('/timeline'); ?>">Linha do Tempo</a> </li>
+
   <li ng-class="{'selecionado': paginaAtual == 'evolucao'}"><i class="material-icons left">insert_chart</i><a class="" href="<?php echo $this->Url->build('/evolucao'); ?>">Evolução</a> </li>
 
   <li ng-class="{'selecionado': paginaAtual == 'batepapo'}"><i class="material-icons left">chat</i><a class="" href="<?php echo $this->Url->build('/bate-papo'); ?>">Fluxo</a> </li>
