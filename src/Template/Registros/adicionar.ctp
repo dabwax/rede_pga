@@ -1,4 +1,16 @@
+<?php echo $this->element("../Registros/custom_assets"); ?>
+
 <div class="row" ng-controller="AdicionarRegistrosCtrl">
+
+  <!-- Título da página -->
+  <div class="page-title red darken-3">
+
+    <div class="col s12">
+        <h2>Adicionar Nova Aula</h2>
+    </div>
+
+    <div class="clearfix"></div>
+  </div> <!-- .page-title -->
 
   <div class="col s12">
     <div class="card">
@@ -6,8 +18,6 @@
       <?= $this->Form->create($lesson); ?>
 
       <div class="card-content">
-        <span class="card-title">Adicionar Nova Aula</span>
-        <p>Ao avançar a página, você preencherá as informações da aula.</p>
 
         <div class="input-field">
           <strong>Data da Aula *</strong>
@@ -15,8 +25,12 @@
           <input name="date" type="text" ng-model="lesson.date" datepicker ng-change="mudouData(lesson.date)" />
         </div>
 
+
         <div class="input-field">
-          <?= $this->Form->input("observation", ['type' => 'textarea', 'class' => 'materialize-textarea ckeditor', 'label' => 'Observações']); ?>
+          <strong>Observações</strong>
+          <div class="clearfix"></div>
+          <?php echo $this->Form->input("observation", ["editor", "label" => false]); ?>
+
         </div>
 
       </div> <!-- .card-content -->

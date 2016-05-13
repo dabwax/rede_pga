@@ -21,10 +21,19 @@
     <tbody ui-sortable="sortableOptions" ng-model="items">
         <tr ng-repeat="item in items" id="item_id_{{item.id}}">
             <td>{{item.name}}</td>
-            <td>{{item.model}}</td>
+            <td>
+
+            <span class="chip" ng-if="item.belongs_to_protectors">Responsáveis</span>
+            <span class="chip" ng-if="item.belongs_to_schools">Escola</span>
+            <span class="chip" ng-if="item.belongs_to_tutors">Tutores</span>
+            <span class="chip" ng-if="item.belongs_to_users">Alunos</span>
+            <span class="chip" ng-if="item.belongs_to_therapists">Terapeutas</span>
+
+
+            </td>
             <td class="actions">
 
-                <a href="<?php echo $this->Url->build(['action' => 'edit']); ?>/{{item.id}}" class="btn amber darken-2" title="Editar"><i class="material-icons">edit</i></a>
+                <a href="<?php echo $this->Url->build(['action' => 'edit']); ?>/{{item.id}}" class="btn blue darken-2" title="Editar"><i class="material-icons">edit</i></a>
                 <a href="<?php echo $this->Url->build(['action' => 'delete']); ?>/{{item.id}}" class="btn red darken-3" title="Ocultar"><i class="material-icons">remove_circle_outline</i></a>
             </td>
         </tr>

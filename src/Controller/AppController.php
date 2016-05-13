@@ -45,15 +45,23 @@ class AppController extends Controller
 
       // Envia as credenciais do usuário logado
       $this->userLogged = $this->Auth->user();
-      $this->set('userLogged', $this->userLogged );
 
-      //$this->Auth->allow();
+      if(!empty($this->userLogged['user_id'])) {
+        $tmp = TableRegistry::get("Users");
+        $this->userLogged['user'] = $tmp->get($this->userLogged['user_id']);
+        
+      }
+        $this->set('userLogged', $this->userLogged );
 
       // Recupera todas as permissões
       $permissions = $this->getPermissions();
 
       // Roda o método de configuração de ACL
       $this->configAcl($permissions);
+
+      if($this->request->params['controller'] == "Relatorio" || $this->request->params['controller'] == "Api") {
+        $this->Auth->allow();
+      }
 
       // Recupera os atores do usuário logado
       $get_atores = $this->getAtores();
@@ -71,15 +79,16 @@ class AppController extends Controller
       // se for front-end e existir usuário logado
       if($this->isFrontEnd() && !empty($this->userLogged)) {
 
-        // vamos verificar o controller sendo acessado
-        $table = ucfirst($this->userLogged['table']);
-        $property = strtolower($this->request->params['controller']);
 
-        // se a página acessada para o model logado estiver com value 0
-        // desloga o usuário e manda ele para tela de login
-        if($permissions[ $table ]->$property == 0) {
-          return $this->redirect($this->Auth->logout());
-        }
+          // vamos verificar o controller sendo acessado
+          $table = ucfirst($this->userLogged['table']);
+          $property = strtolower($this->request->params['controller']);
+
+          // se a página acessada para o model logado estiver com value 0
+          // desloga o usuário e manda ele para tela de login
+          if($permissions[ $table ]->$property == 0) {
+            return $this->redirect($this->Auth->logout());
+          }
 
       } // isFrontEnd()
 
@@ -88,7 +97,7 @@ class AppController extends Controller
 /**
  * Função para recuperar todos os atores do usuário logado.
  */
-    public function getAtores()
+    public function getAtores($where = null)
     {
       // Busca os models
       $models = [
@@ -109,9 +118,11 @@ class AppController extends Controller
       }
 
       // WHERE da consulta
-      $where = [
-        'user_id' => $this->userLogged['user_id']
-      ];
+      if($where == null) {
+        $where = [
+          'user_id' => $this->userLogged['user_id']
+        ];
+      }
 
       // roda as consultas
       $atores = [

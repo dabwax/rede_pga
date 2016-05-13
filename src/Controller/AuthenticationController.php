@@ -26,6 +26,55 @@ class AuthenticationController extends AppController
     }
   }
 
+/**
+ * Página de escolha de perfil.
+ */
+  public function trocar_perfil($model = null, $id = null)
+  {
+    // se ainda nao selecionar
+    if(empty($model) && empty($id)) {
+      $users = TableRegistry::get("Users");
+      $username = ($this->userLogged['username']);
+
+      // Buscar em todos os atores que tenham este username
+      $where = ['username' => $username];
+      $atores_disponiveis = $this->getAtores($where);
+
+      // remove dado errado
+      unset($atores_disponiveis['Users']);
+
+      $atores = [];
+
+      // itera atores disponiveis e armazena o estudante (bug por causa do containq foi resolvido na gambiarra = marra)
+      foreach($atores_disponiveis as $key => $val) :
+        if(!empty($val)) :
+          foreach($val as $ator) :
+            // gambiarra aqui
+            $ator->user = $users->get($ator->user_id);
+
+            $ator->model = $key;
+          
+            $atores[] = $ator;
+          endforeach;
+        endif;
+      endforeach;
+
+      // envia para view
+      $this->set(compact("atores"));
+    // se tiver selecionado um perfil
+    } else {
+      $entity = TableRegistry::get($model);
+      $entity = $entity->get($id);
+
+      $entity->table = $model;
+
+      $this->Auth->setUser($entity->toArray());
+      
+      $this->Flash->success("Perfil alterado.");
+      return $this->redirect("/");
+    }
+  }
+
   public function edit()
   {
     $this->protected_area = true;

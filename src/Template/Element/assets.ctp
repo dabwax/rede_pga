@@ -1,3 +1,5 @@
+<link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+
 <!--Materialize -->
 <?= $this->Html->css('/vendors/materialize/css/materialize.min.css'); ?>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -7,6 +9,7 @@
 
 <!-- AngularJS - Framework -->
 <?= $this->Html->script('/vendors/angular.js'); ?>
+<?= $this->Html->script('/vendors/angular-sanitize.min.js'); ?>
 <script src="https://code.angularjs.org/1.4.8/i18n/angular-locale_pt-br.js"></script>
 
 <!-- Materialize - Plugin do Materialize -->
@@ -35,3 +38,5 @@
 <!-- Caminho absoluto da página acessível via JavaScript -->
 <script>var baseUrl = '<?php echo $this->Url->build("/", true); ?>';</script>
 <?= $this->Html->script('/js/main.js'); ?>
+
+<?php echo $this->fetch("custom_assets"); ?>

@@ -76,18 +76,20 @@ angular.module("RedePga")
 }])
 .controller("NovoGraficoCtrl", ["$scope", "$http", "$filter", "$timeout", function($scope, $http, $filter, $timeout) {
 
+	$scope.serieEmBranco = null;
+
 	// Recupera os dados do gráfico
 	$timeout(function() {
 		var currentChart = $("#card-grafico").data("chart");
+		$scope.user_id = $("#card-grafico").data("user_id");
 
 		if(currentChart != "undefined") {
 			$scope.emptyChart = currentChart;
-		}
-	});
 
-	// Observador do campo de formato
-	$scope.$watch("emptyChart.options.format", function (newValue, oldValue) {
-		
+			// Faz bakup da serie em branco, para ser usado no botão de adicionar
+
+			$scope.serieEmBranco = $scope.emptyChart.series[0];
+		}
 	});
 
 	// Busca todos os inputs disponíveis
@@ -121,44 +123,58 @@ angular.module("RedePga")
 	// Função chamada quando um input/matéria é definido
 	$scope.trocou = function(key) {
 
+		var materia = 0;
+
+		if($scope.emptyChart.series[key].theme_id != undefined) {
+			materia = $scope.emptyChart.series[key].theme_id;
+		}
+
 		// Busca cálculo
 		var dados = {
-			grafico: {
-				data_inicial: $scope.emptyChart.filter_start,
-				data_final: $scope.emptyChart.filter_end,
-				formato: $scope.emptyChart.format,
-				tipo: $scope.emptyChart.series[key].type
-			},
-			materia: $scope.emptyChart.series[key].theme_id,
+			formato: $scope.emptyChart.format,
+			tipo: $scope.emptyChart.series[key].type,
+			materia: materia,
 			input: $scope.emptyChart.series[key].input_id,
+			user_id: $scope.user_id
 		};
-		$http.post(baseUrl + "cms/api/calcular_serie", dados).then(function sucess(response) {
+		$http.get(baseUrl + "cms/api/calcular_serie/" + dados.user_id  + "/" +  dados.input + "/" + dados.formato + "/" + dados.materia).then(function sucess(response) {
 
-			$scope.emptyChart.options.xAxis.categories = response.data.eixo_x;
-			$scope.emptyChart.series[key].data = response.data.serie;
-						console.log($scope.emptyChart);
+			$scope.emptyChart.series[key].data = response.data.data;
 
-			// $scope.emptyChart.series[key].data = [];
+			if(response.data.type == "text") {
+				$scope.emptyChart.series[key].type = "pie";
+			}
+
 		}, function error(response) {
 
 		});
 
-		console.log($scope.emptyChart.series[key].input_id);
 	}
 
 	// Função chamada quando é adicionado uma nova série
 	$scope.adicionar = function() {
 
-		var ultima_serie = angular.copy($scope.emptyChart.series.slice(-1)[0]);
-		delete ultima_serie.$$hashKey;
 
-		ultima_serie.name = ultima_serie.name + "1";
-		ultima_serie.id = ultima_serie.id + "1";
+		var clonado = {
+			id: Math.floor((Math.random() * 10000) + 1),
+			name: 'Exemplo ' + Math.floor((Math.random() * 10000) + 1),
+			color: '#446CB3',
+			type: 'line'
+		};
 
 		$timeout(function() {
 
-			$scope.emptyChart.series.push(ultima_serie);
+			$scope.emptyChart.series.push(clonado);
 		});
 	}
+
+	// Função chamada quando é excluído uma série
+	$scope.deletarSerie = function(key) {
+		if(confirm('Voce tem certeza disto?')) {
+			$scope.emptyChart.series.splice(key, 1);
+		}
+
+		return false;
+	};
 
 }]);

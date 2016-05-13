@@ -1,13 +1,28 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 70px !important;
+}
+
+#rodape {
+  position: absolute; bottom: 0px; right: 0px; width: 100%; text-align: right;
+}
+#rodape hr {
+  border: none;
+  border-bottom: 1px dashed #CCC;
+}
+#rodape em {
+  padding-right: 20px; margin-top: 20px; display: block; padding-bottom: 20px;color: #999;
+}
+
 #search
   border none
 
   &::-webkit-input-placeholder
     color #222
-
-.search-icon
-  position absolute
-  left 20px
-  top 12px
 
 #pep-menu-btn
   display inline-block
@@ -65,3 +80,32 @@ strong
 
   h4
     color #FFF !important
+
+html
+  font-family 'Arvo' !important
+
+#slide-out
+  li
+    position relative
+
+  .menu-mobile
+    position absolute
+    right 0px
+    top 0px
+
+.pep-relatorio
+  
+  #main
+    padding-left 0px !important
+
+// Menu responsivo
+@media only screen and (max-width: 992px)
+  .side-nav.fixed
+    width 100% !important
+    transform none !important
+    position relative !important
+    padding-bottom 0px !important
+
+  #main
+    padding-left 0px !important
+

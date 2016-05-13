@@ -8,7 +8,7 @@
     <div class="clearfix"></div>
 </div> <!-- .page-title -->
 
-<div class="card">
+<div class="card col s8 offset-s2">
     <div class="card-content">
 
         <?php if(!empty($charts)) : ?>
@@ -16,6 +16,7 @@
         <thead>
             <tr>
                 <th>Título do Gráfico</th>
+                <th>Sub-Título</th>
                 <th class="actions"><?= __('Ações') ?></th>
             </tr>
         </thead>
@@ -23,9 +24,13 @@
         <?php foreach ($charts as $chart): ?>
             <tr>
                 <td><?= h($chart->name) ?></td>
+                <td><?= h($chart->subname) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $chart->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $chart->id], ['class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $chart->id)]) ?>
+
+
+              <a href="<?php echo $this->Url->build(['action' => 'edit', $chart->id]); ?>" class="btn blue darken-2" title="Editar"><i class="material-icons">edit</i></a>
+              <a href="<?php echo $this->Url->build(['action' => 'delete', $chart->id]); ?>" class="btn red darken-3" title="Ocultar" onclick="if(!confirm('Você tem certeza disso? Irá apagar o gráfico.')) { return false; }"><i class="material-icons">remove_circle_outline</i></a>
+
                 </td>
             </tr>
 

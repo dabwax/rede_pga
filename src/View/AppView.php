@@ -34,7 +34,21 @@ class AppView extends View
     {
     }
 
-    public function formatarGrafico($chart = null) {
+    public function formatarCargo($role = null) {
+      $tmp = [
+         "dad" => "Pai"
+        ,"mom" => "Mãe"
+        ,"tutor" => "Tutor"
+        ,"therapist" => "Terap."
+        ,"mediator" => "Mediad."
+        ,"coordinator" => "Coord."
+        ,"user" => "Est."
+      ];
+
+      return $tmp[$role];
+    }
+
+    public function formatarGrafico($chart = null, $user_id = null) {
       $default = [
         "options" => [
           "chart" => [
@@ -42,7 +56,15 @@ class AppView extends View
           ],
           "plotOptions" => [
             "series" => [
-              "stacking" => ""
+              "stacking" => "",
+              "cursor" => 'pointer',
+            ],
+            "pie" => [
+              "cursor" => "pointer",
+              "dataLabels" => [
+                "enabled" => "true",
+                "format" => '<b>{point.name}</b>: {point.percentage:.1f} %'
+              ]
             ]
           ],
           "xAxis" => [
@@ -50,19 +72,12 @@ class AppView extends View
           ]
         ],
         "series" => [
-          [
-            "name" => "Linha Exemplo (PHP)",
-            "color" => "red",
-            "data" => [1, 2],
-            "id" => "series-0",
-            "type" => "bar"
-          ]
         ],
         "title" => [
           "text" => "Gráfico de Demonstração"
         ],
         "subtitle" => [
-          "text" => "Subtítulo aqui"
+          "text" => ""
         ],
         "credits" => [
           "enabled" => false
@@ -108,28 +123,45 @@ class AppView extends View
           // requisição a API
           $url = $this->Url->build("/", true);
 
-          $jsonPayload = [
-            'grafico' => [
-              'data_inicial' => $chart->filter_start,
-              'data_final' => $chart->filter_end,
-              'formato' => $chart->format,
-            ],
+
+          $dados = [
+            'formato' => $chart->format,
             'input' => $serie->input_id,
             'materia' => $serie->theme_id,
           ];
-          $response = $http->post($url . 'cms/api/calcular_serie', $jsonPayload, ['type' => 'json']);
+
+          $url = $url.'cms/api/calcular_serie/';
+
+          $payload = [
+            'user_id' => $user_id,
+            'input_id' => $dados['input'],
+            'formato_grafico' => $dados['formato'],
+            'theme_id' => $dados['materia']
+          ];
+
+          if(!empty($_GET['inicio'])) {
+            $payload['inicio'] = $_GET['inicio'];
+          }
+
+          if(!empty($_GET['fim'])) {
+            $payload['fim'] = $_GET['fim'];
+          }
+
+          $response = $http->post($url, $payload, ['type' => 'json']);
+          
           $response = $response->json;
 
-          $default['series'][] = [
-            'id' => $serie->id,
-            'name' => $serie->name,
-            'color' => $serie->color,
-            'type' => $serie->type,
-            'input_id' => strval($serie->input_id),
-            'theme_id' => strval($serie->theme_id),
-            'data' =>$response['serie']
-          ];;
-          $default['options']['xAxis']['categories'] = $response['eixo_x'];
+          if(!empty($response['data'])) {
+            $default['series'][] = [
+              'id' => $serie->id,
+              'name' => $serie->name,
+              'color' => $serie->color,
+              'type' => $serie->type,
+              'input_id' => strval($serie->input_id),
+              'theme_id' => strval($serie->theme_id),
+              'data' => $response['data']
+            ];
+          }
         }
       }
 

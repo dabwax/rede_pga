@@ -84,22 +84,27 @@ class RegistrosController extends AppController
         $default_value = $config->min;
       }
 
-      $resultado['registros'][] = [
-        'id' => $input->id,
-        'type' => $input->type,
-        'model' => $input->model,
-        'name' => $input->name,
-        'config' => $config,
-        'value' => $default_value,
-        'lesson_entry_id' => false
-      ];
-      $resultado['campos'][] = [
-        'id' => $input->id,
-        'type' => $input->type,
-        'model' => $input->model,
-        'name' => $input->name,
-        'config' => json_decode($input->config),
-      ];
+      $belongs_to = "belongs_to_" . $admin_logged['table'];
+
+      if($input->$belongs_to) {
+
+        $resultado['registros'][] = [
+          'id' => $input->id,
+          'type' => $input->type,
+          'model' => $input->model,
+          'name' => $input->name,
+          'config' => $config,
+          'value' => $default_value,
+          'lesson_entry_id' => false
+        ];
+        $resultado['campos'][] = [
+          'id' => $input->id,
+          'type' => $input->type,
+          'model' => $input->model,
+          'name' => $input->name,
+          'config' => json_decode($input->config),
+        ];
+      }
     }
 
     // Itera os registros da aula
@@ -285,6 +290,21 @@ class RegistrosController extends AppController
     if($this->request->is(["post", "put"]))
     {
 
+      // Se a data do formulário for diferente da data anteriormente registrada, vamos atualizá-la
+      if($this->request->data['date'] != $aula->date->format("d/m/Y")) {
+        // Vamos formatar para o padrão da base de dados
+        $dateTime = \DateTime::createFromFormat("d/m/Y", $this->request->data['date']);
+
+        // Atualiza campo
+        $aula->date = $dateTime->format("Y-m-d");
+
+        // Salva
+        $lessons_table->save($aula);
+
+        // Devolve objeto DateTime
+        $aula->date = $dateTime;
+      }
+
       // Salva o input de matérias
       $lesson_themes_table->salvarMaterias($aula, @$this->request->data['materias'], $admin_logged);
 
@@ -312,13 +332,24 @@ class RegistrosController extends AppController
   public function excluir($id = null)
   {
     $lessons  = TableRegistry::get("Lessons");
-    $entries = $lessons->LessonEntries->find()->where(['lesson_id' => $id ])->all();
+    $lesson = $lessons->get($id);
+    $entries = $lessons->LessonEntries->find()->where(['lesson_id' => $id, 'model' => $this->userLogged['table'], 'model_id' => $this->userLogged['id'] ])->all();
 
     foreach($entries as $e) {
       $lessons->LessonEntries->delete($e);
     }
 
+    // busca todas entradas de aula desta aula
+    $entries = $lessons->LessonEntries->find()->where(['lesson_id' => $id ])->all()->toArray();
+
     $this->Flash->success("Sua participação da aula foi removida!");
+
+    // se nao houver nenhuma significa que só o ator atual participoud ela entao ela deve ser excluida
+    if(empty($entries)) {
+      $lessons->delete($lesson);
+
+      $this->Flash->success("Como apenas você participou desta aula, ela foi excluida como um todo.");
+    }
 
     return $this->redirect('/');
   }

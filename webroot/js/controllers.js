@@ -16,13 +16,29 @@ angular.module("RedePga")
 
 }])
 
-.controller('FeedCtrl', ['$scope', 'Feed', '$window', function($scope, Feed, $window) {
+.controller('FeedCtrl', ['$scope', 'Feed', '$window', '$timeout', function($scope, Feed, $window, $timeout) {
 
   $scope.lessons = [];
 
   Feed.fetch_all($window.location.search).then(function(result) {
     //console.log(result.data);
     $scope.lessons = result.data;
+
+
+    $timeout(function() {
+      var card = $("#masonry-grid").data("card");
+
+      if(card != "") {
+        
+        angular.forEach($scope.lessons, function(value) {
+          var data_formatada = value.date_d + "/" + value.date_m + "/" + value.date_y;
+
+          if(data_formatada == card) {
+            $("#modal" + value.id).openModal();
+          }
+        });
+      }
+    });
   }, function() {
     alert("Ocorreu um erro ao carregar os exercícios do site!");
   });
@@ -417,6 +433,7 @@ angular.module("RedePga")
 
 .controller('EditarRegistroCtrl', ['$scope', 'Inputs', '$timeout', function($scope, Inputs, $timeout) {
   $scope.registros = [];
+  $scope.avancar = true;
 
   $scope.init = function() {
 
@@ -433,19 +450,49 @@ angular.module("RedePga")
     });
   };
 
+  $scope.mudouData = function(data) {
+    Inputs.validar_data(data).then(function(result) {
+
+      if(result.data.status == "INDISPONÍVEL") {
+        $scope.avancar = false;
+      } else {
+        $scope.avancar = true;
+      }
+
+      Materialize.toast(result.data.message, 10000);
+
+    });
+  };
+
 }])
 
 .controller('EvolucaoCtrl', ['$scope', '$filter', function($scope, $filter) {
-  // Preenche os campos de data (inicial e final)
-  $scope.date_start   = "01/01/" + $filter('date')(new Date(), 'yyyy');
-  $scope.date_finish  = $filter('date')(new Date(), 'dd/MM/yyyy');
 
-  // Configurações dos gráficos
-  $scope.graficos = {
-    atencao_por_materia_mensal: {"options":{"chart":{"type":"line"},"plotOptions":{"series":{"stacking":"normal"}}},"series":[{"name":"Matemática","data":[1,2,4,7,3,1,10,20,1,10,20],"id":"series-0","type":"line","color":"blue","dashStyle":"ShortDash","connectNulls":true},{"data":[15,20,7,7,4,13,3,15,20,4],"id":"series-4","name":"Física","type":"line","color":"orange","dashStyle":"LongDash","connectNulls":false},{"data":[19,20,9,2,14,1,6,15,15,8],"id":"series-5","name":"Química","type":"line","color":"gray","dashStyle":"ShortDot"},{"data":[18,3,15,3,6,18,11,16,14,5],"id":"series-6","name":"Português","type":"line","color":"yellow"}],"title":{"text":"Atenção por matéria"},"credits":{"enabled":false},"loading":false,"size":{},"subtitle":{"text":"Mensal"},"xAxis":{"categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}}
-    ,atencao_independencia_autonomia_geral_mensal: {"options":{"chart":{"type":"line"},"plotOptions":{"series":{"stacking":"normal"}}},"series":[{"name":"Autonomia","data":[1,2,4,7,3,1,10,20,1,10,20],"id":"series-0","type":"line","color":"blue","dashStyle":"ShortDash","connectNulls":true},{"data":[15,20,7,7,5,13,3,15,20,4],"id":"series-4","name":"Independencia","type":"line","color":"orange","dashStyle":"LongDash","connectNulls":false},{"data":[19,20,9,2,14,1,6,15,15,8],"id":"series-5","name":"Atenção","type":"line","color":"gray","dashStyle":"ShortDot"}],"title":{"text":"Atenção/Independencia/Autonomia"},"credits":{"enabled":false},"loading":false,"size":{},"subtitle":{"text":"(Geral-Mensal)"},"xAxis":{"categories": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}}
-  };
+  $scope.graficos = [];
 
+  $("div.grafico").each(function() {
+    var dados = $(this).data("dados");
+
+    dados.options.plotOptions.series.point = {
+      events: {
+        click: function() {
+
+          var str = this.name;
+          var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+
+          if(m) {
+            var url = baseUrl + "feed?card=" + str;
+            var win = window.open(url, '_blank');
+            win.focus();
+          }
+        }
+      }
+    };
+
+    console.log(dados);
+
+    $scope.graficos.push(dados);
+  });
 }])
 
 .controller('AdicionarRegistrosCtrl', ['$scope', '$http', 'Inputs', function($scope, $http, Inputs) {
@@ -453,7 +500,6 @@ angular.module("RedePga")
   $scope.avancar = false;
 
   $scope.mudouData = function(date) {
-    console.log(date);
 
     Inputs.validar_data(date).then(function(result) {
 
@@ -465,7 +511,7 @@ angular.module("RedePga")
 
       Materialize.toast(result.data.message, 10000);
 
-    });;
+    });
 
   }
 }])

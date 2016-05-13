@@ -32,9 +32,6 @@ class ChartsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator->add('name', 'notBlank', ['rule' => 'notBlank', 'message' => 'O título do gráfico é obrigatório.']);
-        $validator->add('subname', 'notBlank', ['rule' => 'notBlank', 'message' => 'O sub-título do gráfico é obrigatório.']);
-        $validator->add('filter_start', 'notBlank', ['rule' => 'notBlank', 'message' => 'A data inicial é obrigatória.']);
-        $validator->add('filter_end', 'notBlank', ['rule' => 'notBlank', 'message' => 'A data final é obrigatória.']);
         $validator->add('format', 'notBlank', ['rule' => 'notBlank', 'message' => 'O formato do gráfico é obrigatório.']);
 
         return $validator;

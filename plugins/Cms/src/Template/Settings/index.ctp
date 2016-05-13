@@ -1,15 +1,46 @@
 <div class="row">
 
-<div class="col-lg-12">
-  <h1>Configurações do Sistema</h1>
-  <hr>
+<div class="page-title">
+  <h2>Configurações</h2>
+</div>
 
-  <p>Esta página é destinada ao desenvolvedor.</p>
 
-  <a href="<?php echo $this->Url->build(['action' => 'backup']); ?>" class="btn btn-lg btn-success">Efetuar Backup da Base de Dados</a>
+<div class="clearfix"></div>
+
+<div class="card-panel">
+
+<div class="page-title">
+  <h2 style="font-size: 16px;">Base de Dados</h2>
+</div>
+<div class="clearfix"></div>
+  <a href="<?php echo $this->Url->build(['action' => 'backup']); ?>" class="btn btn-lg btn-success"><i class="material-icons">file_download</i> Fazer Download</a>
 
   <div class="clearfix"></div>
 
-  <a href="<?php echo $this->Url->build(['action' => 'delete_all']); ?>" class="btn btn-sm btn-danger mt20" onclick="if(!confirm('Você tem certeza disto? Vai apagar TODOS os dados! Esta ação é PERMANENTE!')) { return false; }">Limpar Base de Dados</a>
+  <div class="page-title">
+    <h2 style="font-size: 16px;">Importação</h2>
+  </div>
+
+  <div class="clearfix"></div>
+
+    <div class="field col s4">
+      <label>Aluno</label>
+      <select name="" class="browser-default" id="">
+        <option value="">Selecionar</option>
+        <option value="">JP</option>
+      </select>
+    </div>
+    <div class="field col s4">
+      <label>Arquivo SQL</label>
+      <input type="file">
+    </div>
+    <div class="field col s4">
+    <button class="btn orange">Importar</button>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="card-panel red white-text">A importação ainda não está funcionando!</div>
+
+  <div class="clearfix"></div>
 </div>
 </div>

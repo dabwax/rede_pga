@@ -16,12 +16,20 @@
   </div>
 
   <?php if($userLogged) : ?>
-    <?php echo $this->element("menu"); ?>
+    <?php if($this->name != "Relatorio") : ?>
+      <?php echo $this->element("menu"); ?>
+    <?php endif; ?>
   <?php endif; ?>
 
   <div id="main" class="container">
     <?= $this->fetch('content') ?>
+
   </div>
+
+    <footer id="rodape">
+      <hr>
+      <em>PEP Plataforma de Ensino Profissinalizante. Todos os direitos reservados.</em>
+    </footer>
 
   <?php echo $this->element("/assets"); ?>
     <?= $this->Flash->render() ?>

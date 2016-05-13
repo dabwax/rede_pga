@@ -1,41 +1,106 @@
-<div class="inputs form large-10 medium-9 columns" ng-controller="CmsInputCtrl">
+<div class="page-title red darken-3">
+    <h2>Editar Input <small><?php echo $input->name; ?></small></h2>
+
+    <div class="actions">
+    <a href="<?php echo $this->Url->build(['action' => 'index']); ?>" class="btn grey"><i class="material-icons left">keyboard_backspace</i> Voltar</a>
+        <a href="<?php echo $this->Url->build(['action' => 'add']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">add</i> novo</a>
+
+    </div> <!-- .actions -->
+
+    <div class="clearfix"></div>
+</div> <!-- .page-title -->
+
+<div class="card-panel" ng-controller="CmsInputCtrl" ng-init='input = <?php echo json_encode($input); ?>;'>
 
     <shortcut></shortcut>
 
-    <a href="<?php echo $this->Url->build(['action' => 'index']); ?>" class="btn btn-default pull-right">Listar Inputs</a>
-    <h2>Editar Input "<?php echo $input->name; ?>"</h2>
-    <hr>
+  <?= $this->Form->create($input) ?>
 
-    <?= $this->Form->create($input) ?>
-    <fieldset ng-init='input = <?php echo json_encode($input); ?>;'>
-        <?php
-            echo $this->Form->input('type', ['label' => 'Tipo', 'options' => ['calendario' => 'Calendário', 'intervalo_tempo' => 'Intervalo de Tempo', 'registro_textual' => 'Registro Textual', 'escala_numerica' => 'Escala Numérica', 'escala_texto' => 'Escala de Texto', 'numero' => 'Número', 'texto_privativo' => 'Texto Privativo'], 'class' => 'form-control', 'ng-model' => 'input.type' ]);
-            echo $this->Form->input('model', ['label' => 'Modelo', 'options' => ['All' => 'Todos', 'Protectors' => 'Responsáveis', 'Schools' => 'Escola', 'Tutors' => 'Tutor', 'Therapists' => 'Terapeuta'], 'class' => 'form-control' ]);
-            echo $this->Form->input('name', ['label' => 'Nome', 'class' => 'form-control']);
-        ?>
+  <?php echo $this->Form->input('name', ['label' => 'Nome', 'class' => 'form-control']); ?>
 
-        <div class="config" ng-if="input.type == 'escala_numerica'">
-            <?php echo $this->Form->input('config.min', ['label' => 'Valor Mínimo', 'class' => 'form-control', 'ng-model' => 'input.config.min']); ?>
-            <?php echo $this->Form->input('config.max', ['label' => 'Valor Máximo', 'class' => 'form-control', 'ng-model' => 'input.config.max']); ?>
-        </div>
+  <strong>Tipo</strong>
+  <?php
+  echo $this->Form->input('type', [
+  'label' => false,
+  'div' => false,
+   'options' => [
+       'calendario' => 'Calendário',
+       'intervalo_tempo' => 'Intervalo de Tempo',
+       'registro_textual' => 'Registro Textual',
+       'escala_numerica' => 'Escala Numérica',
+       'escala_texto' => 'Escala de Texto',
+       'numero' => 'Número',
+       'texto_privativo' => 'Texto Privativo'
+  ],
+  'class' => 'browser-default',
+  'ng-model' => 'input.type'
+  ]); ?>
 
-        <div class="config" ng-if="input.type == 'escala_texto'">
+  <strong>Atores</strong>
 
-            <div class="clearfix"></div>
+  <p>
+    <input type="hidden" name="belongs_to_schools" value="0">
+    <input type="checkbox" name="belongs_to_schools" id="belongs_to_schools" value="1" <?php if($input->belongs_to_schools == 1) :?>checked<?php endif; ?>>
+    <label for="belongs_to_schools">Escolas?</label>
+  </p>
 
-            <a href="javascript:;" class="btn btn-xs btn-info" style="margin-bottom: 20px; margin-top: 20px;" ng-click="adicionar_mais()">Adicionar +</a>
+  <p>
+    <input type="hidden" name="belongs_to_tutors" value="0">
+    <input type="checkbox" name="belongs_to_tutors" id="belongs_to_tutors" value="1" <?php if($input->belongs_to_tutors == 1) :?>checked<?php endif; ?>>
+    <label for="belongs_to_tutors">Tutores?</label>
+  </p>
 
-            <div class="clearfix"></div>
+  <p>
+    <input type="hidden" name="belongs_to_protectors" value="0">
+    <input type="checkbox" name="belongs_to_protectors" id="belongs_to_protectors" value="1" <?php if($input->belongs_to_protectors == 1) :?>checked<?php endif; ?>>
+    <label for="belongs_to_protectors">Responsáveis?</label>
+  </p>
 
-            <div class="form-group">
-                <textarea class="form-control" name="config[options][{{index}}]" ng-repeat="(index, option) in input.config.options track by $index" placeholder="Preencha com um nome">{{option}}</textarea>
-            </div>
-        </div>
-    </fieldset>
+  <p>
+    <input type="hidden" name="belongs_to_users" value="0">
+    <input type="checkbox" name="belongs_to_users" id="belongs_to_users" value="1" <?php if($input->belongs_to_users == 1) :?>checked<?php endif; ?>>
+    <label for="belongs_to_users">Alunos?</label>
+  </p>
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-floppy-o"></i> Salvar</button>
+  <p>
+    <input type="hidden" name="belongs_to_therapists" value="0">
+    <input type="checkbox" name="belongs_to_therapists" id="belongs_to_therapists" value="1" <?php if($input->belongs_to_therapists == 1) :?>checked<?php endif; ?>>
+    <label for="belongs_to_therapists">Terapeutas?</label>
+  </p>
+
+
+  <div class="config" ng-if="input.type == 'escala_numerica'">
+    <strong>Configuração Escala Numérica</strong>
+    <div class="clearfix"></div>
+
+
+    <div class="col s6">
+      <?php echo $this->Form->input('config.min', ['label' => 'Valor Mínimo', 'class' => 'form-control', 'ng-model' => 'input.config.min']); ?>
     </div>
+
+    <div class="col s6">
+      <?php echo $this->Form->input('config.max', ['label' => 'Valor Máximo', 'class' => 'form-control', 'ng-model' => 'input.config.max']); ?>
+    </div>
+
+  </div> <!-- escala_numerica -->
+
+  <div class="config" ng-if="input.type == 'escala_texto'">
+    <strong>Configuração Escala de Texto</strong>
+
+      <div class="clearfix"></div>
+
+      <a href="javascript:;" class="btn btn-xs btn-info" style="margin-bottom: 20px; margin-top: 20px;" ng-click="adicionar_mais()">Adicionar +</a>
+
+      <div class="clearfix"></div>
+
+      <div class="form-group">
+          <textarea class="form-control" name="config[options][{{index}}]" ng-repeat="(index, option) in input.config.options track by $index" placeholder="Preencha com um nome">{{option}}</textarea>
+      </div>
+  </div> <!-- escala_texto -->
+
+  <div class="form-group">
+    <button type="submit" class="btn"><i class="material-icons">save</i> Salvar</button>
+  </div>
 
     <?= $this->Form->end() ?>
 </div>

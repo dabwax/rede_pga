@@ -23,8 +23,8 @@
             <td><?= h($theme->name) ?></td>
             <td class="actions">
 
-                              <a href="<?php echo $this->Url->build(['action' => 'edit', $theme->id]); ?>" class="btn amber darken-2" title="Editar"><i class="material-icons">edit</i></a>
-                              <a href="<?php echo $this->Url->build(['action' => 'delete', $theme->id]); ?>" class="btn red darken-3" title="Ocultar"><i class="material-icons">remove_circle_outline</i></a>
+              <a href="<?php echo $this->Url->build(['action' => 'edit', $theme->id]); ?>" class="btn blue darken-2" title="Editar"><i class="material-icons">edit</i></a>
+              <a href="<?php echo $this->Url->build(['action' => 'delete', $theme->id]); ?>" class="btn red darken-3" title="Ocultar"><i class="material-icons">remove_circle_outline</i></a>
 
             </td>
         </tr>

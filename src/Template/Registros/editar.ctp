@@ -1,3 +1,4 @@
+<?php echo $this->element("../Registros/custom_assets"); ?>
 
 <div class="row">
   <!-- Título da página -->
@@ -19,27 +20,21 @@
 
         <?= $this->Form->create($aula); ?>
 
-        <div class="form-body">
+        <div class="form-body" ng-init="lesson_date = '<?= $aula->date->format('d/m/Y'); ?>'">
 
-          <?php if(!empty($_GET['status']) && $_GET['status'] == "sucesso") : ?>
-            <p class="sucesso">
-              <i class="fa fa-check-square-o"></i>
-              <span>
-              Salvo!</span>
-            </p> <!-- .sucesso -->
-          <?php endif; ?>
+          <div class="col s12 l8">
 
-          <div class="col s8">
+            <strong>Inputs</strong>
 
             <div class="form-group campo campo-{{indice}}" ng-repeat="(indice, registro) in registros">
 
-              <div class="col s3">
+              <div class="col s4 l3">
 
                   <span class="label label-primary">{{registro.name}}</span>
 
               </div> <!-- .col-md-3 -->
 
-              <div class="col s9">
+              <div class="col s8 l9">
 
                   <input name="registros[{{indice}}][id]" ng-model="registro.id" type="hidden" value="{{registro.id}}" class="form-control">
                   <input name="registros[{{indice}}][status]" ng-model="registro.status" type="hidden" value="{{registro.status}}" class="form-control">
@@ -57,7 +52,7 @@
                 </div> <!-- intervalo_tempo -->
 
                 <div ng-if="registro.type === 'registro_textual'">
-                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control"></textarea>
+                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control" editor></textarea>
                 </div> <!-- registro_textual -->
 
                 <div ng-if="registro.type === 'escala_numerica'">
@@ -80,7 +75,7 @@
                 </div> <!-- numero -->
 
                 <div ng-if="registro.type === 'texto_privativo'">
-                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control"></textarea>
+                  <textarea id="input{{registro.id}}" name="registros[{{indice}}][value]" ng-model="registro.value" class="form-control" editor></textarea>
                 </div> <!-- numero -->
 
               </div> <!-- .col-md-8 -->
@@ -91,7 +86,7 @@
 
           </div> <!-- .col-lg-8 -->
 
-          <div class="col s4">
+          <div class="col s12 l4">
 
             <div class="campo" ng-if="!admin_logged.clinical_condition">
               <strong>Matérias</strong>
@@ -129,16 +124,34 @@
 
           <div class="clearfix"></div>
 
+          <div class="col s12">
+
+
+            <strong>Observações</strong>
+
+            <div class="clearfix"></div>
+
+            <?php echo $this->Form->input("observation", ["editor", "label" => false]); ?>
+
+
+            <strong>Data da Aula</strong>
+
+            <div class="clearfix"></div>
+
+            <?php echo $this->Form->input("date", ["label" => false, "type" => "text", "value" => $aula->date->format('d/m/Y'), 'ng-model' => 'lesson_date', 'ng-change' => 'mudouData(lesson_date)', 'datepicker' ]); ?>
+
+            <a href="<?php echo $this->Url->build(['action' => 'excluir', $aula->id]); ?>" class="btn-remover-dados-aula" onclick="if(!confirm('Você tem certeza disto? Esta ação é permanente!')) { return false; }">remover meus dados desta aula</a></small>
+          </div>
+
         </div> <!-- .form-body -->
 
         <div class="form-actions" style="margin-bottom: 20px;">
           <div class="row">
             <div class="col-md-offset-3 col-md-9">
-              <button type="submit" class="btn btn-block btn-success green">
+              <button type="submit" ng-disabled="!avancar" class="btn btn-block btn-success green">
                 <i class="fa fa-pencil"></i> Salvar dados
               </button>
 
-              <small class="text-center" style="display: block; margin-top: 10px;"><a href="<?php echo $this->Url->build(['action' => 'excluir', $aula->id]); ?>" style="color: #f00 !important;" onclick="if(!confirm('Você tem certeza disto? Esta ação é permanente!')) { return false; }">remover meus dados desta aula</a></small>
             </div>
           </div>
         </div> <!-- .form-actions -->

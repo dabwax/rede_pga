@@ -8,26 +8,17 @@
     <div class="clearfix"></div>
 </div> <!-- .page-title -->
 
-<div id="card-grafico" class="card" ng-controller="NovoGraficoCtrl" data-chart='<?php echo $this->formatarGrafico($chart); ?>'>
+<div id="card-grafico" class="card" ng-controller="NovoGraficoCtrl" data-chart='<?php echo $this->formatarGrafico($chart, $user_id); ?>' data-user_id='<?php echo $user_id; ?>'>
     <div class="card-content">
 
         <?= $this->Form->create($chart) ?>
 
-        <div id="demonstracao" class="col s6">
-            <p><strong>Demonstração:</strong></p>
 
-            <highchart id="grafico_demonstracao" config="emptyChart"></highchart>
-        </div> <!-- #demonstracao -->
-
-        <div class="col s6">
+        <div class="col s12 l6">
 
           <?php echo $this->Form->input("name", ["id" =>"chart_name", "ng-model" =>"emptyChart.title.text","label"=>"Título"]) ?>
 
           <?php echo $this->Form->input("subname", ["id" =>"chart_subname", "ng-model" =>"emptyChart.subtitle.text","label"=>"Sub-título"]) ?>
-
-          <?php echo $this->Form->input("filter_start", ["id" =>"date_start", "datepicker", "ng-model" =>"emptyChart.filter_start","label"=>"Filtro dos Dados (Data Inicial - apenas para demonstração)", "ng-change" => "mudouGrafico()"]) ?>
-
-          <?php echo $this->Form->input("filter_end", ["id" =>"date_end", "datepicker", "ng-model" =>"emptyChart.filter_end","label"=>"Filtro dos Dados (Data Final - apenas para demonstração)", "ng-change" => "mudouGrafico()"]) ?>
 
           <p>
             <input name="format" type="radio" id="mensal" ng-model="emptyChart.format" ng-change="mudouGrafico()" value="mensal" />
@@ -46,10 +37,30 @@
                 <a href="javascript:;" class="btn red" ng-click="adicionar()">Adicionar Série</a>
 
                 <div class="serie-item pink lighten-4" style="margin-top: 10px;" ng-repeat="(key, value) in emptyChart.series track by $index">
+
+                    <a href="javascript:void(0);" class="btn-deletar-serie" ng-click="deletarSerie(key)"><i class="material-icons">delete_forever</i></a>
+
                     <label for="">Título</label>
                     <input type="text" name="chart_series[{{key}}][name]" ng-model="emptyChart.series[key].name">
+
                     <label for="">Cor</label>
-                    <input type="text" name="chart_series[{{key}}][color]" ng-model="emptyChart.series[key].color">
+
+                    <select class="browser-default" name="chart_series[{{key}}][color]" ng-model="emptyChart.series[key].color">
+                      <option value="#F22613">Vermelho</option>
+                      <option value="#DB0A5B">Rosa</option>
+                      <option value="#446CB3">Azul Escuro</option>
+                      <option value="#19B5FE">Azul Claro</option>
+                      <option value="#8E44AD">Roxo</option>
+                      <option value="#87D37C">Verde Oliva</option>
+                      <option value="#26A65B">Verde Eucalipto</option>
+                      <option value="#1E824C">Verde Escuro</option>
+                      <option value="#F89406">Laranja</option>
+                      <option value="#F2784B">Salmão</option>
+                      <option value="#F9BF3B">Amarelo</option>
+                      <option value="#6C7A89">Cinza Escuro</option>
+                      <option value="#D2D7D3">Cinza Claro</option>
+                    </select>
+
                     <label for="">Tipo</label>
 
                     <select name="chart_series[{{key}}][type]" ng-model="emptyChart.series[key].type" class="browser-default">
@@ -81,6 +92,12 @@
         <button class="btn btn-primary btn-block"><i class="fa fa-floppy-o"></i> Salvar</button>
 
         </div> <!-- .col -->
+
+        <div id="demonstracao" class="col s12 l6">
+            <p><strong>Demonstração:</strong></p>
+
+            <highchart id="grafico_demonstracao" config="emptyChart"></highchart>
+        </div> <!-- #demonstracao -->
 
         <?php echo $this->Form->end(); ?>
 

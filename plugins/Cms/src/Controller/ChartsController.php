@@ -57,8 +57,11 @@ class ChartsController extends AppController
           ,"bar" =>"Barra"
           ,"pie" =>"Pizza"
         ];
+
+        $user_id = $this->currentUser('user_id');
+
         // Envia dados para a view
-        $this->set(compact('chart', 'themes', "types"));
+        $this->set(compact('chart', 'themes', "types", "user_id"));
     }
 
     /**
@@ -82,7 +85,7 @@ class ChartsController extends AppController
             if ($this->Charts->save($chart)) {
 
                 // Alerta e redirecionamento
-                $this->Flash->success(__('O gráfico foi cadastrado cmo sucesso.'));
+                $this->Flash->success(__('O gráfico foi cadastrado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('Não foi possível salvar o gráfico.'));
@@ -98,8 +101,11 @@ class ChartsController extends AppController
           ,"bar" =>"Barra"
           ,"pie" =>"Pizza"
         ];
+
+        $user_id = $this->currentUser('user_id');
+
         // Envia dados para a view
-        $this->set(compact('chart', 'themes', "types"));
+        $this->set(compact('chart', 'themes', "types", "user_id"));
     }
 
     /**
@@ -111,7 +117,7 @@ class ChartsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        //$this->request->allowMethod(['post', 'delete']);
         $chart = $this->Charts->get($id);
         if ($this->Charts->delete($chart)) {
             $this->Flash->success(__('O gráfico foi excluído.'));
