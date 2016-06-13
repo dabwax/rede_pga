@@ -4,7 +4,21 @@ angular.module("RedePga")
 
   $scope.usuarioAtual = function(campo) {
 
-    console.log($scope.usuarioLogado);
+    if(campo == 'tipoDeAtor') {
+      var roles = {
+         "dad": "Pai"
+        ,"mom": "Mãe"
+        ,"tutor": "Tutor"
+        ,"therapist": "Terap."
+        ,"mediator": "Mediad."
+        ,"coordinator": "Coord."
+        ,"user": "Est."
+      };
+
+      return roles[$scope.usuarioLogado['role']];
+    } else {
+      return $scope.usuarioLogado[campo];
+    }
     // if(campo == 'tipoDeAtor') {
     //   return $scope.userLogged[campo];
     // } else {

@@ -18,7 +18,7 @@ gulp.task('css', function () {
         'webroot/stylesheets/pages',
         'webroot/stylesheets/sections']}))
         .pipe(autoprefixer())
-        .pipe(minifyCSS())
+        // .pipe(minifyCSS())
         .pipe(rename('application.css'))
         .pipe(gulp.dest('webroot/'))
         .pipe(livereload());
