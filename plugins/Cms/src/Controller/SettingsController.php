@@ -21,9 +21,23 @@ class SettingsController extends AppController
       $host = $config['host'];
       $user = $config['username'];
       $pass = $config['password'];
-      $name = 'abacate';
+      $name = 'pep';
 
       $script_path = $this->request->data['dump']['tmp_name'];
+
+      // clear it before
+      $mysqli = new \mysqli($host, $user, $pass, $name);
+      $mysqli->query('SET foreign_key_checks = 0');
+      if ($result = $mysqli->query("SHOW TABLES"))
+      {
+          while($row = $result->fetch_array(MYSQLI_NUM))
+          {
+              $mysqli->query('DROP TABLE IF EXISTS '.$row[0]);
+          }
+      }
+
+      $mysqli->query('SET foreign_key_checks = 1');
+      $mysqli->close();
 
 
       // Connect to MySQL server
@@ -35,7 +49,7 @@ class SettingsController extends AppController
       mysql_query('SET character_set_connection=utf8');
       mysql_query('SET character_set_client=utf8');
       mysql_query('SET character_set_results=utf8');
-      
+
       // Temporary variable, used to store current query
       $templine = '';
       // Read in entire file
@@ -52,12 +66,16 @@ class SettingsController extends AppController
       // If it has a semicolon at the end, it's the end of the query
       if (substr(trim($line), -1, 1) == ';')
       {
+
+          $templine = str_replace('""', '0', $templine);
           // Perform the query
           mysql_query($templine) or print('Error performing query \'<strong>' . $templine . '\': ' . mysql_error() . '<br /><br />');
           // Reset temp variable to empty
           $templine = '';
       }
       }
+      die();
+
       $this->Flash->success(__('Importação efetuada com sucesso.'));
 
       return $this->redirect(['action' => 'index']);
@@ -153,6 +171,9 @@ class SettingsController extends AppController
           {
             $row[$j] = addslashes($row[$j]);
             $row[$j] = ereg_replace("\n","\\n",$row[$j]);
+
+            $row[$j] = mysql_real_escape_string($row[$j]);
+            
             if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
             if ($j < ($num_fields-1)) { $return.= ','; }
           }
