@@ -1,5 +1,18 @@
 angular.module("RedePga")
 
+.controller('ApplicationCtrl', ['$scope', '$http', function($scope, $http) {
+
+  $scope.usuarioAtual = function(campo) {
+
+    console.log($scope.usuarioLogado);
+    // if(campo == 'tipoDeAtor') {
+    //   return $scope.userLogged[campo];
+    // } else {
+    //   return $scope.userLogged[campo];
+    // }
+  }
+
+}])
 .controller('AdminInputsCtrl', ['$scope', '$http', function($scope, $http) {
 
   $scope.sortableOptions = {
@@ -29,7 +42,7 @@ angular.module("RedePga")
       var card = $("#masonry-grid").data("card");
 
       if(card != "") {
-        
+
         angular.forEach($scope.lessons, function(value) {
           var data_formatada = value.date_d + "/" + value.date_m + "/" + value.date_y;
 
@@ -442,7 +455,7 @@ angular.module("RedePga")
     $scope.admin_logged = $("#registros-container").data('admin-logged');
     $scope.lesson_id = $("#registros-container").data('lesson-id');
 
-    console.log($scope.lesson_id);
+    // console.log($scope.lesson_id);
 
     Inputs.fetch_all($scope.lesson_id).then(function(result) {
       $scope.registros = result.data.registros;
@@ -489,7 +502,7 @@ angular.module("RedePga")
       }
     };
 
-    console.log(dados);
+    // console.log(dados);
 
     $scope.graficos.push(dados);
   });
@@ -571,7 +584,7 @@ angular.module("RedePga")
 
   $scope.keyPressed = function(e) {
 
-    console.log(e.which);
+    // console.log(e.which);
     if(e.which == 2)
     {
       $scope.adicionar_mais();

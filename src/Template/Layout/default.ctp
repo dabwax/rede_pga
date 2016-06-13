@@ -9,7 +9,7 @@
   <?= $this->Html->css('/application.css'); ?>
   <title>PEP - Plataforma de Ensino Personalizado</title>
 </head>
-<body class="pep-login pep-<?php echo strtolower($this->request->params['controller']); ?>">
+<body ng-controller="ApplicationCtrl" ng-init='usuarioLogado = <?php echo json_encode($userLogged); ?>' class="pep-login pep-<?php echo strtolower($this->request->params['controller']); ?>">
 
   <div class="loader" data-loading>
     <?php echo $this->Html->image("spinner.gif") ?>

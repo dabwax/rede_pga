@@ -26,6 +26,10 @@
 
             <strong>Inputs</strong>
 
+            <div class="alert" ng-if="registros.length == 0">
+              Não há inputs atualmente para o seu tipo de ator ({{usuarioAtual('teste')}}).
+            </div>
+
             <div class="form-group campo campo-{{indice}}" ng-repeat="(indice, registro) in registros">
 
               <div class="col s4 l3">

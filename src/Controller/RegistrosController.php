@@ -8,33 +8,6 @@ class RegistrosController extends AppController
 {
   public $protected_area = true;
 
-  // OBS: O formato da data usado aqui é "yyyy-MM-dd".
-  public function api_validar_data()
-  {
-    $this->autoRender = false;
-
-    // Objetos de tabela
-    $lessons_table = TableRegistry::get("Lessons");
-
-    // Busca o registro da aula na data especificada
-    $date = \DateTime::createFromFormat("d/m/Y", $_GET['data']);
-
-    $lesson = $lessons_table->find()->where(['date' => $date->format("Y-m-d") ])->first();
-
-    $return = [];
-
-    if($lesson) {
-      $return['status']   = "INDISPONÍVEL";
-      $return['message']  = "INDISPONÍVEL! Já existe uma aula nesta data.";
-    } else {
-      $return['status']   = "DISPONÍVEL";
-      $return['message']  = "Esta data está DISPONÍVEL!";
-    }
-
-    echo json_encode($return);
-
-  }
-
   public function api_inputs($lesson_id)
   {
     $this->autoRender = false;
@@ -248,15 +221,28 @@ class RegistrosController extends AppController
       if(empty($this->request->data['date'])) {
         $this->Flash->error("Não foi possível cadastrar a aula. Verifique os dados preenchidos.");
       } else {
-        $dateTime = \DateTime::createFromFormat("d/m/Y", $this->request->data['date']);
 
-        $this->request->data['date'] = $dateTime->format("Y-m-d");
-        $this->request->data['user_id'] = $admin_logged['user_id'];
+        // Busca o registro da aula na data especificada
+        $date = \DateTime::createFromFormat("d/m/Y", $this->request->data['date']);
 
-        $lesson = $lessons_table->patchEntity($lesson, $this->request->data);
-        $lessons_table->save($lesson);
+        $aulaJaExiste = $lessons_table->find()->where(['date' => $date->format("Y-m-d") ])->first();
 
-        $this->Flash->success("A aula foi criada com sucesso.");
+        if($aulaJaExiste) {
+          $this->Flash->error(" Algum autor já a incluiu registros nesta data. Porém, você também pode adicionar informações a esta aula.");
+
+          return $this->redirect(['action' => 'editar', $aulaJaExiste->id]);
+        } else {
+
+          $dateTime = \DateTime::createFromFormat("d/m/Y", $this->request->data['date']);
+
+          $this->request->data['date'] = $dateTime->format("Y-m-d");
+          $this->request->data['user_id'] = $admin_logged['user_id'];
+
+          $lesson = $lessons_table->patchEntity($lesson, $this->request->data);
+          $lessons_table->save($lesson);
+
+          $this->Flash->success("A aula foi criada com sucesso.");
+        }
 
         return $this->redirect(['action' => 'editar', $lesson->id]);
       }
