@@ -11,24 +11,11 @@ class SchoolsTable extends Table
 /**
  * Finder para autenticação.
  */
-    public function findAuthCoordinator($query, $options)
+    public function findAuth($query, $options)
     {
-        $query
-            ->select(['id', 'user_id', 'instituition_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
-            ->where(['role' => 'coordinator']);
+        $query->select(['id', 'user_id', 'instituition_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin']);
 
         return $query;
     }
 
-/**
- * Finder para autenticação.
- */
-    public function findAuthMediator($query, $options)
-    {
-        $query
-            ->select(['id', 'user_id', 'instituition_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
-            ->where(['role' => 'mediator']);
-
-        return $query;
-    }
 }

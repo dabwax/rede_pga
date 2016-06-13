@@ -20,7 +20,7 @@ class AuthenticationController extends AppController
       $this->Auth->config('authenticate', [
         'Form' => [
            'userModel' => $ator_selecionado['table']
-          ,'finder' => 'auth' . ucfirst($ator_selecionado['role'])
+          ,'finder' => 'auth'
         ],
       ]);
     }
@@ -109,13 +109,13 @@ class AuthenticationController extends AppController
 
   // função utilizada para detectar o table/role do ator selecionado
   private function detectarAtor() {
-    $tmp = explode(".", @$this->request->data['role']);
+    $tmp = @$this->request->data['role'];
 
     if(!empty($this->request->data['role'])) {
       return [
-         'table' => $tmp[0]
-        ,'role' => $tmp[1]
-        ,'model' => TableRegistry::get(ucfirst($tmp[0]))
+         'table' => $tmp
+        ,'role' => ''
+        ,'model' => TableRegistry::get(ucfirst($tmp))
       ];
     } else {
       return false;

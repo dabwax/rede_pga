@@ -30,8 +30,10 @@ angular.module("RedePga")
 .controller('AdminInputsCtrl', ['$scope', '$http', function($scope, $http) {
 
   $scope.sortableOptions = {
-    update: function(e, ui) {
+    stop: function(e, ui) {
       var data = $(this).sortable('serialize');
+
+      console.log(data);
 
       $http.get(baseUrl + "cms/inputs/sortable?" + data).then(function(result) {
 
@@ -51,21 +53,6 @@ angular.module("RedePga")
     //console.log(result.data);
     $scope.lessons = result.data;
 
-
-    $timeout(function() {
-      var card = $("#masonry-grid").data("card");
-
-      if(card != "") {
-
-        angular.forEach($scope.lessons, function(value) {
-          var data_formatada = value.date_d + "/" + value.date_m + "/" + value.date_y;
-
-          if(data_formatada == card) {
-            $("#modal" + value.id).openModal();
-          }
-        });
-      }
-    });
   }, function() {
     alert("Ocorreu um erro ao carregar os exercícios do site!");
   });
@@ -116,13 +103,30 @@ angular.module("RedePga")
   }
 }])
 
-.controller('TimelineCtrl', ['$scope', 'Feed', '$window', '$http', function($scope, Feed, $window, $http) {
+.controller('TimelineCtrl', ['$scope', 'Feed', '$window', '$http', '$timeout', function($scope, Feed, $window, $http, $timeout) {
 
   $scope.lessons = [];
 
   $http.get(baseUrl + 'timeline/api').then(function(result) {
     //console.log(result.data);
     $scope.lessons = result.data;
+
+
+    $timeout(function() {
+      var card = $("#cd-timeline").data("card");
+
+      if(card != "") {
+
+        angular.forEach($scope.lessons, function(value) {
+          var data_formatada = value.date_d + "/" + value.date_m + "/" + value.date_y;
+
+          if(data_formatada == card) {
+            $("#modal" + value.id).openModal();
+          }
+        });
+      }
+    });
+
   }, function() {
     alert("Ocorreu um erro ao carregar os exercícios do site!");
   });
@@ -462,6 +466,13 @@ angular.module("RedePga")
   $scope.registros = [];
   $scope.avancar = true;
 
+  $scope.loadItems = function($query) {
+    
+    console.log($("#registros-container").data("hashtags-disponiveis"));
+    
+    return $("#registros-container").data("hashtags-disponiveis");
+  }
+
   $scope.init = function() {
 
     $scope.hashtags = $("#registros-container").data('hashtags');
@@ -508,7 +519,7 @@ angular.module("RedePga")
           var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
 
           if(m) {
-            var url = baseUrl + "feed?card=" + str;
+            var url = baseUrl + "timeline?card=" + str;
             var win = window.open(url, '_blank');
             win.focus();
           }
@@ -551,22 +562,18 @@ angular.module("RedePga")
 
   $scope.roleChecked = false;
   $scope.roles = {
-    'tutors.tutor' : 'Tutor(a)',
-    'schools.mediator' : 'Mediador(a)',
-    'schools.coordinator' : 'Coordenador(a)',
-    'protectors.dad' : 'Pai',
-    'protectors.mom' : 'Mãe',
-    'therapists.therapist' : 'Terapeuta',
-    'users.user' : 'Aluno(a)',
+    'tutors' : 'Tutor',
+    'schools' : 'Escola (Coordenação/Professor/Mediador/Outros)',
+    'protectors' : 'Família (Pai/Mãe/Outros)',
+    'therapists' : 'Terapeuta',
+    'users' : 'Aluno(a)',
   };
   $scope.roles_icons = {
-    'tutors.tutor' : 'graduation-cap',
-    'schools.mediator' : 'users',
-    'schools.coordinator' : 'building',
-    'protectors.dad' : 'male',
-    'protectors.mom' : 'female',
-    'therapists.therapist' : 'user-md',
-    'users.user' : 'user',
+    'tutors' : 'graduation-cap',
+    'schools' : 'building',
+    'protectors' : 'male',
+    'therapists' : 'user-md',
+    'users' : 'user'
   };
 
     $scope.setRole = function($role)

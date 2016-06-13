@@ -24,24 +24,11 @@ class ProtectorsTable extends Table
 /**
  * Finder para autenticação.
  */
-    public function findAuthDad($query, $options)
+    public function findAuth($query, $options)
     {
-        $query
-            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
-            ->where(['role' => 'dad']);
+        $query->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin']);
 
         return $query;
     }
 
-/**
- * Finder para autenticação.
- */
-    public function findAuthMom($query, $options)
-    {
-        $query
-            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
-            ->where(['role' => 'mom']);
-
-        return $query;
-    }
 }

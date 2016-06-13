@@ -39,7 +39,7 @@
       <div class="clearfix"></div>
   </div> <!-- .page-title -->
 
-  <div id="masonry-grid" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}' data-card="<?php echo @$_GET['card']; ?>">
+  <div id="masonry-grid" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}'>
 
     <!-- Loop -->
     <div masonry-tile class="tile col s12 m4" ng-if="lessons.length > 0" ng-repeat="lesson in lessons | filter:search:strict">

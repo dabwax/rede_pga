@@ -14,14 +14,30 @@ class InputsController extends AppController
     public function sortable()
     {
         $this->autoRender = false;
+        $estudanteAtual = $this->estudanteAtual();
+
+        $query = $this->Inputs->find()->contain(['Users'])->where(
+        [
+            'Inputs.user_id' => $estudanteAtual['id'],
+        ])->order(['Inputs.position' => 'ASC']);
+
+        $i = 0;
 
         foreach($_GET['item_id'] as $position => $item_id)
         {
-            $entity = $this->Inputs->get($item_id);
 
-            $entity->position = $position;
+            $i++;
 
-            $this->Inputs->save($entity);
+            foreach($query as $q) {
+                if($q->id == $item_id) {
+
+                    $q->position = $i;
+
+                    var_dump($item_id);
+
+                    $this->Inputs->save($q);
+                }
+            }
         }
     }
 
@@ -38,7 +54,7 @@ class InputsController extends AppController
         [
             'Inputs.user_id' => $estudanteAtual['id'],
             'Inputs.status' => 1
-        ])->order(['Inputs.position' => 'DESC']);
+        ])->order(['Inputs.position' => 'ASC']);
 
         $this->set('inputs', $this->paginate($query));
         $this->set('_serialize', ['inputs']);

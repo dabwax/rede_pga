@@ -8,13 +8,11 @@
         <span class="card-title">{{getRole()}}</span>
 
         <ul id="pep-lista-atores" class="collection" ng-hide="roleChecked">
-          <li class="collection-item"><div>Aluno<a ng-click="setRole('users.user')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-          <li class="collection-item"><div>Pai<a ng-click="setRole('protectors.dad')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-          <li class="collection-item"><div>Mãe<a ng-click="setRole('protectors.mom')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-          <li class="collection-item"><div>Tutor<a ng-click="setRole('tutors.tutor')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-          <li class="collection-item"><div>Terapeuta<a ng-click="setRole('therapists.therapist')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-          <li class="collection-item"><div>Coordenador(a)<a ng-click="setRole('schools.coordinator')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-          <li class="collection-item"><div>Mediador(a)<a ng-click="setRole('schools.mediator')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+          <li class="collection-item"><div>Família (Pai/Mãe/Outros)<a ng-click="setRole('protectors')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+          <li class="collection-item"><div>Escola (Coordenação/Professor/Mediador/Outros)<a ng-click="setRole('schools')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+          <li class="collection-item"><div>Tutor<a ng-click="setRole('tutors')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+          <li class="collection-item"><div>Terapeuta<a ng-click="setRole('therapists')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+          <li class="collection-item"><div>Aluno<a ng-click="setRole('users')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
         </ul>
 
 

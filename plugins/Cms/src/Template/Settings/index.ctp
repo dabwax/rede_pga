@@ -22,24 +22,19 @@
   </div>
 
   <div class="clearfix"></div>
-
+  
+    <?php echo $this->Form->create(null, ['type' => 'file']); ?>
     <div class="field col s4">
-      <label>Aluno</label>
-      <select name="" class="browser-default" id="">
-        <option value="">Selecionar</option>
-        <option value="">JP</option>
-      </select>
+      <label>Arquivo SQL (Backup)</label>
+      <input name="dump" type="file">
     </div>
     <div class="field col s4">
-      <label>Arquivo SQL</label>
-      <input type="file">
+    <button type="submit" class="btn orange">Importar</button>
     </div>
-    <div class="field col s4">
-    <button class="btn orange">Importar</button>
-    </div>
+    <?php echo $this->Form->end(); ?>
 
     <div class="clearfix"></div>
-    <div class="card-panel red white-text">A importação ainda não está funcionando!</div>
+    <div class="card-panel red white-text">Muito cuidado ao utilizar a Importação dos dados!</div>
 
   <div class="clearfix"></div>
 </div>

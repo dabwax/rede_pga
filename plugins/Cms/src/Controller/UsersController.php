@@ -218,6 +218,6 @@ class UsersController extends AppController
         } else {
             $this->Flash->error(__('Não foi possível remover o ator.'));
         }
-        return $this->redirect(['action' => 'config_actors']);
+        return $this->redirect(['action' => 'configurar_atores']);
     }
 }

@@ -30,6 +30,9 @@
 <?= $this->Html->css('/vendors/ng-tags-input/ng-tags-input.min.css'); ?>
 <?= $this->Html->script('/vendors/ng-tags-input/ng-tags-input.min.js'); ?>
 
+<!-- sortable -->
+<?= $this->Html->script('/vendors/sortable.min.js'); ?>
+
 <!-- Masonry - Plugin para grid de altura dinâmica -->
 <?= $this->Html->script('/vendors/angular-masonry-directive-master/src/masonry.pkgd.min.js'); ?>
 <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>

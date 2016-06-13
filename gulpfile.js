@@ -11,17 +11,17 @@ var plumber = require('gulp-plumber');
 gulp.task('default', ['css', 'js', 'watch']);
 
 gulp.task('css', function () {
-    gulp.src('webroot/stylesheets/application.styl')
-      .pipe(plumber())
-      .pipe(stylus({compress: false, paths: [
-        'webroot/stylesheets',
-        'webroot/stylesheets/pages',
-        'webroot/stylesheets/sections']}))
-        .pipe(autoprefixer())
-        // .pipe(minifyCSS())
-        .pipe(rename('application.css'))
-        .pipe(gulp.dest('webroot/'))
-        .pipe(livereload());
+    // gulp.src('webroot/stylesheets/application.styl')
+    //   .pipe(plumber())
+    //   .pipe(stylus({compress: false, paths: [
+    //     'webroot/stylesheets',
+    //     'webroot/stylesheets/pages',
+    //     'webroot/stylesheets/sections']}))
+    //     .pipe(autoprefixer())
+    //     // .pipe(minifyCSS())
+    //     .pipe(rename('application.css'))
+    //     .pipe(gulp.dest('webroot/'))
+    //     .pipe(livereload());
 });
 
 gulp.task('js', function() {

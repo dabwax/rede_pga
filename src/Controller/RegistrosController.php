@@ -43,7 +43,7 @@ class RegistrosController extends AppController
       'Inputs.user_id'  => $admin_logged['user_id'],
       'Inputs.status'   => 1
     ])
-    ->order(['Inputs.position' => 'DESC'])
+    ->order(['Inputs.position' => 'ASC'])
     ->all();
 
 
@@ -256,6 +256,7 @@ class RegistrosController extends AppController
     $admin_logged         = $this->userLogged;
 
     // DataTable's
+    $hashtags_table          = TableRegistry::get("Hashtags");
     $themes_table          = TableRegistry::get("Themes");
     $lessons_table         = TableRegistry::get("Lessons");
     $lesson_themes_table   = TableRegistry::get("LessonThemes");
@@ -271,6 +272,12 @@ class RegistrosController extends AppController
     // Atribui as matérias existentes ao objeto do formulário
     $aula->materias       = $lesson_themes_table->getMateriasDefinidas($lesson_id, $admin_logged['user_id'], $admin_logged['table'], $admin_logged['id']);
     $aula->hashtags       = $lesson_hashtags_table->getHashtagsDefinidas($lesson_id, $admin_logged);
+
+    $hashtagsDisponiveis = $hashtags_table->find()->all()->toArray();
+
+    foreach($hashtagsDisponiveis as $key => $val) {
+      $hashtagsDisponiveis[$key] = $val->name;
+    }
 
     // Se houver requisição POST
     if($this->request->is(["post", "put"]))
@@ -312,7 +319,7 @@ class RegistrosController extends AppController
     }
 
     // Envia váriaveis pra view
-    $this->set(compact("materias", "aula", "redirect_to_input_id", "admin_logged"));
+    $this->set(compact("materias", "aula", "redirect_to_input_id", "admin_logged", "hashtagsDisponiveis"));
   }
 
   public function excluir($id = null)

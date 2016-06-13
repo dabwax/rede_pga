@@ -1,4 +1,4 @@
-<section id="cd-timeline" ng-controller="TimelineCtrl">
+<section id="cd-timeline" ng-controller="TimelineCtrl" data-card="<?php echo @$_GET['card']; ?>">
 
   <div class="cd-timeline-block" ng-repeat="lesson in lessons">
 

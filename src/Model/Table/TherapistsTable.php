@@ -27,11 +27,9 @@ class TherapistsTable extends Table
 /**
  * Finder para autenticação.
  */
-    public function findAuthTherapist($query, $options)
+    public function findAuth($query, $options)
     {
-        $query
-            ->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin'])
-            ->where(['role' => 'therapist']);
+        $query->select(['id', 'user_id', 'role', 'username', 'password', 'full_name', 'phone', 'is_admin']);
 
         return $query;
     }

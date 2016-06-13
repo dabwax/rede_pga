@@ -28,10 +28,9 @@ class UsersTable extends Table
 /**
  * Finder para autenticação.
  */
-    public function findAuthUser($query, $options)
+    public function findAuth($query, $options)
     {
-        $query
-            ->select(['id', 'username', 'password']);
+        $query->select(['id', 'username', 'password']);
 
         return $query;
     }

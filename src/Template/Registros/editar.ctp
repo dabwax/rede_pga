@@ -16,7 +16,7 @@
 
   <div class="card-panel">
 
-      <div id="registros-container" class="portlet-body form" ng-controller="EditarRegistroCtrl" ng-init="init()" data-hashtags='<?php echo json_encode($aula->hashtags, true); ?>' data-lesson-id='<?php echo $aula->id; ?>' data-admin-logged='<?php echo json_encode($admin_logged); ?>' data-materias='<?php echo json_encode($aula->materias, true); ?>'>
+      <div id="registros-container" class="portlet-body form" ng-controller="EditarRegistroCtrl" ng-init="init()" data-hashtags='<?php echo json_encode($aula->hashtags, true); ?>' data-hashtags-disponiveis='<?php echo json_encode($hashtagsDisponiveis, true); ?>' data-lesson-id='<?php echo $aula->id; ?>' data-admin-logged='<?php echo json_encode($admin_logged); ?>' data-materias='<?php echo json_encode($aula->materias, true); ?>'>
 
         <?= $this->Form->create($aula); ?>
 
@@ -118,7 +118,9 @@
               <strong>Hashtags</strong>
               <hr>
 
-              <tags-input ng-model="hashtags"></tags-input>
+              <tags-input ng-model="hashtags">
+                <auto-complete source="loadItems($query)" load-on-focus="true" load-on-empty="true"></auto-complete>
+              </tags-input>
 
               <input type="hidden" name="hashtags[{{key}}]" value="{{hashtag.text}}" ng-repeat="(key, hashtag) in hashtags">
 
