@@ -2,7 +2,7 @@
   <div class="col s12 m6 l6 offset-l3 offset-m3">
     <div class="card blue-grey lighten-5">
       <div class="card-content center-align">
-        <?php echo $this->Html->image("logo_monster.png", ["height" => 120]); ?>
+        <?php echo $this->Html->image("logo-azul.png", ["height" => 90]); ?>
 
         <div class="clearfix"></div>
         <span class="card-title">{{getRole()}}</span>

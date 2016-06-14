@@ -143,8 +143,44 @@ class AuthenticationController extends AppController
         // autentica
         $this->Auth->setUser($user);
 
-        // redireciona
-        return $this->redirect($this->Auth->redirectUrl());
+
+        // verifica se o usuario logado tem mais de um perifl pra selecionar.
+        // se tiver, manda ele pra pagina de selecionar perfil.
+        $users = TableRegistry::get("Users");
+        $username = ($this->userLogged['username']);
+
+        // Buscar em todos os atores que tenham este username
+        $where = ['username' => $username];
+        $atores_disponiveis = $this->getAtores($where);
+
+        // remove dado errado
+        unset($atores_disponiveis['Users']);
+
+        $atores = [];
+
+        // itera atores disponiveis e armazena o estudante (bug por causa do containq foi resolvido na gambiarra = marra)
+        foreach($atores_disponiveis as $key => $val) :
+          if(!empty($val)) :
+            foreach($val as $ator) :
+              // gambiarra aqui
+              $ator->user = $users->get($ator->user_id);
+
+              $ator->model = $key;
+            
+              $atores[] = $ator;
+            endforeach;
+          endif;
+        endforeach;
+
+        if(sizeof($atores) == 1) {
+          // redireciona
+          return $this->redirect($this->Auth->redirectUrl());
+        } else {
+          // redireciona
+          $this->Flash->success("Selecione um perfil para se logar.");
+
+          return $this->redirect(['action' => 'trocar_perfil']);
+        }
       } else {
         $this->Flash->error(__('E-mail ou senha inválidos. Tente novamente.'), [
             'key' => 'auth'

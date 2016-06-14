@@ -460,7 +460,7 @@ div.input {
   left: 18px;
   height: 100%;
   width: 4px;
-  background: #d7e4ed;
+  /*background: #d7e4ed;*/
 }
 @media only screen and (min-width: 1170px) {
   #cd-timeline {
@@ -498,16 +498,16 @@ div.input {
     margin-bottom: 0;
   }
 }
-.cd-timeline-img {
+/*.cd-timeline-img {
   position: absolute;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   box-shadow: 0 0 0 4px #fff, inset 0 2px 0 rgba(0,0,0,0.08), 0 3px 0 4px rgba(0,0,0,0.05);
-}
-.cd-timeline-img img {
+}*/
+/*.cd-timeline-img img {
   display: block;
   width: 24px;
   height: 24px;
@@ -516,7 +516,7 @@ div.input {
   top: 50%;
   margin-left: -12px;
   margin-top: -12px;
-}
+}*/
 .cd-timeline-img.cd-picture {
   background: #75ce66;
 }
@@ -527,15 +527,15 @@ div.input {
   background: #f0ca45;
 }
 @media only screen and (min-width: 1170px) {
-  .cd-timeline-img {
-    width: 60px;
-    height: 60px;
+/*  .cd-timeline-img {
+    width: 20px;
+    height: 20px;
     left: 50%;
-    margin-left: -30px;
-/* Force Hardware Acceleration in WebKit */
+    margin-left: -10px;
+ Force Hardware Acceleration in WebKit 
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
-  }
+  }*/
   .cssanimations .cd-timeline-img.is-hidden {
     visibility: hidden;
   }
@@ -561,10 +561,11 @@ div.input {
 .cd-timeline-content {
   position: relative;
   margin-left: 60px;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.03);
   border-radius: 0.25em;
   padding: 1em;
-  box-shadow: 0 3px 0 #d7e4ed;
+  /*box-shadow: 0 3px 0 #d7e4ed;*/
+  text-align: right;
 }
 .cd-timeline-content:after {
   content: "";
@@ -653,6 +654,7 @@ div.input {
   }
   .cd-timeline-block:nth-child(even) .cd-timeline-content {
     float: right;
+    text-align: left;
   }
   .cd-timeline-block:nth-child(even) .cd-timeline-content::before {
     top: 24px;
@@ -662,7 +664,7 @@ div.input {
     border-right-color: #fff;
   }
   .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
-    float: right;
+    float: left;
   }
   .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
     left: auto;

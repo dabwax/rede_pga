@@ -3,15 +3,18 @@
 <ul id="slide-out" class="side-nav fixed" ng-init="paginaAtual = '<?php echo strtolower($this->request->params['controller']); ?>'">
 
   <li>
-   <a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo center"><?php echo $this->Html->image("logo_monster.png", ["height" => 50]); ?></a>
-   <a href="#" class="hide-on-large-only menu-mobile" onclick="$('#submenu').toggleClass('hide-on-med-and-down');"><i class="material-icons">menu</i></a>
+   <a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo center">
 
-   <em style="text-align: center; display: block; font-size: 14px; color: #FFF;"><?php echo $this->formatarCargo($userLogged['role']); ?> de <?php echo $userLogged['user']->full_name; ?></em>
+   <?php echo $this->Html->image("logo-branco.png", ["height" => 50]); ?>
+
+      <em style="text-align: center; display: inline-block; font-size: 14px; line-height: 14px; position: relative; top: -14px; font-weight: normal; font-style: normal; letter-spacing: 1px; color: #FFF;"><?php echo $this->formatarCargo($userLogged['role']); ?> de <?php echo $userLogged['user']->full_name; ?></em>
+   </a>
+   <a href="#" class="hide-on-large-only menu-mobile" onclick="$('#submenu').toggleClass('hide-on-med-and-down');"><i class="material-icons">menu</i></a>
 
   </li>
 
   <ul id="submenu" class="hide-on-med-and-down">
-  <li ng-class="{'selecionado': paginaAtual == 'feed'}"><i class="material-icons left">home</i><a class="" href="<?php echo $this->Url->build('/'); ?>">Feed</a> </li>
+  <li ng-class="{'selecionado': paginaAtual == 'feed'}"><i class="material-icons left">home</i><a class="" href="<?php echo $this->Url->build('/'); ?>">Inputs</a> </li>
 
   <li ng-class="{'selecionado': paginaAtual == 'timeline'}"><i class="material-icons left">timeline</i><a class="" href="<?php echo $this->Url->build('/timeline'); ?>">Linha do Tempo</a> </li>
 

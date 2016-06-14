@@ -1,9 +1,9 @@
 <section id="cd-timeline" ng-controller="TimelineCtrl" data-card="<?php echo @$_GET['card']; ?>">
 
-  <div class="cd-timeline-block" ng-repeat="lesson in lessons">
-
   <!-- Modal Structure -->
   <?php echo $this->element("../Feed/modal"); ?>
+
+  <div class="cd-timeline-block" ng-repeat="lesson in lessons">
 
 
     <div class="cd-timeline-img" style="background: #33d1ff;">
