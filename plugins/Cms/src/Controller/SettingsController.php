@@ -74,7 +74,7 @@ class SettingsController extends AppController
           $templine = '';
       }
       }
-      die();
+      // die();
 
       $this->Flash->success(__('Importação efetuada com sucesso.'));
 
