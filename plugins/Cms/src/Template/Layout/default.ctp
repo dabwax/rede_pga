@@ -61,6 +61,14 @@
         </a>
         </li>
         </li>
+
+        <li class="<?php echo ($this->request->params['controller'] == 'TemplateEmails') ? 'selecionado' : ''; ?>">
+        <i class="material-icons left">email</i>
+        <a href="<?= $this->Url->build('/cms/template_emails'); ?>">
+        <span class="title">Emails</span>
+        <span class="arrow "></span>
+        </a>
+        </li>
         <li>
         <i class="material-icons left">home</i>
         <a href="<?= $this->Url->build('/'); ?>">

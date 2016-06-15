@@ -27,6 +27,7 @@
   <li>
     <i class="material-icons left">settings</i> <a class='dropdown-button ' href="javascript:;" data-activates='dropdown1'>Config. <i class="material-icons" style="position: relative; top: 6px;">keyboard_arrow_down</i></a>
     <ul id='dropdown1' class="dropdown-content">
+      <li><a href="<?php echo $this->Url->build('/authentication/trocar_senha'); ?>"><i class="material-icons left">vpn_key</i> Trocar Senha</a></li>
       <li><a href="<?php echo $this->Url->build('/authentication/trocar_perfil'); ?>"><i class="material-icons left">person_pin_circle</i> Trocar Perfil</a></li>
 
   <?php if($userLogged['is_admin']) : ?>

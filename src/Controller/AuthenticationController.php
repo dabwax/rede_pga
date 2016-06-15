@@ -4,6 +4,9 @@ namespace App\Controller;
 use App\Controller\AppController;
 use App\Form\LoginForm;
 use Cake\ORM\TableRegistry;
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\Network\Http\Client;
+use Mailgun\Mailgun;
 
 class AuthenticationController extends AppController
 {
@@ -23,6 +26,56 @@ class AuthenticationController extends AppController
           ,'finder' => 'auth'
         ],
       ]);
+    }
+  }
+
+  /**
+   * Página para trocar senha.
+   */
+  public function trocar_senha() {
+
+    // Se houver requisição POST
+    if($this->request->is(["post", "put"])) {
+
+      // Carregamos a entidade de usuários
+      // Busca o usuário atual
+      $table = TableRegistry::get($this->userLogged['table']);
+      $user = $table->get($this->userLogged['id']);
+
+      // Vamos atualizar a senha do usuário
+      $user->password = (new DefaultPasswordHasher)->hash($this->request->data["new_password"]);
+
+      // Salvamos o usuário
+      $table->save($user);
+
+      // Enviamos um e-mail com a nova senha como forma de backup
+
+      // Alertamos ele
+      $this->Flash->success("Sua senha foi alterada.");
+      $this->Flash->success("Enviamos um e-mail com ela para você não perdê-la.");
+
+
+      # Instantiate the client.
+      $client = new \Http\Adapter\Guzzle6\Client();
+      $mailgun = new \Mailgun\Mailgun('key-9rx3rxgdw21u5hphx9bvft18-1urrrg0', $client);
+      $domain = "sandbox12317.mailgun.org";
+
+
+      $template_emails = TableRegistry::get("TemplateEmails");
+      $html = $template_emails->get(1);
+      $html = $html->content;
+      $html = str_replace('{{user}}', $user->full_name, $html);
+      $html = str_replace('{{password}}', $this->request->data['new_password'], $html);
+
+      # Make the call to the client.
+      $result = $mailgun->sendMessage($domain, array(
+          'from'    => 'PEP Plataforma de Ensino Personalizado <nao-responda@0e1dev.com>',
+          'to'      => '<' . $user->username . '>',
+          'subject' => '[PEP] Alteração de Senha',
+          'html'    => $html
+      ));
+
+      return $this->redirect(['action' => 'trocar_senha']);
     }
   }
 
@@ -53,7 +106,7 @@ class AuthenticationController extends AppController
             $ator->user = $users->get($ator->user_id);
 
             $ator->model = $key;
-          
+
             $atores[] = $ator;
           endforeach;
         endif;
@@ -69,10 +122,12 @@ class AuthenticationController extends AppController
       $entity->table = $model;
 
       $this->Auth->setUser($entity->toArray());
-      
+
       $this->Flash->success("Perfil alterado.");
       return $this->redirect("/");
     }
+
+    $this->set("userLogged", false);
   }
 
   public function edit()
@@ -143,6 +198,8 @@ class AuthenticationController extends AppController
         // autentica
         $this->Auth->setUser($user);
 
+        // gambiarra pra corrigir bug abaixo
+        $this->userLogged = $user;
 
         // verifica se o usuario logado tem mais de um perifl pra selecionar.
         // se tiver, manda ele pra pagina de selecionar perfil.
@@ -162,21 +219,51 @@ class AuthenticationController extends AppController
         foreach($atores_disponiveis as $key => $val) :
           if(!empty($val)) :
             foreach($val as $ator) :
+
               // gambiarra aqui
               $ator->user = $users->get($ator->user_id);
 
               $ator->model = $key;
-            
+
               $atores[] = $ator;
             endforeach;
           endif;
         endforeach;
 
         if(sizeof($atores) == 1) {
-          // redireciona
+
+          // Altera o campo de último login
+          $table = TableRegistry::get($this->userLogged['table']);
+          $currentUser = $table->get($this->userLogged['id']);
+
+          // Se for o primeiro login do usuário, redireciona ele para a página de alterar senha
+          if(empty($currentUser->lastLogin)) {
+
+            // Atualiza este primeiro login como se fosse o último
+            $currentUser->lastLogin = new \DateTime("now");
+
+            $table->save($currentUser);
+
+            // Alerta
+            $this->Flash->success("Seja bem-vindo ao PEP! Esta é sua 1ª visita ao site. Recomendamos que você altere sua senha.");
+
+            // Redirecionamento
+            return $this->redirect(['action' => 'trocar_senha']);
+          }
+
+          // Atualiza o último login do usuário
+          $currentUser->lastLogin = new \DateTime("now");
+
+          // Salva
+          $table->save($currentUser);
+
+          // Alerta
+          $this->Flash->success("Seja bem-vindo ao PEP!");
+
+          // Redireciona
           return $this->redirect($this->Auth->redirectUrl());
         } else {
-          // redireciona
+          // Redireciona
           $this->Flash->success("Selecione um perfil para se logar.");
 
           return $this->redirect(['action' => 'trocar_perfil']);

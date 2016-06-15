@@ -258,6 +258,7 @@ html {
 }
 #pep-lista-atores li {
   opacity: 0;
+  font-size: 12px;
 }
 .secondary-content {
   color: #33d1ff !important;
@@ -532,7 +533,7 @@ div.input {
     height: 20px;
     left: 50%;
     margin-left: -10px;
- Force Hardware Acceleration in WebKit 
+ Force Hardware Acceleration in WebKit
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
   }*/

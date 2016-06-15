@@ -1,5 +1,19 @@
 angular.module("RedePga")
 
+.controller('TrocarSenhaCtrl', ['$scope', function($scope) {
+
+  $scope.formValido = false;
+
+  $scope.$watch("user.confirm_new_password", function(newValue) {
+
+    if(newValue == $scope.user.new_password) {
+      $scope.formValido = true;
+    } else {
+      $scope.formValido = false;
+    }
+  });
+}])
+
 .controller('ApplicationCtrl', ['$scope', '$http', function($scope, $http) {
 
   $scope.usuarioAtual = function(campo) {
@@ -467,9 +481,9 @@ angular.module("RedePga")
   $scope.avancar = true;
 
   $scope.loadItems = function($query) {
-    
+
     console.log($("#registros-container").data("hashtags-disponiveis"));
-    
+
     return $("#registros-container").data("hashtags-disponiveis");
   }
 
