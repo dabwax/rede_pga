@@ -11,14 +11,19 @@ class EvolucaoController extends AppController
 	{
 		if($this->request->is("get")) {
 			$charts = TableRegistry::get("Charts");
+			$chart_tabs = TableRegistry::get("ChartTabs");
 			$where = [
 				'Charts.user_id' => $this->userLogged['user_id']
 			];
 			$charts = $charts->find()->distinct()->where($where)->contain(['ChartSeries'])->all();
+			$where = [
+				'ChartTabs.user_id' => $this->userLogged['user_id']
+			];
+			$tabs = $chart_tabs->find()->distinct()->where($where)->all();
 
 	    $user_id = $this->userLogged['user_id'];
 
-			$this->set(compact("charts", "user_id"));
+			$this->set(compact("tabs", "charts", "user_id"));
 		} else {
 
 			$tmp = TableRegistry::get("Reports");

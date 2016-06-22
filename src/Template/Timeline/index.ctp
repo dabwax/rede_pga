@@ -37,6 +37,7 @@
     #{{entries.hashtag.name }}
   </a> <!-- .chip -->
 
+      <a href="javascript:;" expandir-timeline ng-if="lesson.observation.length > 40" class="cd-keep-reading">Continuar lendo</a>
       <a href="javascript:;" data-id="{{lesson.id}}" modal class="cd-read-more">Veja mais</a>
     </div> <!-- cd-timeline-content -->
   </div> <!-- cd-timeline-block -->

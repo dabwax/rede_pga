@@ -39,6 +39,7 @@ class UsersController extends AppController
       if(strlen($data['password']) <= 0) {
         unset($data['password']);
       } else {
+          $cache_password = $data['password'];
         	$data['password'] = (new DefaultPasswordHasher)->hash($data['password']);
       }
 
@@ -55,6 +56,17 @@ class UsersController extends AppController
       }
 
       $entity = $table->patchEntity($entity, $data);
+
+      // Se não tiver sido passad nenhum ID
+      // (ou seja, se o usuário estiver sendo adicionado ao invés de editado)
+      if(empty($data['id'])) {
+
+        // Disparo de e-mail usando o template de ator cadastrado
+        $extra_data = [
+          'current_password' => $cache_password
+        ];
+        $this->dispararEmail(2, $entity, $extra_data );
+      }
 
       if(!empty($data['instituition_id']))
       {

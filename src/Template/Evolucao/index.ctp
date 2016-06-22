@@ -25,7 +25,7 @@
 
     <!-- Pesquisa -->
     <?php if($this->name != "Relatorio") : ?>
-    <div class="col s12 l5 right">
+    <div class="col s12 l6 right">
       <?php echo $this->element("../Evolucao/formulario_busca"); ?>
     </div>
 
@@ -43,12 +43,22 @@
   <div class="clearfix"></div>
 
   <div class="row">
-  
+    <div class="col s12">
+
+    <?php foreach($tabs as $tab) : ?>
+      <a href="javascript:void(0);" class="btn btn-filtro" filtrar-grafico data-charts-related='<?php echo $tab->charts_related; ?>'><?php echo $tab->title; ?></a>
+    <?php endforeach; ?>
+
+    </div> <!-- .col -->
+  </div> <!-- .row -->
+
+  <div class="row">
+
     <?php foreach($charts as $c) : ?>
       <div class="grafico" data-dados='<?php echo $this->formatarGrafico($c, $user_id ); ?>'></div>
     <?php endforeach; ?>
 
-    <div class="col s12 l6" ng-repeat="grafico in graficos">
+    <div class="col s12 l6 graficoHighchart grafico{{grafico.chart_id}}" ng-repeat="grafico in graficos">
       <highchart config='grafico'></highchart>
     </div>
 
@@ -73,7 +83,7 @@
               <?php echo $this->Form->input("user_id", ['type' => 'hidden', 'value' => $userLogged['user_id'] ]); ?>
               <?php echo $this->Form->input("start", ['type' => 'hidden', 'value' => @$_GET['inicio']]); ?>
               <?php echo $this->Form->input("end", ['type' => 'hidden', 'value' => @$_GET['fim']]); ?>
-              
+
               <p>
                 <label for="observacao">Observação</label>
                 <?php echo $this->Form->input("observation", ['type' => 'textarea', 'editor', 'label' => false]); ?>

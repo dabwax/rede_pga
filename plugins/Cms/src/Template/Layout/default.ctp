@@ -26,6 +26,14 @@
 
         <li class="<?php echo ($this->request->params['controller'] == 'Inputs') ? 'selecionado' : ''; ?>">
         <i class="material-icons left">edit</i>
+        <a href="<?= $this->Url->build('/cms/users/configurar_atores'); ?>">
+        <span class="title">Atores</span>
+        <span class="arrow "></span>
+        </a>
+        </li>
+
+        <li class="<?php echo ($this->request->params['controller'] == 'Inputs') ? 'selecionado' : ''; ?>">
+        <i class="material-icons left">edit</i>
         <a href="<?= $this->Url->build('/cms/inputs'); ?>">
         <span class="title">Inputs</span>
         <span class="arrow "></span>

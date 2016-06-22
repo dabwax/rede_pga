@@ -9,7 +9,7 @@
 
         <ul id="pep-lista-atores" class="collection" ng-hide="roleChecked">
           <li class="collection-item"><div>Família (Pai/Mãe/Outros)<a ng-click="setRole('protectors')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-          <li class="collection-item"><div>Escola (Coordenação/Professor/Mediador/Outros)<a ng-click="setRole('schools')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+          <li class="collection-item"><div>Escola (Coordenação / Professor / Mediador / Outros)<a ng-click="setRole('schools')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
           <li class="collection-item"><div>Tutor<a ng-click="setRole('tutors')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
           <li class="collection-item"><div>Terapeuta<a ng-click="setRole('therapists')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
           <li class="collection-item"><div>Aluno<a ng-click="setRole('users')" href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
@@ -17,7 +17,7 @@
 
 
   <div id="form-login" ng-if="roleChecked">
-  
+
     <?php echo $this->Form->create(null, ['class' => '']); ?>
     <?php echo $this->Form->input("role", ['type' => 'hidden', 'value' => '{{roleChecked}}']); ?>
 

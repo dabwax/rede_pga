@@ -1,4 +1,44 @@
 angular.module('RedePga')
+.directive('materializeSelect', function() {
+  return {
+    link: function(scope, elem, attrs) {
+      $(elem).material_select();
+    }
+  }
+})
+.directive('filtrarGrafico', function() {
+  return {
+    link: function(scope, elem, attrs) {
+
+      $(elem).click(function() {
+
+        $(".btn-filtro").removeClass("green");
+        $(this).addClass("green");
+        var chartsRelated = $(elem).data("charts-related");
+
+        $(".graficoHighchart").stop().fadeOut("fast", function() {
+
+          for(var i = 0; i < chartsRelated.length; i++) {
+            $(".grafico" + chartsRelated[i]).stop().fadeIn("slow");
+          }
+        });
+
+      });
+    }
+  }
+})
+.directive('expandirTimeline', function() {
+
+  return {
+    link: function(scope, elem, attrs) {
+      $(elem).click(function() {
+        $(this).fadeOut('fast', function() {
+          $(this).parent().css('height', 'auto');
+        });
+      });
+    }
+  }
+})
 
 .directive('loading', ['$http', function ($http) {
     return {

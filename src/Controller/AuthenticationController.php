@@ -54,26 +54,11 @@ class AuthenticationController extends AppController
       $this->Flash->success("Sua senha foi alterada.");
       $this->Flash->success("Enviamos um e-mail com ela para você não perdê-la.");
 
-
-      # Instantiate the client.
-      $client = new \Http\Adapter\Guzzle6\Client();
-      $mailgun = new \Mailgun\Mailgun('key-9rx3rxgdw21u5hphx9bvft18-1urrrg0', $client);
-      $domain = "sandbox12317.mailgun.org";
-
-
-      $template_emails = TableRegistry::get("TemplateEmails");
-      $html = $template_emails->get(1);
-      $html = $html->content;
-      $html = str_replace('{{user}}', $user->full_name, $html);
-      $html = str_replace('{{password}}', $this->request->data['new_password'], $html);
-
-      # Make the call to the client.
-      $result = $mailgun->sendMessage($domain, array(
-          'from'    => 'PEP Plataforma de Ensino Personalizado <nao-responda@0e1dev.com>',
-          'to'      => '<' . $user->username . '>',
-          'subject' => '[PEP] Alteração de Senha',
-          'html'    => $html
-      ));
+      // Disparo de e-mail usando o template de trocar a senha
+      $extra_data = [
+        'new_password' => $this->request->data["new_password"]
+      ];
+      $this->dispararEmail(1, $user, $extra_data );
 
       return $this->redirect(['action' => 'trocar_senha']);
     }

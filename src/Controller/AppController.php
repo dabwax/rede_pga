@@ -1,10 +1,12 @@
 <?php
 namespace App\Controller;
 
-use Cake\Controller\Controller;
-use Cake\Database\Type;
-use Cake\ORM\TableRegistry;
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\Controller\Component\AuthComponent;
+use Cake\Controller\Controller;
+use Cake\ORM\TableRegistry;
+use Cake\Database\Type;
+use Mailgun\Mailgun;
 
 /**
  * Controller principal do PEP.
@@ -49,7 +51,7 @@ class AppController extends Controller
       if(!empty($this->userLogged['user_id'])) {
         $tmp = TableRegistry::get("Users");
         $this->userLogged['user'] = $tmp->get($this->userLogged['user_id']);
-        
+
       }
         $this->set('userLogged', $this->userLogged );
 
@@ -67,6 +69,29 @@ class AppController extends Controller
       $get_atores = $this->getAtores();
 
       $this->set(compact("admin_logged", "get_atores", "permissions"));
+    }
+
+    public function dispararEmail($template_email_id = 0, $user = array(), $extra_data = array() ) {
+      $client = new \Http\Adapter\Guzzle6\Client();
+      $mailgun = new \Mailgun\Mailgun('key-9rx3rxgdw21u5hphx9bvft18-1urrrg0', $client);
+      $domain = "sandbox12317.mailgun.org";
+
+
+      $template_emails = TableRegistry::get("TemplateEmails");
+      $template_email = $template_emails->get($template_email_id);
+      $html = $template_email->content;
+      $html = str_replace('{{user}}', $user->full_name, $html);
+      $html = str_replace('{{password}}', @$extra_data['new_password'], $html);
+      $html = str_replace('{{current_password}}', @$extra_data['current_password'], $html);
+
+      $result = $mailgun->sendMessage($domain, array(
+          'from'    => 'PEP Plataforma de Ensino Personalizado <nao-responda@0e1dev.com>',
+          'to'      => '<' . $user->username . '>',
+          'subject' => '[PEP] ' . $template_email->title,
+          'html'    => $html
+      ));
+
+      return $result;
     }
 
 /**

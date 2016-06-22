@@ -577,7 +577,7 @@ angular.module("RedePga")
   $scope.roleChecked = false;
   $scope.roles = {
     'tutors' : 'Tutor',
-    'schools' : 'Escola (Coordenação/Professor/Mediador/Outros)',
+    'schools' : 'Escola (Coordenação / Professor / Mediador / Outros)',
     'protectors' : 'Família (Pai/Mãe/Outros)',
     'therapists' : 'Terapeuta',
     'users' : 'Aluno(a)',

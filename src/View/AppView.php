@@ -50,6 +50,7 @@ class AppView extends View
 
     public function formatarGrafico($chart = null, $user_id = null) {
       $default = [
+        "chart_id" => $chart->id,
         "options" => [
           "chart" => [
             "type" => $chart->type
@@ -148,7 +149,7 @@ class AppView extends View
           }
 
           $response = $http->post($url, $payload, ['type' => 'json']);
-          
+
           $response = $response->json;
 
           if(!empty($response['data'])) {
