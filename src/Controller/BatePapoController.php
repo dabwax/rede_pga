@@ -19,25 +19,26 @@ class BatePapoController extends AppController
 		$message_recipients_table = TableRegistry::get("MessageRecipients");
 
 		// Sessão de admin
-    	$admin_logged = $this->Cookie->read("admin_logged");
-    	$user_id = $admin_logged['user_id'];
-
     	$dados = json_decode(file_get_contents('php://input'), true);
 
-    	$dados['user_id'] = $user_id;
-    	$dados['views'] = 0;
+      $mensagem = [
+        'user_id' => $dados['usuarioLogado']['user_id'],
+        'model' => $dados['usuarioLogado']['table'],
+        'model_id' => $dados['usuarioLogado']['id'],
+        'name' => $dados['mensagem']['name'],
+        'content' => $dados['mensagem']['content'],
+      ];
 
-    	$entity = $messages_table->newEntity($dados);
+    	$entity = $messages_table->newEntity($mensagem);
 
     	$messages_table->save($entity);
 
     	foreach($dados['to'] as $to)
     	{
-    		$explode = explode("_", $to);
 
     		$tmp = [
-    			'model_id' => $explode[0],
-    			'model' => $explode[1],
+    			'model_id' => $to['id'],
+    			'model' => $to['model'],
     			'message_id' => $entity->id
     		];
 
@@ -72,11 +73,10 @@ class BatePapoController extends AppController
     	$this->autoRender = false;
 
     	// Objetos de tabela
-		$messages_table = TableRegistry::get("Messages");
+		  $messages_table = TableRegistry::get("Messages");
 
 		// Sessão de admin
-    	$admin_logged = $this->Cookie->read("admin_logged");
-    	$user_id = $admin_logged['user_id'];
+    	$user_id = $this->userLogged['user_id'];
 
     	// Busca todas as mensagens do usuário logado
     	$where = [
@@ -98,7 +98,7 @@ class BatePapoController extends AppController
 			// Respostas
 			$message->replies = [];
 
-			// Recipiente
+			// Autor
 			$message->from = "";
 
 			// Resumo

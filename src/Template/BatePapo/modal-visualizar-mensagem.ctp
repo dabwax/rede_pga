@@ -1,7 +1,7 @@
 <!-- Modal Structure -->
-<div id="modalnova" class="modal">
+<div id="modalMensagem" class="modal">
 <div class="modal-content">
-  <h4 class="center">Nova Mensagem</h4>
+  <h4 class="center">Visualizar Mensagem</h4>
 
   <form ng-submit='enviar(nova_mensagem)'>
 

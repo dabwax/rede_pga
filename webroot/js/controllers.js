@@ -264,110 +264,25 @@ angular.module("RedePga")
 
 .controller('BatePapoCtrl', ['$scope', '$http', '$timeout', '$interval', 'Mensagens', function($scope, $http, $timeout, $interval, Mensagens) {
 
+  $scope.mensagens = [];
+  $scope.mensagem = {};
 
-  Mensagens.fetch_all().then(function(result) {
-    $scope.mensagens = result.data;
-  }, function() {
-    alert("Ocorreu um erro ao carregar as mensagens do site!");
+  Mensagens.fetch_all().success(function(result) {
+    $scope.mensagens = result;
   });
 
-  // init
-  $scope.janela_expandida = false;
-  $scope.mensagem_selecionada = false;
-  $scope.resposta_enviada = false;
-  $scope.mensagem_enviada = false;
-  $scope.mostrar_formulario_nova_mensagem = false;
-
-  $scope.reset_search = function()
-  {
-    $scope.search.$ = '';
-    $scope.fechar();
-  };
-
-  $scope.enviar_nova_mensagem = function(mensagem, model_role, model_id, model_name)
-  {
-
-    mensagem = {
-      to: mensagem.to,
-      model: model_role,
-      model_id: model_id,
-      author: model_name,
-      content: mensagem.content,
-      name: mensagem.name
-    };
-
-    Mensagens.add_message(mensagem).then(function(result) {
-
-      $scope.mensagem_enviada = true;
-      $scope.segundos_restantes = 3;
-
-      $interval(function() {
-        if($scope.segundos_restantes > 0)
-        {
-          $scope.segundos_restantes = $scope.segundos_restantes - 1;
-        } else {
-          window.location.reload();
-        }
-      }, 1000);
-    }, function() {
-
-      alert("Não foi possível incluir a mensagem!");
+  $scope.enviar = function(mensagem) {
+    Mensagens.send(mensagem, $scope.usuarioLogado).success(function(result) {
+      $('#modalnova').closeModal();
+      Materialize.toast('Sua mensagem foi enviada com sucesso!', 4000);
     });
+  }
 
-  };
-
-  $scope.btn_nova_mensagem = function()
-  {
-    $scope.janela_expandida = true;
-    $scope.mensagem_selecionada = false;
-    $scope.mostrar_formulario_nova_mensagem = true;
-  };
-
-  $scope.enviar_resposta = function(resposta, mensagem_id, model, model_id, model_name)
-  {
-    resposta = {
-      content: resposta.content,
-      model: model,
-      model_id: model_id,
-      message_id: mensagem_id,
-      author: model_name
-    };
-
-    $scope.mensagem_selecionada.replies.push(resposta);
-
-    Mensagens.add_reply(resposta).then(function(result) {
-
-      $scope.resposta_enviada = true;
-
-      $scope.segundos_restantes = 3;
-
-      $interval(function() {
-        if($scope.segundos_restantes > 0)
-        {
-          $scope.segundos_restantes = $scope.segundos_restantes - 1;
-        } else {
-          window.location.reload();
-        }
-      }, 1000);
-
-    }, function() {
-      alert("Não foi possível salvar a sua resposta");
-    })
-  };
-
-
-  $scope.fechar = function()
-  {
-    $scope.janela_expandida = false;
-    $scope.mensagem_selecionada = false;
-    $scope.mostrar_formulario_nova_mensagem = false;
-  };
-
-  $scope.selecionar_mensagem = function(mensagem)
-  {
-    $scope.janela_expandida = true;
-    $scope.mensagem_selecionada = ($scope.mensagem_selecionada != mensagem) ? mensagem : false;
-  };
+  $scope.visualizar = function(mensagem) {
+    $scope.mensagem = mensagem;
+    $('#modalMensagem').openModal();
+    Materialize.toast('Os participantes desta mensagem serão notificados por e-mail caso você responda.', 4000);
+  }
 
 }])
 

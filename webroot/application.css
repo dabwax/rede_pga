@@ -1,3 +1,18 @@
+.fluxoItem:hover {
+  background: #CCC !important;
+}
+.fluxoItem:hover p,
+.fluxoItem:hover em {
+  color: rgba(0, 0, 0, 0.5);
+}
+.fluxoItem a {
+  color: #222;
+  display: inline-block;
+  width: 100%;
+}
+.fluxoItem .title {
+  font-weight: bold;
+}
 #btn-busca-evolucao {
   margin-top: 22px;
 }

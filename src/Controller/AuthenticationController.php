@@ -168,6 +168,9 @@ class AuthenticationController extends AppController
  */
   public function login()
   {
+
+      $this->Auth->logout();
+
     // se houver requisição POST
     if ($this->request->is('post')) {
 

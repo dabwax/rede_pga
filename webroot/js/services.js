@@ -44,9 +44,9 @@ angular.module("RedePga")
 .factory("Mensagens", ["$http", function($http) {
 
 	return {
-		add_message: function(mensagem)
+		send: function(mensagem, usuarioLogado)
 		{
-			return $http.post("BatePapo/api_add_message", mensagem);
+			return $http.post("BatePapo/api_add_message", {mensagem: mensagem, usuarioLogado: usuarioLogado});
 		},
 		add_reply: function(resposta)
 		{
