@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Text;
+use Cake\Routing\Router;
 
 class BatePapoController extends AppController
 {
@@ -33,8 +34,15 @@ class BatePapoController extends AppController
 
     	$messages_table->save($entity);
 
-    	foreach($dados['to'] as $to)
+    	foreach($dados['mensagem']['to'] as $to)
     	{
+        $table = TableRegistry::get($to['model']);
+        $user = $table->get($to['id']);
+
+        $extra_data = [
+          'url' => Router::url( $this->here, true )
+        ];
+        $this->dispararEmail(3, $user, $extra_data );
 
     		$tmp = [
     			'model_id' => $to['id'],
@@ -54,17 +62,36 @@ class BatePapoController extends AppController
     	$this->autoRender = false;
 
     	// Objetos de tabela
-		$messages_table = TableRegistry::get("MessageReplies");
-
-		// Sessão de admin
-    	$admin_logged = $this->Cookie->read("admin_logged");
-    	$user_id = $admin_logged['user_id'];
+      $message_recipients_table = TableRegistry::get("MessageRecipients");
+		  $messages_table = TableRegistry::get("MessageReplies");
 
     	$dados = json_decode(file_get_contents('php://input'), true);
 
-    	$entity = $messages_table->newEntity($dados);
+      $resposta = [
+        'message_id' => $dados['message_id'],
+        'model' => $dados['usuarioLogado']['table'],
+        'model_id' => $dados['usuarioLogado']['id'],
+        'content' => $dados['resposta']['content'],
+      ];
+
+    	$entity = $messages_table->newEntity($resposta);
 
     	$messages_table->save($entity);
+
+      $recipientes = $message_recipients_table->find()->where(['MessageRecipients.message_id' => $dados['message_id'] ])->all();
+
+      foreach($recipientes as $recipiente) {
+        $table = TableRegistry::get($recipiente->model);
+        $user = $table->get($recipiente->model_id);
+
+        $extra_data = [
+        'name' => $dados['usuarioLogado']['full_name'],
+        'url' => Router::url( $this->here, true )
+        ];
+        $this->dispararEmail(4, $user, $extra_data );
+      }
+
+
 	}
 
 	// API - fetch_all()

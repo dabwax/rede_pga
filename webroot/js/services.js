@@ -48,9 +48,9 @@ angular.module("RedePga")
 		{
 			return $http.post("BatePapo/api_add_message", {mensagem: mensagem, usuarioLogado: usuarioLogado});
 		},
-		add_reply: function(resposta)
+		send_reply: function(resposta, message_id, usuarioLogado)
 		{
-			return $http.post("BatePapo/api_add_reply", resposta);
+			return $http.post("BatePapo/api_add_reply", {resposta: resposta, usuarioLogado: usuarioLogado, message_id: message_id});
 		},
 		fetch_all: function()
 		{

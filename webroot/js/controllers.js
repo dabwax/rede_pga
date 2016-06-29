@@ -267,22 +267,43 @@ angular.module("RedePga")
   $scope.mensagens = [];
   $scope.mensagem = {};
 
-  Mensagens.fetch_all().success(function(result) {
-    $scope.mensagens = result;
-  });
+  $scope.carregarMensagens = function() {
+    Mensagens.fetch_all().success(function(result) {
+      $scope.mensagens = result;
+    });
+  }
 
   $scope.enviar = function(mensagem) {
     Mensagens.send(mensagem, $scope.usuarioLogado).success(function(result) {
-      $('#modalnova').closeModal();
+      $scope.carregarMensagens();
+      $scope.fechar();
       Materialize.toast('Sua mensagem foi enviada com sucesso!', 4000);
     });
+  }
+
+  $scope.fechar = function() {
+    $('#modalnova').closeModal();
+    $('#modalMensagem').closeModal();
   }
 
   $scope.visualizar = function(mensagem) {
     $scope.mensagem = mensagem;
     $('#modalMensagem').openModal();
-    Materialize.toast('Os participantes desta mensagem serão notificados por e-mail caso você responda.', 4000);
+    // Materialize.toast('Os participantes desta mensagem serão notificados por e-mail caso você responda.', 4000);
   }
+
+  $scope.enviar_resposta = function(resposta, mensagem_id) {
+    Mensagens.send_reply(resposta, mensagem_id, $scope.usuarioLogado).success(function(result) {
+      $scope.resposta = {};
+
+      $scope.carregarMensagens();
+      $scope.fechar();
+
+      Materialize.toast('Sua resposta foi enviada com sucesso!', 4000);
+    });
+  }
+
+  $scope.carregarMensagens();
 
 }])
 

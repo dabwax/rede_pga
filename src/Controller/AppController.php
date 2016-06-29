@@ -84,6 +84,10 @@ class AppController extends Controller
       $html = str_replace('{{password}}', @$extra_data['new_password'], $html);
       $html = str_replace('{{current_password}}', @$extra_data['current_password'], $html);
 
+      foreach($extra_data as $key => $val) {
+        $html = str_replace('{{' . $key . '}}', $val, $html);
+      }
+
       $result = $mailgun->sendMessage($domain, array(
           'from'    => 'PEP Plataforma de Ensino Personalizado <nao-responda@0e1dev.com>',
           'to'      => '<' . $user->username . '>',

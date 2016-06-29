@@ -29,7 +29,7 @@
     </li>
     <li class="collection-item center">
           <button type="submit" class="btn btn-success">Enviar nova mensagem</button>
-          <a href="#!" class="waves-effect waves-red btn-flat">Fechar</a>
+          <a href="javascript:void(0);" ng-click="fechar()" class="waves-effect waves-red btn-flat">Fechar</a>
     </li>
   </ul>
 
