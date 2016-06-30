@@ -16,7 +16,7 @@
 
   <div class="card-panel">
 
-      <div id="registros-container" class="portlet-body form" ng-controller="EditarRegistroCtrl" ng-init="init()" data-hashtags='<?php echo json_encode($aula->hashtags, true); ?>' data-hashtags-disponiveis='<?php echo json_encode($hashtagsDisponiveis, true); ?>' data-lesson-id='<?php echo $aula->id; ?>' data-admin-logged='<?php echo json_encode($admin_logged); ?>' data-materias='<?php echo json_encode($aula->materias, true); ?>'>
+      <div id="registros-container" class="portlet-body form" ng-controller="EditarRegistroCtrl" data-hashtags='<?php echo json_encode($aula->hashtags, true); ?>' data-hashtags-disponiveis='<?php echo json_encode($hashtagsDisponiveis, true); ?>' data-lesson-id='<?php echo $aula->id; ?>' data-admin-logged='<?php echo json_encode($admin_logged); ?>' data-materias='<?php echo json_encode($aula->materias, true); ?>'>
 
         <?= $this->Form->create($aula); ?>
 
@@ -147,7 +147,7 @@
 
             <?php echo $this->Form->input("date", ["label" => false, "type" => "text", "value" => $aula->date->format('d/m/Y'), 'ng-model' => 'lesson_date', 'ng-change' => 'mudouData(lesson_date)', 'datepicker' ]); ?>
 
-            <a href="<?php echo $this->Url->build(['action' => 'excluir', $aula->id]); ?>" class="btn-remover-dados-aula" onclick="if(!confirm('Você tem certeza disto? Esta ação é permanente!')) { return false; }">remover meus dados desta aula</a></small>
+            <a href="<?php echo $this->Url->build(['action' => 'excluir', $aula->id]); ?>" class="btn-remover-dados-aula" onclick="if(!confirm('Você tem certeza disto? Esta ação é permanente!')) { return false; }">Apagar aula</a></small>
           </div>
 
         </div> <!-- .form-body -->

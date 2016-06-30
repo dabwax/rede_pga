@@ -413,8 +413,6 @@ angular.module("RedePga")
     $scope.admin_logged = $("#registros-container").data('admin-logged');
     $scope.lesson_id = $("#registros-container").data('lesson-id');
 
-    // console.log($scope.lesson_id);
-
     Inputs.fetch_all($scope.lesson_id).then(function(result) {
       $scope.registros = result.data.registros;
       $scope.campos = result.data.campos;
@@ -434,6 +432,8 @@ angular.module("RedePga")
 
     });
   };
+
+  $scope.init();
 
 }])
 

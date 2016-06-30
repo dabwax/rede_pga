@@ -13,7 +13,6 @@ class RegistrosController extends AppController
     $this->autoRender = false;
 
     // dados do usuário logado
-    $admin_logged = $this->getAdminLogged();
 
     // Objetos de tabela
     $lessons_table = TableRegistry::get("Lessons");
@@ -29,18 +28,20 @@ class RegistrosController extends AppController
     $lesson = $lessons_table->find()->contain(['LessonEntries' => function($q) {
 
       $where = [
-        'LessonEntries.model' => $this->currentUser('table')
-        ,'LessonEntries.model_id' => $this->currentUser('id')
+        'LessonEntries.model' => $this->userLogged['table']
+        ,'LessonEntries.model_id' => $this->userLogged['id']
       ];
 
       return $q->where($where)->contain(['Inputs']);
     }])->where(['id' => $lesson_id])->first();
 
+
+
     // Busca e itera todos os campos do aluno
     $inputs = $inputs_table
     ->find()
     ->where([
-      'Inputs.user_id'  => $admin_logged['user_id'],
+      'Inputs.user_id'  => $this->userLogged['user_id'],
       'Inputs.status'   => 1
     ])
     ->order(['Inputs.position' => 'ASC'])
@@ -57,7 +58,7 @@ class RegistrosController extends AppController
         $default_value = $config->min;
       }
 
-      $belongs_to = "belongs_to_" . $admin_logged['table'];
+      $belongs_to = "belongs_to_" . strtolower($this->userLogged['table']);
 
       if($input->$belongs_to) {
 
@@ -93,7 +94,7 @@ class RegistrosController extends AppController
           if($registro['id'] == $lesson_entry->input_id)
           {
 
-            if(empty($admin_logged['clinical_condition']))
+            if(empty($this->userLogged['clinical_condition']))
             {
               $resultado['registros'][$key]['value']            = $lesson_entry->value;
               $resultado['registros'][$key]['lesson_entry_id']  = $lesson_entry->id;
