@@ -66,7 +66,26 @@ class ChartTabsController extends AppController
     public function add()
     {
         $chartTab = $this->ChartTabs->newEntity();
+
+        $estudanteAtual = $this->estudanteAtual();
+
+        $chartTab->user_id = $estudanteAtual['id'];
+
+        $chartsRelated = [];
+
+        $charts = TableRegistry::get("Charts");
+
+        $where = [
+            'Charts.user_id' => $estudanteAtual['id']
+        ];
+        $tmp = $charts->find()->where($where)->all()->toArray();
+
+        foreach($tmp as $t) {
+            $chartsRelated[$t->id] = $t->name . ' - ' . $t->subname;
+        }
+
         if ($this->request->is('post')) {
+            $this->request->data['charts_related'] = json_encode($this->request->data['charts_related']);
             $chartTab = $this->ChartTabs->patchEntity($chartTab, $this->request->data);
             if ($this->ChartTabs->save($chartTab)) {
                 $this->Flash->success(__('The chart tab has been saved.'));
@@ -76,7 +95,7 @@ class ChartTabsController extends AppController
             }
         }
         $users = $this->ChartTabs->Users->find('list', ['limit' => 200]);
-        $this->set(compact('chartTab', 'users'));
+        $this->set(compact('chartTab', 'users', 'chartsRelated'));
         $this->set('_serialize', ['chartTab']);
     }
 

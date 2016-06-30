@@ -1,21 +1,26 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Chart Tabs'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+<div class="page-title red darken-3">
+    <h2>Abas dos Gráficos</h2>
+
+    <div class="actions">
+        <a href="<?php echo $this->Url->build(['action' => 'index']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_backspace</i> voltar</a>
+    </div> <!-- .actions -->
+
+    <div class="clearfix"></div>
+</div> <!-- .page-title -->
+
 <div class="chartTabs form large-9 medium-8 columns content">
     <?= $this->Form->create($chartTab) ?>
-    <fieldset>
-        <legend><?= __('Add Chart Tab') ?></legend>
-        <?php
-            echo $this->Form->input('user_id', ['options' => $users, 'empty' => true]);
-            echo $this->Form->input('title');
-            echo $this->Form->input('charts_related');
+    <?php
+        echo $this->Form->input('title', ['label' => 'Nome da Aba']);
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+
+    <div class="input-field">
+        <?php echo $this->Form->input('charts_related', ['options' => $chartsRelated, 'type' => 'select', 'label' => false, 'multiple' => true, 'templates' => [
+        'inputContainer' => '{{content}}'
+        ], 'materialize-select' ]); ?>
+        <label>Gráficos Relacionados</label>
+    </div>
+
+    <button class="btn">Salvar Aba</button>
     <?= $this->Form->end() ?>
 </div>

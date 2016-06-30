@@ -52,10 +52,20 @@ class AppView extends View
       $default = [
         "chart_id" => $chart->id,
         "options" => [
+
+            "legend" => [
+                "itemStyle" => [
+                  "fontWeight" => "normal",
+                  "fontSize" => "12px",
+                  "fontFamily" => "'Arvo'",
+                  "textTransform" => "uppercase"
+                ]
+            ],
           "chart" => [
             "type" => $chart->type
           ],
           "plotOptions" => [
+
             "series" => [
               "stacking" => "",
               "cursor" => 'pointer',
@@ -69,16 +79,27 @@ class AppView extends View
             ]
           ],
           "xAxis" => [
-            "categories" => []
+            "categories" => [],
           ]
         ],
         "series" => [
         ],
         "title" => [
-          "text" => "Gráfico de Demonstração"
+          "text" => "Gráfico de Demonstração",
+          "style" => [
+            "fontWeight" => "bold",
+            "fontSize" => "21px",
+            "fontFamily" => "'Arvo'",
+            "textTransform" => "uppercase"
+          ]
         ],
         "subtitle" => [
-          "text" => ""
+          "text" => "",
+          "style" => [
+            "fontSize" => "15px",
+            "fontFamily" => "'Arvo'",
+            "textTransform" => "uppercase"
+          ]
         ],
         "credits" => [
           "enabled" => false
