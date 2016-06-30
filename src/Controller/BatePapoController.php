@@ -40,7 +40,7 @@ class BatePapoController extends AppController
         $user = $table->get($to['id']);
 
         $extra_data = [
-          'url' => Router::url( $this->here, true )
+          'url' => Router::url( ['action' => 'index'], true )
         ];
         $this->dispararEmail(3, $user, $extra_data );
 
@@ -86,7 +86,7 @@ class BatePapoController extends AppController
 
         $extra_data = [
         'name' => $dados['usuarioLogado']['full_name'],
-        'url' => Router::url( $this->here, true )
+        'url' => Router::url( ['action' => 'index'], true )
         ];
         $this->dispararEmail(4, $user, $extra_data );
       }

@@ -72,10 +72,8 @@ class AppController extends Controller
     }
 
     public function dispararEmail($template_email_id = 0, $user = array(), $extra_data = array() ) {
-      $client = new \Http\Adapter\Guzzle6\Client();
-      $mailgun = new \Mailgun\Mailgun('key-9rx3rxgdw21u5hphx9bvft18-1urrrg0', $client);
-      $domain = "sandbox12317.mailgun.org";
 
+      $mail = new \PHPMailer();
 
       $template_emails = TableRegistry::get("TemplateEmails");
       $template_email = $template_emails->get($template_email_id);
@@ -88,14 +86,26 @@ class AppController extends Controller
         $html = str_replace('{{' . $key . '}}', $val, $html);
       }
 
-      $result = $mailgun->sendMessage($domain, array(
-          'from'    => 'PEP Plataforma de Ensino Personalizado <nao-responda@0e1dev.com>',
-          'to'      => '<' . $user->username . '>',
-          'subject' => '[PEP] ' . $template_email->title,
-          'html'    => $html
-      ));
+      $mail->isSMTP();                                      // Set mailer to use SMTP
+      $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+      $mail->SMTPAuth = true;                               // Enable SMTP authentication
+      $mail->Username = 'luizhrqas@gmail.com';                 // SMTP username
+      $mail->Password = 'startrek123';                           // SMTP password
+      $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+      $mail->Port = 587;                                    // TCP port to connect to
 
-      return $result;
+      $mail->setFrom('no-reply@pep.com.br', 'PEP');
+      $mail->addAddress($user->username);               // Name is optional
+
+      $mail->isHTML(true);                                  // Set email format to HTML
+
+      $mail->Subject = '[PEP] ' . $template_email->title;
+      $mail->Body    = $html;
+      $mail->AltBody = $html;
+
+      if($mail->send()) {
+        return true;
+      }
     }
 
 /**
