@@ -6,6 +6,35 @@ use Cake\ORM\TableRegistry;
 
 class ChartsController extends AppController
 {
+    public function sortable()
+    {
+        $this->autoRender = false;
+        $estudanteAtual = $this->estudanteAtual();
+
+        $query = $this->Charts->find()->contain(['Users'])->where(
+        [
+            'Charts.user_id' => $estudanteAtual['id'],
+        ])->order(['Charts.position' => 'ASC']);
+
+        $i = 0;
+
+        foreach($_GET['item_id'] as $position => $item_id)
+        {
+
+            $i++;
+
+            foreach($query as $q) {
+                if($q->id == $item_id) {
+
+                    $q->position = $i;
+
+                    var_dump($item_id);
+
+                    $this->Charts->save($q);
+                }
+            }
+        }
+    }
 
     public function index()
     {
@@ -14,7 +43,7 @@ class ChartsController extends AppController
         $charts = $this->Charts->find()->contain(['Users'])->where(
         [
             'Charts.user_id' => $estudanteAtual['id']
-        ])->all()->toArray();
+        ])->order(['Charts.position' => 'ASC'])->all()->toArray();
 
         $this->set('charts', $charts);
     }

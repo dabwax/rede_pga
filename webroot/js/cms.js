@@ -3,6 +3,40 @@ angular.module("RedePga")
 .controller("FormularioEdicaoUsuario", ["$scope", function($scope) {
 
 }])
+.controller('AdminInputsCtrl', ['$scope', '$http', function($scope, $http) {
+
+  $scope.sortableOptions = {
+    stop: function(e, ui) {
+      var data = $(this).sortable('serialize');
+
+      console.log(data);
+
+      $http.get(baseUrl + "cms/inputs/sortable?" + data).then(function(result) {
+
+
+      });
+
+    }
+  };
+
+}])
+.controller('AdminChartsCtrl', ['$scope', '$http', function($scope, $http) {
+
+  $scope.sortableOptions = {
+    stop: function(e, ui) {
+      var data = $(this).sortable('serialize');
+
+      console.log(data);
+
+      $http.get(baseUrl + "cms/charts/sortable?" + data).then(function(result) {
+
+
+      });
+
+    }
+  };
+
+}])
 
 .controller("ConfigurarAtoresCtrl", ["$scope", "$http", "$filter", "$timeout", function($scope, $http, $filter, $timeout) {
 	$scope.actor = {

@@ -41,23 +41,6 @@ angular.module("RedePga")
   }
 
 }])
-.controller('AdminInputsCtrl', ['$scope', '$http', function($scope, $http) {
-
-  $scope.sortableOptions = {
-    stop: function(e, ui) {
-      var data = $(this).sortable('serialize');
-
-      console.log(data);
-
-      $http.get(baseUrl + "cms/inputs/sortable?" + data).then(function(result) {
-
-
-      });
-
-    }
-  };
-
-}])
 
 .controller('FeedCtrl', ['$scope', 'Feed', '$window', '$timeout', function($scope, Feed, $window, $timeout) {
 
