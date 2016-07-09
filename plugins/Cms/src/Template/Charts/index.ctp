@@ -4,6 +4,7 @@
     <div class="actions">
         <a href="<?php echo $this->Url->build(['action' => 'add']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">add</i> novo</a>
         <a href="<?php echo $this->Url->build(['controller' => 'chart_tabs', 'action' => 'index']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">list</i> abas</a>
+        <a href="<?php echo $this->Url->build(['controller' => 'chart_absolutes', 'action' => 'index']); ?>" class="waves-effect waves-light btn"><i class="material-icons left">list</i> núm. absoluto</a>
     </div> <!-- .actions -->
 
     <div class="clearfix"></div>

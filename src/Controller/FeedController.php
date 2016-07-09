@@ -18,8 +18,8 @@ class FeedController extends AppController
 		$actors 			= $this->getAtores();
 
 		// if current user is a user, load correct view
-		if($this->currentUserIsStudent())
-			$this->view = "dashboard_aluno";
+		// if($this->currentUserIsStudent())
+			// $this->view = "dashboard_aluno";
 
 		// get all lessons from current user
 		$query = $lessons->buscaAulas( $this->userLogged['user_id'] );

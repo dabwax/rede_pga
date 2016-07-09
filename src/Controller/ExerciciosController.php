@@ -68,10 +68,9 @@ class ExerciciosController extends AppController
     	// Objetos de tabela
 		$exercises_table = TableRegistry::get("Exercises");
 
-abaq
 		// Sessão de admin
-    	$admin_logged = $this->Cookie->read("admin_logged");
-    	$user_id = $admin_logged['user_id'];
+    	// $admin_logged = $this->Cookie->read("admin_logged");
+    	// $user_id = $admin_logged['user_id'];
 
     	// Busca todos os exercícios do usuário logado
     	$where = [

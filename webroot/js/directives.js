@@ -18,8 +18,10 @@ angular.module('RedePga')
 
         $(".graficoHighchart").stop().fadeOut("fast", function() {
 
-          for(var i = 0; i < chartsRelated.length; i++) {
-            $(".grafico" + chartsRelated[i]).stop().fadeIn("slow");
+          if(chartsRelated.length > 0) {
+            for(var i = 0; i < chartsRelated.length; i++) {
+              $(".grafico" + chartsRelated[i]).stop().fadeIn("slow");
+            }
           }
         });
 

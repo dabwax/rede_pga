@@ -27,7 +27,7 @@
 
 		<?php echo $this->element("actors/list", ['k' => $k, 'l' => $l, 'actors' => $actors]); ?>
   	</div> <!-- #tabs-# -->
-  	
+
 	<?php endforeach; ?>
 
 

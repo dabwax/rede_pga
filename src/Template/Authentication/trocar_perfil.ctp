@@ -10,7 +10,14 @@
             <?php foreach($atores as $ator) :  ?>
           <li class="collection-item">
             <div>
-              <?php echo $this->formatarCargo($ator->role); ?> de <?php echo $ator->user->full_name; ?><a href="<?php echo $this->Url->build(['action' => 'trocar_perfil', $ator->model, $ator->id]); ?>" class="secondary-content"> <i class="material-icons">send</i></a>
+
+              <?php if(!empty($ator->role)) : ?>
+              <?php echo $this->formatarCargo($ator->role); ?> de <?php echo $ator->user->full_name; ?>
+            <?php else: ?>
+              Entrar como aluno (<?php echo $ator->user->full_name; ?>)
+            <?php endif; ?>
+
+              <a href="<?php echo $this->Url->build(['action' => 'trocar_perfil', $ator->model, $ator->id]); ?>" class="secondary-content"> <i class="material-icons">send</i></a>
             </div>
 
           </li>

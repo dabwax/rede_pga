@@ -16,7 +16,7 @@
         </ul>
 
 
-  <div id="form-login" ng-if="roleChecked">
+  <div id="form-login" ng-if="roleChecked && !showForgot">
 
     <?php echo $this->Form->create(null, ['class' => '']); ?>
     <?php echo $this->Form->input("role", ['type' => 'hidden', 'value' => '{{roleChecked}}']); ?>
@@ -33,8 +33,30 @@
     <a href="javascript:;" ng-click="clear()" class="waves-effect waves-teal btn-flat">Voltar</a>
 
     <?php echo $this->Form->end(); ?>
+
+    <a href="javascript:;" ng-click="forgot()" style="font-size: 10px;" class="waves-effect waves-teal btn-flat">Esqueci minha senha</a>
+
   </div> <!-- #form-login -->
 
+
+  <div id="form-login" ng-if="roleChecked && showForgot">
+
+    <?php echo $this->Form->create(null, ['class' => '', 'url' => ['action' => 'reset_password'] ]); ?>
+    <?php echo $this->Form->input("role", ['type' => 'hidden', 'value' => '{{roleChecked}}']); ?>
+
+    <div class="input-field col s12">
+      <?php echo $this->Form->input("username", ['class' => 'validate', 'label' => 'E-mail']); ?>
+    </div>
+
+    <button type="submit" class="waves-effect waves-light btn">Resetar senha <i class="material-icons right">send</i></button>
+
+    <a href="javascript:;" ng-click="clear()" class="waves-effect waves-teal btn-flat">Voltar</a>
+
+    <?php echo $this->Form->end(); ?>
+
+    <a href="javascript:;" ng-click="forgot()" style="font-size: 10px;" class="waves-effect waves-teal btn-flat">Esqueci minha senha</a>
+
+  </div> <!-- #form-login -->
         <em class="small-logo">Plataforma de Ensino Personalizado</em>
 
       </div>

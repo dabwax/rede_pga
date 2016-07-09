@@ -78,15 +78,11 @@
                         <option ng-repeat="input in inputs" value="{{input.id}}">{{input.name}}</option>
                     </select>
 
-                    <div ng-if="emptyChart.series[key].input_id">
-
                       <label for="">Matéria</label>
                       <select name="chart_series[{{key}}][theme_id]" ng-model="emptyChart.series[key].theme_id" ng-change="trocou(key)" class="browser-default">
                           <option value="">Todas</option>
                           <option ng-repeat="materia in materias" value="{{materia.id}}">{{materia.name}}</option>
                       </select>
-
-                    </div>
 
                 </p>
             </div>

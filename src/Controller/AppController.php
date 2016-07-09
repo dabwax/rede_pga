@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Cake\Core\Configure;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Controller\Component\AuthComponent;
 use Cake\Controller\Controller;
@@ -61,6 +62,10 @@ class AppController extends Controller
       // Roda o método de configuração de ACL
       $this->configAcl($permissions);
 
+      $this->Auth->allow('reset_password');
+      $this->Auth->allow('confirm_reset_password');
+      $this->Auth->allow('visualizar');
+
       if($this->request->params['controller'] == "Relatorio" || $this->request->params['controller'] == "Api") {
         $this->Auth->allow();
       }
@@ -86,13 +91,13 @@ class AppController extends Controller
         $html = str_replace('{{' . $key . '}}', $val, $html);
       }
 
-      $mail->isSMTP();                                      // Set mailer to use SMTP
-      $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-      $mail->SMTPAuth = true;                               // Enable SMTP authentication
-      $mail->Username = 'luizhrqas@gmail.com';                 // SMTP username
-      $mail->Password = 'startrek123';                           // SMTP password
-      $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-      $mail->Port = 587;                                    // TCP port to connect to
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'mail.smtp2go.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'contato@0e1dev.com';                 // SMTP username
+        $mail->Password = 'relogio123';                           // SMTP password
+        // $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 2525;                                    // TCP port to connect to
 
       $mail->setFrom('no-reply@pep.com.br', 'PEP');
       $mail->addAddress($user->username);               // Name is optional
@@ -103,9 +108,7 @@ class AppController extends Controller
       $mail->Body    = $html;
       $mail->AltBody = $html;
 
-      if($mail->send()) {
-        return true;
-      }
+      return $mail->send();
     }
 
 /**
@@ -190,7 +193,7 @@ class AppController extends Controller
  */
     public function currentUserIsStudent()
     {
-      return ($this->userLogged['role'] == "user");
+      return (!empty($this->userLogged['role']));
     }
 
 /**

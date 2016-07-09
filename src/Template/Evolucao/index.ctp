@@ -43,6 +43,16 @@
   <div class="clearfix"></div>
 
   <div class="row">
+    <?php foreach($absolutes as $abs) : ?>
+    <div class="col s6">
+
+      <p style="text-transform: uppercase;"><strong><?php echo $abs->title; ?></strong> <?php echo $abs->value; ?></p>
+
+    </div> <!-- .col -->
+    <?php endforeach; ?>
+  </div> <!-- .row -->
+
+  <div class="row">
     <div class="col s12">
 
     <?php foreach($tabs as $tab) : ?>

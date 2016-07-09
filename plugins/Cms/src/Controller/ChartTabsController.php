@@ -155,7 +155,6 @@ class ChartTabsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
         $chartTab = $this->ChartTabs->get($id);
         if ($this->ChartTabs->delete($chartTab)) {
             $this->Flash->success(__('The chart tab has been deleted.'));

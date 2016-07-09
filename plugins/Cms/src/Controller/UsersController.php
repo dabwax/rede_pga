@@ -65,7 +65,9 @@ class UsersController extends AppController
         $extra_data = [
           'current_password' => $cache_password
         ];
-        $this->dispararEmail(2, $entity, $extra_data );
+        if($this->dispararEmail(2, $entity, $extra_data )) {
+
+        }
       }
 
       if(!empty($data['instituition_id']))
@@ -108,6 +110,16 @@ class UsersController extends AppController
             $this->request->data['profile_attachment'] = $this->Upload->uploadIt("profile_attachment", $user);
 
             $user = $this->Users->patchEntity($user, $this->request->data);
+
+            // Disparo de e-mail usando o template de ator cadastrado
+            $extra_data = [
+              'username' => $this->request->data['username'],
+              'new_password' => $this->request->data['password']
+            ];
+
+            if($this->dispararEmail(6, $user, $extra_data )) {
+                $this->Flash->success(__('Foi enviado um e-mail para o aluno cadastrado. No e-mail terá o seu usuário e senha.'));
+            }
 
             // start - get instituition name input and converts to ID
             $tmp = $this->Users->Instituitions->find()->where(['name LIKE' => '%' . $this->request->data['instituition_id'] . '%' ])->first();
@@ -168,6 +180,21 @@ class UsersController extends AppController
             'contain' => ['Instituitions']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+
+
+          if($this->request->data['username'] != $user->username) {
+            // Disparo de e-mail usando o template de ator cadastrado
+            $extra_data = [
+              'username' => $this->request->data['username'],
+              'new_password' => $this->request->data['password']
+            ];
+
+            $user->username = $this->request->data['username'];
+
+            if($this->dispararEmail(6, $user, $extra_data )) {
+                $this->Flash->success(__('Foi enviado um e-mail para o novo e-mail cadastrado para o Aluno. No e-mail terá o seu usuário e senha.'));
+            }
+          }
 
             $this->request->data['profile_attachment'] = $this->Upload->uploadIt("profile_attachment", $user);
 

@@ -22,8 +22,14 @@ class BatePapoController extends AppController
 		// Sessão de admin
     	$dados = json_decode(file_get_contents('php://input'), true);
 
+      $user_id = $dados['usuarioLogado']['id'];
+
+      if(!empty($dados['usuarioLogado']['user_id'])) {
+        $user_id = $dados['usuarioLogado']['user_id'];
+      }
+
       $mensagem = [
-        'user_id' => $dados['usuarioLogado']['user_id'],
+        'user_id' => $user_id,
         'model' => $dados['usuarioLogado']['table'],
         'model_id' => $dados['usuarioLogado']['id'],
         'name' => $dados['mensagem']['name'],
@@ -42,17 +48,19 @@ class BatePapoController extends AppController
         $extra_data = [
           'url' => Router::url( ['action' => 'index'], true )
         ];
-        $this->dispararEmail(3, $user, $extra_data );
 
-    		$tmp = [
-    			'model_id' => $to['id'],
-    			'model' => $to['model'],
-    			'message_id' => $entity->id
-    		];
+        if($this->dispararEmail(3, $user, $extra_data )) {
 
-    		$tmp = $message_recipients_table->newEntity($tmp);
+      		$tmp = [
+      			'model_id' => $to['id'],
+      			'model' => $to['model'],
+      			'message_id' => $entity->id
+      		];
 
-    		$message_recipients_table->save($tmp);
+      		$tmp = $message_recipients_table->newEntity($tmp);
+
+      		$message_recipients_table->save($tmp);
+        }
     	}
 	}
 
@@ -88,7 +96,9 @@ class BatePapoController extends AppController
         'name' => $dados['usuarioLogado']['full_name'],
         'url' => Router::url( ['action' => 'index'], true )
         ];
-        $this->dispararEmail(4, $user, $extra_data );
+        if($this->dispararEmail(4, $user, $extra_data )) {
+
+        }
       }
 
 
@@ -104,6 +114,11 @@ class BatePapoController extends AppController
 
 		// Sessão de admin
     	$user_id = $this->userLogged['user_id'];
+
+      // Se ele for um aluno
+      if($this->userLogged['table'] == 'Users') {
+
+      }
 
     	// Busca todas as mensagens do usuário logado
     	$where = [
@@ -182,14 +197,6 @@ class BatePapoController extends AppController
 
 			}
 
-
-			if(!empty($admin_logged['clinical_condition']))
-			{
-				if(!in_array($admin_logged['full_name'], $message->to) && $message->from != $admin_logged['full_name'])
-				{
-					unset($messages[$key_message]);
-				}
-			}
 		}
 
 		// Retorna em JSON

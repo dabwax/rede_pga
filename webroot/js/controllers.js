@@ -493,6 +493,7 @@ angular.module("RedePga")
   Materialize.showStaggeredList('#pep-lista-atores');
   Materialize.fadeInImage('img');
 
+  $scope.showForgot = false;
   $scope.roleChecked = false;
   $scope.roles = {
     'tutors' : 'Tutor',
@@ -531,6 +532,12 @@ angular.module("RedePga")
     $scope.clear = function()
     {
       $scope.roleChecked = false;
+      $scope.showForgot = false;
+    }
+
+    $scope.forgot = function()
+    {
+      $scope.showForgot = true;
     }
 }])
 

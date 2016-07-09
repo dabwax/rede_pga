@@ -203,7 +203,4 @@ Type::build('datetime')->useLocaleParser();
 
 Plugin::load('Cms', ['bootstrap' => false, 'routes' => true, 'autoload' => true]);
 
-Plugin::load('Estudante', ['bootstrap' => false, 'routes' => true, 'autoload' => true]);
-
-
 Plugin::load('DebugKit', ['bootstrap' => true, 'routes' => true]);

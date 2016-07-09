@@ -7,6 +7,7 @@ use Cake\ORM\TableRegistry;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Network\Http\Client;
 use Mailgun\Mailgun;
+use Cake\Routing\Router;
 
 class AuthenticationController extends AppController
 {
@@ -26,6 +27,113 @@ class AuthenticationController extends AppController
           ,'finder' => 'auth'
         ],
       ]);
+    }
+  }
+
+  public function confirm_reset_password() {
+
+    $token = unserialize(base64_decode($_GET['token']));
+
+    if(empty($token)) {
+        $this->Flash->error("Token inválido.");
+        return $this->redirect(['action' => 'login']);
+    }
+
+    if($this->request->is(["post", "put"])) {
+
+      // Validar data de expiração
+      $now              = new \DateTime('now');
+      $expiration_time  = $token['expiration_time'];
+
+      $expiration_time->modify('+1 day');
+
+      if($expiration_time > $now) {
+        // echo "Data válida";
+
+        // Buscar atores pelo username
+        $where = ['username' => $token['username']];
+        $atores_disponiveis = $this->getAtores($where);
+
+        // Alterar senha de cada um
+        foreach($atores_disponiveis as $model => $actors) {
+
+          foreach($actors as $actor) {
+
+            $table = TableRegistry::get($model);
+
+            // Vamos atualizar a senha do usuário
+            $actor->password = (new DefaultPasswordHasher)->hash($this->request->data["new_password"]);
+
+            // Salvamos o usuário
+            $table->save($actor);
+          }
+        }
+
+        // Alerta
+        $this->Flash->success("A senha da sua conta foi alterada com sucesso.");
+
+        // Redireciona pra home
+        return $this->redirect(['action' => 'login']);
+
+      } else {
+        $this->Flash->error("Este link já expirou. Solicite novamente pelo site.");
+        return $this->redirect(['action' => 'login']);
+      }
+    }
+
+  }
+
+  public function reset_password() {
+    // Se houver requisição POST
+    if($this->request->is(["post", "put"])) {
+
+      // Pesquisa ator
+      unset($this->request->data['role']);
+      $where = $this->request->data;
+      $atores_disponiveis = $this->getAtores($where);
+
+      $tem_ator = false;
+
+      foreach($atores_disponiveis as $modelo => $atores) {
+        $tem_ator = (!empty($atores)) ? true : $tem_ator;
+      }
+
+      // Se tiver ator
+      if($tem_ator) {
+
+        $hash = base64_encode(serialize([
+          'expiration_time' => new \DateTime('now'),
+          'username' => $this->request->data['username']
+        ]));
+
+        // Enviar e-mail com URL com hash
+        // Disparo de e-mail usando o template de trocar a senha
+        $extra_data = [
+          'user' => $this->request->data['username'],
+          'url' => Router::url( ['controller' => 'authentication', 'action' => 'confirm_reset_password', '?' => ['token' => $hash] ], true )
+        ];
+
+        $user = (object) [
+          'full_name' => $this->request->data['username'],
+          'username' => $this->request->data['username']
+        ];
+
+        if($this->dispararEmail(5, $user, $extra_data )) {
+          $this->Flash->success("E-mail com página para alterar senha enviado com sucesso.");
+          return $this->redirect(['action' => 'login']);
+        }
+      }
+
+      // Se não tiver ator
+      if(!$tem_ator) {
+        $this->Flash->success("Não há atores com este e-mail.");
+        return $this->redirect(['action' => 'login']);
+      }
+
+
+    } else {
+        $this->Flash->success("Requisição inválida.");
+      return $this->redirect(['action' => 'login']);
     }
   }
 
@@ -58,9 +166,9 @@ class AuthenticationController extends AppController
       $extra_data = [
         'new_password' => $this->request->data["new_password"]
       ];
-      $this->dispararEmail(1, $user, $extra_data );
-
-      return $this->redirect(['action' => 'trocar_senha']);
+      if($this->dispararEmail(1, $user, $extra_data )) {
+        return $this->redirect(['action' => 'trocar_senha']);
+      }
     }
   }
 
@@ -79,7 +187,7 @@ class AuthenticationController extends AppController
       $atores_disponiveis = $this->getAtores($where);
 
       // remove dado errado
-      unset($atores_disponiveis['Users']);
+      // unset($atores_disponiveis['Users']);
 
       $atores = [];
 
@@ -88,7 +196,12 @@ class AuthenticationController extends AppController
         if(!empty($val)) :
           foreach($val as $ator) :
             // gambiarra aqui
-            $ator->user = $users->get($ator->user_id);
+
+            if(!empty($ator->user_id)) {
+              $ator->user = $users->get($ator->user_id);
+            } else {
+              $ator->user = $users->get($ator->id);
+            }
 
             $ator->model = $key;
 
