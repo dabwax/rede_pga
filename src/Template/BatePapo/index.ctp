@@ -7,7 +7,7 @@
     </div>
 
     <div class="actions">
-      <a href="javascript:;" data-id="nova" modal class="waves-effect waves-light btn grey">
+      <a href="javascript:;" data-id="nova" modal class="waves-effect waves-light btn blue">
         Nova mensagem <i class="material-icons right">add</i>
       </a>
     </div>

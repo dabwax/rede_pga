@@ -30,7 +30,7 @@ class UsersTable extends Table
  */
     public function findAuth($query, $options)
     {
-        $query->select(['id', 'username', 'password']);
+        $query->select(['id', 'username', 'password', 'full_name', 'is_admin']);
 
         return $query;
     }

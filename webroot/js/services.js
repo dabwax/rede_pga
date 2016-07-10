@@ -27,12 +27,19 @@ angular.module("RedePga")
 .factory("Exercicios", ["$http", "Upload", function($http, Upload) {
 
 	return {
-		add_reply: function(resposta)
+		send: function(mensagem, usuarioLogado)
 		{
 			return Upload.upload({
-		        url: baseUrl + 'exercicios/api_add_reply',
-		        data: {anexo: resposta.attachment, resposta: resposta}
+		        url: 'Exercicios/api_add_message',
+		        data: {anexo: mensagem.attachment, mensagem: mensagem, usuarioLogado: usuarioLogado}
 		    });
+		},
+		send_reply: function(resposta, message_id, usuarioLogado)
+		{
+			return Upload.upload({
+			  url: 'Exercicios/api_add_reply',
+			  data: {anexo: resposta.attachment, resposta: resposta, usuarioLogado: usuarioLogado, message_id: message_id}
+			});
 		},
 		fetch_all: function()
 		{

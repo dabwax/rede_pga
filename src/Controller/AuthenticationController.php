@@ -187,7 +187,7 @@ class AuthenticationController extends AppController
       $atores_disponiveis = $this->getAtores($where);
 
       // remove dado errado
-      // unset($atores_disponiveis['Users']);
+      unset($atores_disponiveis['Users']);
 
       $atores = [];
 
@@ -266,7 +266,7 @@ class AuthenticationController extends AppController
 
     if(!empty($this->request->data['role'])) {
       return [
-         'table' => $tmp
+         'table' => ucfirst($tmp)
         ,'role' => ''
         ,'model' => TableRegistry::get(ucfirst($tmp))
       ];
@@ -294,7 +294,7 @@ class AuthenticationController extends AppController
 
         // inclui informações extras de login
         $ator_selecionado = $this->detectarAtor();
-        $user['table'] = $ator_selecionado['table'];
+        $user['table'] = ucfirst($ator_selecionado['table']);
 
         // autentica
         $this->Auth->setUser($user);
@@ -312,7 +312,9 @@ class AuthenticationController extends AppController
         $atores_disponiveis = $this->getAtores($where);
 
         // remove dado errado
-        unset($atores_disponiveis['Users']);
+        if($ator_selecionado['table'] != 'Users') {
+          unset($atores_disponiveis['Users']);
+        }
 
         $atores = [];
 
@@ -322,8 +324,11 @@ class AuthenticationController extends AppController
             foreach($val as $ator) :
 
               // gambiarra aqui
-              $ator->user = $users->get($ator->user_id);
-
+              if(!empty($ator->user_id)) {
+                $ator->user = $users->get($ator->user_id);
+              } else {
+                $ator->user = $users->get($ator->id);
+              }
               $ator->model = $key;
 
               $atores[] = $ator;

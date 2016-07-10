@@ -53,7 +53,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/login', ['controller' => 'Authentication', 'action' => 'login']);
     $routes->connect('/sair', ['controller' => 'Authentication', 'action' => 'logout']);
     $routes->connect('/minha-conta', ['controller' => 'Authentication', 'action' => 'edit']);
-    $routes->connect('/bate-papo', ['controller' => 'BatePapo', 'action' => 'index']);
+    $routes->connect('/fluxo', ['controller' => 'BatePapo', 'action' => 'index']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.

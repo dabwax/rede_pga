@@ -28,7 +28,13 @@
 
     <footer id="rodape">
       <hr>
-      <em>PEP Plataforma de Ensino Profissinalizante. Todos os direitos reservados.</em>
+
+  <?php if($userLogged) : ?>
+      <a href="#" style="float: left; margin-left: 250px;" onclick="window.open('https://www.sitelock.com/verify.php?site=pep.net.br','SiteLock','width=600,height=600,left=160,top=170');" ><img class="img-responsive" alt="SiteLock" title="SiteLock" src="//shield.sitelock.com/shield/pep.net.br" /></a>
+    <?php else: ?>
+      <a href="#" style="float: left; margin-left: 10px;" onclick="window.open('https://www.sitelock.com/verify.php?site=pep.net.br','SiteLock','width=600,height=600,left=160,top=170');" ><img class="img-responsive" alt="SiteLock" title="SiteLock" src="//shield.sitelock.com/shield/pep.net.br" /></a>
+    <?php endif; ?>
+      <em style=" float: right; line-height: 65px;">PEP Plataforma de Ensino Profissinalizante. Todos os direitos reservados.</em>
     </footer>
 
   <?php echo $this->element("/assets"); ?>

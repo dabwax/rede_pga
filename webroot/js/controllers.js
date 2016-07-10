@@ -175,40 +175,47 @@ angular.module("RedePga")
 }])
 .controller('ExerciciosCtrl', ['$scope', '$http', '$timeout', '$interval', 'Exercicios', 'Upload', function($scope, $http, $timeout, $interval, Exercicios, Upload) {
 
-  Exercicios.fetch_all().then(function(result) {
-    $scope.exercicios = result.data;
-  }, function() {
-    alert("Ocorreu um erro ao carregar os exercícios do site!");
-  });
+  // NOVO
+  $scope.mensagens = [];
+  $scope.mensagem = {};
 
-  // init
-  $scope.janela_expandida = false;
-  $scope.mensagem_selecionada = false;
-  $scope.resposta_enviada = false;
-  $scope.mensagem_enviada = false;
-  $scope.mostrar_formulario_nova_mensagem = false;
-  $scope.resposta = {};
-  $scope.carregando = false;
-  $scope.carregando_porcentagem = 0;
+  $scope.carregarMensagens = function() {
+    Exercicios.fetch_all().then(function(result) {
+      $scope.mensagens = result.data;
+    }, function() {
+      alert("Ocorreu um erro ao carregar os exercícios do site!");
+    });
+  }
 
-  $scope.reset_search = function()
-  {
-    $scope.search.$ = '';
-    $scope.fechar();
-  };
+  $scope.enviar = function(mensagem) {
+    Exercicios.send(mensagem, $scope.usuarioLogado).success(function(result) {
+      $scope.carregarMensagens();
+      $scope.fechar();
+      Materialize.toast('Seu exercício foi enviado com sucesso!', 4000);
+    });
+  }
 
-  $scope.fechar = function()
-  {
-    $scope.janela_expandida = false;
-    $scope.mensagem_selecionada = false;
-    $scope.mostrar_formulario_nova_mensagem = false;
-  };
+  $scope.fechar = function() {
+    $('#modalnova').closeModal();
+    $('#modalMensagem').closeModal();
+  }
 
-  $scope.selecionar_mensagem = function(mensagem)
-  {
-    $scope.janela_expandida = true;
-    $scope.mensagem_selecionada = ($scope.mensagem_selecionada != mensagem) ? mensagem : false;
-  };
+  $scope.visualizar = function(mensagem) {
+    $scope.mensagem = mensagem;
+    $('#modalMensagem').openModal();
+    // Materialize.toast('Os participantes desta mensagem serão notificados por e-mail caso você responda.', 4000);
+  }
+
+  $scope.enviar_resposta = function(resposta, mensagem_id) {
+    Exercicios.send_reply(resposta, mensagem_id, $scope.usuarioLogado).success(function(result) {
+      $scope.resposta = {};
+
+      $scope.carregarMensagens();
+      $scope.fechar();
+
+      Materialize.toast('Sua resposta foi enviada com sucesso!', 4000);
+    });
+  }
 
   $scope.upload = function (id, user_id) {
 
@@ -242,6 +249,8 @@ angular.module("RedePga")
         $scope.carregando_porcentagem = progressPercentage;
     });
   };
+
+  $scope.carregarMensagens();
 
 }])
 

@@ -12,7 +12,7 @@ class ExercisesTable extends Table
       $this->table('exercises');
       $this->belongsTo('Users');
       $this->belongsTo('Themes');
-      // $this->hasMany('MessageRecipients');
+      $this->hasMany('ExerciseReplies');
       $this->addBehavior('Timestamp');
   }
 }

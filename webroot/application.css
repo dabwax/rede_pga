@@ -134,10 +134,11 @@ body {
 }
 #rodape {
   position: absolute;
-  bottom: 0px;
+  bottom: -70px;
   right: 0px;
   width: 100%;
   text-align: right;
+  margin-bottom: 20px;
 }
 #rodape hr {
   border: none;

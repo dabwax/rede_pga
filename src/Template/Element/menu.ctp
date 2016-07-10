@@ -31,7 +31,7 @@
   <?php endif; ?>
 
   <?php if($permissions[$userLogged['table']]->batepapo == 1) : ?>
-  <li ng-class="{'selecionado': paginaAtual == 'batepapo'}"><i class="material-icons left">chat</i><a class="" href="<?php echo $this->Url->build('/bate-papo'); ?>">Fluxo</a> </li>
+  <li ng-class="{'selecionado': paginaAtual == 'batepapo'}"><i class="material-icons left">chat</i><a class="" href="<?php echo $this->Url->build('/fluxo'); ?>">Fluxo</a> </li>
   <?php endif; ?>
 
   <?php if($permissions[$userLogged['table']]->exercicios == 1) : ?>
