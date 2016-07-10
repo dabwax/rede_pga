@@ -99,7 +99,7 @@ class AppController extends Controller
         // $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 2525;                                    // TCP port to connect to
 
-      $mail->setFrom('no-reply@pep.com.br', 'PEP');
+      $mail->setFrom('pedro@pep.net.br', 'Pedro Sampaio');
       $mail->addAddress($user->username);               // Name is optional
 
       $mail->isHTML(true);                                  // Set email format to HTML

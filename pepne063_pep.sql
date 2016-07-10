@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.0.10.7
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 27-Jun-2016 às 15:17
--- Versão do servidor: 5.7.9
--- PHP Version: 5.6.16
+-- Máquina: localhost
+-- Data de Criação: 10-Jul-2016 às 01:16
+-- Versão do servidor: 5.5.48-37.8
+-- versão do PHP: 5.4.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,10 +14,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `pep`
+-- Base de Dados: `pepne063_pep`
 --
 
 -- --------------------------------------------------------
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `charts`
 --
 
-DROP TABLE IF EXISTS `charts`;
 CREATE TABLE IF NOT EXISTS `charts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -36,23 +35,48 @@ CREATE TABLE IF NOT EXISTS `charts` (
   `filter_end` varchar(11) DEFAULT '02/01/2016',
   `format` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `position` int(11) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Extraindo dados da tabela `charts`
 --
 
-INSERT INTO `charts` (`id`, `name`, `subname`, `type`, `filter_start`, `filter_end`, `format`, `user_id`, `created`, `modified`) VALUES
-(6, 'Humor', 'Pizza com todas as matérias', '', '01/01/2016', '02/01/2016', 'diario', 9, '2016-04-27 11:54:00', '2016-04-27 11:56:27'),
-(7, 'Atenção', 'Diário de Linha', '', '01/01/2016', '02/01/2016', 'diario', 9, '2016-04-27 11:55:31', '2016-04-27 11:57:39'),
-(10, 'Atençãox Autonomia x Independencia', 'Todas as matérias', '', '01/01/2016', '02/01/2016', 'diario', 9, '2016-04-27 23:23:55', '2016-04-27 23:27:40'),
-(11, 'Atenção x Autonomia x Independência ', 'Matemática', '', '01/01/2016', '02/01/2016', 'diario', 9, '2016-04-27 23:35:38', '2016-04-27 23:36:08'),
-(13, 'Atenção x Autonomia x Independência ', 'Física', '', '01/01/2016', '02/01/2016', 'diario', 9, '2016-04-27 23:56:30', '2016-04-27 23:56:30'),
-(14, 'Atenção x Autonomia x Independência ', 'Química', '', '01/01/2016', '02/01/2016', 'diario', 9, '2016-04-28 00:04:55', '2016-04-28 00:04:55'),
-(15, 'Atenção x Autonomia x Independência ', 'Biologia', '', '01/01/2016', '02/01/2016', 'diario', 9, '2016-04-28 00:08:09', '2016-04-28 00:08:09');
+INSERT INTO `charts` (`id`, `name`, `subname`, `type`, `filter_start`, `filter_end`, `format`, `user_id`, `position`, `created`, `modified`) VALUES
+(6, 'Humor', 'Pizza com todas as matérias', '', '01/01/2016', '02/01/2016', 'diario', 9, 1, '2016-04-27 11:54:00', '2016-07-09 11:01:38'),
+(7, 'Atenção', 'Diário de Linha', '', '01/01/2016', '02/01/2016', 'diario', 9, 2, '2016-04-27 11:55:31', '2016-07-09 11:01:38'),
+(10, 'Atençãox Autonomia x Independencia', 'Todas as matérias', '', '01/01/2016', '02/01/2016', 'diario', 9, 3, '2016-04-27 23:23:55', '2016-07-09 11:01:38'),
+(11, 'Atenção x Autonomia x Independência ', 'Matemática', '', '01/01/2016', '02/01/2016', 'diario', 9, 4, '2016-04-27 23:35:38', '2016-07-09 11:01:38'),
+(13, 'Atenção x Autonomia x Independência ', 'Física', '', '01/01/2016', '02/01/2016', 'diario', 9, 5, '2016-04-27 23:56:30', '2016-07-09 11:01:38'),
+(14, 'Atenção x Autonomia x Independência ', 'Química', '', '01/01/2016', '02/01/2016', 'diario', 9, 6, '2016-04-28 00:04:55', '2016-07-09 11:01:38'),
+(15, 'Atenção x Autonomia x Independência ', 'Biologia', '', '01/01/2016', '02/01/2016', 'diario', 9, 7, '2016-04-28 00:08:09', '2016-07-09 11:01:38');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `chart_absolutes`
+--
+
+CREATE TABLE IF NOT EXISTS `chart_absolutes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `input_id` int(11) DEFAULT NULL,
+  `type` enum('media','soma') DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Extraindo dados da tabela `chart_absolutes`
+--
+
+INSERT INTO `chart_absolutes` (`id`, `user_id`, `input_id`, `type`, `title`) VALUES
+(1, 9, 48, 'media', 'Média de exercícios propostos'),
+(2, 9, 48, 'soma', 'Soma de exercícios propostos'),
+(3, 9, 42, 'media', 'Média de Atenção por aula');
 
 -- --------------------------------------------------------
 
@@ -60,7 +84,6 @@ INSERT INTO `charts` (`id`, `name`, `subname`, `type`, `filter_start`, `filter_e
 -- Estrutura da tabela `chart_series`
 --
 
-DROP TABLE IF EXISTS `chart_series`;
 CREATE TABLE IF NOT EXISTS `chart_series` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `chart_id` int(11) NOT NULL,
@@ -70,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `chart_series` (
   `input_id` int(11) DEFAULT NULL,
   `theme_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=213234 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=213234 ;
 
 --
 -- Extraindo dados da tabela `chart_series`
@@ -105,22 +128,23 @@ INSERT INTO `chart_series` (`id`, `chart_id`, `name`, `color`, `type`, `input_id
 -- Estrutura da tabela `chart_tabs`
 --
 
-DROP TABLE IF EXISTS `chart_tabs`;
 CREATE TABLE IF NOT EXISTS `chart_tabs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `charts_related` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Extraindo dados da tabela `chart_tabs`
 --
 
 INSERT INTO `chart_tabs` (`id`, `user_id`, `title`, `charts_related`) VALUES
-(1, 9, 'Godiva 666', '["6","7","15"]'),
-(2, 9, 'Almeida', '[10]');
+(3, 9, 'Pedro Tutor', '["6","7","10","11","13","14","15"]'),
+(4, 1, 'psico teste', '""'),
+(5, 1, 'testeee', '""'),
+(6, 9, 'Luiza Mediadora', '""');
 
 -- --------------------------------------------------------
 
@@ -128,7 +152,6 @@ INSERT INTO `chart_tabs` (`id`, `user_id`, `title`, `charts_related`) VALUES
 -- Estrutura da tabela `exercises`
 --
 
-DROP TABLE IF EXISTS `exercises`;
 CREATE TABLE IF NOT EXISTS `exercises` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -143,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `exercises` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -151,12 +174,11 @@ CREATE TABLE IF NOT EXISTS `exercises` (
 -- Estrutura da tabela `hashtags`
 --
 
-DROP TABLE IF EXISTS `hashtags`;
 CREATE TABLE IF NOT EXISTS `hashtags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
 
 --
 -- Extraindo dados da tabela `hashtags`
@@ -175,7 +197,12 @@ INSERT INTO `hashtags` (`id`, `name`) VALUES
 (21, 'Humorascedente'),
 (22, 'textoprivativo'),
 (23, 'comentarioremedio'),
-(24, 'diadeprova');
+(24, 'diadeprova'),
+(25, 'maotremendo'),
+(26, 'fome'),
+(27, 'atençãodescendente'),
+(28, 'independenciadescendente'),
+(29, 'autonomiadescendente');
 
 -- --------------------------------------------------------
 
@@ -183,7 +210,6 @@ INSERT INTO `hashtags` (`id`, `name`) VALUES
 -- Estrutura da tabela `inputs`
 --
 
-DROP TABLE IF EXISTS `inputs`;
 CREATE TABLE IF NOT EXISTS `inputs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` enum('calendario','intervalo_tempo','registro_textual','escala_numerica','escala_texto','numero','texto_privativo') NOT NULL,
@@ -201,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `inputs` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
 
 --
 -- Extraindo dados da tabela `inputs`
@@ -213,18 +239,19 @@ INSERT INTO `inputs` (`id`, `type`, `user_id`, `model`, `name`, `config`, `belon
 (37, 'escala_texto', 9, 'All', 'Sou bom?', '{"options":["Sim","Muito","N\\u00e3o","P\\u00e9ssimo"]}', 0, 0, 0, 0, 0, 0, 0, '2015-12-16 10:47:51', '2016-01-06 15:21:50'),
 (38, 'calendario', 9, 'All', 'Data da aula', '', 0, 0, 0, 0, 0, 0, 0, '2016-01-16 15:04:43', '2016-01-16 15:04:49'),
 (39, 'calendario', 9, 'All', 'Data da aula modificado', '', 0, 0, 0, 0, 0, 4, 0, '2016-01-16 15:06:55', '2016-01-21 09:41:16'),
-(40, 'intervalo_tempo', 9, 'All', 'Tempo de aula (horas)', '', 0, 0, 1, 0, 0, 5, 1, '2016-01-16 15:07:16', '2016-04-27 13:32:23'),
+(40, 'intervalo_tempo', 9, 'All', 'Tempo de aula (horas)', '', 0, 0, 1, 0, 0, 1, 1, '2016-01-16 15:07:16', '2016-06-14 22:14:41'),
 (41, 'registro_textual', 9, 'All', 'Descrição', '', 0, 0, 0, 0, 0, 3, 0, '2016-01-16 15:07:30', '2016-01-21 09:39:17'),
-(42, 'escala_numerica', 9, 'All', 'Atenção', '{"min":"0","max":"10"}', 1, 1, 1, 1, 1, 6, 1, '2016-01-16 15:08:05', '2016-05-02 22:30:10'),
+(42, 'escala_numerica', 9, 'All', 'Atenção', '{"min":"0","max":"10"}', 1, 1, 1, 1, 1, 2, 1, '2016-01-16 15:08:05', '2016-06-14 22:14:41'),
 (43, 'escala_texto', 9, 'All', 'Humor', '{"options":["Agressivo","Irritado","Normal","contente","Alegre","Esfuziante"]}', 0, 0, 0, 0, 0, 4, 0, '2016-01-16 15:12:09', '2016-01-21 11:39:54'),
-(44, 'numero', 9, 'All', 'Tempo disperso (seg.)', '', 0, 0, 1, 0, 0, 3, 1, '2016-01-16 15:14:28', '2016-04-27 13:32:28'),
-(45, 'texto_privativo', 9, 'All', 'Texto privativo', '', 1, 1, 1, 1, 1, 0, 1, '2016-01-16 15:15:26', '2016-05-02 22:32:17'),
-(46, 'escala_numerica', 9, 'All', 'Autonomia', '{"min":"0","max":"10"}', 0, 1, 1, 0, 0, 1, 1, '2016-01-21 09:39:46', '2016-06-01 10:16:19'),
-(47, 'escala_numerica', 9, 'All', 'Independência', '{"min":"0","max":"10"}', 0, 1, 1, 0, 0, 2, 1, '2016-01-21 09:40:43', '2016-06-01 10:15:56'),
-(48, 'numero', 9, 'All', 'Exercícios/atividades propostos(as)', '', 0, 1, 1, 0, 0, 0, 1, '2016-01-21 09:50:13', '2016-06-01 10:17:37'),
-(49, 'numero', 9, 'All', 'Exercícios/atividades realizados(as)', '', 0, 1, 1, 0, 0, 0, 1, '2016-01-21 09:50:26', '2016-06-01 10:18:23'),
-(50, 'escala_texto', 9, 'All', 'Humor', '{"options":["Irritado","Mal humorado","Normal","Bem humorado","Empolgado",""]}', 1, 1, 1, 1, 1, 0, 1, '2016-01-21 11:41:20', '2016-05-02 22:32:54'),
-(51, 'escala_numerica', 9, 'All', 'Testeeeee', '{"min":"5","max":"10"}', 0, 0, 0, 0, 0, 0, 0, '2016-04-14 17:26:51', '2016-04-25 22:53:26');
+(44, 'numero', 9, 'All', 'Tempo disperso (seg.)', '', 0, 0, 1, 0, 0, 6, 1, '2016-01-16 15:14:28', '2016-06-14 22:14:41'),
+(45, 'texto_privativo', 9, 'All', 'Texto privativo', '', 1, 1, 1, 1, 1, 9, 1, '2016-01-16 15:15:26', '2016-06-14 22:14:41'),
+(46, 'escala_numerica', 9, 'All', 'Autonomia', '{"min":"0","max":"10"}', 0, 1, 1, 0, 0, 3, 1, '2016-01-21 09:39:46', '2016-06-14 22:14:41'),
+(47, 'escala_numerica', 9, 'All', 'Independência', '{"min":"0","max":"10"}', 0, 1, 1, 0, 0, 4, 1, '2016-01-21 09:40:43', '2016-06-14 22:14:41'),
+(48, 'numero', 9, 'All', 'Exercícios/atividades propostos(as)', '', 0, 1, 1, 0, 0, 7, 1, '2016-01-21 09:50:13', '2016-06-14 22:14:41'),
+(49, 'numero', 9, 'All', 'Exercícios/atividades realizados(as)', '', 0, 1, 1, 0, 0, 8, 1, '2016-01-21 09:50:26', '2016-06-14 22:14:41'),
+(50, 'escala_texto', 9, 'All', 'Humor', '{"options":["Irritado","Mal humorado","Normal","Bem humorado","Empolgado",""]}', 1, 1, 1, 1, 1, 5, 1, '2016-01-21 11:41:20', '2016-06-14 22:14:41'),
+(51, 'escala_numerica', 9, 'All', 'Testeeeee', '{"min":"5","max":"10"}', 0, 0, 0, 0, 0, 0, 0, '2016-04-14 17:26:51', '2016-04-25 22:53:26'),
+(52, 'escala_texto', 1, 'All', '', '{"options":["Irritado","Mal Humorado","Normal","Bem humorado","Empolgado"]}', 0, 0, 0, 0, 0, 0, 1, '2016-07-04 14:24:24', '2016-07-04 14:24:24');
 
 -- --------------------------------------------------------
 
@@ -232,12 +259,11 @@ INSERT INTO `inputs` (`id`, `type`, `user_id`, `model`, `name`, `config`, `belon
 -- Estrutura da tabela `instituitions`
 --
 
-DROP TABLE IF EXISTS `instituitions`;
 CREATE TABLE IF NOT EXISTS `instituitions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `instituitions`
@@ -246,7 +272,8 @@ CREATE TABLE IF NOT EXISTS `instituitions` (
 INSERT INTO `instituitions` (`id`, `name`) VALUES
 (1, 'IBA-Wakigawa'),
 (3, 'Abacateiro'),
-(4, 'CEI- Centro Educacional Espaço Integrado');
+(4, 'CEI- Centro Educacional Espaço Integrado'),
+(5, '1234');
 
 -- --------------------------------------------------------
 
@@ -254,7 +281,6 @@ INSERT INTO `instituitions` (`id`, `name`) VALUES
 -- Estrutura da tabela `lessons`
 --
 
-DROP TABLE IF EXISTS `lessons`;
 CREATE TABLE IF NOT EXISTS `lessons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -263,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `lessons` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
 
 --
 -- Extraindo dados da tabela `lessons`
@@ -308,7 +334,13 @@ INSERT INTO `lessons` (`id`, `user_id`, `date`, `observation`, `created`, `modif
 (56, 9, '2016-06-06', '<p style="text-align: justify; ">João Ficou de me entregar dois trabalhos extras, que eu havia deixado para o final de semana: Uma redação com uma listagem aberta sobre o que ele havia aprendido e selecionar seu maior interesse em biologia e um exercício para construção de prismas, identificação de arestas e outros elementos. &nbsp;Mesmo não tendo entregado no dia em que deveria, dessa vez estava pronto. A redação foi feita com alguns erros conceituais (assexuado = produção de próprio alimento). Me confessou não ter entendido muito o de matemática e ter pedido ajuda pra mediadora. Expliquei que era importante que eu pudesse ver seu erro, para entender melhor como ele estava no conteúdo.&nbsp;</p><p style="text-align: justify; ">Falou bastante empolgado sobre o fim de semana: Encontrou Karina, ex mediadora e foi à casa dos pais da namorada do irmão. Quanto à ex mediadora, frisou que era importante não se deixar mimar.&nbsp;</p><br><p><p style="text-align: justify;"><span style="color: inherit; font-family: Roboto, sans-serif; line-height: 1.5;">Teve razoável dificuldade com a disciplina, mas nada que não tenha se resolvido com algumas explicações para retomar algumas operações: apesar disso, trocou diversos conceitos, principalmente relacionados à estrutura atômica.</span></p><br><p style="text-align: justify;"><span style="color: inherit; font-family: Roboto, sans-serif; line-height: 1.5;">&nbsp;Ao final, fez questão de me dizer que pelo menos não tinha jogado videogame o tempo todo e que estava estudando mais. Eu falei serio com ele, que ele deveria se dar conta que já tava na hora de impor regras a esse videogame, como toda pessoa de sua idade e que ele deveria pegar o controle e entregar pra sua mãe, só pegando para jogar no final de semana. Prestou atenção seriamente, como se tivesse concordando, mas sem nenhuma confirmação objetiva.</span></p><span style="color: inherit; font-family: Roboto, sans-serif; line-height: 1.5;">&nbsp;</span></p>', '2016-06-06 23:15:03', '2016-06-06 23:15:03'),
 (57, 9, '2016-06-08', '<p>Cheguei um pouco atrasado e João estava fazendo um trabalho de filosofia.&nbsp;</p><p>Tomou um susto quando entrei no quarto e disse que gostaria de poder adiantar mais o trabalho: Respondi que ele deveria ter feito antes, ao invés de jogar videogame. ele disse que "Não joguei.... Quer dizer, só um pouquinho quando cheguei". Disse que eu tinha certeza de que ele havia jogado e estava tentando esconder isso de mim. se ele queria fazer o dever não deveria ter jogado. Ficou um pouco nervoso diante do assunto, tentando me convencer de que realmente não deu tempo. Não cedi e disse que todos tínhamos nossas obrigações: "Pra você, nada interessa né?"</p><br><p>Foi muito bem no exercício sobre formação das palavras. Conseguiu anotar e modificar os tipos de formação atras da ficha. Teve boa identificação dos radicais das palavras, bem como sufixos e prefixo. Em determinado momento fui ao banheiro e ele fez questões sozinho. Quando voltei, nem me mostrou o que havia feito, na certeza de estar certo: "Ah, não precisa"&nbsp;</p><br><p>Ao final, perguntei a ele o que havia falado na aula anterior. Depois de algumas desconversas respondeu: "deixar o controle com a minha mãe, né?", mas não se mostrou muito propenso a isso.....</p><br><p>bs: em um momento em que falei pra ele prestar muuuita atenção, ele respondeu: se eu não prestar vou cair em lava, por acaso? Olhei para ele e o deixei desconfortável, "e por acaso estamos em um videogame, joão? Isso é muito mas importante!"</p>', '2016-06-08 22:28:58', '2016-06-08 22:28:58'),
 (58, 9, '2016-06-04', '', '2016-06-09 16:50:22', '2016-06-09 16:50:22'),
-(59, 9, '2016-06-13', '<p style="color: rgba(0, 0, 0, 0.870588);">Havia combinado que ele separaria todas as fichas de física desde o primeiro ano, para que fizéssemos uma retrospectiva, já que ele não teria dever hoje, pois foi descanso pela UERJ do Final de Semana. Ele avia separado o material e me enviado mensagem desde sábado. Antes d começar a discutir tivemos que fazer uma questão de física.&nbsp;</p><p style="color: rgba(0, 0, 0, 0.870588);">João não se mostrou muito incomodado com o fato de nao ter feito UERJ, apesar de dar umas travadas quando fala disso (Não... não fiz). Além disso, na sua pasta tinham uns panfletos sobre curso em design de informatica, perguntei o que era e ele disse que "é o que eu vou fazer ano que vem... quer dizer, ta na hora de eu tomar alguma decisão!"</p><br><p style="color: rgba(0, 0, 0, 0.870588);">A aula correu bem, ele estava atento e bem disposto, talvez por não ter ido à escola no dia. Em determinado momento eu perguntei se havia jogado videogame e ele respondeu: "Também Não foi bem assim"</p><p style="color: rgba(0, 0, 0, 0.870588);">Ao final, perguntei se ele havia pensado no que eu havia falado(deixar o controle do videogame com a mão, aos finais de semana e ele disse que ainda não muito....</p>', '2016-06-13 22:13:33', '2016-06-13 22:13:33');
+(59, 9, '2016-06-13', '<p style="color: rgba(0, 0, 0, 0.870588);">Havia combinado que ele separaria todas as fichas de física desde o primeiro ano, para que fizéssemos uma retrospectiva, já que ele não teria dever hoje, pois foi descanso pela UERJ do Final de Semana. Ele avia separado o material e me enviado mensagem desde sábado. Antes d começar a discutir tivemos que fazer uma questão de física.&nbsp;</p><p style="color: rgba(0, 0, 0, 0.870588);">João não se mostrou muito incomodado com o fato de nao ter feito UERJ, apesar de dar umas travadas quando fala disso (Não... não fiz). Além disso, na sua pasta tinham uns panfletos sobre curso em design de informatica, perguntei o que era e ele disse que "é o que eu vou fazer ano que vem... quer dizer, ta na hora de eu tomar alguma decisão!"</p><br><p style="color: rgba(0, 0, 0, 0.870588);">A aula correu bem, ele estava atento e bem disposto, talvez por não ter ido à escola no dia. Em determinado momento eu perguntei se havia jogado videogame e ele respondeu: "Também Não foi bem assim"</p><p style="color: rgba(0, 0, 0, 0.870588);">Ao final, perguntei se ele havia pensado no que eu havia falado(deixar o controle do videogame com a mão, aos finais de semana e ele disse que ainda não muito....</p>', '2016-06-13 22:13:33', '2016-06-13 22:13:33'),
+(60, 9, '2016-06-10', '<ul><li>JP queria fazer o trabalho de historia, que eram perguntas para as quais tinham todas as respostas no caderno. perguntei se ele havia trazido o livro para ampliar a discussão, ele disse que não. Disse, então, para ele fazer dutante o fds, pq senão eu ia ficar olhando ele copiar, o que não seria podutivo. COncordou</li><li>Trabalhamos uma ficha de física,sobre calorimetria. Esteve bem e situado no conteúdo. Tive que explicar sbre os conceitos de capcidade termica e calor específico.&nbsp;</li></ul>', '2016-06-14 23:02:20', '2016-06-14 23:02:20'),
+(61, 9, '2015-04-26', '<ul><li>Continuando o estudo de química para a prova&nbsp;</li><li>Reclamou de fome</li><li>Muita dificuldade em construir relações causais</li><li>Dificuldade em interpretar os protocolos das questões.</li><li>A cada passo, mesmo que tenha demonstrado ter entendido e acertado uma vez, tudo pode ser perdido em outros tipos de associação.</li><li>Errando algumas contas (dividindo ao invés de multiplicar).</li><li>Aula domingo (14:00 as 16:00)</li></ul>', '2016-06-14 23:26:15', '2016-06-14 23:26:15'),
+(62, 9, '2015-06-26', '<ul><li>Muio esforço para fazer a questão sozinho&nbsp;</li><li>Não consegue entender o funcionamento da balança, mesmo comigo explicando</li><li>Descobriu o volume de um líquido tranquilamente em um becker em que era dado o volume e depois um líquido enchendo 2/5 dele. 100m3 --&gt; 40m3</li><li>Não quis que eu falasse a resposta para ele de jeito nenhum, mas as vezes me olhava, querendo ajuda, o que eu me recusei a fazer.</li><li>Fez as 3 questões que eu marque. Eram questões difíceis e conceituais, com enunciados longos. Se perdeu bastante.</li><li><span style="color: inherit; line-height: 1.5; font-family: Roboto, sans-serif;">É capaz de decrever o conceito de "pressão" e na questão seguinte confundir sua fórmula com a de energia.</span><span style="color: inherit; line-height: 1.5; font-family: Roboto, sans-serif;">&nbsp;</span></li><li><span style="color: inherit; line-height: 1.5; font-family: Roboto, sans-serif;">Coloquei para ele que ele já havia esquecido o material e que se ele ficasse assim toda sexta feira, não haveria mais aula na sexta; "pode isso?"</span></li></ul>', '2016-06-14 23:55:11', '2016-06-15 00:10:58'),
+(63, 9, '2015-06-08', '<ul><li>Estudando para a prova de química</li><li>No início conversei sobre seu orgulho e que como ele tinha melhorado, era compreensível, pois vinha produzindo mais, só que orgulho demais estava atrapalhando (soberba), igual à tensão demais, que ele tinha antes e que o travava. Ele mesmo completou dizendo que tinha que equilibrar.</li><li>Já domina a matéria, pois é a mesma do teste, em que ele tinha ido muito bem. (poderia ter sido variado)</li><li>Pedi para ele fazer desenhos sobre as narrativas das questões. Fez muito bem.&nbsp;</li><li>Sua atenção caiu ao final e ele e ele apresentou dificuldade em relação a conversão de unidades e contas com decimais</li></ul>', '2016-06-15 00:17:58', '2016-06-15 00:17:58'),
+(64, 9, '2015-03-06', '<ul><li><span style="font-family: Roboto, sans-serif; line-height: 1.5;">Parece um pouco disperso e no final mais ainda.&nbsp;</span><br></li><li><span style="font-family: Roboto, sans-serif; line-height: 1.5;">Confundiu seno com ângulo e demorou para interpretar a questão. O humor está bom.&nbsp;</span></li><li><span style="font-family: Roboto, sans-serif; line-height: 1.5;">Aparente pressa em terminar os cálculos, pode estar atrapalhando.</span></li></ul>', '2016-06-15 00:33:00', '2016-06-15 00:33:00'),
+(65, 9, '2015-03-13', '<p><ul><li><span style="color: inherit; font-family: Roboto, sans-serif; line-height: 1.5;">Fazer resumo de 3 linhas de um texto que já havia escrito, sobre cura de doenças se utilizando de princípio ativo de alguma droga.</span></li><li><span style="color: inherit; font-family: Roboto, sans-serif; line-height: 1.5;">Estudar pata teste de química.&nbsp;</span></li><li><span style="color: inherit; font-family: Roboto, sans-serif; line-height: 1.5;">Pedi para que ele me explicasse o que iria escrever antes de ler. Depois de algum incentivo ele o fez com bomd desempenho. Ao final, confessou estar se sentidno "Tão bem" e "esforçado ultimamente. Concordei com ele</span></li><li><span style="color: inherit; font-family: Roboto, sans-serif; line-height: 1.5;">Declarei que não iria ajudá-loa escrever as 3 linhas. ele, mesmo assim perguntou como poderia começar. Não o respondi. (Humor muito bom/ autonomia 7/ atenção 8)</span></li><li><span style="color: inherit; font-family: Roboto, sans-serif; line-height: 1.5;">Em química, sua atenção caiu muito e ele dificilmente entendia o que deveria ser feito. Eram muitos exercícios, apesar de o professor dizer que só passaria 4 questões.&nbsp;</span></li><li><span style="color: inherit; font-family: Roboto, sans-serif; line-height: 1.5;">Me disse que não havia tomado o remédio e a aula terminou de forma tensa, mas eu o acalmei."&nbsp;</span><br></li></ul></p><br>', '2016-06-15 00:48:48', '2016-06-15 00:48:48');
 
 -- --------------------------------------------------------
 
@@ -316,7 +348,6 @@ INSERT INTO `lessons` (`id`, `user_id`, `date`, `observation`, `created`, `modif
 -- Estrutura da tabela `lesson_entries`
 --
 
-DROP TABLE IF EXISTS `lesson_entries`;
 CREATE TABLE IF NOT EXISTS `lesson_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -328,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `lesson_entries` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=459 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=522 ;
 
 --
 -- Extraindo dados da tabela `lesson_entries`
@@ -691,7 +722,61 @@ INSERT INTO `lesson_entries` (`id`, `user_id`, `lesson_id`, `input_id`, `model`,
 (455, 9, 59, 45, 'Tutors', 1, '', '2016-06-13 22:14:29', '2016-06-13 22:37:03'),
 (456, 9, 59, 48, 'Tutors', 1, '', '2016-06-13 22:14:29', '2016-06-13 22:37:03'),
 (457, 9, 59, 49, 'Tutors', 1, '', '2016-06-13 22:14:29', '2016-06-13 22:37:03'),
-(458, 9, 59, 50, 'Tutors', 1, 'Bem humorado', '2016-06-13 22:14:29', '2016-06-13 22:37:03');
+(458, 9, 59, 50, 'Tutors', 1, 'Bem humorado', '2016-06-13 22:14:29', '2016-06-13 22:37:03'),
+(459, 9, 60, 40, 'Tutors', 1, '2', '2016-06-14 23:04:27', '2016-06-14 23:04:27'),
+(460, 9, 60, 42, 'Tutors', 1, '8', '2016-06-14 23:04:27', '2016-06-14 23:04:27'),
+(461, 9, 60, 46, 'Tutors', 1, '7', '2016-06-14 23:04:27', '2016-06-14 23:04:27'),
+(462, 9, 60, 47, 'Tutors', 1, '7', '2016-06-14 23:04:27', '2016-06-14 23:04:27'),
+(463, 9, 60, 50, 'Tutors', 1, 'Normal', '2016-06-14 23:04:27', '2016-06-14 23:04:27'),
+(464, 9, 60, 44, 'Tutors', 1, '', '2016-06-14 23:04:27', '2016-06-14 23:04:27'),
+(465, 9, 60, 48, 'Tutors', 1, '3', '2016-06-14 23:04:27', '2016-06-14 23:04:27'),
+(466, 9, 60, 49, 'Tutors', 1, '2', '2016-06-14 23:04:27', '2016-06-14 23:04:27'),
+(467, 9, 60, 45, 'Tutors', 1, '', '2016-06-14 23:04:27', '2016-06-14 23:04:27'),
+(468, 9, 61, 40, 'Tutors', 1, '2', '2016-06-14 23:31:38', '2016-06-14 23:31:38'),
+(469, 9, 61, 42, 'Tutors', 1, '4', '2016-06-14 23:31:38', '2016-06-14 23:31:38'),
+(470, 9, 61, 46, 'Tutors', 1, '5', '2016-06-14 23:31:38', '2016-06-14 23:31:38'),
+(471, 9, 61, 47, 'Tutors', 1, '4', '2016-06-14 23:31:38', '2016-06-14 23:31:38'),
+(472, 9, 61, 50, 'Tutors', 1, 'Normal', '2016-06-14 23:31:38', '2016-06-14 23:31:38'),
+(473, 9, 61, 44, 'Tutors', 1, '', '2016-06-14 23:31:38', '2016-06-14 23:31:38'),
+(474, 9, 61, 48, 'Tutors', 1, '', '2016-06-14 23:31:38', '2016-06-14 23:31:38'),
+(475, 9, 61, 49, 'Tutors', 1, '', '2016-06-14 23:31:38', '2016-06-14 23:31:38'),
+(476, 9, 61, 45, 'Tutors', 1, '', '2016-06-14 23:31:38', '2016-06-14 23:31:38'),
+(477, 9, 62, 40, 'Tutors', 1, '2', '2016-06-14 23:56:26', '2016-06-15 00:10:58'),
+(478, 9, 62, 42, 'Tutors', 1, '6', '2016-06-14 23:56:26', '2016-06-15 00:10:58'),
+(479, 9, 62, 46, 'Tutors', 1, '7', '2016-06-14 23:56:26', '2016-06-15 00:10:58'),
+(480, 9, 62, 47, 'Tutors', 1, '6', '2016-06-14 23:56:26', '2016-06-15 00:10:58'),
+(481, 9, 62, 50, 'Tutors', 1, 'Normal', '2016-06-14 23:56:26', '2016-06-15 00:10:58'),
+(482, 9, 62, 44, 'Tutors', 1, '', '2016-06-14 23:56:26', '2016-06-15 00:10:58'),
+(483, 9, 62, 48, 'Tutors', 1, '', '2016-06-14 23:56:26', '2016-06-15 00:10:58'),
+(484, 9, 62, 49, 'Tutors', 1, '', '2016-06-14 23:56:26', '2016-06-15 00:10:58'),
+(485, 9, 62, 45, 'Tutors', 1, '', '2016-06-14 23:56:26', '2016-06-15 00:10:58'),
+(486, 9, 63, 40, 'Tutors', 1, '2', '2016-06-15 00:20:17', '2016-06-15 00:20:17'),
+(487, 9, 63, 42, 'Tutors', 1, '8', '2016-06-15 00:20:17', '2016-06-15 00:20:17'),
+(488, 9, 63, 46, 'Tutors', 1, '8', '2016-06-15 00:20:17', '2016-06-15 00:20:17'),
+(489, 9, 63, 47, 'Tutors', 1, '8', '2016-06-15 00:20:17', '2016-06-15 00:20:17'),
+(490, 9, 63, 50, 'Tutors', 1, 'Bem humorado', '2016-06-15 00:20:17', '2016-06-15 00:20:17'),
+(491, 9, 63, 44, 'Tutors', 1, '', '2016-06-15 00:20:17', '2016-06-15 00:20:17'),
+(492, 9, 63, 48, 'Tutors', 1, '', '2016-06-15 00:20:17', '2016-06-15 00:20:17'),
+(493, 9, 63, 49, 'Tutors', 1, '', '2016-06-15 00:20:17', '2016-06-15 00:20:17'),
+(494, 9, 63, 45, 'Tutors', 1, '', '2016-06-15 00:20:17', '2016-06-15 00:20:17'),
+(495, 9, 64, 40, 'Tutors', 1, '', '2016-06-15 00:33:49', '2016-06-15 00:33:49'),
+(496, 9, 64, 42, 'Tutors', 1, '7', '2016-06-15 00:33:49', '2016-06-15 00:33:49'),
+(497, 9, 64, 46, 'Tutors', 1, '5', '2016-06-15 00:33:49', '2016-06-15 00:33:49'),
+(498, 9, 64, 47, 'Tutors', 1, '5', '2016-06-15 00:33:49', '2016-06-15 00:33:49'),
+(499, 9, 64, 50, 'Tutors', 1, 'Bem humorado', '2016-06-15 00:33:49', '2016-06-15 00:33:49'),
+(500, 9, 64, 44, 'Tutors', 1, '', '2016-06-15 00:33:49', '2016-06-15 00:33:49'),
+(501, 9, 64, 48, 'Tutors', 1, '', '2016-06-15 00:33:49', '2016-06-15 00:33:49'),
+(502, 9, 64, 49, 'Tutors', 1, '', '2016-06-15 00:33:49', '2016-06-15 00:33:49'),
+(503, 9, 64, 45, 'Tutors', 1, '', '2016-06-15 00:33:49', '2016-06-15 00:33:49'),
+(504, 9, 65, 40, 'Tutors', 1, '2', '2016-06-15 00:51:28', '2016-06-15 00:51:28'),
+(505, 9, 65, 42, 'Tutors', 1, '4', '2016-06-15 00:51:28', '2016-06-15 00:51:28'),
+(506, 9, 65, 46, 'Tutors', 1, '3', '2016-06-15 00:51:28', '2016-06-15 00:51:28'),
+(507, 9, 65, 47, 'Tutors', 1, '5', '2016-06-15 00:51:28', '2016-06-15 00:51:28'),
+(508, 9, 65, 50, 'Tutors', 1, 'Normal', '2016-06-15 00:51:28', '2016-06-15 00:51:28'),
+(509, 9, 65, 44, 'Tutors', 1, '', '2016-06-15 00:51:28', '2016-06-15 00:51:28'),
+(510, 9, 65, 48, 'Tutors', 1, '', '2016-06-15 00:51:28', '2016-06-15 00:51:28'),
+(511, 9, 65, 49, 'Tutors', 1, '', '2016-06-15 00:51:28', '2016-06-15 00:51:28'),
+(512, 9, 65, 45, 'Tutors', 1, '', '2016-06-15 00:51:28', '2016-06-15 00:51:28');
 
 -- --------------------------------------------------------
 
@@ -699,7 +784,6 @@ INSERT INTO `lesson_entries` (`id`, `user_id`, `lesson_id`, `input_id`, `model`,
 -- Estrutura da tabela `lesson_hashtags`
 --
 
-DROP TABLE IF EXISTS `lesson_hashtags`;
 CREATE TABLE IF NOT EXISTS `lesson_hashtags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `lesson_id` int(11) NOT NULL,
@@ -707,7 +791,7 @@ CREATE TABLE IF NOT EXISTS `lesson_hashtags` (
   `model` varchar(255) DEFAULT NULL,
   `model_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
 
 --
 -- Extraindo dados da tabela `lesson_hashtags`
@@ -733,7 +817,16 @@ INSERT INTO `lesson_hashtags` (`id`, `lesson_id`, `hashtag_id`, `model`, `model_
 (47, 39, 19, 'tutors', 1),
 (48, 44, 22, 'tutors', 1),
 (49, 46, 23, 'tutors', 1),
-(51, 53, 24, 'schools', 11);
+(51, 53, 24, 'schools', 11),
+(52, 61, 25, 'tutors', 1),
+(53, 61, 26, 'tutors', 1),
+(54, 61, 27, 'tutors', 1),
+(55, 61, 28, 'tutors', 1),
+(56, 65, 13, 'tutors', 1),
+(57, 65, 17, 'tutors', 1),
+(58, 65, 27, 'tutors', 1),
+(59, 65, 28, 'tutors', 1),
+(60, 65, 29, 'tutors', 1);
 
 -- --------------------------------------------------------
 
@@ -741,7 +834,6 @@ INSERT INTO `lesson_hashtags` (`id`, `lesson_id`, `hashtag_id`, `model`, `model_
 -- Estrutura da tabela `lesson_themes`
 --
 
-DROP TABLE IF EXISTS `lesson_themes`;
 CREATE TABLE IF NOT EXISTS `lesson_themes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `lesson_id` int(11) NOT NULL,
@@ -752,7 +844,7 @@ CREATE TABLE IF NOT EXISTS `lesson_themes` (
   `nota_esperada` varchar(255) DEFAULT NULL,
   `nota_alcancada` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Extraindo dados da tabela `lesson_themes`
@@ -807,7 +899,15 @@ INSERT INTO `lesson_themes` (`id`, `lesson_id`, `theme_id`, `model`, `model_id`,
 (47, 56, 4, 'tutors', 1, 'Exercícios fácis de ropriedades periódicas, identificação de família e período. Dificuldade em lembrar das famílias, em contruir a relação da periodicidade do raio atomico e confusão inicial em relação a estutura atômica (necessaria para se entender a variação intra familia e intra periodo. No final das contas conseguiu levar os protocolos à frente, de forma intuitiva, mas com fraca utilização dos modelos corretos.', '', ''),
 (48, 57, 2, 'tutors', 1, 'Ficha relativa a formação de palavras. No início ele não lebrou de nada, mas o fiz ir anotando atrás da ficha o que líamos no livro. ', '', ''),
 (49, 58, 1, 'tutors', 1, '', '', ''),
-(50, 59, 3, 'tutors', 1, 'Exercício da ficha de calorimetria. Demonstrou compreensão dos conceitos, mas dificuldade em entender o comando: encontrar a razão entre os calores específicos de cois materiais distintos.  A questão era dificil, pois não se tratava de encontrar um valor, mas a relação entre dois valores algébricos. ', '', '');
+(50, 59, 3, 'tutors', 1, 'Exercício da ficha de calorimetria. Demonstrou compreensão dos conceitos, mas dificuldade em entender o comando: encontrar a razão entre os calores específicos de cois materiais distintos.  A questão era dificil, pois não se tratava de encontrar um valor, mas a relação entre dois valores algébricos. ', '', ''),
+(51, 60, 3, 'tutors', 1, 'Ficha de calorimeria', '', ''),
+(52, 61, 4, 'tutors', 1, 'Ficha de Reações químicas\r\n', '', ''),
+(53, 62, 3, 'tutors', 1, 'Estudando deveres de física do livro, que eu selecionei . 3 questões difíceis. ', '', ''),
+(54, 63, 4, 'tutors', 1, 'Narrativas sobre sal e a diminuição do ponto de fusão. Funcionamento de panela de pressão e água fervendo no Everest.', '', ''),
+(55, 64, 1, 'tutors', 1, 'Exercícios matemática página 216\r\n8 e 9 ', '', ''),
+(56, 65, 2, 'tutors', 1, 'Resumo de tres linhas de texto que já havia escrito. muita dificuldade em formular o texto', '', ''),
+(57, 65, 4, 'tutors', 1, 'Questões da ficha (nao anotei o conteúdo)', '', ''),
+(58, 68, 7, 'tutors', 1, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -815,7 +915,6 @@ INSERT INTO `lesson_themes` (`id`, `lesson_id`, `theme_id`, `model`, `model_id`,
 -- Estrutura da tabela `messages`
 --
 
-DROP TABLE IF EXISTS `messages`;
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -827,7 +926,26 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Extraindo dados da tabela `messages`
+--
+
+INSERT INTO `messages` (`id`, `user_id`, `model`, `model_id`, `name`, `content`, `views`, `created`, `modified`) VALUES
+(1, 9, 'Tutors', 1, 'sasa', 'afdsfads', 0, '2016-06-29 17:01:34', '2016-06-29 17:01:34'),
+(2, 9, 'Protectors', 19, 'asdfas', 'fadsfasddfsa', 0, '2016-06-29 17:12:42', '2016-06-29 17:12:42'),
+(3, 9, 'Protectors', 19, 'asdfas', 'fadsfasddfsa', 0, '2016-06-29 17:14:20', '2016-06-29 17:14:20'),
+(4, 9, 'Protectors', 19, 'asdfas', 'fadsfasddfsa', 0, '2016-06-29 17:14:52', '2016-06-29 17:14:52'),
+(5, 9, 'Tutors', 1, 'fsadfdfas', 'sadfsadf', 0, '2016-06-29 17:50:35', '2016-06-29 17:50:35'),
+(6, 9, 'Tutors', 1, 'fsadfdfas', 'sadfsadf', 0, '2016-06-29 17:50:51', '2016-06-29 17:50:51'),
+(7, 9, 'Tutors', 1, 'fsadfdfas', 'sadfsadf', 0, '2016-06-29 18:03:32', '2016-06-29 18:03:32'),
+(8, 9, 'Tutors', 1, 'fsadfdfas', 'sadfsadf', 0, '2016-06-29 18:04:28', '2016-06-29 18:04:28'),
+(9, 9, 'Tutors', 1, 'fsadfdfas', 'sadfsadf', 0, '2016-06-29 18:11:31', '2016-06-29 18:11:31'),
+(10, 9, 'Tutors', 1, 'fsadfdfas', 'sadfsadf', 0, '2016-06-29 18:11:55', '2016-06-29 18:11:55'),
+(11, 9, 'Tutors', 1, 'fsadfdfas', 'sadfsadf', 0, '2016-06-29 18:24:26', '2016-06-29 18:24:26'),
+(12, 1, 'Protectors', 20, 'testestte', 'estsseatase', 0, '2016-06-29 19:15:59', '2016-06-29 19:15:59'),
+(13, 9, 'Tutors', 1, 'teste', 'teste', 0, '2016-06-30 11:02:29', '2016-06-30 11:02:29');
 
 -- --------------------------------------------------------
 
@@ -835,7 +953,6 @@ CREATE TABLE IF NOT EXISTS `messages` (
 -- Estrutura da tabela `message_recipients`
 --
 
-DROP TABLE IF EXISTS `message_recipients`;
 CREATE TABLE IF NOT EXISTS `message_recipients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `model` enum('Protectors','Schools','Tutors','Users','Therapists') NOT NULL,
@@ -844,7 +961,16 @@ CREATE TABLE IF NOT EXISTS `message_recipients` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Extraindo dados da tabela `message_recipients`
+--
+
+INSERT INTO `message_recipients` (`id`, `model`, `model_id`, `message_id`, `created`, `modified`) VALUES
+(1, 'Protectors', 20, 12, '2016-06-29 19:16:00', '2016-06-29 19:16:00'),
+(2, 'Protectors', 19, 13, '2016-06-30 11:02:31', '2016-06-30 11:02:31'),
+(3, 'Tutors', 1, 13, '2016-06-30 11:02:31', '2016-06-30 11:02:31');
 
 -- --------------------------------------------------------
 
@@ -852,7 +978,6 @@ CREATE TABLE IF NOT EXISTS `message_recipients` (
 -- Estrutura da tabela `message_replies`
 --
 
-DROP TABLE IF EXISTS `message_replies`;
 CREATE TABLE IF NOT EXISTS `message_replies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `message_id` int(11) NOT NULL,
@@ -860,7 +985,15 @@ CREATE TABLE IF NOT EXISTS `message_replies` (
   `model_id` int(11) NOT NULL,
   `content` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `message_replies`
+--
+
+INSERT INTO `message_replies` (`id`, `message_id`, `model`, `model_id`, `content`) VALUES
+(1, 1, 'Tutors', 1, 'teste'),
+(2, 13, 'Tutors', 1, 'resposta teste');
 
 -- --------------------------------------------------------
 
@@ -868,7 +1001,6 @@ CREATE TABLE IF NOT EXISTS `message_replies` (
 -- Estrutura da tabela `permissions`
 --
 
-DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `model` enum('Protectors','Schools','Tutors','Users','Therapists') NOT NULL,
@@ -877,21 +1009,22 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `batepapo` int(11) DEFAULT NULL,
   `registros` int(11) DEFAULT NULL,
   `exercicios` int(11) DEFAULT NULL,
-  `authentication` tinyint(1) NOT NULL DEFAULT '1',
-  `timeline` int(11) NOT NULL DEFAULT '1',
+  `authentication` tinyint(1) DEFAULT '1',
+  `timeline` int(11) DEFAULT '1',
+  `relatorio` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `permissions`
 --
 
-INSERT INTO `permissions` (`id`, `model`, `feed`, `evolucao`, `batepapo`, `registros`, `exercicios`, `authentication`, `timeline`) VALUES
-(1, 'Protectors', 1, 1, 1, 1, 1, 1, 1),
-(2, 'Schools', 1, 1, 1, 1, 1, 1, 1),
-(3, 'Tutors', 1, 1, 1, 1, 1, 1, 1),
-(4, 'Therapists', 1, 1, 1, 1, 1, 1, 1),
-(5, 'Users', 1, 1, 1, 1, 1, 1, 1);
+INSERT INTO `permissions` (`id`, `model`, `feed`, `evolucao`, `batepapo`, `registros`, `exercicios`, `authentication`, `timeline`, `relatorio`) VALUES
+(1, 'Protectors', 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 'Schools', 1, 1, 1, 1, 1, 1, 1, 1),
+(3, 'Tutors', 1, 1, 1, 1, 1, 1, 1, 1),
+(4, 'Therapists', 1, 1, 1, 1, 1, 1, 1, 1),
+(5, 'Users', 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -899,7 +1032,6 @@ INSERT INTO `permissions` (`id`, `model`, `feed`, `evolucao`, `batepapo`, `regis
 -- Estrutura da tabela `protectors`
 --
 
-DROP TABLE IF EXISTS `protectors`;
 CREATE TABLE IF NOT EXISTS `protectors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -913,14 +1045,15 @@ CREATE TABLE IF NOT EXISTS `protectors` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Extraindo dados da tabela `protectors`
 --
 
 INSERT INTO `protectors` (`id`, `user_id`, `role`, `username`, `password`, `full_name`, `phone`, `is_admin`, `lastLogin`, `created`, `modified`) VALUES
-(2, 9, 'dad', 'luizhrqas@gmail.com', '$2y$10$OepMa5RXbwpHo0LPm/PHyuum82y8gF/QIzsFqQjctUBrcmBlumA6u', 'Luiz Henrique Almeida da SIlva', '(51) 9262-5423', 1, NULL, '2016-06-21 20:31:17', '2016-06-21 20:31:17');
+(20, 1, 'mom', 'luizhrqas@gmail.com', '$2y$10$w/JKxfD8BV23aTM5n22x2ujt6kVgXKuLe4dsZRM/M7hFSnytwy3y6', 'luiz henrique', '14324721847213', 1, '2016-06-29 19:15:18', '2016-06-29 19:14:35', '2016-06-29 19:15:27'),
+(22, 9, 'dad', 'luizhrqas@gmail.com', '$2y$10$sA8H96Y9um2XXOP2l8WoiOfD3Sc7RPYfL2DLYMuCt4Sm0fCSYgjO2', 'Luiz Henrique Almeida da SIlva', '35868412', 1, NULL, '2016-07-01 14:09:47', '2016-07-01 14:09:47');
 
 -- --------------------------------------------------------
 
@@ -928,7 +1061,6 @@ INSERT INTO `protectors` (`id`, `user_id`, `role`, `username`, `password`, `full
 -- Estrutura da tabela `reports`
 --
 
-DROP TABLE IF EXISTS `reports`;
 CREATE TABLE IF NOT EXISTS `reports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -936,7 +1068,7 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `start` varchar(255) DEFAULT NULL,
   `end` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Extraindo dados da tabela `reports`
@@ -945,7 +1077,19 @@ CREATE TABLE IF NOT EXISTS `reports` (
 INSERT INTO `reports` (`id`, `user_id`, `observation`, `start`, `end`) VALUES
 (4, 9, '<p><strong>abacate</strong></p>', '', ''),
 (5, 9, 'aluno está muito bem,...', '', ''),
-(6, 9, 'asasa', '10/01/2016', '04/05/2016');
+(6, 9, 'asasa', '10/01/2016', '04/05/2016'),
+(7, 9, '', '', ''),
+(8, 9, 'asasasasas', '', ''),
+(9, 9, 'teste 123 teste', '', ''),
+(10, 9, 'bli blo', '', ''),
+(11, 9, '123', '', ''),
+(12, 9, 'Tes tes&nbsp;', '', ''),
+(13, 9, 'asasasaasa', '05/01/2014', '08/07/2016'),
+(14, 1, 'etstes', '', ''),
+(15, 1, 'sdfsdfd', '', ''),
+(16, 9, 'teste', '', ''),
+(17, 9, 'teste', '', ''),
+(18, 9, 'teste', '', '');
 
 -- --------------------------------------------------------
 
@@ -953,7 +1097,6 @@ INSERT INTO `reports` (`id`, `user_id`, `observation`, `start`, `end`) VALUES
 -- Estrutura da tabela `schools`
 --
 
-DROP TABLE IF EXISTS `schools`;
 CREATE TABLE IF NOT EXISTS `schools` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -966,14 +1109,14 @@ CREATE TABLE IF NOT EXISTS `schools` (
   `is_admin` int(11) DEFAULT NULL,
   `lastLogin` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Extraindo dados da tabela `schools`
 --
 
 INSERT INTO `schools` (`id`, `user_id`, `role`, `instituition_id`, `username`, `password`, `full_name`, `phone`, `is_admin`, `lastLogin`) VALUES
-(11, 9, 'mediator', 4, 'Luizalaureano', '$2y$10$Q9mUHSB9WUR7NJnaMzoXeOguBUMDwf1BiaRcGi7j.wfJjxiF.JCf6', 'Luiza Laureano', '21 987450704', NULL, NULL);
+(15, 9, 'mediator', 4, 'luizalaureano@yahoo.com.br', '$2y$10$D1g0CSrl7ujNfyh0mRkE..sXlCS6XXO8w9seRjg6vamI.c0ioGu9m', 'Luiza Laureano', '21 987450704', NULL, '2016-07-04 09:56:50');
 
 -- --------------------------------------------------------
 
@@ -981,7 +1124,6 @@ INSERT INTO `schools` (`id`, `user_id`, `role`, `instituition_id`, `username`, `
 -- Estrutura da tabela `template_emails`
 --
 
-DROP TABLE IF EXISTS `template_emails`;
 CREATE TABLE IF NOT EXISTS `template_emails` (
   `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -995,7 +1137,11 @@ CREATE TABLE IF NOT EXISTS `template_emails` (
 
 INSERT INTO `template_emails` (`id`, `title`, `content`) VALUES
 (1, 'Alterar Senha', '<p><img src="http://pep.0e1dev.com/img/logo-azul.png" height="80">\r\n\r\n          </p><h2>Olá, {{user}}!</h2>\r\n\r\n          <p>A sua senha foi alterada no site do PEP.</p>\r\n\r\n          <p>A nova senha é: <strong>{{password}}</strong></p>\r\n\r\n          <p>Atenciosamente, <br> Pedro Lima Sampaio - Fundador do PEP.</p>'),
-(2, 'Ator Cadastrado', '<p><img src="http://pep.0e1dev.com/img/logo-azul.png" style="height: 80px;" height="80">\r\n\r\n          </p><h2>Olá, {{user}}!</h2>\r\n\r\n          <p>Seu e-mail foi cadastrado na rede do PEP.</p>\r\n\r\n          <p>A sua senha é: <strong>{{current_password}}</strong> </p>\r\n\r\n          <p>Atenciosamente, <br> Pedro Lima Sampaio - Fundador do PEP.</p>');
+(2, 'Ator Cadastrado', '<p><img src="http://pep.0e1dev.com/img/logo-azul.png" style="height: 80px;" height="80">\r\n\r\n          </p><h2>Olá, {{user}}!</h2>\r\n\r\n          <p>Seu e-mail foi cadastrado na rede do PEP.</p>\r\n\r\n          <p>A sua senha é: <strong>{{current_password}}</strong> </p>\r\n\r\n          <p>Atenciosamente, <br> Pedro Lima Sampaio - Fundador do PEP.</p>'),
+(3, 'Mensagem Enviada', '<p><img src="http://pep.0e1dev.com/img/logo-azul.png" style="height: 80px;" height="80">\r\n\r\n          </p><h2>Olá, {{user}}!</h2>\r\n\r\n          <p>Enviaram uma mensagem para você no PEP.</p>\r\n\r\n          <a href="{{url}}" target="_blank">Clique aqui e veja mais.</a>\r\n\r\n          <p>Atenciosamente, <br> Pedro Lima Sampaio - Fundador do PEP.</p>'),
+(4, 'Resposta Enviada', '<p><img src="http://pep.0e1dev.com/img/logo-azul.png" style="height: 80px;" height="80">\r\n\r\n          </p><h2>Olá, {{user}}!</h2>\r\n\r\n          <p>{{name}} enviou uma resposta para você no PEP.</p>\r\n\r\n          <a href="{{url}}" target="_blank">Clique aqui e veja mais.</a>\r\n\r\n          <p>Atenciosamente, <br> Pedro Lima Sampaio - Fundador do PEP.</p>'),
+(5, 'Esqueci Minha Senha', '<p><img src="http://pep.0e1dev.com/img/logo-azul.png" style="height: 80px;" height="80"> </p><h2>Olá, {{user}}!</h2> <p>Solicitaram no PEP uma alteração de senha.</p> <a href="{{url}}" target="_blank">Clique aqui e altere sua senha. Este link é válido por 24 horas.</a> <p>Caso voce nao tenha solicitado apenas ignore este e-mail.</p> <p>Atenciosamente, <br> Pedro Lima Sampaio - Fundador do PEP.</p>'),
+(6, 'Aluno Cadastrado', '<p><img src="http://pep.0e1dev.com/img/logo-azul.png" style="height: 80px;" height="80">\r\n\r\n          </p><h2>Olá, {{user}}!</h2>\r\n\r\n          <p>Você foi cadastrado no PEP.</p>\r\n\r\n<p>Seu usuário é: {{username}}</p>\r\n<p>Sua senha é: {{password}}</p>\r\n\r\n          <p>Atenciosamente, <br> Pedro Lima Sampaio - Fundador do PEP.</p>');
 
 -- --------------------------------------------------------
 
@@ -1003,7 +1149,6 @@ INSERT INTO `template_emails` (`id`, `title`, `content`) VALUES
 -- Estrutura da tabela `themes`
 --
 
-DROP TABLE IF EXISTS `themes`;
 CREATE TABLE IF NOT EXISTS `themes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -1011,7 +1156,7 @@ CREATE TABLE IF NOT EXISTS `themes` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Extraindo dados da tabela `themes`
@@ -1033,7 +1178,6 @@ INSERT INTO `themes` (`id`, `user_id`, `name`, `created`, `modified`) VALUES
 -- Estrutura da tabela `therapists`
 --
 
-DROP TABLE IF EXISTS `therapists`;
 CREATE TABLE IF NOT EXISTS `therapists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -1045,7 +1189,14 @@ CREATE TABLE IF NOT EXISTS `therapists` (
   `is_admin` int(11) DEFAULT NULL,
   `lastLogin` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Extraindo dados da tabela `therapists`
+--
+
+INSERT INTO `therapists` (`id`, `user_id`, `role`, `username`, `password`, `full_name`, `phone`, `is_admin`, `lastLogin`) VALUES
+(5, 9, 'therapist', 'daltro.inq@gmail.com', '$2y$10$T05drM2SlJG0W3EBdmg7cOxsnmilbt6RlnhCG0ABtrbhCoAEy/422', 'pedro teste', '2121212121', NULL, '2016-07-08 19:00:37');
 
 -- --------------------------------------------------------
 
@@ -1053,7 +1204,6 @@ CREATE TABLE IF NOT EXISTS `therapists` (
 -- Estrutura da tabela `tutors`
 --
 
-DROP TABLE IF EXISTS `tutors`;
 CREATE TABLE IF NOT EXISTS `tutors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -1065,14 +1215,14 @@ CREATE TABLE IF NOT EXISTS `tutors` (
   `is_admin` int(11) DEFAULT NULL,
   `lastLogin` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `tutors`
 --
 
 INSERT INTO `tutors` (`id`, `user_id`, `role`, `username`, `password`, `full_name`, `phone`, `is_admin`, `lastLogin`) VALUES
-(1, 9, 'tutor', 'luizhrqas@gmail.com', '$2y$10$L3adRU20In.9kSkaLLI/zee4MVwYHiQasbCBeoZYDYfY1cMLf5kGe', 'Pedro Lima Sampaio', '', 1, '2016-06-21 20:01:18');
+(1, 9, 'tutor', 'plima1@gmail.com', '$2y$10$O4Y.tYYUbilv.5EmJMfVM.OPxmQ6PRvjpVIbsRgmx3MLn7/4ttTxK', 'Pedro Lima Sampaio', '21 972711717', 1, '2016-07-09 12:50:40');
 
 -- --------------------------------------------------------
 
@@ -1080,7 +1230,6 @@ INSERT INTO `tutors` (`id`, `user_id`, `role`, `username`, `password`, `full_nam
 -- Estrutura da tabela `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
@@ -1095,16 +1244,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `lastLogin` datetime DEFAULT NULL,
+  `is_admin` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `profile_attachment`, `date_of_birth`, `instituition_id`, `clinical_condition`, `school_grade`, `description`, `created`, `modified`, `lastLogin`) VALUES
-(1, 'lhas1620@gmail.com', '$2y$10$9V5woOyKjxPWhBDrzCLvle7rYHolZXw05R4MhZAM.xi0fxI7FvtEu', 'Fulano de Tal', '1459097841-wallhaven-178474-jpg.jpg', '28/04/1995', 1, 'Síndrome de Down', '3º Ano', 'É daqueles, mané!', '2016-03-27 13:57:21', '2016-04-04 13:06:46', NULL),
-(9, 'jp@jp.com.br', '$2y$10$lQY3xe2wX06QubocG0MN9e8M3cyP4FTJ/jmYXzBnHi2LkD.ZotNAm', 'JP', '1460124969-12920886-10154087239369628-70006640-n-jpg.jpg', '28/04/1995', 4, 'SA', 'Terceiro Ano', 'Nenhuma observação no momento.', '2016-04-08 11:16:09', '2016-04-08 11:16:09', NULL);
+INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `profile_attachment`, `date_of_birth`, `instituition_id`, `clinical_condition`, `school_grade`, `description`, `created`, `modified`, `lastLogin`, `is_admin`) VALUES
+(1, 'lhas1620@gmail.com', '$2y$10$L3adRU20In.9kSkaLLI/zee4MVwYHiQasbCBeoZYDYfY1cMLf5kGe', 'Fulano de Tal', '1459097841-wallhaven-178474-jpg.jpg', '28/04/1995', 1, 'Síndrome de Down', '3º Ano', 'É daqueles, mané!', '2016-03-27 13:57:21', '2016-04-04 13:06:46', NULL, 0),
+(9, 'jp@jp.com.br', '$2y$10$yOMMQY7n0IhW7MrTC2UqluvDjGExWBCKuJsACHABw3LpELRcsKblS', 'JP', '1460124969-12920886-10154087239369628-70006640-n-jpg.jpg', '28/04/1995', 4, 'SA', 'Terceiro Ano', 'Nenhuma observação no momento.', '2016-04-08 11:16:09', '2016-07-09 12:51:04', NULL, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
