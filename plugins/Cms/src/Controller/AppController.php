@@ -28,6 +28,20 @@ class AppController extends BaseController
       $this->estudanteAtual();
     }
 
+    protected function formatarCargo($role = null) {
+      $tmp = [
+         "dad" => "Pai"
+        ,"mom" => "Mãe"
+        ,"tutor" => "Tutor"
+        ,"therapist" => "Terap."
+        ,"mediator" => "Mediad."
+        ,"coordinator" => "Coord."
+        ,"user" => "Est."
+      ];
+
+      return $tmp[$role];
+    }
+
 /**
  * Função usada para verificar se o usuário tem permissão
  * para ver o CMS.

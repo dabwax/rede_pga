@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 <th>Aba</th>
-                <th>Gráficos</th>
+                <th>Atores</th>
                 <th class="actions"><?= __('Ações') ?></th>
             </tr>
         </thead>
@@ -22,9 +22,9 @@
             <tr>
                 <td><?= h($chartTab->title) ?></td>
                 <td>
-                    <?php foreach($chartTab->graficos as $c) : ?>
+                    <?php foreach($chartTab->actors as $c) : ?>
                         <div class="chip">
-                            <i class="material-icons">insert_chart</i> <?php echo $c->name; ?>
+                            <i class="material-icons">insert_chart</i> <?php echo $c->full_name; ?>
                         </div>
                     <?php endforeach; ?>
                 </td>

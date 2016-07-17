@@ -28,13 +28,20 @@ class ChartTabsController extends AppController
         $charts = TableRegistry::get("Charts");
 
         foreach($chartTabs as $chartTab) {
-            $tmp = json_decode($chartTab->charts_related);
-            $where = [
-                'Charts.id IN' => $tmp
-            ];
-            $tmp = $charts->find()->where($where)->all()->toArray();
+            $tmp = json_decode($chartTab->actors);
 
-            $chartTab->graficos = $tmp;
+            $tmp2 = [];
+            
+            foreach ($tmp as $key => $value) {
+                $explode = explode("_", $value);
+                
+                $entity = TableRegistry::get($explode[1]);
+                $entity = $entity->get($explode[0]);
+
+                $tmp2[] = $entity;
+            }
+
+            $chartTab->actors = $tmp2;
         }
 
         $this->set(compact('chartTabs'));
@@ -71,21 +78,8 @@ class ChartTabsController extends AppController
 
         $chartTab->user_id = $estudanteAtual['id'];
 
-        $chartsRelated = [];
-
-        $charts = TableRegistry::get("Charts");
-
-        $where = [
-            'Charts.user_id' => $estudanteAtual['id']
-        ];
-        $tmp = $charts->find()->where($where)->all()->toArray();
-
-        foreach($tmp as $t) {
-            $chartsRelated[$t->id] = $t->name . ' - ' . $t->subname;
-        }
-
         if ($this->request->is('post')) {
-            $this->request->data['charts_related'] = json_encode($this->request->data['charts_related']);
+            $this->request->data['actors'] = json_encode($this->request->data['actors']);
             $chartTab = $this->ChartTabs->patchEntity($chartTab, $this->request->data);
             if ($this->ChartTabs->save($chartTab)) {
                 $this->Flash->success(__('The chart tab has been saved.'));
@@ -95,7 +89,26 @@ class ChartTabsController extends AppController
             }
         }
         $users = $this->ChartTabs->Users->find('list', ['limit' => 200]);
-        $this->set(compact('chartTab', 'users', 'chartsRelated'));
+
+        $actorsList = $this->getAtores();
+        $actors = [];
+
+        foreach ($actorsList as $model => $entities) {
+            foreach($entities as $entity) {
+                $index = $entity->id . '_' . $model;
+
+                $role = $entity->role;
+
+                if(!empty($role)) {
+                    $label = $entity->full_name . ' (' . $this->formatarCargo($role) . ')';
+
+                    $actors[$index] = $label;
+                }
+            }
+            # code...
+        }
+
+        $this->set(compact('actors', 'chartTab', 'users'));
         $this->set('_serialize', ['chartTab']);
     }
 
