@@ -90,6 +90,14 @@ class ChartTabsController extends AppController
         }
         $users = $this->ChartTabs->Users->find('list', ['limit' => 200]);
 
+        $actors = $this->formatarAtores();
+
+        $this->set(compact('actors', 'chartTab', 'users'));
+        $this->set('_serialize', ['chartTab']);
+    }
+
+    public function formatarAtores()
+    {
         $actorsList = $this->getAtores();
         $actors = [];
 
@@ -108,8 +116,7 @@ class ChartTabsController extends AppController
             # code...
         }
 
-        $this->set(compact('actors', 'chartTab', 'users'));
-        $this->set('_serialize', ['chartTab']);
+        return $actors;
     }
 
     /**
@@ -125,26 +132,11 @@ class ChartTabsController extends AppController
         $chartTab = $this->ChartTabs->get($id, [
             'contain' => []
         ]);
-        $chartsRelated = [];
-
-        $charts = TableRegistry::get("Charts");
-
-        $tmp = json_decode($chartTab->charts_related);
-
-        $chartTab->charts_related = $tmp;
-        $where = [
-            'Charts.user_id' => $estudanteAtual['id']
-        ];
-        $tmp = $charts->find()->where($where)->all()->toArray();
-
-        foreach($tmp as $t) {
-            $chartsRelated[$t->id] = $t->name . ' - ' . $t->subname;
-        }
+        $actors = $this->formatarAtores();
 
         if ($this->request->is(['patch', 'post', 'put'])) {
 
-
-            $this->request->data['charts_related'] = json_encode($this->request->data['charts_related']);
+            $this->request->data['actors'] = json_encode($this->request->data['actors']);
 
             $chartTab = $this->ChartTabs->patchEntity($chartTab, $this->request->data);
             if ($this->ChartTabs->save($chartTab)) {
@@ -153,9 +145,11 @@ class ChartTabsController extends AppController
             } else {
                 $this->Flash->error(__('The chart tab could not be saved. Please, try again.'));
             }
+        } else {
+            $chartTab->actors = json_decode($chartTab->actors);
         }
         $users = $this->ChartTabs->Users->find('list', ['limit' => 200]);
-        $this->set(compact('chartTab', 'users', 'chartsRelated'));
+        $this->set(compact('chartTab', 'users', 'actors', 'chartsRelated'));
         $this->set('_serialize', ['chartTab']);
     }
 

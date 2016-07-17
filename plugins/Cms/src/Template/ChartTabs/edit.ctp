@@ -15,10 +15,10 @@
         ?>
 
     <div class="input-field">
-        <?php echo $this->Form->input('charts_related', ['options' => $chartsRelated, 'type' => 'select', 'label' => false, 'multiple' => true, 'templates' => [
+        <?php echo $this->Form->input('actors', ['options' => $actors, 'type' => 'select', 'label' => false, 'multiple' => true, 'templates' => [
         'inputContainer' => '{{content}}'
         ], 'materialize-select' ]); ?>
-        <label>Gráficos Relacionados</label>
+        <label>Atores Relacionados</label>
     </div>
 
     <button class="btn">Salvar Aba</button>
