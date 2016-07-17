@@ -17,6 +17,7 @@
 			<td><span title="<?php echo $a->password; ?>">********</span></td>
 			<td>
 				<a href="javascript:;" class="btn blue white-text" ng-click='set_actor(<?php echo json_encode($a, true); ?>, "<?php echo $k; ?>")' title="Editar ator"><i class="material-icons">edit</i></a>
+				<a href="<?php echo $this->Url->build(['action' => 'delete_actor', $k, $a->id]); ?>" class="btn red white-text" onclick="if(!confirm('Você tem certeza disso? Irá apagá-lo para sempre!')) { return false; }"><i class="material-icons">delete</i></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

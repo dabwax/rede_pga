@@ -9,15 +9,15 @@ class TimelineController extends AppController
 
   public function api()
   {
-    $this->autoRender = false;
+
       // Get all tables
     $lessons      = TableRegistry::get("Lessons");
     // get current actors
     $actors       = $this->getAtores();
 
     // if current user is a user, load correct view
-    if($this->currentUserIsStudent())
-      $this->view = "dashboard_aluno";
+    // if($this->currentUserIsStudent())
+    //   $this->view = "dashboard_aluno";
 
     // get all lessons from current user
     $query = $lessons->buscaAulas( $this->userLogged['user_id'] );
@@ -83,7 +83,7 @@ class TimelineController extends AppController
       $q->date_y = $q->date->format("Y");
     }
 
-    echo json_encode(array_values($query));
+    echo json_encode(array_values($query)); die();
   }
 
   public function index()

@@ -75,7 +75,7 @@
 	<button type="submit" class="btn green"><i class="material-icons">save</i> Salvar Ator</button>
 
 	<?php if($estudanteAtual['full_name'] != "Fulano de Tal") : ?>
-		<a href="<?php echo $this->Url->build(['action' => 'delete_actor']); ?>/{{actor.model}}/{{actor.id}}" class="btn red white-text" ng-if="actor.id"><i class="material-icons">delete</i> Excluir Ator</a>
+		<a href="<?php echo $this->Url->build(['action' => 'delete_actor']); ?>/{{actor.model}}/{{actor.id}}" class="btn red white-text" ng-if="actor.id" onclick="if(!confirm('Você tem certeza disso? Irá apagá-lo para sempre!')) { return false; }"><i class="material-icons">delete</i> Excluir Ator</a>
 	<?php endif; ?>
 
 	<a href="javascript:;" ng-click="cancelarEdicao()" class="btn btn-flat right" ng-if="actor.id"><i class="material-icons">close</i> Cancelar Edição</a>

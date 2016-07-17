@@ -65,7 +65,7 @@ class ChartAbsolutesController extends AppController
             }
         }
         $users = $this->ChartAbsolutes->Users->find('list', ['limit' => 200]);
-        $inputs = $this->ChartAbsolutes->Inputs->find('list', ['limit' => 200])->where(['Inputs.user_id' => $estudanteAtual['id'], 'Inputs.type IN' => ['escala_numerica', 'numero'] ]);
+        $inputs = $this->ChartAbsolutes->Inputs->find('list', ['limit' => 200])->where(['Inputs.user_id' => $estudanteAtual['id'], 'Inputs.type IN' => ['escala_numerica', 'numero', 'intervalo_tempo'] ]);
         $this->set(compact('chartAbsolute', 'users', 'inputs'));
         $this->set('_serialize', ['chartAbsolute']);
     }
@@ -96,7 +96,7 @@ class ChartAbsolutesController extends AppController
             }
         }
         $users = $this->ChartAbsolutes->Users->find('list', ['limit' => 200]);
-        $inputs = $this->ChartAbsolutes->Inputs->find('list', ['limit' => 200])->where(['Inputs.user_id' => $estudanteAtual['id'], 'Inputs.type IN' => ['escala_numerica', 'numero'] ]);
+        $inputs = $this->ChartAbsolutes->Inputs->find('list', ['limit' => 200])->where(['Inputs.user_id' => $estudanteAtual['id'], 'Inputs.type IN' => ['escala_numerica', 'numero', 'intervalo_tempo'] ]);
         $this->set(compact('chartAbsolute', 'users', 'inputs'));
         $this->set('_serialize', ['chartAbsolute']);
     }

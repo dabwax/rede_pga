@@ -30,7 +30,7 @@ class RelatorioController extends AppController
 
       $user_id = $report->user_id;
 
-      $this->set(compact("charts", "user_id", "tabs"));
+      $this->set(compact("charts", "user_id", "tabs", "absolutes"));
 
       $this->set("report", $report);
 

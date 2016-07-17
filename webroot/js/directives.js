@@ -16,14 +16,15 @@ angular.module('RedePga')
         $(this).addClass("green");
         var chartsRelated = $(elem).data("charts-related");
 
-        $(".graficoHighchart").stop().fadeOut("fast", function() {
 
-          if(chartsRelated.length > 0) {
-            for(var i = 0; i < chartsRelated.length; i++) {
-              $(".grafico" + chartsRelated[i]).stop().fadeIn("slow");
-            }
-          }
-        });
+        if(chartsRelated instanceof Array) {
+          $(".graficoHighchart").stop().fadeOut("fast", function() {
+
+              for(var i = 0; i < chartsRelated.length; i++) {
+                $(".grafico" + chartsRelated[i]).stop().fadeIn("slow");
+              }
+          });
+        }
 
       });
     }
