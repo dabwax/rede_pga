@@ -48,7 +48,7 @@ class AppView extends View
       return $tmp[$role];
     }
 
-    public function formatarGrafico($chart = null, $user_id = null) {
+    public function formatarGrafico($chart = null, $user_id = null, $tab_id = null) {
       $default = [
         "chart_id" => $chart->id,
         "options" => [
@@ -167,6 +167,10 @@ class AppView extends View
 
           if(!empty($_GET['fim'])) {
             $payload['fim'] = $_GET['fim'];
+          }
+
+          if(!empty($tab_id)) {
+            $payload['tab_id'] = $tab_id;
           }
 
           $response = $http->post($url, $payload, ['type' => 'json']);

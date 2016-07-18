@@ -7,7 +7,7 @@ use Cake\ORM\TableRegistry;
 class EvolucaoController extends AppController
 {
 
-	public function index()
+	public function index($tab_id = null)
 	{
 		if($this->request->is("get")) {
 			$charts = TableRegistry::get("Charts");
@@ -18,10 +18,38 @@ class EvolucaoController extends AppController
 				'Charts.user_id' => $this->userLogged['user_id']
 			];
 			$charts = $charts->find()->distinct()->where($where)->order(['Charts.position' => 'ASC'])->contain(['ChartSeries'])->all();
+			
 			$where = [
 				'ChartTabs.user_id' => $this->userLogged['user_id']
 			];
 			$tabs = $chart_tabs->find()->distinct()->where($where)->all();
+
+			// Se tiver sido selecionado uma aba busca os dados da aba
+			if(!empty($tab_id)) {
+				$where = [
+					'ChartTabs.id' => $tab_id
+				];
+				$tab = $chart_tabs->find()->distinct()->where($where)->first();
+				$tabActors = json_decode($tab->actors);
+				$models = [];
+
+				foreach($tabActors as $tabActor) {
+					$explode = explode("_", $tabActor);
+					$models[] = [
+						'model_id' => $explode[0],
+						'model' => $explode[1]
+					];
+				}
+
+				$tmpModels = [];
+				$tmpModelsId = [];
+
+				foreach($models as $model) {
+					$tmpModels[] = $model['model'];
+					$tmpModelsId[] = $model['model_id'];
+				}
+			}
+
 			$where = [
 				'ChartAbsolutes.user_id' => $this->userLogged['user_id']
 			];
@@ -34,6 +62,13 @@ class EvolucaoController extends AppController
 					'LessonEntries.user_id' => $abs->user_id,
 					'LessonEntries.input_id' => $abs->input_id,
 				];
+
+				// Se estiver na aba filtra pelos atores da aba
+				if(!empty($models)) {
+
+					$where['LessonEntries.model IN'] = $tmpModels; 
+					$where['LessonEntries.model_id IN'] = $tmpModelsId; 
+				}
 				$tmp = $LessonEntries->find()->where($where)->all();
 
 				$totalAulas = [];
@@ -46,8 +81,10 @@ class EvolucaoController extends AppController
 					}
 				}
 
-				if($abs->type == "media") {
-					$total = $total / sizeof($totalAulas);
+				if($total > 0) {
+					if($abs->type == "media") {
+						$total = $total / sizeof($totalAulas);
+					}
 				}
 
 				$abs->value = floor($total);
@@ -55,7 +92,7 @@ class EvolucaoController extends AppController
 
 	    $user_id = $this->userLogged['user_id'];
 
-			$this->set(compact("tabs", "charts", "user_id", "absolutes"));
+			$this->set(compact("tabs", "charts", "user_id", "absolutes", "tab_id"));
 		} else if($this->request->is(["post", "put"])) {
 
 			$this->autoRender = false;

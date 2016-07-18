@@ -32,6 +32,10 @@ class ApiController extends AppController
         $input_id = $dados_recebidos->input_id;
         $formato_grafico = $dados_recebidos->formato_grafico;
 
+        if(!empty($dados_recebidos->tab_id)) {
+          $tab_id = $dados_recebidos->tab_id;
+        }
+
         if(!empty($dados_recebidos->theme_id)) {
          $theme_id = $dados_recebidos->theme_id;
         }
@@ -40,6 +44,13 @@ class ApiController extends AppController
       // Busca o input
       $inputs = TableRegistry::get("Inputs");
       $input = $inputs->get($input_id);
+
+      // Busca a tab
+      $tab = [];
+      if(!empty($tab_id)) {
+        $tabs = TableRegistry::get("ChartTabs");
+        $tab = $tabs->get($tab_id);
+      }
 
       // Geramos o objeto vazio da série
       $serie = [
@@ -96,11 +107,37 @@ class ApiController extends AppController
       $order = [
         'Lessons.date' => 'ASC'
       ];
-      $LessonEntries = function($q) use ($input) {
+      $LessonEntries = function($q) use ($input, $tab) {
 
         $where = [
           'LessonEntries.input_id' => $input->id
         ];
+
+        if(!empty($tab)) {
+          /* start:boilerplate */
+          $tabActors = json_decode($tab->actors);
+          $models = [];
+
+          foreach($tabActors as $tabActor) {
+            $explode = explode("_", $tabActor);
+            $models[] = [
+              'model_id' => $explode[0],
+              'model' => $explode[1]
+            ];
+          }
+
+          $tmpModels = [];
+          $tmpModelsId = [];
+
+          foreach($models as $model) {
+            $tmpModels[] = $model['model'];
+            $tmpModelsId[] = $model['model_id'];
+          }
+          /* end:boilerplate */
+
+					$where['LessonEntries.model IN'] = $tmpModels; 
+					$where['LessonEntries.model_id IN'] = $tmpModelsId;
+        }
 
         return $q->where($where);
       };
@@ -114,14 +151,28 @@ class ApiController extends AppController
 
         return $q->where($where);
       };
-      $lessons = $lessons->find()
-      ->where($where)
-      ->order($order)
-      ->distinct()
-      ->matching('LessonEntries', $LessonEntries)
-      ->innerJoinWith('LessonThemes', $LessonThemes)
-      ->all()
-      ->toArray();
+
+      // se tiver matéria, INNER JOIN de matéria
+      if(!empty($theme_id)) {
+        $lessons = $lessons->find()
+        ->where($where)
+        ->order($order)
+        ->distinct()
+        ->matching('LessonEntries', $LessonEntries)
+        ->innerJoinWith('LessonThemes', $LessonThemes)
+        ->all()
+        ->toArray();
+      } else {
+        $lessons = $lessons->find()
+        ->where($where)
+        ->order($order)
+        ->distinct()
+        ->matching('LessonEntries', $LessonEntries)
+        // ->innerJoinWith('LessonThemes', $LessonThemes)
+        ->all()
+        ->toArray();
+
+      }
 
       // Antes de tudo, vamos fazer logo os gráficos que a série seja do tipo texto
       // Pois é mais simples
