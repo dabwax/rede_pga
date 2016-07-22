@@ -101,7 +101,7 @@ class EvolucaoController extends AppController
 
 			$tmp->save($entity);
 
-			return $this->redirect('/relatorio/visualizar/' . $entity->id);
+			return $this->redirect('/relatorio/index/' . $entity->id);
 
 		}
 	}

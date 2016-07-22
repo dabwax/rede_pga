@@ -44,7 +44,8 @@
 
   <div class="row">
     <div class="col s12">
-
+    <a href="<?php echo $this->Url->build(['action' => 'index']); ?>" class="btn <?php if(empty($tab_id)): ?>green<?php endif; ?>">Geral</a>
+    
     <?php foreach($tabs as $tab) : ?>
       <a href="<?php echo $this->Url->build(['action' => 'index', $tab->id]); ?>" class="btn <?php if(!empty($tab_id) && $tab_id == $tab->id): ?>green<?php endif; ?>"><?php echo $tab->title; ?></a>
     <?php endforeach; ?>
