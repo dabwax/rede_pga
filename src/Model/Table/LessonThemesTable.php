@@ -65,7 +65,7 @@ class LessonThemesTable extends Table
     // Itera todas as matérias preenchidas
     // Verifica se a matéria preenchida já existe no registro da aula
     // Se não existir, gera uma nova entidade e salva ela na base de dados
-
+    if(!empty($materias)) {
     foreach($materias as $theme_id => $materia)
     {
 
@@ -120,6 +120,7 @@ class LessonThemesTable extends Table
       }// if materia enabled == 1
 
     } // foreach
+    } // !empty()
 
   } // function
 

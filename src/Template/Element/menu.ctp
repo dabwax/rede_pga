@@ -3,7 +3,7 @@
 <ul id="slide-out" class="side-nav fixed" ng-init="paginaAtual = '<?php echo strtolower($this->request->params['controller']); ?>'">
 
   <li>
-   <a href="<?php echo $this->Url->build('/'); ?>" class="brand-logo center">
+   <a href="<?php echo $this->Url->build('/'); ?>" style="min-height: 121px;" class="brand-logo center">
 
    <?php echo $this->Html->image("logo-branco.png", ["height" => 50]); ?>
 

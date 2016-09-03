@@ -6,7 +6,7 @@
   <div class="page-title red darken-3">
 
     <div class="col s12">
-        <h2>Adicionar Nova Aula</h2>
+        <h2>Adicionar Novo Registro</h2>
     </div>
 
     <div class="clearfix"></div>
