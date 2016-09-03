@@ -195,13 +195,21 @@ class AuthenticationController extends AppController
       foreach($atores_disponiveis as $key => $val) :
         if(!empty($val)) :
           foreach($val as $ator) :
-            // gambiarra aqui
-
-            if(!empty($ator->user_id)) {
-              $ator->user = $users->get($ator->user_id);
-            } else {
-              $ator->user = $users->get($ator->id);
-            }
+            
+              // gambiarra aqui
+              if(!empty($ator->user_id)) {
+                $get = $users->findById($ator->user_id)->first();
+                
+                if(!empty($get)) {
+                  $ator->user = $get;
+                }
+              } else {
+                $get = $users->findById($ator->id)->first();
+                
+                if(!empty($get)) {
+                  $ator->user = $get;
+                }
+              }
 
             $ator->model = $key;
 
@@ -325,10 +333,19 @@ class AuthenticationController extends AppController
 
               // gambiarra aqui
               if(!empty($ator->user_id)) {
-                $ator->user = $users->get($ator->user_id);
+                $get = $users->findById($ator->user_id)->first();
+                
+                if(!empty($get)) {
+                  $ator->user = $get;
+                }
               } else {
-                $ator->user = $users->get($ator->id);
+                $get = $users->findById($ator->id)->first();
+                
+                if(!empty($get)) {
+                  $ator->user = $get;
+                }
               }
+              
               $ator->model = $key;
 
               $atores[] = $ator;

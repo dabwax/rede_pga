@@ -7,7 +7,7 @@
         <span class="card-title">Perfis disponíveis</span>
 
         <ul id="pep-lista-atores" class="collection">
-            <?php foreach($atores as $ator) :  ?>
+            <?php foreach($atores as $ator) : if(!empty($ator->user->full_name)) :  ?>
           <li class="collection-item">
             <div>
 
@@ -21,7 +21,7 @@
             </div>
 
           </li>
-          <?php endforeach; ?>
+          <?php endif; endforeach; ?>
         </ul>
 
       </div>
