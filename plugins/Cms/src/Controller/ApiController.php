@@ -17,7 +17,7 @@ class ApiController extends AppController
  * Utilizado principalmente no cadastramento de gráfico
  * e na página de Evolução.
  */
-    public function calcular_serie($user_id = null, $input_id = null, $formato_grafico = null, $theme_id = null)
+    public function calcular_serie($user_id = null, $chart_serie_id = null, $input_id = null, $formato_grafico = null, $theme_id = null)
     {
       $this->autoRender = false;
 
@@ -29,6 +29,7 @@ class ApiController extends AppController
 
       if(!empty($dados_recebidos)) {
         $user_id = $dados_recebidos->user_id;
+        $chart_serie_id = $dados_recebidos->chart_serie_id;
         $input_id = $dados_recebidos->input_id;
         $formato_grafico = $dados_recebidos->formato_grafico;
 
@@ -44,6 +45,10 @@ class ApiController extends AppController
       // Busca o input
       $inputs = TableRegistry::get("Inputs");
       $input = $inputs->get($input_id);
+
+      // Busca a série
+      $series = TableRegistry::get("ChartSeries");
+      $chart_serie = $series->get($chart_serie_id);
 
       // Busca a tab
       $tab = [];
@@ -185,7 +190,18 @@ class ApiController extends AppController
 
           $value = $lesson->_matchingData['LessonEntries']->value;
 
-          $tmp[$value] = @$tmp[$value] + 1;
+          // aqui precisamos verificar se o chart_serie
+          // tem alguma restrição para o autor deste input
+          // se tiver, não é para preencher o valor
+          $autorDoInput = [
+            'model' => strtolower($lesson->_matchingData['LessonEntries']->model),
+            'model_id' => $lesson->_matchingData['LessonEntries']->model_id
+          ];
+          $nomeDaColuna = 'actors_' . $autorDoInput['model'];
+
+          if($chart_serie->$nomeDaColuna == 1) {
+            $tmp[$value] = @$tmp[$value] + 1;
+          }
         }
 
         foreach($tmp as $key => $val) {
@@ -229,7 +245,20 @@ class ApiController extends AppController
 
             $indice_do_mes = $lesson->date->format("m") - 1;
 
-            $serie['data'][$indice_do_mes]['y'] = $y;
+            
+            // aqui precisamos verificar se o chart_serie
+            // tem alguma restrição para o autor deste input
+            // se tiver, não é para preencher o valor
+            $autorDoInput = [
+              'model' => strtolower($lesson->_matchingData['LessonEntries']->model),
+              'model_id' => $lesson->_matchingData['LessonEntries']->model_id
+            ];
+            $nomeDaColuna = 'actors_' . $autorDoInput['model'];
+
+            if($chart_serie->$nomeDaColuna == 1) {
+              $serie['data'][$indice_do_mes]['y'] = $y;
+            }
+
           }
 
         }
@@ -251,7 +280,21 @@ class ApiController extends AppController
 
             if($y > 0) {
 
-              $serie['data'][] = ['name' => $lesson->date->format("d/m/Y"), 'y' => $y];
+              
+              // aqui precisamos verificar se o chart_serie
+              // tem alguma restrição para o autor deste input
+              // se tiver, não é para preencher o valor
+              $autorDoInput = [
+                'model' => strtolower($lesson->_matchingData['LessonEntries']->model),
+                'model_id' => $lesson->_matchingData['LessonEntries']->model_id
+              ];
+              $nomeDaColuna = 'actors_' . $autorDoInput['model'];
+
+              if($chart_serie->$nomeDaColuna == 1) {
+
+                $serie['data'][] = ['name' => $lesson->date->format("d/m/Y"), 'y' => $y];
+
+              }
             }
 
           }

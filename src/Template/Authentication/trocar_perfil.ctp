@@ -1,5 +1,5 @@
 <div ng-controller="AuthenticationController" class="row">
-  <div class="col s12 m6 l6 offset-l3 offset-m3">
+  <div class="col s12">
     <div class="card blue-grey lighten-5">
       <div class="card-content center-align">
 

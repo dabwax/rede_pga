@@ -67,24 +67,68 @@ ul[dnd-list] li.selected {
   margin-top: 18px;
   margin-right: 14px;
 }
-.pep-login .side-nav.fixed a {
+#login-page .card-panel {
+      box-shadow: 0 16px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21);
+}
+.profile-image-login {
+  height: 60px;
+}
+.login-form-text {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+#login-page input:focus + label,
+#login-page i.material-icons.active {
+  color: #f9a825;
+}
+.forgot-pw {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: #bdbdbd;
+  font-weight: 300;
+}
+html.pep-authentication,
+body.pep-authentication {
+    height: 100%;
+}
+html.pep-authentication {
+    display: table;
+    margin: auto;
+}
+.notifications .success {
+  background: #00e676 !important;
+}
+.pep-authentication {
+    display: table-cell;
+    vertical-align: middle;
+    background-color: #00bcd4!important;
+}
+#login-page {
+  width: 390px;
+}
+.side-nav.fixed a {
   font-family: "Arvo";
   font-weight: 900;
   font-size: 16px;
   text-transform: uppercase;
+  color: #fff !important;
 }
-.pep-login .side-nav.fixed a:hover {
+.side-nav .dropdown-content li a {
+  color: #222 !important;
+}
+.side-nav.fixed a:hover {
   background: transparent !important;
 }
-.pep-login .side-nav.fixed li:hover,
+.side-nav.fixed li:hover,
 .selecionado {
   background: rgba(255,255,255,0.3) !important;
 }
-.pep-login .side-nav.fixed li:hover {
+.side-nav.fixed li:hover {
   background: rgba(255,255,255,0.4) !important;
 }
-.pep-login .side-nav.fixed a,
-.pep-login .side-nav.fixed i {
+.side-nav.fixed a,
+.side-nav.fixed i {
   color: #fff;
 }
 #btn-abrir-cms {

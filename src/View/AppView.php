@@ -156,6 +156,7 @@ class AppView extends View
 
           $payload = [
             'user_id' => $user_id,
+            'chart_serie_id' => $serie->id,
             'input_id' => $dados['input'],
             'formato_grafico' => $dados['formato'],
             'theme_id' => $dados['materia']
@@ -185,6 +186,10 @@ class AppView extends View
               'type' => $serie->type,
               'input_id' => strval($serie->input_id),
               'theme_id' => strval($serie->theme_id),
+              'actors_tutors' => ($serie->actors_tutors),
+              'actors_therapists' => ($serie->actors_therapists),
+              'actors_schools' => ($serie->actors_schools),
+              'actors_protectors' => ($serie->actors_protectors),
               'data' => $response['data']
             ];
           }

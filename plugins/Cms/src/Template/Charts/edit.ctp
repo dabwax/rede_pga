@@ -41,7 +41,7 @@
 
                 <a href="javascript:;" class="btn red" ng-click="adicionar()">Adicionar Série</a>
 
-                <p class="serie-item pink lighten-4" style="margin-top: 10px;" ng-repeat="(key, value) in emptyChart.series track by $index">
+                <div class="serie-item pink lighten-4" style="margin-top: 10px;" ng-repeat="(key, value) in emptyChart.series track by $index">
 
                     <input type="hidden" name="chart_series[{{key}}][id]" value="{{emptyChart.series[key].id}}" ng-model="emptyChart.series[key].id">
 
@@ -84,7 +84,34 @@
                           <option ng-repeat="materia in materias" value="{{materia.id}}">{{materia.name}}</option>
                       </select>
 
-                </p>
+                      <div style="margin-top: 20px; margin-bottom: 10px;">
+
+                        <p class="">
+                            <input type="hidden" ng-model="emptyChart.series[key].actors_tutors" name="chart_series[{{key}}][actors_tutors]" value="0">
+                            <input type="checkbox" ng-model="emptyChart.series[key].actors_tutors" name="chart_series[{{key}}][actors_tutors]" id="tutors{{key}}" value="1">
+                            <label for="tutors{{key}}" class="white-text">Tutores</label>
+                        </p>
+
+                        <p class="">
+                            <input type="hidden" ng-model="emptyChart.series[key].actors_therapists" name="chart_series[{{key}}][actors_therapists]" value="0">
+                            <input type="checkbox" ng-model="emptyChart.series[key].actors_therapists" name="chart_series[{{key}}][actors_therapists]" id="therapists{{key}}" value="1">
+                            <label for="therapists{{key}}" class="white-text">Terapeutas</label>
+                        </p>
+
+                        <p class="">
+                            <input type="hidden" ng-model="emptyChart.series[key].actors_schools" name="chart_series[{{key}}][actors_schools]" value="0">
+                            <input type="checkbox" ng-model="emptyChart.series[key].actors_schools" name="chart_series[{{key}}][actors_schools]" id="schools{{key}}" value="1">
+                            <label for="schools{{key}}" class="white-text">Escola</label>
+                        </p>
+
+                        <p class="">
+                            <input type="hidden" ng-model="emptyChart.series[key].actors_protectors" name="chart_series[{{key}}][actors_protectors]" value="0">
+                            <input type="checkbox" ng-model="emptyChart.series[key].actors_protectors" name="chart_series[{{key}}][actors_protectors]" id="protectors{{key}}" value="1">
+                            <label for="protectors{{key}}" class="white-text">Responsáveis</label>
+                        </p>
+                        </div>
+
+                </div>
             </div>
         </div>
 
