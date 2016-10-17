@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0c9d9908e95370d942d2de9f7b3da109",
-    "content-hash": "e58c659eb19b2f67a066cbb53c24b836",
+    "hash": "a009cfe19b49bbdcceb811f3a0bd26d0",
+    "content-hash": "aba0e0b6c1f541821b026d9ecdaea9dd",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -988,6 +988,53 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "riesenia/cakephp-duplicatable",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/riesenia/cakephp-duplicatable.git",
+                "reference": "1c91452535de8691f04999bfc54f6efbb587ed99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/riesenia/cakephp-duplicatable/zipball/1c91452535de8691f04999bfc54f6efbb587ed99",
+                "reference": "1c91452535de8691f04999bfc54f6efbb587ed99",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/orm": "~3.0",
+                "php": ">=5.4.16"
+            },
+            "require-dev": {
+                "cakephp/cakephp": "~3.0",
+                "phpunit/phpunit": "*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Duplicatable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tomas Saghy",
+                    "email": "segy@riesenia.com"
+                }
+            ],
+            "description": "CakePHP ORM plugin for duplicating entities (including related entities)",
+            "keywords": [
+                "cakephp",
+                "copy",
+                "duplicate",
+                "orm"
+            ],
+            "time": "2016-10-07 12:16:04"
         },
         {
             "name": "robmorgan/phinx",

@@ -1835,5 +1835,54 @@
             }
         ],
         "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "riesenia/cakephp-duplicatable",
+        "version": "v1.0.4",
+        "version_normalized": "1.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/riesenia/cakephp-duplicatable.git",
+            "reference": "1c91452535de8691f04999bfc54f6efbb587ed99"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/riesenia/cakephp-duplicatable/zipball/1c91452535de8691f04999bfc54f6efbb587ed99",
+            "reference": "1c91452535de8691f04999bfc54f6efbb587ed99",
+            "shasum": ""
+        },
+        "require": {
+            "cakephp/orm": "~3.0",
+            "php": ">=5.4.16"
+        },
+        "require-dev": {
+            "cakephp/cakephp": "~3.0",
+            "phpunit/phpunit": "*"
+        },
+        "time": "2016-10-07 12:16:04",
+        "type": "cakephp-plugin",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Duplicatable\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Tomas Saghy",
+                "email": "segy@riesenia.com"
+            }
+        ],
+        "description": "CakePHP ORM plugin for duplicating entities (including related entities)",
+        "keywords": [
+            "cakephp",
+            "copy",
+            "duplicate",
+            "orm"
+        ]
     }
 ]

@@ -5,7 +5,7 @@ return [
         'Bake' => $baseDir . '/vendor/cakephp/bake/',
         'Cms' => $baseDir . '/plugins/Cms/',
         'DebugKit' => $baseDir . '/vendor/cakephp/debug_kit/',
-        'Estudante' => $baseDir . '/plugins/Estudante/',
+        'Duplicatable' => $baseDir . '/vendor/riesenia/cakephp-duplicatable/',
         'Migrations' => $baseDir . '/vendor/cakephp/migrations/'
     ]
 ];

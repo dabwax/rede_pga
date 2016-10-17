@@ -8,6 +8,115 @@ use Cake\Auth\DefaultPasswordHasher;
 class UsersController extends AppController
 {
 
+    public function clone($id)
+    {  
+        // disable view
+        $this->autoRender = false;
+
+        $cacheInputsName = [];
+
+        $usersTable = TableRegistry::get("Users");
+        $inputsTable = TableRegistry::get("Inputs");
+        $chartsTable = TableRegistry::get("Charts");
+
+        // clone user
+        $user = $usersTable->get($id)->toArray();
+        unset($user['id']);
+
+        $user = $usersTable->newEntity($user);
+
+        $user->full_name = $user->full_name . ' (cópia)';
+
+        $usersTable->save($user);
+         
+        // clone charts
+        $where = [
+            'user_id' => $id
+        ];
+        $charts = $chartsTable->find()->where($where)->contain(['ChartSeries'])->all();
+
+        foreach($charts as $chart) {
+            $tmp = $chart->toArray();
+            $tmp['user_id'] = $user->id;
+            unset($tmp['id']);
+
+
+            foreach($tmp['chart_series'] as $key => $tmpChartSerie) {
+                
+                if(empty($cacheInputsName[$tmp['chart_series'][$key]['input_id']])) {
+                    $cacheInputsName[$tmp['chart_series'][$key]['input_id']] = true;
+
+                    unset($tmp['chart_series'][$key]['id']);
+                    unset($tmp['chart_series'][$key]['chart_id']);
+
+                    $tmpInput = $inputsTable->get($tmpChartSerie['input_id'])->toArray();
+                    $tmpInput['user_id'] = $user->id;
+                    unset($tmpInput['id']);
+
+                    $tmpInput = $inputsTable->newEntity($tmpInput);
+                    $inputsTable->save($tmpInput);
+
+                    $cacheInputsName[$tmpChartSerie['name']] = true;
+
+                    $tmp['chart_series'][$key]['input_id'] = $tmpInput->id;
+                }
+
+            }
+
+            $clone = $chartsTable->newEntity($tmp, [
+                'associated' => ['ChartSeries']
+            ]);
+
+            $chartsTable->save($clone);
+        }
+
+        // clonar atores
+        $where = ['user_id' => $id];
+        $atores = $this->getAtores($where);
+
+        unset($atores['Users']);
+
+        foreach($atores as $actor_label => $actors) {
+            foreach($actors as $actor) {
+                $tmp = $actor->toArray();
+                $tmp['user_id'] = $user->id;
+                unset($tmp['id']);
+
+                $tableObject = TableRegistry::get($actor_label);
+
+                $tmp = $tableObject->newEntity($tmp);
+                $tableObject->save($tmp);
+            }
+        }
+
+        // replicar todos os inputs
+        // que pertencam ao usuário antigo
+        // porém que não estejam no cache
+        $where = [
+            'user_id' => $id,
+            'id NOT IN' => array_keys($cacheInputsName)
+        ];
+        $novosInputs = $inputsTable->find()->where($where)->all();
+
+        foreach($novosInputs as $novoInput) {
+            $tmp = $novoInput->toArray();
+
+            unset($tmp['id']);
+
+            $tmp['user_id'] = $user->id;
+
+            $tmp = $inputsTable->newEntity($tmp);
+            $inputsTable->save($tmp);
+        }
+
+        // alert
+        $this->Flash->success(__('Aluno clonado!'));
+
+        // redirect
+        return $this->redirect(['action' => 'trocar_aluno']);
+            
+    }
+
     public function configurar_atores()
     {
 

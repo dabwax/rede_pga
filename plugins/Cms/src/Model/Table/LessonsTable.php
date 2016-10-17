@@ -23,6 +23,10 @@ class LessonsTable extends Table
         $this->table('lessons');
         $this->displayField('date');
         $this->primaryKey('id');
+        $this->hasMany('LessonEntries', [
+            'foreignKey' => 'lesson_id',
+            'className' => 'LessonEntries'
+        ]);
     }
 
 }

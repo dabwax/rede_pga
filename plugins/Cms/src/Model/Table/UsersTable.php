@@ -18,6 +18,17 @@ class UsersTable extends Table
         $this->displayField('full_name');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
+
+        // add Duplicatable behavior
+        $this->addBehavior('Duplicatable.Duplicatable', [
+            // duplicate also items and their properties
+            'contain' => ['Charts', 'Charts.ChartSeries',
+            'Inputs', 'Protectors', 'Schools',
+            'Therapists', 'Tutors'],
+            // append copy to the name
+            'append' => ['full_name' => ' - cópia']
+        ]);
+
         $this->belongsTo('Instituitions', [
             'foreignKey' => 'instituition_id',
             'joinType' => 'INNER',
@@ -51,9 +62,9 @@ class UsersTable extends Table
             'foreignKey' => 'user_id',
             'className' => 'Cms.Messages'
         ]);
-        $this->hasMany('Parents', [
+        $this->hasMany('Protectors', [
             'foreignKey' => 'user_id',
-            'className' => 'Cms.Parents'
+            'className' => 'Cms.Protectors'
         ]);
         $this->hasMany('Schools', [
             'foreignKey' => 'user_id',
