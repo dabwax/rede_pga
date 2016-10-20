@@ -22,7 +22,7 @@
       </p>
 
       <div style="float: right;">
-        <a class="waves-effect waves-teal btn-flat" onclick="if(!confirm('Você tem certeza que quer clonar este aluno?')) { return false; }" href="<?php echo $this->Url->build(['action' => 'clone', $u->id]); ?>">
+        <a class="waves-effect waves-teal btn-flat" onclick="if(!confirm('Você tem certeza que quer clonar este aluno?')) { return false; }" href="<?php echo $this->Url->build(['action' => 'duplicate', $u->id]); ?>">
           <i class="material-icons">account_box</i> Clonar
         </a>
         <a class="waves-effect waves-teal btn-flat" href="<?php echo $this->Url->build(['action' => 'trocar_aluno', $u->id]); ?>">

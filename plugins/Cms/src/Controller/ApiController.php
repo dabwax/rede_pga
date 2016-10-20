@@ -12,6 +12,15 @@ class ApiController extends AppController
     $this->Auth->allow();
   }
 
+  function array_sort_by_column(&$arr, $col, $dir = SORT_ASC) {
+      $sort_col = array();
+      foreach ($arr as $key=> $row) {
+          $sort_col[$key] = $row[$col];
+      }
+
+      array_multisort($sort_col, $dir, $arr);
+  }
+
 /**
  * Action utilizada para calcular a série de um gráfico.
  * Utilizado principalmente no cadastramento de gráfico
@@ -205,11 +214,13 @@ class ApiController extends AppController
         }
 
         foreach($tmp as $key => $val) {
-
+          
           if($key != "?" && $key != "") {
-            $serie['data'][] = ['name' => $key, 'y' => $val];
+            $serie['data'][] = ['name' => trim(ucfirst($key)), 'y' => $val];
           }
         }
+
+        $this->array_sort_by_column($serie['data'], 'name');
 
         echo json_encode($serie);
 

@@ -179,6 +179,16 @@ class AppView extends View
           $response = $response->json;
 
           if(!empty($response['data'])) {
+
+            foreach($response['data'] as $data) {
+
+              if(!in_array($data['name'], $default['options']['xAxis']['categories'])) {
+                $default['options']['xAxis']['categories'][] = $data['name'];
+              }
+            }
+
+            sort($default['options']['xAxis']['categories']);
+
             $default['series'][] = [
               'id' => $serie->id,
               'name' => $serie->name,

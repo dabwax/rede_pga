@@ -8,7 +8,7 @@ use Cake\Auth\DefaultPasswordHasher;
 class UsersController extends AppController
 {
 
-    public function clone($id)
+    public function duplicate($id)
     {  
         // disable view
         $this->autoRender = false;

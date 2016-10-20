@@ -73,6 +73,37 @@ class AppController extends Controller
       // Recupera os atores do usuário logado
       $get_atores = $this->getAtores();
 
+      /*
+      $inputsTable = TableRegistry::get('inputs');
+      $where = [
+        'config LIKE' => '%Com dificuldade%'
+      ];
+      $inputs = $inputsTable->find()->where($where)->all()->toArray();
+
+      foreach($inputs as $input) {
+        $decode = json_decode($input->config);
+
+        foreach($decode->options as $key => $option) {
+
+          switch($option) {
+            case 'Com dificuldade':
+            case 'Com dificuldades':
+            case 'Com dificuldades.':
+            case 'Com dificuldade.':
+              $decode->options[$key] = 'Com dificuldade';
+            break;
+          }
+          
+        }
+
+        $input->config = json_encode($decode);
+
+        $inputsTable->save($input);
+
+        // die();
+      }
+      */
+
       $this->set(compact("admin_logged", "get_atores", "permissions"));
     }
 

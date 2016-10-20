@@ -469,7 +469,7 @@ angular.module("RedePga")
       }
     };
 
-    // console.log(dados);
+    console.log(dados);
 
     $scope.graficos.push(dados);
   });
