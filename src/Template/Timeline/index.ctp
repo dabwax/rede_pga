@@ -9,7 +9,7 @@
     <div class="cd-timeline-img" style="background: #33d1ff;">
     </div> <!-- cd-timeline-img -->
 
-    <div class="cd-timeline-content card grey lighten-4">
+    <div class="cd-timeline-content card blue-grey lighten-5">
 
       <div class="card-content">
 
@@ -24,9 +24,13 @@
             {{role_helper(lesson.actors[author_id].role)}}: {{lesson.actors[author_id].full_name }}
         </p> <!-- .chip -->
 
-        <strong>Observação:</strong>
+        <div class="card-panel small blue-grey lighten-4 grey-text text-darken-3">
 
-        <div class="observacao-area" ng-bind-html="lesson.observation"></div>
+          <strong>Observação:</strong>
+
+          <div class="observacao-area" ng-bind-html="lesson.observation"></div>
+
+          </div> <!-- .card-panel -->
 
         <div class="clearfix"></div>
 

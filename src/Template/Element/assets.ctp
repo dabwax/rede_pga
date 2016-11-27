@@ -1,8 +1,8 @@
-<link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
 
 <!--Materialize -->
 <?= $this->Html->css('/vendors/materialize/css/materialize.min.css'); ?>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!-- jQuery - Biblioteca -->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

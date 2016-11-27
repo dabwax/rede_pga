@@ -1,3 +1,12 @@
+.icone-trocar-senha {
+  font-size: 44px !important;
+}
+.card-trocar-senha label, .card-trocar-senha input {
+  color: #FFF;
+}
+.card-users-add label {
+  color: #FFF;
+}
 .campo {
   margin-top: 20px;
   margin-bottom: 20px;

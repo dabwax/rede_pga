@@ -1,40 +1,40 @@
-<div class="card-panel">
+<?= $this->Form->create($user, ['type' => 'file']) ?>
 
-    <h2><?= __('Adicionar Estudante') ?></h2>
-    <hr>
+<div class="card card-users-add blue-grey darken-1">
 
-    <p>Você irá definir os atores na paǵina seguinte. Esta página é exclusiva do aluno.</p>
+    <div class="card-content white-text">
 
-    <?= $this->Form->create($user, ['type' => 'file']) ?>
+      <span class="card-title">Adicionar Estudante</span>
 
-    <h3>Informações Gerais</h3>
+      <p>Você irá definir os atores na paǵina seguinte. Esta página é exclusiva do aluno.</p>
 
-    <?php
-        echo $this->Form->input('full_name', ['label' => 'Nome', 'class' => 'form-control', 'required']);
-        echo $this->Form->input('profile_attachment', ['label' => 'Imagem de Perfil', 'class' => 'form-control', 'type' => 'file', 'required']);
-        echo $this->Form->input('date_of_birth', ['label' => 'Data de Aniversário', 'class' => 'form-control datepicker', 'datepicker' => 'datepicker', 'type' => 'text', 'required']);
-        echo $this->Form->input('clinical_condition', ['label' => 'Condição Clínica', 'class' => 'form-control', 'type' => 'text', 'required']);
-        echo $this->Form->input('description', ['label' => 'Observação', 'class' => 'form-control', 'type' => 'textarea', 'required', 'required']);
-    ?>
+      <?php
+          echo $this->Form->input('full_name', ['label' => 'Nome', 'class' => 'form-control', 'required']);
+          echo $this->Form->input('profile_attachment', ['label' => 'Imagem de Perfil', 'class' => 'form-control', 'type' => 'file', 'required']);
+          echo $this->Form->input('date_of_birth', ['label' => 'Data de Aniversário', 'class' => 'form-control datepicker', 'datepicker' => 'datepicker', 'type' => 'text', 'required']);
+          echo $this->Form->input('clinical_condition', ['label' => 'Condição Clínica', 'class' => 'form-control', 'type' => 'text', 'required']);
+          echo $this->Form->input('description', ['label' => 'Observação', 'class' => 'form-control', 'type' => 'textarea', 'required', 'required']);
+      ?>
 
-    <h3>Dados de Acesso</h3>
+      <b>Dados de Acesso</b>
 
-    <?php
-        echo $this->Form->input('username', ['label' => 'E-mail', 'class' => 'form-control', 'required']);
-        echo $this->Form->input('password', ['label' => 'Senha', 'class' => 'form-control', 'required']);
-    ?>
+      <?php
+          echo $this->Form->input('username', ['label' => 'E-mail', 'class' => 'form-control', 'required']);
+          echo $this->Form->input('password', ['label' => 'Senha', 'class' => 'form-control', 'required']);
+      ?>
 
-    <h3>Informações Escolares</h3>
-    <?php
-        echo $this->Form->input('instituition_id', ['label' => 'Escola', 'class' => 'form-control', 'type' => 'text', 'maxlength' => '255', 'required']);
-        echo $this->Form->input('school_grade', ['label' => 'Série', 'class' => 'form-control', 'type' => 'text', 'required']);
-    ?>
+      <b>Dados Escolares</b>
+      <?php
+          echo $this->Form->input('instituition_id', ['label' => 'Escola', 'class' => 'form-control', 'type' => 'text', 'maxlength' => '255', 'required']);
+          echo $this->Form->input('school_grade', ['label' => 'Série', 'class' => 'form-control', 'type' => 'text', 'required']);
+      ?>
 
+  </div> <!-- .card-content -->
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-floppy-o"></i> Salvar</button>
-    </div>
+  <div class="card-action">
+      <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-floppy-o"></i> Salvar</button>
+  </div> <!-- .card-action -->
 
-    <?= $this->Form->end() ?>
+</div> <!-- .card -->
 
-</div>
+<?= $this->Form->end() ?>
