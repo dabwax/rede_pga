@@ -25,9 +25,7 @@
 
     <!-- Pesquisa -->
     <?php if($this->name != "Relatorio") : ?>
-    <div class="col s12 l6 right">
       <?php echo $this->element("../Evolucao/formulario_busca"); ?>
-    </div>
 
         <?php if(!empty($_GET['inicio']) && !empty($_GET['fim'])) : ?>
           <div class="clearfix"></div>

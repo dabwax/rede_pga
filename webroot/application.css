@@ -180,10 +180,11 @@ body {
 .side-nav.fixed a {
   padding: 0 10px !important;
 }
+.search-title {
+  font-size: 18px !important;
+  margin-bottom: 0px !important;
+}
 #rodape {
-  position: absolute;
-  bottom: -70px;
-  right: 0px;
   width: 100%;
   text-align: right;
   margin-bottom: 20px;
@@ -498,7 +499,8 @@ div.input {
 }
 @media only screen and (min-width: 1170px) {
   #cd-timeline {
-    margin-top: 3em;
+    margin-top: 0px;
+    padding-top: 0px;
     margin-bottom: 3em;
   }
   #cd-timeline::before {
@@ -508,7 +510,7 @@ div.input {
 }
 .cd-timeline-block {
   position: relative;
-  margin: 2em 0;
+  margin: 0px !important;
 }
 .cd-timeline-block:after {
   content: "";
@@ -605,6 +607,7 @@ div.input {
   background-image: linear-gradient(to bottom, transparent, black);
   text-align: center;
   transition: all 0.25s linear;
+  z-index: 5;
 }
 .cd-keep-reading:hover {
   height: 60px;
@@ -618,7 +621,7 @@ div.input {
   padding: 1em;
   /*box-shadow: 0 3px 0 #d7e4ed;*/
   text-align: right;
-  height: 300px;
+  height: 320px;
   display: inline-block;
   overflow: hidden;
 }
@@ -685,10 +688,19 @@ div.input {
   }
 }
 @media only screen and (min-width: 1170px) {
+  .even {
+    background: transparent !important;
+  }
+  .even .cd-timeline-content {
+    top: -40px;
+  }
+  .odd.cd-timeline-block {
+    top: 40px;
+  }
   .cd-timeline-content {
     margin-left: 0;
     padding: 1.6em;
-    width: 45%;
+    width: 48%;
   }
   .cd-timeline-content::before {
     top: 24px;

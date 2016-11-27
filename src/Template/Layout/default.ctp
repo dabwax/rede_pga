@@ -27,9 +27,7 @@
 
     <?= $this->fetch('content') ?>
 
-  <?php if($this->request->params['controller'] != 'Authentication') : ?>
-  </div>
-  <?php endif; ?>
+    
 
   <?php if($this->request->params['controller'] != 'Authentication') : ?>
     <footer id="rodape">
@@ -37,7 +35,7 @@
 
 
         <?php if($userLogged) : ?>
-          <a href="#" style="float: left; margin-left: 250px;" onclick="window.open('https://www.sitelock.com/verify.php?site=pep.net.br','SiteLock','width=600,height=600,left=160,top=170');" >
+          <a href="#" style="float: left;" onclick="window.open('https://www.sitelock.com/verify.php?site=pep.net.br','SiteLock','width=600,height=600,left=160,top=170');" >
             <img class="img-responsive" alt="SiteLock" title="SiteLock" src="//shield.sitelock.com/shield/pep.net.br" />
           </a>
         <?php else: ?>
@@ -48,6 +46,10 @@
           <em style=" float: right; line-height: 65px;">PEP Plataforma de Ensino Profissinalizante. Todos os direitos reservados.</em>
 
     </footer>
+  <?php endif; ?>
+
+  <?php if($this->request->params['controller'] != 'Authentication') : ?>
+  </div>
   <?php endif; ?>
 
   <?php echo $this->element("/assets"); ?>

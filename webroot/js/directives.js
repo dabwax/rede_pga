@@ -36,7 +36,7 @@ angular.module('RedePga')
     link: function(scope, elem, attrs) {
       $(elem).click(function() {
         $(this).fadeOut('fast', function() {
-          $(this).parent().css('height', 'auto');
+          $(this).parent().parent().css('height', 'auto');
         });
       });
     }

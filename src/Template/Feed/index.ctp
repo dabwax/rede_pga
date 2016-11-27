@@ -3,7 +3,7 @@
   <!-- Título da página -->
   <div class="page-title red darken-3">
 
-    <div class="col s6">
+    <div class="col s12 m6">
         <h2>Inputs</h2>
 
       <p class="subtitle"><?php if(!empty($hashtag)) : ?><strong>Filtrando pela hashtag: <?php echo $hashtag->name; ?>.</strong><?php endif; ?> </p>
@@ -11,21 +11,20 @@
 
 
     <!-- Pesquisa -->
-    <div class="col s5 right">
-      <form id="formulario-busca" class="grey lighten-2">
-        <div class="col s9">
-          <label for="search">Pesquisar</label>
-          <input id="search" type="search"  ng-model="search.$" placeholder="" required>
-        </div>
-        <div class="col s2">
-          <span class="search-icon btn-enviar-busca"><i class="material-icons">search</i></span>
-        </div>
+    <div class="col s12 m5 text-left right">
+
+      <h2 class="search-title">Pesquisa</h2>
+
+      <div class="clearfix"></div>
+
+      <div class="input-field">
+        <input type="text"  ng-model="search.$" required>
+        <label for="search">Digite aqui</label>
+      </div>
+
         <i class="material-icons" ng-show="search.$" ng-click="reset_search()">close</i>
 
-        <div class="clearfix"></div>
-      </form>
-      <div class="clearfix"></div>
-      {{lessons.length}} aulas registradas. 
+      <p>{{lessons.length}} aulas registradas.</p>
     </div>
 
       <div class="actions">
