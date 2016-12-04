@@ -35,7 +35,7 @@
 
 <!-- Masonry - Plugin para grid de altura dinâmica -->
 <?= $this->Html->script('/vendors/angular-masonry-directive-master/src/masonry.pkgd.min.js'); ?>
-<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
 <?= $this->Html->script('/vendors/angular-masonry-directive-master/src/angular-masonry-directive.js'); ?>
 
 <!-- Caminho absoluto da página acessível via JavaScript -->
